@@ -1,0 +1,93 @@
+# Meta Data for SEO
+
+## Homepage
+title = "mirrord"
+titleSeparator = "-"
+titleAddition = "Rethinking cloud development"
+description = "mirrord is a cli/IDE extension that lets backend developers run their local code in the context of the remote environment."
+
+## Documentation
+# docsVersion = "0.3"
+
+## Open Graph
+images = ["doks.png"]
+ogLocale = "en_US"
+domainTLD = "mirrord.dev"
+titleHome = "mirrord"
+
+## Twitter Cards
+twitterSite = "@metalbearco"
+twitterCreator = "@metalbearco"
+
+## JSON-LD
+# schemaType = "Person"
+schemaType = "Organization"
+schemaName = "mirrord"
+schemaAuthor = "MetalBear"
+schemaAuthorTwitter = "https://twitter.com/metalbearco"
+schemaAuthorLinkedIn = "https://www.linkedin.com/company/metalbearco/"
+schemaAuthorGitHub = "https://github.com/metalbear-co"
+schemaLocale = "en-US"
+schemaLogo = "logo-doks.png"
+schemaLogoWidth = 512
+schemaLogoHeight = 512
+schemaImage = "doks.png"
+schemaImageWidth = 1280
+schemaImageHeight = 640
+schemaTwitter = "https://twitter.com/metalbearco"
+schemaLinkedIn = "https://www.linkedin.com/company/metalbearco/"
+schemaGitHub = "https://github.com/metalbear-co/mirrord"
+schemaSection = "blog"
+
+## Sitelinks Search Box
+siteLinksSearchBox = false
+
+## Chrome Browser
+themeColor = "#fff"
+
+# Images
+quality = 85
+bgColor = "#fff"
+landscapePhotoWidths = [900, 800, 700, 600, 500]
+portraitPhotoWidths = [800, 700, 600, 500]
+lqipWidth = "20x"
+smallLimit = "300"
+
+# Footer
+footer = "<a href=\"https://metalbear.co\">© 2022 MetalBear</a>"
+
+# Feed
+copyRight = "Copyright (c) 2020-2021 Henk Verlinde"
+
+# Alert
+alert = false
+alertDismissable = true
+# alertText = "Introducing the Doks child theme, several DX + UX updates, and more! <a class=\"alert-link stretched-link\" href=\"https://getdoks.org/blog/doks-v0.2/\" target=\"_blank\" rel=\"noopener\">Check out Doks v0.2</a>"
+alertText = "Introducing the Doks child theme, several DX + UX updates, and more! <a class=\"alert-link stretched-link\" href=\"https://getdoks.org/blog/doks-v0.2/\">Check out Doks v0.2</a>"
+
+# Edit Page
+repoHost = "GitHub"
+docsRepo = "https://github.com/metalbear-co/mirrord.dev"
+docsRepoBranch = "master"
+docsRepoSubPath = ""
+editPage = true
+lastMod = true
+
+[options]
+  lazySizes = true
+  clipBoard = true
+  instantPage = true
+  flexSearch = true
+  darkMode = true
+  bootStrapJs = true
+  breadCrumb = false
+  highLight = true
+  kaTex = false
+  multilingualMode = false
+  docsVersioning = false
+  fullWidth = false
+
+[menu]
+  [menu.section]
+    auto = true
+    collapsibleSidebar = true

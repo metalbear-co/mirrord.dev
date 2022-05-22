@@ -1,0 +1,48 @@
+{{ define "main" }}
+<section class="section container-fluid mt-n3 pb-3">
+  <div class="row justify-content-center">
+  <div class="col-lg-5 text-center">
+      {{- .Content -}}
+    </div>
+    <div class="col-lg-7 col-xl-7 text-center">
+      <p class="lead">{{ .Params.lead | safeHTML }}</p>
+      <a class="btn btn-primary btn-lg px-4 mb-2" href="/docs/{{ if .Site.Params.options.docsVersioning }}{{ .Site.Params.docsVersion }}/{{ end }}prologue/introduction/" role="button">Get Started</a>
+      <p class="meta">Open-source MIT Licensed. <a href="https://github.com/h-enk/doks">GitHub v{{ $data := getJSON "/package.json" }}{{ $data.version }}</a></p>
+    </div>
+  </div>
+</section>
+{{ end }}
+
+{{ define "sidebar-prefooter" }}
+<section class="section section-sm">
+  <div class="row justify-content-center">
+    <div class="col-lg-2 text-center">
+      <ul class="nav nav-pills" id="pills-tab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="pills-cli-tab" data-bs-toggle="pill" data-bs-target="#pills-cli" type="button" role="tab" aria-controls="pills-cli" aria-selected="true">CLI</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="pills-vscode-tab" data-bs-toggle="pill" data-bs-target="#pills-vscode" type="button" role="tab" aria-controls="pills-vscode" aria-selected="false">VS Code</button>
+        </li>
+    </div>
+  </div>
+  <div class="row justify-content-center demo-gif" style="margin-top: 2rem">
+    <div class="col">
+      <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="pills-cli" role="tabpanel" aria-labelledby="pills-cli-tab">
+          <div class="row justify-content-center">
+            <div class="col text-center">
+              <img src="/test.gif"/>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="pills-vscode" role="tabpanel" aria-labelledby="pills-vscode-tab" tabindex="0">...</div>
+      </div>
+    </div>
+  </div>
+</section>
+{{ end }}
+
+{{ define "sidebar-footer" }}
+
+{{ end }}
