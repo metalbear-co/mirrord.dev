@@ -36,6 +36,15 @@ header.navbar.navbar-expand-md.navbar-light.doks-navbar nav.container-xxl.flex-w
   color:#248b81;
 }
 
+.nav-pills .nav-link.active {
+  background-color: #f16b26
+}
+
+.nav-pills .nav-link {
+  background-color: #f5874a;
+  color: #fff;
+}
+
 body {
   color: black
 }

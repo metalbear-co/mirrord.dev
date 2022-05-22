@@ -3,6 +3,7 @@
   <div class="row justify-content-center">
   <div class="col-lg-5 text-center">
       {{- .Content -}}
+      <iframe src="https://ghbtns.com/github-btn.html?user=metalbear-co&repo=mirrord&type=star&count=true&size=large" frameborder="0" scrolling="0" width="170" height="30" title="GitHub"></iframe>
     </div>
     <div class="col-lg-7 col-xl-7 text-center">
       <p class="lead">{{ .Params.lead | safeHTML }}</p>
@@ -30,6 +31,13 @@
             <div class="tab-content" id="pills-tabContent">
                 <div class="tab-pane fade show active" id="pills-cli" role="tabpanel" aria-labelledby="pills-cli-tab">
                     <div class="row justify-content-center">
+                        <div class="col-sm-auto text-center">
+                            {{ $input := `curl lala asdsadsasadasdsadasds | sh` }}
+                            {{ transform.Highlight $input "bash"}}
+                        </div>
+                    </div>
+                    
+                    <div class="row justify-content-center">
                         <div class="col text-center">
                             <img src="/test.gif" />
                         </div>
@@ -39,7 +47,8 @@
                     tabindex="0">
                     <div class="row justify-content-center">
                         <div class="col text-center">
-                            <a href="vscode:extension/MetalBear.mirrord" class="btn btn-primary btn-lg px-4 mb-2">Install VSCode Extension</a>
+                            <a href="vscode:extension/MetalBear.mirrord"
+                                class="btn btn-primary btn-lg px-4 mb-2">Install VSCode Extension</a>
                         </div>
                     </div>
                     <div class="row justify-content-center">
