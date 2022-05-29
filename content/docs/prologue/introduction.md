@@ -1,10 +1,11 @@
 ---
 title: "Introduction"
-description: "Doks is a Hugo theme for building secure, fast, and SEO-ready documentation websites, which you can easily update and customize."
-lead: "Doks is a Hugo theme for building secure, fast, and SEO-ready documentation websites, which you can easily update and customize."
-date: 2020-10-06T08:48:57+00:00
-lastmod: 2020-10-06T08:48:57+00:00
+description: "mirrord is an open-source tool that lets developers run local processes in the context of their cloud environment. It’s meant to provide the benefits of running your service on a cloud environment (e.g. staging) without actually going through the hassle of deploying it there, and without disrupting the environment by deploying untested code."
+lead: "mirrord is an open-source tool that lets developers run local processes in the context of their cloud environment. It’s meant to provide the benefits of running your service on a cloud environment (e.g. staging) without actually going through the hassle of deploying it there, and without disrupting the environment by deploying untested code."
+date: 2022-05-26T08:48:57+00:00
+lastmod: 2022-05-26T08:48:57+00:00
 draft: false
+# resources: ["diagram.jpeg"]
 images: []
 menu:
   docs:
@@ -13,12 +14,14 @@ weight: 100
 toc: true
 ---
 
+
 ## Get started
 
 There are two main ways to get started with Doks:
 
 ### Tutorial
 
+<!-- ![asdasd](diagram.jpeg) -->
 {{< alert icon="👉" text="The Tutorial is intended for novice to intermediate users." />}}
 
 Step-by-step instructions on how to start a new Doks project. [Tutorial →](https://getdoks.org/tutorial/introduction/)

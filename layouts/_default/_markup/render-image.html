@@ -3,6 +3,7 @@
   {{ $image = resources.GetRemote .Destination -}}
 {{ else -}}
   {{ $image = .Page.Resources.GetMatch .Destination -}}
+  {{ .Destination -}}
 {{ end -}}
 {{ with $image -}}
   {{ $lqip := $image.Resize site.Params.lqipWidth -}}
@@ -32,5 +33,5 @@
     <img class="img-fluid lazyload blur-up" src="{{ $lqip.Permalink }}" data-src="{{ $image.Permalink }}" width="{{ $image.Width }}" height="{{ $image.Height }}" alt="{{ $.Text }}">
   {{ end -}}
 {{ else -}}
-  {{ erroridf "image-not-found" "Image not found" -}}
+  {{ erroridf "image-not-found" .Destination -}}
 {{ end -}}

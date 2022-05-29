@@ -10,6 +10,7 @@ images: []
 
 ## The fastest/safest/easiet route to pre-production testing
 By mirroring traffic to and from your machine, mirrord surrounds your local service with a mirror image of its cloud environment.
+
 - Speed up your feedback loop - Test your service in the cloud from your local machine, without CI or deployment
 - Lightweight - Get up and running in seconds Safe - Concurrently test on the same cloud environmen
 
