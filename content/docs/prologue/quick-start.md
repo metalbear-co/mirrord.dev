@@ -19,11 +19,13 @@ mirrord runs on your local machine and in your cluster.
 - kubectl needs to be configured on the local machine.
 
 
-### Installation
-mirrord can be used as a CLI tool or an extension for VS Code. 
+mirrord can be used in two ways:
+1. CLI Tool
+2. VS Code Extension
 
 
 #### CLI
+### Installation
 
 To install the CLI, run the following command:
 
@@ -31,12 +33,8 @@ To install the CLI, run the following command:
 curl -fsSL https://raw.githubusercontent.com/metalbear-co/mirrord/main/scripts/install.sh | bash
 ```
 
-#### VS Code Extension
-You can install the extension directly in the IDE, or download it from the marketplace [here](https://marketplace.visualstudio.com/items?itemName=MetalBear.mirrord).
-
 ### Running
 
-#### CLI
 You can use `mirrord --help` to get all possible commands + arguments.
 Example command:
 ```bash
@@ -51,6 +49,11 @@ Most configurations can be set by env and/or by passing a command line flag.
 - `-n` | `--pod-namespace` | `MIRRORD_AGENT_IMPERSONATED_POD_NAMESPACE` - Namespace that the impersonated pod exists in (Defaults to “default”)
 - `-a` | `--agent-namespace` | `MIRRORD_AGENT_NAMESPACE` - Namespace to spawn our agent in, (Defaults to “default”).
 - `-l` | `--agent_log_level` | `MIRRRD_AGENT_RUST_LOG` - `RUST_LOG` to set for the agent. See EnvFilter docs
+
+
+
+#### VS Code Extension
+You can install the extension directly in the IDE, or download it from the marketplace [here](https://marketplace.visualstudio.com/items?itemName=MetalBear.mirrord).
 
 
 
