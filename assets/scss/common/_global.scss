@@ -36,6 +36,13 @@ header.navbar.navbar-expand-md.navbar-light.doks-navbar nav.container-xxl.flex-w
   color:#248b81;
 }
 
+
+.nav-pills .nav-link, .nav-pills .banner .nav a, .banner .nav .nav-pills a {
+  border-radius: 5px;
+  margin-right: 0.5rem;
+  margin-left: 0.5rem;
+}
+
 .nav-pills .nav-link.active {
   background-color: #f16b26
 }
