@@ -1,7 +1,6 @@
 ---
 title: "Quick Start"
 description: "One page summary of how to start a new Doks project."
-lead: "One page summary of how to start a new Doks project."
 date: 2020-11-16T13:59:39+01:00
 lastmod: 2020-11-16T13:59:39+01:00
 draft: false
@@ -13,67 +12,59 @@ weight: 110
 toc: true
 ---
 
-## Requirements
+### Requirements
+mirrord runs on your local machine and in your cluster.
+- MacOS (Intel, Silicon) and Linux (x86_64) are supported for the local machine.
+- Kubernetes is supported for the cloud cluster.
+- kubectl needs to be configured on the local machine.
 
-- [Git](https://git-scm.com/) — latest source release
-- [Node.js](https://nodejs.org/) — latest LTS version or newer
 
-{{< details "Why Node.js?" >}}
-Doks uses npm (included with Node.js) to centralize dependency management, making it [easy to update]({{< relref "how-to-update" >}}) resources, build tooling, plugins, and build scripts.
-{{< /details >}}
+### Installation
+mirrord can be used as a CLI tool or an extension for VS Code. 
 
-## Start a new Doks project
 
-Create a new site, change directories, install dependencies, and start development server.
+#### CLI
 
-### Create a new site
-
-Doks is available as a child theme and a starter theme.
-
-#### Child theme
-
-- Intended for novice to intermediate users
-- Intended for minor customizations
-- [Easily update npm packages]({{< relref "how-to-update" >}}) — __including__ [Doks](https://www.npmjs.com/package/@hyas/doks)
+To install the CLI, run the following command:
 
 ```bash
-git clone https://github.com/h-enk/doks-child-theme.git my-doks-site
+curl -fsSL https://raw.githubusercontent.com/metalbear-co/mirrord/main/scripts/install.sh | bash
 ```
 
-#### Starter theme
+#### VS Code Extension
+You can install the extension directly in the IDE, or download it from the marketplace [here](https://marketplace.visualstudio.com/items?itemName=MetalBear.mirrord).
 
-- Intended for intermediate to advanced users
-- Intended for major customizations
-- [Easily update npm packages]({{< relref "how-to-update" >}})
+### Running
 
+#### CLI
+You can use `mirrord --help` to get all possible commands + arguments.
+Example command:
 ```bash
-git clone https://github.com/h-enk/doks.git my-doks-site
+mirrord exec --pod-name app-pod-01 python main.py
 ```
 
-{{< details "Help me choose" >}}
-Not sure which one is for you? Pick the child theme.
-{{< /details >}}
 
-### Change directories
 
-```bash
-cd my-doks-site
-```
+##### Advanced Configuration
+Most configurations can be set by env and/or by passing a command line flag.
+- `--pod-name`  - Name of the pod to impersonate
+- `-n` | `--pod-namespace` | `MIRRORD_AGENT_IMPERSONATED_POD_NAMESPACE` - Namespace that the impersonated pod exists in (Defaults to “default”)
+- `-a` | `--agent-namespace` | `MIRRORD_AGENT_NAMESPACE` - Namespace to spawn our agent in, (Defaults to “default”).
+- `-l` | `--agent_log_level` | `MIRRRD_AGENT_RUST_LOG` - `RUST_LOG` to set for the agent. See EnvFilter docs
 
-### Install dependencies
 
-```bash
-npm install
-```
 
-### Start development server
+## Contributing
 
-```bash
-npm run start
-```
+Contributing has many forms, and we welcome any feedback/help.
+Those are the common ways:
+- Report a bug you found to our [issue tracker](https://github.com/metalbear-co/mirrord/issues).
+- Suggest a feature/improvement in a discussion on our [GitHub discussions](https://github.com/metalbear-co/mirrord/discussions).
+- Write a blog post about your experience with mirrord. We will love to share it!
+- Fix/implement an issue from our [issue tracker](https://github.com/metalbear-co/mirrord/issues), please let us know that you're working on an issue beforehand so we can provide help and reduce double-work.
+- Help our docs and website by sending a PR with improvements.
 
-Doks will start the Hugo development webserver accessible by default at `http://localhost:1313`. Saved changes will live reload in the browser.
 
-## Other commands
+## Help
 
-Doks comes with commands for common tasks. [Commands →]({{< relref "commands" >}})
+Need Help? Open a [discussion](https://github.com/metalbear-co/mirrord/discussions) or join our Discord server [here](https://discord.gg/pSKEdmNZcK).
