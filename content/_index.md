@@ -13,28 +13,6 @@ images: []
 
 By mirroring traffic to and from your machine, mirrord surrounds your local service with a mirror image of its cloud environment.
 
-- <b>Speed up your feedback loop:</b> Test your service in the cloud from your local machine, without CI or deployment
-- <b>Lightweight:</b> Get up and running in seconds 
-- <b>Safe:</b> Concurrently test on the same cloud environmen
-
-<!-- ## Why deploy to staging when you can...
-**not** deploy to staging?
-
-By mirroring traffic to and from your machine, ***mirrord*** surrounds your local sergvice with a mirror image of its cloud environment.
-
-### No more:
- - Mocking up databases/traffic/configuration
- - Waiting for the CI to run
- - Breaking the shared environment for everyone -->
-
-<!-- ### Stop 🛑✋
-
-- Mocking databases/traffic/configuration
-- Waiting for the CI to run
-- Breaking the shared environment for everyone
-
-### Start ▶️
-- Running your service locally, with remote service's context
-- Receiving mirrored (duplicated) traffic in real time
-- Having the same environment variables the remote service has
-- Accessing resources available to the remote context such as databases, managed services, etc. -->
+- **Speed up your feedback loop:** Test your service in the cloud from your local machine, without CI or deployment
+- **Lightweight:** Get up and running in seconds 
+- **Safe:** Concurrently test on the same cloud environmen
