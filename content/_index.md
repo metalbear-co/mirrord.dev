@@ -8,11 +8,14 @@ draft: false
 images: []
 ---
 
-## The fastest/safest/easiet route to pre-production testing
+
+<h2>The <span id="typewriter"></span> route to pre-production testing</h2>
+
 By mirroring traffic to and from your machine, mirrord surrounds your local service with a mirror image of its cloud environment.
 
-- Speed up your feedback loop - Test your service in the cloud from your local machine, without CI or deployment
-- Lightweight - Get up and running in seconds Safe - Concurrently test on the same cloud environmen
+- <b>Speed up your feedback loop:</b> Test your service in the cloud from your local machine, without CI or deployment
+- <b>Lightweight:</b> Get up and running in seconds 
+- <b>Safe:</b> Concurrently test on the same cloud environmen
 
 <!-- ## Why deploy to staging when you can...
 **not** deploy to staging?
