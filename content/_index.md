@@ -15,4 +15,4 @@ By mirroring traffic to and from your machine, mirrord surrounds your local serv
 
 - **Speed up your feedback loop:** Test your service in the cloud from your local machine, without CI or deployment
 - **Lightweight:** Get up and running in seconds 
-- **Safe:** Concurrently test on the same cloud environmen
+- **Safe:** Concurrently test on the same cloud environment
