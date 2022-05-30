@@ -29,8 +29,7 @@
                 <div class="tab-pane fade show active" id="pills-cli" role="tabpanel" aria-labelledby="pills-cli-tab">
                     <div class="row justify-content-center">
                         <div class="col-sm-auto text-center">
-                            {{ $input := `curl -fsSL
-                            https://raw.githubusercontent.com/metalbear-co/mirrord/main/scripts/install.sh | bash` }}
+                            {{ $input := `curl -fsSL https://raw.githubusercontent.com/metalbear-co/mirrord/main/scripts/install.sh | bash` }}
                             {{ transform.Highlight $input "bash"}}
                         </div>
                     </div>
@@ -57,7 +56,7 @@
 <script>
     window.addEventListener('DOMContentLoaded', (event) => {
         new Typewriter('#typewriter', {
-            strings: ['fastest', 'safest', 'easiest'],
+            strings: ['easy', 'fast', 'safe'],
             autoStart: true,
             loop: true,
             pausefor: 4000,

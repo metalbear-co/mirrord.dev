@@ -9,7 +9,7 @@ images: []
 ---
 
 
-<h2>The <span id="typewriter"></span> route to pre-production testing</h2>
+<h2>Pre-production testing made <span id="typewriter"></span></h2>
 
 By mirroring traffic to and from your machine, mirrord surrounds your local service with a mirror image of its cloud environment.
 
