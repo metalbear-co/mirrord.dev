@@ -53,17 +53,11 @@
 {{ end }}
 
 {{ define "sidebar-footer" }}
-<script>
-    window.addEventListener('DOMContentLoaded', (event) => {
-        new Typewriter('#typewriter', {
-            strings: ['easy', 'fast', 'safe'],
-            autoStart: true,
-            loop: true,
-            pausefor: 4000,
-            cursor: '_',
-        });
-    });
-</script>
+{{ $typewriter := resources.Get "js/index-typewriter.js" -}}
+{{ $typewriter := $typewriter | js.Build -}}
+{{ $typewriter := $typewriter | minify | fingerprint "sha512" -}}
+<script src="{{ $typewriter.RelPermalink }}" integrity="{{ $typewriter.Data.Integrity }}" crossorigin="anonymous" defer></script>
+
 <style>
     .chroma {
         margin: 0;
