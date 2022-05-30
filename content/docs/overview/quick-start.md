@@ -53,15 +53,18 @@ Most configurations can be set by env and/or by passing a command line flag.
 - `--pod-name`  - Name of the pod to impersonate
 - `-n` | `--pod-namespace` | `MIRRORD_AGENT_IMPERSONATED_POD_NAMESPACE` - Namespace that the impersonated pod exists in (Defaults to “default”)
 - `-a` | `--agent-namespace` | `MIRRORD_AGENT_NAMESPACE` - Namespace to spawn our agent in, (Defaults to “default”).
-- `-l` | `--agent-log-level` | `MIRRRD_AGENT_RUST_LOG` - `RUST_LOG` to set for the agent. See EnvFilter docs
+- `-l` | `--agent-log-level` | `MIRRORD_AGENT_RUST_LOG` - `RUST_LOG` to set for the agent. See EnvFilter docs
 
 
 
 ### VS Code Extension
+#### Installation
 You can install the extension directly in the IDE, or download it from the marketplace [here](https://marketplace.visualstudio.com/items?itemName=MetalBear.mirrord).
 
+#### Usage
+To use extension, click the 'Enable mirrord' button in the status bar at the bottom of the window. When you next run a debug session, you'll be prompted with a dropdown listing pods in the namespace you've configured (or the 'default' namespace, if you haven't). Select the pod you want to impersonate, and the debugged process will be plugged into that pod by mirrord.
 
-
-## Help
-
-Need Help? Open a [discussion](https://github.com/metalbear-co/mirrord/discussions) or join our Discord server [here](https://discord.gg/pSKEdmNZcK).
+#### Configuration
+Use the Settings button in the status bar to open the settings menu. You can change the following parameters:
+- `Pod Namespace` - The namespace that the pod you want to impersonate exists in.
+- `Agent Namespace` - The namespace to spawn the mirrord agent in.
