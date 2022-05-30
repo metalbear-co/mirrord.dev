@@ -1,5 +1,6 @@
 ---
 title: "Introduction"
+description: "mirrord 101"
 date: 2022-05-26T08:48:57+00:00
 lastmod: 2022-05-26T08:48:57+00:00
 draft: false
@@ -16,7 +17,7 @@ mirrord is an open-source tool that lets developers run local processes in the c
 
 ## Why?
 Traditionally, software development happens in loops, where developers write and test their code locally, then deploy it to a staging/pre-production environment in the cloud, where they perform additional tests. These tests often fail, because the code is meeting a near-production environment for the first time, and encounters new conditions. The code must then be fixed/rewritten, tested locally again, deployed to staging again, and so on, until the tests pass.
-{{<figure src="loop.png" class="center">}}
+{{<figure src="loop.png" class="white-background center">}}
 
 The deployment to staging stage is expensive for several reasons:
 1. It often goes through a CI process, which is often slow (because of e.g. a long automated test suite having to pass in order to progress) and sometimes broken
