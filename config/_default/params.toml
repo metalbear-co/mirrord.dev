@@ -10,7 +10,7 @@ description = "mirrord is a cli/IDE extension that lets backend developers run t
 # docsVersion = "0.3"
 
 ## Open Graph
-images = ["doks.png"]
+images = ["android-chrome-512x512.png"]
 ogLocale = "en_US"
 domainTLD = "mirrord.dev"
 titleHome = "mirrord"
@@ -28,10 +28,10 @@ schemaAuthorTwitter = "https://twitter.com/metalbearco"
 schemaAuthorLinkedIn = "https://www.linkedin.com/company/metalbearco/"
 schemaAuthorGitHub = "https://github.com/metalbear-co"
 schemaLocale = "en-US"
-schemaLogo = "logo-doks.png"
+schemaLogo = "android-chrome-512x512.png"
 schemaLogoWidth = 512
 schemaLogoHeight = 512
-schemaImage = "doks.png"
+schemaImage = "android-chrome-512x512.png"
 schemaImageWidth = 1280
 schemaImageHeight = 640
 schemaTwitter = "https://twitter.com/metalbearco"
