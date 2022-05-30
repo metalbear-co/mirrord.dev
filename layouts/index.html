@@ -1,13 +1,13 @@
 {{ define "main" }}
 <section class="section container-fluid mt-n3 pb-3">
-  <div class="row justify-content-center">
-  <div class="col-lg-5 text-center">
-      {{- .Content -}}
+    <div class="row justify-content-center">
+        <div class="col-lg-5 text-center">
+            {{- .Content -}}
+        </div>
+        <div class="col-lg-7 col-xl-7 text-center">
+            <img src="info.svg" />
+        </div>
     </div>
-    <div class="col-lg-7 col-xl-7 text-center">
-      <img src="info.svg"/>
-    </div>
-  </div>
 </section>
 <section class="section container-fluid mt-n3 pb-3">
     <div class="row justify-content-center">
@@ -29,7 +29,8 @@
                 <div class="tab-pane fade show active" id="pills-cli" role="tabpanel" aria-labelledby="pills-cli-tab">
                     <div class="row justify-content-center">
                         <div class="col-sm-auto text-center">
-                            {{ $input := `curl -fsSL https://raw.githubusercontent.com/metalbear-co/mirrord/main/scripts/install.sh | bash` }}
+                            {{ $input := `curl -fsSL
+                            https://raw.githubusercontent.com/metalbear-co/mirrord/main/scripts/install.sh | bash` }}
                             {{ transform.Highlight $input "bash"}}
                         </div>
                     </div>
@@ -50,23 +51,18 @@
 {{ end }}
 
 {{ define "sidebar-prefooter" }}
-<section class="section container-fluid mt-n3 pb-3">
-    <div class="row justify-content-center">
-        <div class="col text-center">
-            <img style="max-width: 80%; max-height:80%" src="/demo.gif" />
-        </div>
-    </div>
-</section>
 {{ end }}
 
 {{ define "sidebar-footer" }}
 <script>
-    new Typewriter('#typewriter', {
-      strings: ['fastest', 'safest', 'easiest'],
-      autoStart: true,
-      loop: true,
-      pausefor: 4000,
-      cursor: '_',
+    window.addEventListener('DOMContentLoaded', (event) => {
+        new Typewriter('#typewriter', {
+            strings: ['fastest', 'safest', 'easiest'],
+            autoStart: true,
+            loop: true,
+            pausefor: 4000,
+            cursor: '_',
+        });
     });
 </script>
 {{ end }}

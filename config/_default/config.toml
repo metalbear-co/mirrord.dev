@@ -12,7 +12,7 @@ rssLimit = 10
 # Multilingual
 defaultContentLanguage = "en"
 disableLanguages = ["de", "nl"]
-# defaultContentLanguageInSubdir = true
+defaultContentLanguageInSubdir = false
 
 # add redirects/headers
 [outputs]
