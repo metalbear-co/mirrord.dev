@@ -30,4 +30,4 @@ With *mirrord*, we're trying to remove the costs associated with deployment to s
 mirrord runs in two places - in the memory of your local process (the mirrord-layer), and as a pod in your cloud environment (the mirrord-agent).
 {{<figure src="diagram.svg" alt="mirrord - Basic Architecure" class="white-background center large-width">}}
 
-When you start your local process with mirrord, it creates a pod in your cloud environment, which listens in on the pod you've passed as an argument. The mirrord-layer then hooks syscalls for your process, overriding its network behavior to instead 
+When you start your local process with mirrord, it creates a pod in your cloud environment, which listens in on the pod you've passed as an argument. The mirrord-layer then hooks syscalls for your process, overriding its network behavior to listen to incoming traffic from the agent, instead of local sockets. It then subscribes to incoming traffic from the agent (whatever was sniffed by the agent on the port that's being listened to locally), and whatever traffic reaches the remote pod is then duplicated by the agent, sent to the layer, and routed to the local process.
