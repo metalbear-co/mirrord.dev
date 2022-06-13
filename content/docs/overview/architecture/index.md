@@ -1,0 +1,37 @@
+---
+title: "Architecture"
+description: "mirrord's architecture"
+date: 2020-11-16T13:59:39+01:00
+lastmod: 2020-11-16T13:59:39+01:00
+draft: false
+images: []
+menu:
+  docs:
+    parent: "architecture"
+weight: 110
+toc: true
+---
+
+mirrord is composed of the following components:
+
+- `mirrord-agent` - Rust binary that is packaged as a container image. mirrord-agent runs in the cloud and acts as a proxy for the local process.
+- `mirrord-layer` - Rust dynamic library (so/dylib) that loads to the local process, hooks its filesystem, network APIs and relays them to the agent.
+- `mirrord-cli` - Rust binary that wraps the behavior of mirrord-layer in a user friendly CLI.
+- `VS Code extension` - Exposes the same functionality as - mirrord-cli within the VS Code IDE.
+{{<figure src="architecture.svg" alt="mirrord - Architecure" class="white-background center large-width">}}
+
+#### mirrord-agent
+
+mirrord-agent is a Kubernetes job that runs in the same namespace as the pod being impersonated in the cluster. This lets the mirrored-agent sniff the network traffic and gain access to the filesystem of the impersonated pod. It then relays file operations from the local process to the impersonated pod and incoming traffic from the impersonated pod to the local process. The connection between the agent and the impersonated pod is terminated if the agent pod hits a timeout.
+
+#### mirrord-layer
+
+mirrord-layer is a `.dylib` file for OSX systems and `.so` file on Linux distributions. mirrord-layer is loaded through `LD_PRELOAD/DYLD_INSERT_LIBRARIES` environment variable with the local process, which lets mirrord-layer selectively override libc functions. The overridden functions are then responsible for maintaining coordination between the process and incoming/outgoing requests for network traffic/file access. mirrord-layer sends and receives events from the agent using port-forwarding.
+
+#### mirrord-cli
+
+mirrord-cli is a user friendly interface over the essential functionality provided by mirrord-layer.  When you run mirrord-cli, it runs the process provided as an argument with mirrord-layer loaded into it.
+
+#### VS Code Extension
+
+mirrored’s VS Code extension provides mirrord’s functionality within VS Code’s UI. When you debug a process with mirrord enabled in VS Code, it prompts you for a pod to impersonate, then runs the debugged process with mirrord-layer loaded into it.
