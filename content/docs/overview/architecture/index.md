@@ -7,8 +7,8 @@ draft: false
 images: []
 menu:
   docs:
-    parent: "architecture"
-weight: 110
+    parent: "overview"
+weight: 120
 toc: true
 ---
 
