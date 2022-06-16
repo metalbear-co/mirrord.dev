@@ -27,6 +27,6 @@ In order to have a more structured approach, here’s the flow you should follow
     3. Once `open` is called, I’ll send a blocking request to the agent to open the remote file, returning the return code of the operation. 
     4. Create an fd using `memfd`. The result will be returned to the local app, and if successful we’ll save that fd into a HashMap that matches between local fd and remote fd/identifier. 
     5. When `read` is called, I will check if the fd being read was previously opened by us, and if it is we’ll send a blocking `read` request to the agent. The result will be sent back to the caller.
-    6. ….
+    6. And so on.
 5. This doc should go later on to our mirrord docs for advanced developers so people can understand how stuff works
 6. After approval of the implementation, you can start writing code, and add relevant e2e tests.
