@@ -7,12 +7,12 @@ draft: false
 images: []
 menu:
   docs:
-    parent: "fileops"
+    parent: "reference"
 weight: 110
 toc: true
 ---
 
-#### OVERVIEW
+#### Overview
 
 mirrord's cli supports enabling file operations using the `--enable-fs` flag. For example, consider the following python script
 
@@ -44,7 +44,8 @@ Currently, the following operations are supported:
 - lseek
 - write
 
-#### DESCRIPTION
+#### Description
+
 mirrord overrirdes calls to the following libc functions:
 
 **Note**: On a higher level, when running with `python` or `node` these libc function calls are abstracted through the standard libraries.
