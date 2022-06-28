@@ -12,7 +12,7 @@ weight: 110
 toc: true
 ---
 
-#### Overview
+## Overview
 
 mirrord's cli supports enabling file operations using the `--enable-fs` flag. For example, consider the following python script
 
@@ -44,13 +44,19 @@ Currently, the following operations are supported:
 - lseek
 - write
 
-#### Description
+## How does it work?
 
-mirrord overrirdes calls to the following libc functions:
+{{<figure src="mirrord-fileops.png" alt="mirrord - fileops" class="white-background center large-width">}}
 
-**Note**: On a higher level, when running with `python` or `node` these libc function calls are abstracted through the standard libraries.
+Once a request to open a new file is received by `mirrord-agent` from `mirrord-layer`, the agent forwards the request to the container in the remote pod in context of the provided path for the open system call, prefixed with path to the root directory of the container.
 
-##### open
+`mirrord-agent` uses APIs provided by docker and containerd runtimes to get the PID of the remote container, and refers to the root directory of the remote container through `/proc/container_pid/root`
+
+## Description
+
+mirrord overrirdes calls to the following libc functions/system calls:
+
+### open
 
 `int open(const char *pathname, int flags);`
 
@@ -63,7 +69,7 @@ import os
 fd = os.open("/tmp/test", os.O_WRONLY | os.O_CREAT)
 ```
 
-##### openat
+### openat
 
 `int openat(int dirfd, const char *pathname, int flags);`
 
@@ -81,7 +87,7 @@ os.open("test", os.O_RDWR | os.O_NONBLOCK | os.O_CLOEXEC, dir_fd=dir)
 
 `ssize_t read(int fd, void *buf, size_t count);`
 
-Read from a file on the remote pod. If the provided `fd` is a valid file descriptor i.e. it refers to a file opened on the remote pod then the call is forwarded to the remote pod, otherwise if the call is sent to libc.
+Read from a file on the remote pod.
 
 Example:
 
@@ -94,7 +100,7 @@ read = os.read(fd, 1024)
 
 `ssize_t write(int fd, const void *buf, size_t count);`
 
-Write to a file on the remote pod. If the provided `fd` is a valid file descriptor i.e. it refers to a file opened on the remote pod then the call is forwarded to the remote pod, otherwise if the call is sent to libc.
+Write to a file on the remote pod.
 
 Example:
 
@@ -107,7 +113,7 @@ with open("/tmp/test", "w") as file:
 
 `off_t lseek(int fd, off_t offset, int whence);`
 
-Reposition the file offset of an open file on the remote pod. lseek through mirrord-layer supports all valid options for whence as specified in the Linux manpages. If the provided `fd` is a valid file descriptor i.e. it refers to a file opened on the remote pod then the call is forwarded to the remote pod, otherwise if the call is sent to libc.
+Reposition the file offset of an open file on the remote pod. lseek through mirrord-layer supports all valid options for whence as specified in the Linux manpages.
 
 Example:
 
@@ -116,3 +122,5 @@ with open("/tmp/test", "w") as file:
     file.seek(10)
     file.write(TEXT)
 ```
+
+**Note:** For read, write, and lseek if the provided `fd` is a valid file descriptor i.e. it refers to a file opened on the remote pod then the call is forwarded to the remote pod, otherwise the call is sent to libc.
