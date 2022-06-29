@@ -1,6 +1,6 @@
 ---
 title: "File Operations"
-description: ""
+description: "Reference to mirrord's file operations"
 date: 2022-06-15T08:48:45+00:00
 lastmod: 2022-06-15T08:48:45+00:00
 draft: false
@@ -52,7 +52,7 @@ Once a request to open a new file is received by `mirrord-agent` from `mirrord-l
 
 `mirrord-agent` uses APIs provided by docker and containerd runtimes to get the PID of the remote container, and refers to the root directory of the remote container through `/proc/container_pid/root`
 
-## Description
+## Syscalls
 
 mirrord overrirdes calls to the following libc functions/system calls:
 
