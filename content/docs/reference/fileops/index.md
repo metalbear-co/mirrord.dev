@@ -83,7 +83,7 @@ dir = os.open("/tmp", os.O_RDONLY | os.O_NONBLOCK | os.O_CLOEXEC | os.O_DIRECTOR
 os.open("test", os.O_RDWR | os.O_NONBLOCK | os.O_CLOEXEC, dir_fd=dir)
 ```
 
-##### read
+### read
 
 `ssize_t read(int fd, void *buf, size_t count);`
 
@@ -96,7 +96,7 @@ fd = os.open("/tmp/test, os.O_RDWR | os.O_NONBLOCK | os.O_CLOEXEC)
 read = os.read(fd, 1024)
 ```
 
-##### write
+### write
 
 `ssize_t write(int fd, const void *buf, size_t count);`
 
@@ -109,7 +109,7 @@ with open("/tmp/test", "w") as file:
     file.write(TEXT)
 ```
 
-##### lseek
+### lseek
 
 `off_t lseek(int fd, off_t offset, int whence);`
 
