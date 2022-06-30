@@ -147,7 +147,7 @@ On Nightly toolchain -
 
 | OSX | `cargo +nightly build --workspace --exclude mirrord-agent` |
 | - | - |
-| Linux | `cargo +nighty build` |
+| **Linux** | **`cargo +nighty build`** |
 
 - Run mirrord with a local process
 
@@ -253,7 +253,7 @@ Download [nodejs](https://nodejs.org/en/download/)
 
 | OSX | `brew install node` |
 | - | - |
-| Ubuntu (Linux) | `apt install nodejs npm` |
+| **Ubuntu (Linux)** | **`apt install nodejs npm`** |
 
 Install [expressjs](https://expressjs.com/)
 
@@ -267,7 +267,7 @@ Download [python](https://www.python.org/downloads/)
 
 | OSX | `brew install python` |
 | - | - |
-| Ubuntu (Linux) | `apt install python` |
+| **Ubuntu (Linux)** | **`apt install python`** |
 
 Install [Flask](https://flask.palletsprojects.com/en/2.1.x/)
 
