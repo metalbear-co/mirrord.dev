@@ -14,6 +14,7 @@ toc: true
 
 ## Setup Environment
 
+### Setup a k8s Cluster
 ### Docker Desktop
 
 - Download [Docker Desktop](https://www.docker.com/products/docker-desktop/)
@@ -24,18 +25,20 @@ toc: true
 
 {{<figure src="mirrord-enable-kubernetes.png" alt="mirrord - Download Docker Desktop" class="white-background center large-width">}}
 
-- Switch Kubernetes context to `docker-desktop`
+### Preparing a cluster
+
+- Switch Kubernetes context to `your-context`
 
 ```bash
 kubectl config get-contexts
 ```
 
 ```bash
-kubectl config use-context docker-desktop
+kubectl config use-context your-context
 ```
 
 <details>
-  <summary>View Sample Output</summary>
+  <summary>View sample output with Docker Desktop</summary>
 
 ```bash
 ❯ kubectl config get-contexts
@@ -240,4 +243,46 @@ curl localhost:32905
 2022-06-30T05:17:31.878193Z  WARN mirrord_layer::tcp_mirror: tcp_tunnel -> exiting due to remote stream closed!
 2022-06-30T05:17:31.878255Z DEBUG mirrord_layer::tcp_mirror: tcp_tunnel -> exiting
 OK - GET: Request completed
+```
+
+### Run E2E tests
+
+- Setup Node environment
+
+Download [nodejs](https://nodejs.org/en/download/)
+
+| OSX | `brew install node` |
+| - | - |
+| Ubuntu (Linux) | `apt install nodejs npm` |
+
+Install [expressjs](https://expressjs.com/)
+
+```bash
+npm install express
+```
+
+- Setup Python environment
+
+Download [python](https://www.python.org/downloads/)
+
+| OSX | `brew install python` |
+| - | - |
+| Ubuntu (Linux) | `apt install python` |
+
+Install [Flask](https://flask.palletsprojects.com/en/2.1.x/)
+
+```bash
+pip3 install flask
+```
+
+- Make sure `mirrord-agent` image is tagged as `test`
+
+```bash
+docker tag agent-image test
+```
+
+- Run Cargo test
+
+```bash
+cargo test --package tests --lib -- tests --nocapture --test-threads 1
 ```
