@@ -1,6 +1,6 @@
 ---
 title: "Testing & Development"
-description: "How to test and develop mirrord"
+description: "Setup environment for testing and developing mirrord"
 date: 2022-06-15T08:48:45+00:00
 lastmod: 2022-06-15T08:48:45+00:00
 draft: false
@@ -12,22 +12,34 @@ weight: 110
 toc: true
 ---
 
-## Setup Environment
+
+### Prerequisites
+
+- [Rust](https://www.rust-lang.org/)
+- [Nodejs](https://nodejs.org/en/) & [Expressjs](https://expressjs.com/)
+- [Python](https://www.python.org/) & [Flask](https://flask.palletsprojects.com/en/2.1.x/)
+- Kubernetes Cluster (local/remote)
 
 ### Setup a k8s Cluster
+
+A minimal Kubernetes cluster can be easily setup locally using either of the following -
+- [Minikube](https://minikube.sigs.k8s.io/)
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+
+For the ease of illustration and testing, we will conform to using Docker Desktop for the rest of the guide.
 ### Docker Desktop
 
-- Download [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+Download [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 
 {{<figure src="mirrord-docker-desktop.png" alt="mirrord - Download Docker Desktop" class="white-background center large-width">}}
 
-- Enable Kubernetes in preferences, Apply and Restart
+Enable Kubernetes in preferences, Apply and Restart
 
 {{<figure src="mirrord-enable-kubernetes.png" alt="mirrord - Download Docker Desktop" class="white-background center large-width">}}
 
 ### Preparing a cluster
 
-- Switch Kubernetes context to `your-context`
+Switch Kubernetes context to `your-context`
 
 ```bash
 kubectl config get-contexts
@@ -38,7 +50,7 @@ kubectl config use-context your-context
 ```
 
 <details>
-  <summary>View sample output with Docker Desktop</summary>
+  <summary>View sample output from Docker Desktop</summary>
 
 ```bash
 ❯ kubectl config get-contexts
@@ -55,8 +67,7 @@ Switched to context "docker-desktop".
 
 </details>
 
-
-- Create new testing deployment & service
+Create a new testing deployment & service
 
 ```bash
 kubectl apply -f app.yaml
@@ -113,8 +124,7 @@ spec:
 
 </details>
 
-
-- Verify everything was created after applying the manifest
+Verify everything was created after applying the manifest
 
 ```bash
 ❯ kubectl get services
@@ -129,19 +139,19 @@ NAME                                 READY   STATUS    RESTARTS   AGE
 py-serv-deployment-ff89b5974-x9tjx   1/1     Running   0          3h8m
 ```
 
-- Build mirrord-agent Image
+### Build mirrord-agent
 
 ```bash
 docker build -t test . --file mirrord-agent/Dockerfile
 ```
 
-```
+```bash
 ❯ docker images
 REPOSITORY                                     TAG       IMAGE ID       CREATED         SIZE
 test                                           latest    5080c20a8222   2 hours ago     300MB
 ```
 
-- Build mirrord from source
+### Build & run mirrord
 
 On Nightly toolchain - 
 
@@ -149,7 +159,7 @@ On Nightly toolchain -
 | - | - |
 | **Linux** | **`cargo +nighty build`** |
 
-- Run mirrord with a local process
+Run mirrord with a local process
 
 Sample web server - `app.js`
 
@@ -210,7 +220,7 @@ MIRRORD_AGENT_IMAGE=test MIRRORD_AGENT_RUST_LOG=debug RUST_LOG=debug target/debu
 Server listening on port 80
 ```
 
-- Send traffic to the Kubernetes Pod through the service
+Send traffic to the Kubernetes Pod through the service
 
 ```bash
 ❯ kubectl get services
@@ -223,7 +233,7 @@ py-serv      NodePort    10.96.139.36   <none>        80:32095/TCP   3h27m
 curl localhost:32905
 ```
 
-- Check the traffic was received by the local process
+Check the traffic was received by the local process
 
 ```bash
 .
@@ -247,41 +257,13 @@ OK - GET: Request completed
 
 ### Run E2E tests
 
-- Setup Node environment
-
-Download [nodejs](https://nodejs.org/en/download/)
-
-| OSX | `brew install node` |
-| - | - |
-| **Ubuntu (Linux)** | **`apt install nodejs npm`** |
-
-Install [expressjs](https://expressjs.com/)
-
-```bash
-npm install express
-```
-
-- Setup Python environment
-
-Download [python](https://www.python.org/downloads/)
-
-| OSX | `brew install python` |
-| - | - |
-| **Ubuntu (Linux)** | **`apt install python`** |
-
-Install [Flask](https://flask.palletsprojects.com/en/2.1.x/)
-
-```bash
-pip3 install flask
-```
-
-- Make sure `mirrord-agent` image is tagged as `test`
+Make sure `mirrord-agent` image is tagged as `test`
 
 ```bash
 docker tag agent-image test
 ```
 
-- Run Cargo test
+Run Cargo test
 
 ```bash
 cargo test --package tests --lib -- tests --nocapture --test-threads 1
