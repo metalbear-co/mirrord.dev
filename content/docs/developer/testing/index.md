@@ -16,18 +16,21 @@ toc: true
 ### Prerequisites
 
 - [Rust](https://www.rust-lang.org/)
-- [Nodejs](https://nodejs.org/en/) & [Expressjs](https://expressjs.com/)
-- [Python](https://www.python.org/) & [Flask](https://flask.palletsprojects.com/en/2.1.x/)
+- [Nodejs](https://nodejs.org/en/), [Expressjs](https://expressjs.com/)
+- [Python](https://www.python.org/), [Flask](https://flask.palletsprojects.com/en/2.1.x/)
 - Kubernetes Cluster (local/remote)
 
-### Setup a k8s Cluster
+### Setup a Kubernetes cluster
 
 A minimal Kubernetes cluster can be easily setup locally using either of the following -
+
 - [Minikube](https://minikube.sigs.k8s.io/)
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+- [Kind](https://kind.sigs.k8s.io/docs/user/quick-start/)
 
 For the ease of illustration and testing, we will conform to using Docker Desktop for the rest of the guide.
-### Docker Desktop
+
+#### Docker Desktop
 
 Download [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 
@@ -37,37 +40,19 @@ Enable Kubernetes in preferences, Apply and Restart
 
 {{<figure src="mirrord-enable-kubernetes.png" alt="mirrord - Download Docker Desktop" class="white-background center large-width">}}
 
-### Preparing a cluster
+#### Preparing a cluster
 
-Switch Kubernetes context to `your-context`
+Switch Kubernetes context to `docker-desktop`
 
 ```bash
 kubectl config get-contexts
 ```
 
 ```bash
-kubectl config use-context your-context
+kubectl config use-context docker-desktop
 ```
 
-<details>
-  <summary>View sample output from Docker Desktop</summary>
-
-```bash
-❯ kubectl config get-contexts
-CURRENT   NAME             CLUSTER          AUTHINFO                               NAMESPACE
-          docker-desktop   docker-desktop   docker-desktop
-          minikube         minikube         minikube                               default
-*         mirrord-test     mirrord-test     clusterUser_mirrod-test_mirrord-test
-```
-
-```bash
-❯ kubectl config use-context docker-desktop
-Switched to context "docker-desktop".
-```
-
-</details>
-
-Create a new testing deployment & service
+Create a new testing deployment and service
 
 ```bash
 kubectl apply -f app.yaml
@@ -139,7 +124,7 @@ NAME                                 READY   STATUS    RESTARTS   AGE
 py-serv-deployment-ff89b5974-x9tjx   1/1     Running   0          3h8m
 ```
 
-### Build mirrord-agent
+### Build mirrord-agent Docker Image
 
 ```bash
 docker build -t test . --file mirrord-agent/Dockerfile
@@ -151,9 +136,9 @@ REPOSITORY                                     TAG       IMAGE ID       CREATED 
 test                                           latest    5080c20a8222   2 hours ago     300MB
 ```
 
-### Build & run mirrord
+**Note:** mirrord-agent is shipped as a container image as it creates a job with this image, providing it with elevated permissions on the same node as the impersonated pod.
 
-On Nightly toolchain - 
+### Build and run mirrord
 
 | OSX | `cargo +nightly build --workspace --exclude mirrord-agent` |
 | - | - |
@@ -162,6 +147,9 @@ On Nightly toolchain -
 Run mirrord with a local process
 
 Sample web server - `app.js`
+
+<details>
+  <summary>app.js</summary>
 
 ```js
 const express = require("express");
@@ -188,6 +176,8 @@ var server = app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
 });
 ```
+
+</details>
 
 ```bash
 
@@ -257,14 +247,8 @@ OK - GET: Request completed
 
 ### Run E2E tests
 
-Make sure `mirrord-agent` image is tagged as `test`
-
-```bash
-docker tag agent-image test
-```
-
 Run Cargo test
 
 ```bash
-cargo test --package tests --lib -- tests --nocapture --test-threads 1
+cargo test --package tests
 ```
