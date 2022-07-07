@@ -46,6 +46,45 @@
             </div>
         </div>
     </div>
+
+    <style>
+        .use-case-text {
+            font-size: 30px;
+            /* TODO: fix font color */
+            color: rgb(223, 119, 39);
+        }
+    </style>
+    <div class="use-cases">
+        <p>
+            <!-- Leave some empty space here for clarity -->
+        </p>
+        <div class = "use-case-text">
+        <p id="development" align="center">No more complex and resource-intensive local setups. Plug the process you're developing (or even just your terminal) directly into your staging environment as you work, and quickly test out database commands, API calls to other services, and more.</p>
+        </div>
+        <div class = "use-case-text">
+        <p id="testing" align="center">Wait for your CR to be approved, for the CI to pass, and for your service to be deployed to staging only to break it for everyone else because of some bug you missed. Or use mirrord, and immediately test your service in staging conditions, without deployment and with minimal risk to the staging environment.</p>
+        </div>
+        <div class = "use-case-text">
+        <p id="troubleshooting" align="center">Have an issue that doesn't reproduce locally? Reproduce it in staging with your local process plugged in, and debug it right in your IDE. Then immediately test your fix, no deployment necessary.
+        </div>
+        </p>
+    </div>
+
+    <script>
+        let index = 0;
+        changeText();
+        function changeText() {          
+          let cases = document.getElementsByClassName("use-case-text");          
+          for (let i = 0; i < cases.length; i++) {
+            cases[i].style.display = "none";  
+          }
+          index++;
+          if (index > cases.length) {index = 1}              
+          cases[index-1].style.display = "block";            
+          setTimeout(changeText, 10000);
+        }
+    </script>
+        
 </section>
 {{ end }}
 
@@ -67,3 +106,4 @@
     }
 </style>
 {{ end }}
+
