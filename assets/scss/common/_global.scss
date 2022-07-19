@@ -23,7 +23,7 @@
 }
 
 header.navbar.navbar-expand-md.navbar-light.doks-navbar nav.container-xxl.flex-wrap.flex-md-nowrap div#offcanvasDoks.offcanvas.offcanvas-end.border-0.py-md-1.show div.offcanvas-body.px-4 ul.nav.flex-column.flex-md-row.ms-md-n3 li.nav-item a.nav-link.ps-0.py-1 {
-  color:#248b81;
+  color: #248b81;
 
 }
 
@@ -31,13 +31,14 @@ header.navbar.navbar-expand-md.navbar-light.doks-navbar nav.container-xxl.flex-w
   color: #333840;
 }
 
-header.navbar.navbar-expand-md.navbar-light.doks-navbar nav.container-xxl.flex-wrap.flex-md-nowrap div#offcanvasDoks.offcanvas.offcanvas-end.border-0.py-md-1.show div.offcanvas-body.px-4 ul.nav.flex-column.flex-md-row.ms-md-auto.me-md-n5.pe-md-2 li.nav-item a.nav-link.ps-0.py-1
-{
-  color:#248b81;
+header.navbar.navbar-expand-md.navbar-light.doks-navbar nav.container-xxl.flex-wrap.flex-md-nowrap div#offcanvasDoks.offcanvas.offcanvas-end.border-0.py-md-1.show div.offcanvas-body.px-4 ul.nav.flex-column.flex-md-row.ms-md-auto.me-md-n5.pe-md-2 li.nav-item a.nav-link.ps-0.py-1 {
+  color: #248b81;
 }
 
 
-.nav-pills .nav-link, .nav-pills .banner .nav a, .banner .nav .nav-pills a {
+.nav-pills .nav-link,
+.nav-pills .banner .nav a,
+.banner .nav .nav-pills a {
   border-radius: 5px;
   margin-right: 0.5rem;
   margin-left: 0.5rem;
@@ -101,6 +102,7 @@ body.docs {
 body {
   background-color: white;
 }
+
 @include media-breakpoint-up(md) {
   body {
     font-size: $font-size-md;
@@ -341,6 +343,7 @@ body {
   display: none;
   padding: 80px;
   text-align: center;
+  transform: 2s;
 }
 
 .prev,
@@ -366,6 +369,7 @@ body {
 }
 
 
+
 .prev:hover,
 .next:hover {
   background-color: rgba(0, 0, 0, 0.8);
@@ -384,7 +388,7 @@ body {
   text-align: center;
   margin: 0 2px;
   display: inline-block;
-  padding: 20px;              
+  padding: 20px;
   transition: background-color 0.6s ease;
   border-radius: 8px;
 }
