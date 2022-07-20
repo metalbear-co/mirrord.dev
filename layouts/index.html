@@ -76,8 +76,15 @@
     </div>
     
     <div>                         
-        <div>                            
-            <img id="howItWorks" src="mirrord-how-it-works-dark.svg" />                                    
+        <div>                
+            <img id="howItWorks" src="#" /> 
+            <script>                
+                if (document.documentElement.hasAttribute('data-dark-mode')) {                                                       
+                    document.getElementById('howItWorks').src = 'mirrord-how-it-works-dark.svg';
+                } else {
+                    document.getElementById('howItWorks').src = 'mirrord-how-it-works-light.svg';
+                }
+            </script>            
         </div>
         <p>mirrord runs in two places - in the memory of your local process, and as a pod in your cloud environment. 
         The two components work together to fuse your local process with its remote counterpart so that inputs to the remote pod are mirrored to the local process, and outputs from the local process are tunnelled to the remote pod. This includes network traffic, file access, and environment variable - 
