@@ -47,6 +47,11 @@
         </div>
     </div>
 
+    <div class="row justify-content-center">
+        <h2 class="useCaseHeading">Use Cases</h2>
+    </div>
+
+    </div>
     <div class="container container-fluid">
         <div class="caseText">
             <p>No more complex and resource-intensive local setups. Plug the process you're developing (or even just
@@ -74,25 +79,7 @@
         <p class="case" onclick="currentIndex(2)">Development</p>
         <p class="case" onclick="currentIndex(3)">Troubleshooting</p>
     </div>
-
-    <div>
-        <div>
-            <img id="howItWorks" src="#" />
-            <script>
-                if (document.documentElement.hasAttribute('data-dark-mode')) {
-                    document.getElementById('howItWorks').src = 'mirrord-how-it-works-dark.svg';
-                } else {
-                    document.getElementById('howItWorks').src = 'mirrord-how-it-works-light.svg';
-                }
-            </script>
-        </div>
-        <p>mirrord runs in two places - in the memory of your local process, and as a pod in your cloud environment.
-            The two components work together to fuse your local process with its remote counterpart so that inputs to
-            the remote pod are mirrored to the local process, and outputs from the local process are tunnelled to the
-            remote pod. This includes network traffic, file access, and environment variable -
-            everything needed to make your local process “think” it's running in the cloud.</p>
-    </div>
-
+    
     <script>
         var textIndex = 1;
         showCases(textIndex);

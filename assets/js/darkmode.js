@@ -13,7 +13,7 @@ if (mode !== null) {
 
       localStorage.setItem('theme', 'light');
       document.documentElement.removeAttribute('data-dark-mode');
-      
+
     }
 
   })
@@ -22,14 +22,7 @@ if (mode !== null) {
 
     document.documentElement.toggleAttribute('data-dark-mode');
     localStorage.setItem('theme', document.documentElement.hasAttribute('data-dark-mode') ? 'dark' : 'light');
-    console.log(document.documentElement.hasAttribute('data-dark-mode'))
-
-    var howItWorksID = document.getElementById("howItWorks");
-    if (document.documentElement.hasAttribute('data-dark-mode')) {
-      howItWorksID.src = "mirrord-how-it-works-dark.svg";
-    } else {
-      howItWorksID.src = "mirrord-how-it-works-light.svg";
-    }
+        
   });
 
   if (localStorage.getItem('theme') === 'dark') {
