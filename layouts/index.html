@@ -73,7 +73,17 @@
         <p class="case" onclick="currentIndex(1)">Testing</p>
         <p class="case" onclick="currentIndex(2)">Development</p>
         <p class="case" onclick="currentIndex(3)">Troubleshooting</p>
-    </div>    
+    </div>
+    
+    <div>                         
+        <div>                            
+            <img id="howItWorks" src="mirrord-how-it-works-dark.svg" />                                    
+        </div>
+        <p>mirrord runs in two places - in the memory of your local process, and as a pod in your cloud environment. 
+        The two components work together to fuse your local process with its remote counterpart so that inputs to the remote pod are mirrored to the local process, and outputs from the local process are tunnelled to the remote pod. This includes network traffic, file access, and environment variable - 
+        everything needed to make your local process “think” it's running in the cloud.</p>
+    </div>      
+        
     <script>
         var textIndex = 1;
         showCases(textIndex);
