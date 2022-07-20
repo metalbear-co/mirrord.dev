@@ -22,7 +22,7 @@ if (mode !== null) {
 
     document.documentElement.toggleAttribute('data-dark-mode');
     localStorage.setItem('theme', document.documentElement.hasAttribute('data-dark-mode') ? 'dark' : 'light');
-        
+
   });
 
   if (localStorage.getItem('theme') === 'dark') {
