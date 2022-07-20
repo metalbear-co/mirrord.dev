@@ -48,67 +48,39 @@
     </div>
 
     <div class="row justify-content-center">
-        <h2 class="useCaseHeading">Use Cases</h2>
+        <h2 class="useCaseHeading">Use Cases</h2>    
     </div>
 
-    </div>
-    <div class="container container-fluid">
-        <div class="caseText">
-            <p>No more complex and resource-intensive local setups. Plug the process you're developing (or even just
-                your terminal) directly into your staging environment as you work, and quickly test out database
-                commands, API calls to other services, and more.</p>
+    <div class="useCases">
+        <div class="cases">
+            <input type="radio" name="r" id="r1" checked>
+            <input type="radio" name="r" id="r2">
+            <input type="radio" name="r" id="r3">        
+            <div class="case s1">
+                <p>No more complex and resource-intensive local setups. Plug the process you're developing (or even just
+                    your terminal) directly into your staging environment as you work, and quickly test out database
+                    commands, API calls to other services, and more.</p>
+            </div>
+
+            <div class="case">
+                <p>Wait for your CR to be approved, for the CI to pass, and for your service to be deployed to staging only
+                    to break it for everyone else because of some bug you missed. Or use mirrord, and immediately test your
+                    service in staging conditions, without deployment and with minimal risk to the staging environment.</p>
+            </div>
+
+            <div class="case">
+                <p>Have an issue that doesn't reproduce locally? Reproduce it in staging with your local process plugged in,
+                    and debug it right in your IDE. Then immediately test your fix, no deployment necessary.</p>
+            </div>
         </div>
-
-        <div class="caseText">
-            <p>Wait for your CR to be approved, for the CI to pass, and for your service to be deployed to staging only
-                to break it for everyone else because of some bug you missed. Or use mirrord, and immediately test your
-                service in staging conditions, without deployment and with minimal risk to the staging environment.</p>
+        <div class="navigation">
+            <label for="r1" class="caseButton">Development</label>
+            <label for="r2" class="caseButton">Testing</label>
+            <label for="r3" class="caseButton">Troubleshooting</label>
         </div>
-
-        <div class="caseText">
-            <p>Have an issue that doesn't reproduce locally? Reproduce it in staging with your local process plugged in,
-                and debug it right in your IDE. Then immediately test your fix, no deployment necessary.</p>
-        </div>
-
-        <a class="prev" onclick="addToIndex(-1)">&#10094;</a>
-        <a class="next" onclick="addToIndex(1)">&#10095;</a>
     </div>
 
-    <div class="case-container">
-        <p class="case" onclick="currentIndex(1)">Testing</p>
-        <p class="case" onclick="currentIndex(2)">Development</p>
-        <p class="case" onclick="currentIndex(3)">Troubleshooting</p>
-    </div>
     
-    <script>
-        var textIndex = 1;
-        showCases(textIndex);
-
-        function addToIndex(n) {
-            showCases(textIndex += n);
-        }
-
-        function currentIndex(n) {
-            showCases(textIndex = n);
-        }
-
-        function showCases(n) {
-            var i;
-            var slides = document.getElementsByClassName("caseText");
-            var cases = document.getElementsByClassName("case");
-            if (n > slides.length) { textIndex = 1 }
-            if (n < 1) { textIndex = slides.length }
-            for (i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
-            }
-            for (i = 0; i < cases.length; i++) {
-                cases[i].className = cases[i].className.replace(" now", "");
-            }
-            slides[textIndex - 1].style.display = "block";
-            cases[textIndex - 1].className += " now";
-        }
-    </script>
-
     {{ end }}
 
     {{ define "sidebar-prefooter" }}

@@ -334,74 +334,74 @@ body {
   }
 }
 
-.container {
-  position: relative;
-  // background: rgb(10, 27, 38);
-}
-
-.caseText {
-  display: none;
-  padding: 80px;
-  text-align: center;
-  transform: 2s;
-}
-
-.prev,
-.next {
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  width: auto;
-  margin-top: -30px;
-  padding: 16px;
-  color: #888;
-  font-weight: bold;
-  font-size: 20px;
-  border-radius: 0 3px 3px 0;
-  user-select: none;
-}
-
-
-.next {
-  position: absolute;
-  right: 0;
-  border-radius: 3px 0 0 3px;
-}
-
-
-
-.prev:hover,
-.next:hover {
-  background-color: rgba(0, 0, 0, 0.8);
-  color: white;
-}
-
-.case-container {
-  text-align: center;
-  padding: 3%;
-}
-
-.case {
-  cursor: pointer;
-  height: 10%;
-  width: 25%;
-  text-align: center;
-  margin: 0 2px;
-  display: inline-block;
-  padding: 20px;
-  transition: background-color 0.6s ease;
-  border-radius: 8px;
-}
-
-.now,
-.case:hover {
-  background-color: rgb(242, 106, 27);
-}
-
 .useCaseHeading {
   font-size: 2.5rem;
   font-weight: bold;
   text-align: center;
   padding-top: 3%;
   color: rgb(242, 106, 27);
+}
+
+.useCases {
+  width: 86%;
+  height: 200px;  
+  overflow: hidden;
+  text-align: center;
+  position: relative;
+  top: 50%;  
+  transform: translateX(8%);
+}
+
+.navigation {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+}
+
+.cases {
+  width: 300%;
+  text-align: center;
+  height: 100%;
+  display: flex;
+}
+
+.case {
+  width: 33%;
+  transition: 0.6s;
+}
+
+.caseButton {
+  width: 270px;
+  height: 50px;  
+  text-align: center;
+  margin: 1%;
+  padding: 1%;
+  transition: background-color 0.6s ease;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+.caseButton:hover {
+  background-color: rgb(242, 106, 27);
+
+}
+
+input[name="r"] {
+  position: absolute;
+  visibility: hidden;
+}
+
+#r1:checked ~ .s1 {
+  margin-left: 0%;
+}
+
+#r2:checked ~ .s1 {
+  margin-left: -33%;
+}
+
+#r3:checked ~ .s1 {
+  margin-left: -66%;
 }
