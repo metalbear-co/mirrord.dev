@@ -55,7 +55,12 @@
         <div class="cases">
             <input type="radio" name="r" id="r1" checked>
             <input type="radio" name="r" id="r2">
-            <input type="radio" name="r" id="r3">        
+            <input type="radio" name="r" id="r3">   
+            <div class="navigation">
+                <label for="r1" class="caseButton">Development</label>
+                <label for="r2" class="caseButton">Testing</label>
+                <label for="r3" class="caseButton">Troubleshooting</label>
+            </div>     
             <div class="case s1">
                 <p>No more complex and resource-intensive local setups. Plug the process you're developing (or even just
                     your terminal) directly into your staging environment as you work, and quickly test out database
@@ -73,14 +78,10 @@
                     and debug it right in your IDE. Then immediately test your fix, no deployment necessary.</p>
             </div>
         </div>
-        <div class="navigation">
-            <label for="r1" class="caseButton">Development</label>
-            <label for="r2" class="caseButton">Testing</label>
-            <label for="r3" class="caseButton">Troubleshooting</label>
-        </div>
+        
     </div>
 
-    
+
     {{ end }}
 
     {{ define "sidebar-prefooter" }}
