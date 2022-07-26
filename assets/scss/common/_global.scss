@@ -343,50 +343,51 @@ body {
 }
 
 .useCases {
-  width: 87%;
+  width: 82%;
   overflow: hidden;
   text-align: center;
   position: relative;
   top: 50%;
   transform: translateX(8%);
   margin-bottom: 15%;
+  
 }
 
 .navigation {
   position: absolute;
-  left: 50%;
+  left: 53%;
   transform: translateX(-50%);
   display: flex;
-  width: 90%;
+  width: 100%;
   height: 20%;
 }
 
 .cases {
+  margin-top: 7%;
   width: 302%;
   text-align: center;
   height: 100%;
-  display: flex;
+  display: flex;  
 }
 
 .case {
-  width: 33%;  
+  width: 33%;
+  height: 100%;
   transition: 0.6s;
-  margin-top: 5%;
+  margin-top: 8%;
 }
 
 .caseButton {
-  width: 100%;
-  height: 130%;
+  width: 30%;
+  height: 50px;
   text-align: center;
   margin: 1%;
-  padding-top: 2%;
-  padding-bottom: 2%;
-  padding-left: 2%;
-  padding-right: 2%;
+  padding-top: 1%;  
   transition: background-color 0.6s ease;
   border-radius: 8px;
   cursor: pointer;
   transition: 0.4s;
+  word-wrap: break-word;
 }
 
 .caseButton:hover {
