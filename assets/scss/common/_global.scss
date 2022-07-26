@@ -344,11 +344,11 @@ body {
 
 .useCases {
   width: 86%;
-  height: 200px;  
+  height: 100%;
   overflow: hidden;
   text-align: center;
   position: relative;
-  top: 50%;  
+  top: 50%;
   transform: translateX(8%);
   margin-bottom: 15%;
 }
@@ -357,9 +357,9 @@ body {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  display: flex; 
+  display: flex;
   width: 90%;
-  height: 20%; 
+  height: 17%;
 }
 
 .cases {
@@ -370,17 +370,17 @@ body {
 }
 
 .case {
-  width: 33%;
+  width: 33%;  
   transition: 0.6s;
-  margin-top: 100px;
-} 
+  margin-top: 3.5%;
+}
 
 .caseButton {
   width: 100%;
-  height: 130%;  
+  height: 130%;
   text-align: center;
   margin: 1%;
-  padding: 1%;
+  padding-top: 1%;
   transition: background-color 0.6s ease;
   border-radius: 8px;
   cursor: pointer;
@@ -397,26 +397,26 @@ input[name="r"] {
   visibility: hidden;
 }
 
-#r1:checked ~ .s1 {
+#r1:checked~.s1 {
   margin-left: 0%;
 }
 
-#r2:checked ~ .s1 {
+#r2:checked~.s1 {
   margin-left: -33%;
 }
 
-#r3:checked ~ .s1 {
+#r3:checked~.s1 {
   margin-left: -66%;
 }
 
-#r1:checked ~ .navigation .caseButton[for="r1"] {
+#r1:checked~.navigation .caseButton[for="r1"] {
   background-color: rgb(242, 106, 27);
 }
 
-#r2:checked ~ .navigation .caseButton[for="r2"] {
+#r2:checked~.navigation .caseButton[for="r2"] {
   background-color: rgb(242, 106, 27);
 }
 
-#r3:checked ~ .navigation .caseButton[for="r3"] {
+#r3:checked~.navigation .caseButton[for="r3"] {
   background-color: rgb(242, 106, 27);
 }
