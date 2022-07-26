@@ -142,7 +142,7 @@ test                                           latest    5080c20a8222   2 hours 
 
 | OSX | `cargo +nightly build --workspace --exclude mirrord-agent` |
 | - | - |
-| **Linux** | **`cargo +nighty build`** |
+| **Linux** | **`cargo +nightly build`** |
 
 Run mirrord with a local process
 
