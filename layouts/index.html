@@ -46,24 +46,61 @@
             </div>
         </div>
     </div>
-</section>
-{{ end }}
 
-{{ define "sidebar-prefooter" }}
-{{ end }}
+    <div class="justify-content-center">
+        <h2 class="useCaseHeading">Use Cases</h2>    
+    </div>
 
-{{ define "sidebar-footer" }}
-{{ $typewriter := resources.Get "js/index-typewriter.js" -}}
-{{ $typewriter := $typewriter | js.Build -}}
-{{ $typewriter := $typewriter | minify | fingerprint "sha512" -}}
-<script src="{{ $typewriter.RelPermalink }}" integrity="{{ $typewriter.Data.Integrity }}" crossorigin="anonymous" defer></script>
+    <div class="useCases">
+        <div class="cases">
+            <input type="radio" name="r" id="r1" checked>
+            <input type="radio" name="r" id="r2">
+            <input type="radio" name="r" id="r3">   
+            <div class="navigation justify-content-center">
+                <label for="r1" class="caseButton">Development</label>
+                <label for="r2" class="caseButton">Testing</label>
+                <label for="r3" class="caseButton">Troubleshooting</label>
+            </div>     
+            <div class="case s1">
+                <p>No more complex and resource-intensive local setups. Plug the process you're developing (or even just
+                    your terminal) directly into your staging environment as you work, and quickly test out database
+                    commands, API calls to other services, and more.</p>
+            </div>
 
-<style>
-    .chroma {
-        margin: 0;
-    }
-    .col-lg-5 > ul:nth-child(3) {
-        text-align: left;
-    }
-</style>
-{{ end }}
+            <div class="case">
+                <p>Wait for your CR to be approved, for the CI to pass, and for your service to be deployed to staging only
+                    to break it for everyone else because of some bug you missed. Or use mirrord, and immediately test your
+                    service in staging conditions, without deployment and with minimal risk to the staging environment.</p>
+            </div>
+
+            <div class="case">
+                <p>Have an issue that doesn't reproduce locally? Reproduce it in staging with your local process plugged in,
+                    and debug it right in your IDE. Then immediately test your fix, no deployment necessary.</p>
+            </div>
+        </div>
+        
+    </div>
+
+
+    {{ end }}
+
+    {{ define "sidebar-prefooter" }}
+    {{ end }}
+
+    {{ define "sidebar-footer" }}
+    {{ $typewriter := resources.Get "js/index-typewriter.js" -}}
+    {{ $typewriter := $typewriter | js.Build -}}
+    {{ $typewriter := $typewriter | minify | fingerprint "sha512" -}}
+    <script src="{{ $typewriter.RelPermalink }}" integrity="{{ $typewriter.Data.Integrity }}" crossorigin="anonymous"
+        defer></script>
+
+    <style>
+        .chroma {
+            margin: 0;
+        }
+
+        .col-lg-5>ul:nth-child(3) {
+            text-align: left;
+        }
+    </style>
+    {{ end }}
