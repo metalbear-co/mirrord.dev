@@ -342,28 +342,22 @@ body {
   color: rgb(242, 106, 27);
 }
 
-.useCases {
-  width: 83%;
+.useCases {  
   overflow: hidden;
-  text-align: center;
-  position: relative;
-  top: 50%;
-  transform: translateX(8%);
   margin-bottom: 15%;
 
 }
 
 .navigation {
-  position: absolute;
-  left: 35vw;
-  transform: translateX(-50%);
+  position: absolute;  
+  left: 33vw;
+  transform: translateX(-30%);
   display: flex;
-  width: 60vw;
-  height: 20vw;
+  width: 80%;
 }
 
 .cases {
-  margin-top: 7%;
+  margin-top: 5%;
   width: 302%;
   text-align: center;
   height: 100%;
@@ -373,8 +367,8 @@ body {
 .case {
   width: 33%;
   height: 100%;
-  transition: 0.6s;
-  margin-top: 8%;
+  transition: 0.6s;  
+  margin-top: 5%;
 }
 
 .caseButton {
