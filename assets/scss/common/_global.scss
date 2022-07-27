@@ -342,9 +342,10 @@ body {
   color: rgb(242, 106, 27);
 }
 
+
 .useCases {  
   overflow: hidden;
-  margin-bottom: 15%;
+  margin-bottom: 8%;
 
 }
 
@@ -422,4 +423,13 @@ input[name="r"] {
 #r3:checked~.navigation .caseButton[for="r3"] {
   background-color: rgb(242, 106, 27);
   color: white;
+}
+
+.howItWorksText {
+  margin-top: 4%;
+}
+
+#howItWorks {
+  width: 100%;
+  height: auto;
 }
