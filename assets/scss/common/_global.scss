@@ -338,7 +338,7 @@ body {
   font-size: 2.5rem;
   font-weight: bold;
   text-align: center;
-  padding-top: 15%;
+  padding-top: 8%;
   color: rgb(242, 106, 27);
 }
 
@@ -350,7 +350,7 @@ body {
 
 .navigation {
   position: absolute;  
-  left: 33vw;
+  left: 33.5vw;
   transform: translateX(-30%);
   display: flex;
   width: 80%;
@@ -358,7 +358,7 @@ body {
 
 .cases {
   margin-top: 5%;
-  width: 302%;
+  width: 303%;
   text-align: center;
   height: 100%;
   display: flex;
@@ -368,19 +368,19 @@ body {
   width: 33%;
   height: 100%;
   transition: 0.6s;  
-  margin-top: 5%;
+  margin-top: 6%;
 }
 
 .caseButton {
-  width: 30vw;
-  height: 6vh;
+  width: 32vw;
+  height: 6.5vh;
   text-align: center;
   font-size: calc(0.1vw + 1.9vh);  
   border-radius: 5px;
   margin-right: 0.5rem;
   margin-left: 0.5rem;
   margin: 1%;
-  padding-top: 1vh;
+  padding-top: 1.6vh;
   transition: background-color 0.6s ease;
   border-radius: 6px;
   cursor: pointer;
@@ -411,12 +411,15 @@ input[name="r"] {
 
 #r1:checked~.navigation .caseButton[for="r1"] {
   background-color: rgb(242, 106, 27);
+  color: white;
 }
 
 #r2:checked~.navigation .caseButton[for="r2"] {
   background-color: rgb(242, 106, 27);
+  color: white;
 }
 
 #r3:checked~.navigation .caseButton[for="r3"] {
   background-color: rgb(242, 106, 27);
+  color: white;
 }
