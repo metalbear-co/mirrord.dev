@@ -334,17 +334,18 @@ body {
   }
 }
 
-.useCaseHeading {
-  font-size: 2.5rem;
+.headingText {
+  font-size: calc(1.325rem + 0.9vw);
   font-weight: bold;
   text-align: center;
-  padding-top: 8%;
+  padding-top: 6%;
   color: rgb(242, 106, 27);
 }
 
+
 .useCases {  
   overflow: hidden;
-  margin-bottom: 15%;
+  margin-bottom: 4%;
 
 }
 
@@ -423,3 +424,17 @@ input[name="r"] {
   background-color: rgb(242, 106, 27);
   color: white;
 }
+
+.howItWorksText {
+  // margin-top: 1%;
+  text-align: center;
+}
+
+#howItWorks {
+  width: 100%;
+  height: auto;
+}
+
+// h2 {
+//   font-size: 1.4rem;
+// }
