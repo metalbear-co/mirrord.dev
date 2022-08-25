@@ -9,9 +9,15 @@ images: []
 ---
 
 
-<h2>Pre-production testing made <span id="typewriter"></span></h2>
+<h1>Cloud development made <span id="typewriter"></span></h1>
 
-By mirroring traffic to and from your machine, mirrord surrounds your local service with a mirror image of its cloud environment.
+Run your service in the context of your cloud environment, with access to other microservices, databases, queues, and managed services, all without leaving the local setup you know and love.
+
+<br>
+<div class="nav-pills nav-fill justify-content-center">
+<a href="#pills-tab" class="btn col-5 nav-link active nav-fill" style="display: inline-block; padding: 0.1em">Try it now</a>
+</div>
+<br>
 
 - **Speed up your feedback loop:** Test your service in the cloud from your local machine, without CI or deployment
 - **Lightweight:** Get up and running in seconds 
