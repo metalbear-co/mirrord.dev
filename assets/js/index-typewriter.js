@@ -1,6 +1,6 @@
 window.addEventListener('DOMContentLoaded', (event) => {
     new Typewriter('#typewriter', {
-        strings: ['easy', 'fast', 'safe'],
+        strings: ['easier', 'faster', 'safer'],
         autoStart: true,
         loop: true,
         pausefor: 4000,
