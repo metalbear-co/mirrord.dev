@@ -18,6 +18,7 @@ toc: true
 - [Rust](https://www.rust-lang.org/)
 - [Nodejs](https://nodejs.org/en/), [Expressjs](https://expressjs.com/)
 - [Python](https://www.python.org/), [Flask](https://flask.palletsprojects.com/en/2.1.x/)
+- [Go](https://go.dev/)
 - Kubernetes Cluster (local/remote)
 
 ### Setup a Kubernetes cluster
@@ -52,35 +53,35 @@ kubectl config get-contexts
 kubectl config use-context docker-desktop
 ```
 
-Create a new testing deployment and service
+From the root directory of the mirrord repository, create a new testing deployment and service:
 
 ```bash
-kubectl apply -f app.yaml
+kubectl apply -f sample/kubernetes/app.yaml
 ```
 
 <details>
-  <summary>app.yaml</summary>
+  <summary>sample/kubernetes/app.yaml</summary>
 
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: http-echo-deployment
+  name: py-serv-deployment
   labels:
-    app: http-echo
+    app: py-serv
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: http-echo
+      app: py-serv
   template:
     metadata:
       labels:
-        app: http-echo
+        app: py-serv
     spec:
       containers:
-        - name: http-echo
-          image: ealen/echo-server
+        - name: py-serv
+          image: ghcr.io/metalbear-co/mirrord-pytest:latest
           ports:
             - containerPort: 80
           env:
@@ -94,17 +95,19 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: http-echo
-  name: http-echo
+    app: py-serv
+  name: py-serv
 spec:
   ports:
     - port: 80
       protocol: TCP
       targetPort: 80
+      nodePort: 30000
   selector:
-    app: http-echo
+    app: py-serv
   sessionAffinity: None
   type: NodePort
+
 ```
 
 </details>
@@ -115,7 +118,7 @@ Verify everything was created after applying the manifest
 ❯ kubectl get services
 NAME         TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)        AGE
 kubernetes   ClusterIP   10.96.0.1      <none>        443/TCP        3h13m
-py-serv      NodePort    10.96.139.36   <none>        80:32095/TCP   3h8m
+py-serv      NodePort    10.96.139.36   <none>        80:30000/TCP   3h8m
 ❯ kubectl get deployments
 NAME                 READY   UP-TO-DATE   AVAILABLE   AGE
 py-serv-deployment   1/1     1            1           3h8m
@@ -149,39 +152,83 @@ Run mirrord with a local process
 Sample web server - `app.js`
 
 <details>
-  <summary>app.js</summary>
+  <summary>sample/node/app.mjs</summary>
 
 ```js
-const express = require("express");
-const app = express();
-const PORT = 80;
+import { Buffer } from "node:buffer";
+import { createServer } from "net";
+import { open, readFile } from "fs/promises";
 
-app.get("/", (req, res) => {
-  res.send("OK - GET: Request completed\n");
-});
+async function debug_file_ops() {
+  try {
+    const readOnlyFile = await open("/var/log/dpkg.log", "r");
+    console.log(">>>>> open readOnlyFile ", readOnlyFile);
 
-app.post("/", (req, res) => {
-  res.send("OK - POST: Request completed\n");
-});
+    let buffer = Buffer.alloc(128);
+    let bufferResult = await readOnlyFile.read(buffer);
+    console.log(">>>>> read readOnlyFile returned with ", bufferResult);
 
-app.put("/", (req, res) => {
-  res.send("OK - PUT: Request completed\n");
-});
+    const sampleFile = await open("/tmp/node_sample.txt", "w+");
+    console.log(">>>>> open file ", sampleFile);
 
-app.delete("/", (req, res) => {
-  res.send("OK - DELETE: Request completed\n");
-  });  
+    const written = await sampleFile.write("mirrord sample node");
+    console.log(">>>>> written ", written, " bytes to file ", sampleFile);
 
-var server = app.listen(PORT, () => {
-  console.log(`Server listening on port ${PORT}`);
-});
+    let sampleBuffer = Buffer.alloc(32);
+    let sampleBufferResult = await sampleFile.read(buffer);
+    console.log(">>>>> read ", sampleBufferResult, " bytes from ", sampleFile);
+
+    readOnlyFile.close();
+    sampleFile.close();
+  } catch (fail) {
+    console.error("!!! Failed file operation with ", fail);
+  }
+}
+
+// debug_file_ops();
+
+const server = createServer();
+server.on("connection", handleConnection);
+server.listen(
+  {
+    host: "localhost",
+    port: 80,
+  },
+  function () {
+    console.log("server listening to %j", server.address());
+  }
+);
+
+function handleConnection(conn) {
+  var remoteAddress = conn.remoteAddress + ":" + conn.remotePort;
+  console.log("new client connection from %s", remoteAddress);
+  conn.on("data", onConnData);
+  conn.once("close", onConnClose);
+  conn.on("error", onConnError);
+
+  function onConnData(d) {
+    console.log("connection data from %s: %j", remoteAddress, d.toString());
+    conn.write(d);
+  }
+  function onConnClose() {
+    console.log("connection from %s closed", remoteAddress);
+  }
+  function onConnError(err) {
+    console.log("Connection %s error: %s", remoteAddress, err.message);
+  }
+}
+
 ```
 
 </details>
 
 ```bash
+MIRRORD_AGENT_IMAGE=test MIRRORD_AGENT_RUST_LOG=debug RUST_LOG=debug target/debug/mirrord exec -c --pod-name py-serv-deployment-ff89b5974-x9tjx node sample/node/app.mjs
+```
+**Note:** You need to change the pod name here to the name of the pod created on your system.
 
-MIRRORD_AGENT_IMAGE=test MIRRORD_AGENT_RUST_LOG=debug RUST_LOG=debug target/debug/mirrord exec -c --pod-name py-serv-deployment-ff89b5974-x9tjx node app.js
+
+```
 .
 .
 .
@@ -213,14 +260,7 @@ Server listening on port 80
 Send traffic to the Kubernetes Pod through the service
 
 ```bash
-❯ kubectl get services
-NAME         TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)        AGE
-kubernetes   ClusterIP   10.96.0.1      <none>        443/TCP        3h32m
-py-serv      NodePort    10.96.139.36   <none>        80:32095/TCP   3h27m
-```
-
-```bash
-curl localhost:32905
+curl localhost:30000
 ```
 
 Check the traffic was received by the local process
