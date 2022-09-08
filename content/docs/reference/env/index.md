@@ -22,7 +22,7 @@ For example, if you want your local process to access a remote database, the con
 
 {{<figure src="mirrord-env-vars.png" alt="mirrord - fileops" class="white-background center large-width">}}
 
-mirrord-layer sends a message to mirrord-agent requesting remote environment variables, which are then loaded into the local process once received from the agent.
+mirrord-layer sends a message to mirrord-agent requesting remote environment variables, which are then set before the local process starts.
 
 ## Usage
 
