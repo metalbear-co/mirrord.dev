@@ -14,23 +14,26 @@ toc: true
 
 ## Overview
 
-mirrord's cli supports enabling file operations using the `--enable-fs` flag. For example, consider the following python script
+mirrord will relay all file access to the target pod by default. (this functionality can be disabled using `--no-fs`
+flag on the command line or by unchecking the appropriate box in the IDE plugin. To enable just read-only access,
+`--ro-fs` option.)
+
+For example, the following python script calls the built-in `open` function which translate to something like
+`openat(AT_FDCWD, "/tmp/test", O_RDWR|O_CLOEXEC)` at a lower level:
 
 ```py
-read_str = ""
 with open("/tmp/test", "r+") as rw_file:
-    while read_str != TEXT:
-        read_str += rw_file.read(1)
+    read_str = rw_file.read(42)
 print(read_str)
 ```
 
-being run using mirrord:
+When we run that python script with mirrord:
 
 ```bash
-mirrord exec -c --enable-fs --pod-name py-serv-deployment-cfc458fd4-bjzjx python3 test.py
+mirrord exec -c --pod-name py-serv-deployment-cfc458fd4-bjzjx python3 test.py
 ```
 
-which calls python's builtin `open` function. This call to `open` translates to something like `openat(AT_FDCWD, "/tmp/test", O_RDWR|O_CLOEXEC)` at a lower level. mirrord overrirdes this call and opens `/tmp/test` on the remote pod.
+mirrord overrides that `openat` call and opens `/tmp/test` on the remote pod.
 
 Currently, the following operations are supported:
 
@@ -48,9 +51,13 @@ Currently, the following operations are supported:
 
 {{<figure src="mirrord-fileops.png" alt="mirrord - fileops" class="white-background center large-width">}}
 
-Once a request to open a new file is received by `mirrord-agent` from `mirrord-layer`, the agent forwards the request to the container in the remote pod in context of the provided path for the open system call, prefixed with path to the root directory of the container.
+Once a request to open a new file is received by `mirrord-agent` from `mirrord-layer`, the agent forwards the request
+to the container in the remote pod in context of the provided path for the open system call, prefixed with path to the
+root directory of the container.
 
-`mirrord-agent` uses APIs provided by docker and containerd runtimes to get the PID of the remote container, and refers to the root directory of the remote container through `/proc/container_pid/root`
+`mirrord-agent` uses APIs provided by docker and containerd runtimes to get the PID of the remote container, and
+refers to the root directory of the remote container through `/proc/container_pid/root`
+
 
 ## Syscalls
 
@@ -60,12 +67,13 @@ mirrord overrirdes calls to the following libc functions/system calls:
 
 `int open(const char *pathname, int flags);`
 
-Open files on the remote pod. Functionality when opening with different types of paths might differ. In the case when `pathname` is specified to be a relative path, the call to open is sent to libc instead of the remote pod.
+Open files on the remote pod. Functionality when opening with different types of paths might differ. In the case when
+`pathname` is specified to be a relative path, the call to open is sent to libc instead of the remote pod.
 
 Example:
 
 ```py
-import os 
+import os
 fd = os.open("/tmp/test", os.O_WRONLY | os.O_CREAT)
 ```
 
@@ -73,7 +81,8 @@ fd = os.open("/tmp/test", os.O_WRONLY | os.O_CREAT)
 
 `int openat(int dirfd, const char *pathname, int flags);`
 
-`openat` works the same as `open` when `dirfd` is specified as `AT_FDCWD` or if the path is absolute. If a valid `dirfd` is provided, files relative to the directory referred to by the `dirfd` can be opened.
+`openat` works the same as `open` when `dirfd` is specified as `AT_FDCWD` or if the path is absolute. If a valid
+`dirfd` is provided, files relative to the directory referred to by the `dirfd` can be opened.
 
 Example:
 
@@ -113,7 +122,8 @@ with open("/tmp/test", "w") as file:
 
 `off_t lseek(int fd, off_t offset, int whence);`
 
-Reposition the file offset of an open file on the remote pod. lseek through mirrord-layer supports all valid options for whence as specified in the Linux manpages.
+Reposition the file offset of an open file on the remote pod. lseek through mirrord-layer supports all valid options
+for whence as specified in the Linux manpages.
 
 Example:
 
@@ -123,4 +133,5 @@ with open("/tmp/test", "w") as file:
     file.write(TEXT)
 ```
 
-**Note:** For read, write, and lseek if the provided `fd` is a valid file descriptor i.e. it refers to a file opened on the remote pod then the call is forwarded to the remote pod, otherwise the call is sent to libc.
+**Note:** For read, write, and lseek if the provided `fd` is a valid file descriptor i.e. it refers to a file opened on
+the remote pod then the call is forwarded to the remote pod, otherwise the call is sent to libc.
