@@ -12,16 +12,16 @@ weight: 110
 toc: true
 ---
 
-## Incoming
+## Incoming (TCP/UDP)
 
 mirrord allows users to debug incoming network traffic in the following ways -
 
-#### mirroring
+#### Mirroring
 
 mirrord's default configuration is to duplicate traffic from the remote pod, i.e. run the local process in the context of cloud environment without
 manipulating incoming traffic.
 
-Example - create a simple Kubernetes deployment and service -
+Example - create a simple Kubernetes deployment and service:
 
 1. `user-service`: stores registered users.
 
@@ -76,12 +76,12 @@ mehula@mehul-machine:~/mirrord-demo$ curl http://192.168.49.2:32000/users
 [{"Last":"Bear","Name":"Metal"}]
 ```
 
-#### stealing
+#### Stealing
 
 mirrord can steal network traffic, i.e. intercept it and send it to the local process. This means that the local process's state is directly interacting
 with the incoming network traffic without affecting the remote process.
 
-Example - running `user-service` with mirrord and `--tcp-steal` on -
+Example - running `user-service` with mirrord and `--tcp-steal` on:
 
 ##### Window 1
 
@@ -128,22 +128,22 @@ mehula@mehul-machine:~/mirrord-demo$ curl http://192.168.49.2:32000/users
 [{"Last":"Bear","Name":"Metal"}]
 ```
 
-## Outgoing
+## Outgoing (TCP/UDP)
 
 mirrord provides access to outgoing traffic, i.e. local network requests will be redirected to the remote.
 
-Example - getting the user list from the remote by sending a `GET` request to port 80 in the context of remote
+Example - getting the user list from the remote by sending a `GET` request to port 80 in the context of remote:
 
 ```bash
-mehula@mehul-machine:~/mirrord-demo$ ../mirrord/target/debug/mirrord exec -c -o --pod-name metalbear-deployment-85c754c75f-6k7mg curl localhost:80/users
+mehula@mehul-machine:~/mirrord-demo$ ../mirrord/target/debug/mirrord exec -c --pod-name metalbear-deployment-85c754c75f-6k7mg curl localhost:80/users
 [{"Last":"Bear","Name":"Metal"}]
 ```
 
-## DNS Resolution
+## DNS Resolution (TCP/UDP)
 
 mirrord can resolve DNS queries in the context of the remote pod
 
-Example - calling `getaddrinfo` to see if the query is resolved.
+Example - calling `getaddrinfo` to see if the query is resolved:
 
 ```bash
 Python 3.8.10 (default, Jun 22 2022, 20:18:18) 
