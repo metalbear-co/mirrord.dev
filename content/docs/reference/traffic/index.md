@@ -59,8 +59,9 @@ To mirror traffic from remote services to the local development environment, run
 <center>Window 1</center> 
 
 ```bash
-mehula@mehul-machine:~/mirrord-demo$ ../mirrord/target/debug/mirrord exec -c 
---pod-name metalbear-deployment-85c754c75f-6k7mg python3 user-service/service.py 
+mehula@mehul-machine:~/mirrord-demo$ ../mirrord/target/debug/mirrord exec -c
+--no-outgoing --pod-name metalbear-deployment-85c754c75f-6k7mg python3
+user-service/service.py 
  * Serving Flask app 'service' (lazy loading)
  * Environment: production
    WARNING: This is a development server. Do not use it in a production deployment.
