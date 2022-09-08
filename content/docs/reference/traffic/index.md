@@ -14,7 +14,7 @@ toc: true
 
 ## Incoming (TCP/UDP)
 
-mirrord allows users to debug incoming network traffic in the following ways -
+mirrord allows users to debug incoming network traffic by mirroring and stealing.
 
 #### Mirroring
 
@@ -42,8 +42,6 @@ mehula@mehul-machine:~/mirrord-demo$ curl http://192.168.49.2:31000/index.html
 <html> <head>USERS</head><body><h1> MetalBear Users</h1><p>[{"Last":"Bear","Name":"Metal"}]</p></body></html>
 ```
 
-To mirror traffic from remote services to the local development environment, run the services locally with mirrord
-
 ```bash
 mehula@mehul-machine:~/mirrord$ kubectl get pods
 NAME                                        READY   STATUS    RESTARTS      AGE
@@ -51,7 +49,8 @@ metalbear-bff-deployment-597cb4f957-485t5   1/1     Running   1 (15h ago)   16h
 metalbear-deployment-85c754c75f-6k7mg       1/1     Running   1 (15h ago)   16h
 ```
 
-Result -
+To mirror traffic from remote services to the local development environment, run the services locally with mirrord
+
 
 ##### Window 1
 
@@ -111,7 +110,7 @@ mehula@mehul-machine:~/mirrord-demo$ ../mirrord/target/debug/mirrord exec -c --t
 mehula@mehul-machine:~/mirrord-demo$ curl http://192.168.49.2:32000/users
 [{"Last":"Bear","Name":"Metal"}]
 
-// After running with mirrord and `--tcp-steal` - remote process witched context with local process
+// After running with mirrord and `--tcp-steal` - local process responds instead of the remote
 mehula@mehul-machine:~/mirrord-demo$ curl http://192.168.49.2:32000/users
 []
 mehula@mehul-machine:~/mirrord-demo$ curl -X POST -H "Content-type: application/json" -d "{\"Name\" : \"Mehul\", \"Last\" : \"Arora\"}" http://192.168.49.2:32000/user
@@ -123,7 +122,7 @@ mehula@mehul-machine:~/mirrord-demo$ curl -X POST -H "Content-type: application/
 mehula@mehul-machine:~/mirrord-demo$ curl http://192.168.49.2:32000/users
 [{"Last":"Arora","Name":"Mehul"},{"Last":"C","Name":"Alex"}]
 
-// After sending SIGINT to the local process - remote switched back to its original context
+// After sending SIGINT to the local process
 mehula@mehul-machine:~/mirrord-demo$ curl http://192.168.49.2:32000/users
 [{"Last":"Bear","Name":"Metal"}]
 ```
