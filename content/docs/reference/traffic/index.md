@@ -81,7 +81,7 @@ mehula@mehul-machine:~/mirrord-demo$ curl http://192.168.49.2:32000/users
 mirrord can steal network traffic, i.e. intercept it and send it to the local process. This means that the local process's state is directly interacting
 with the incoming network traffic without affecting the remote process.
 
-Let's run `user-service` with mirrord and `--tcp-steal` on -
+Running `user-service` with mirrord and `--tcp-steal` on -
 
 ##### Window 1
 
@@ -132,7 +132,7 @@ mehula@mehul-machine:~/mirrord-demo$ curl http://192.168.49.2:32000/users
 
 mirrord provides access to outgoing traffic, i.e. local network requests will be redirected to the remote.
 
-Let's see if we can get the user list from the remote by sending a `GET` request to port 80 in the context of remote -
+Example - getting the user list from the remote by sending a `GET` request to port 80 in the context of remote
 
 ```bash
 mehula@mehul-machine:~/mirrord-demo$ ../mirrord/target/debug/mirrord exec -c -o --pod-name metalbear-deployment-85c754c75f-6k7mg curl localhost:80/users
@@ -140,3 +140,25 @@ mehula@mehul-machine:~/mirrord-demo$ ../mirrord/target/debug/mirrord exec -c -o 
 ```
 
 ## DNS Resolution
+
+mirrord can resolve DNS queries in the context of the remote pod
+
+Example -
+
+```bash
+Python 3.8.10 (default, Jun 22 2022, 20:18:18) 
+[GCC 9.4.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import socket
+>>> socket.getaddrinfo('localhost', None)
+2022-09-08T17:37:50.735532Z  INFO mirrord_layer::socket::ops: getaddrinfo -> result Ok(
+    0x00007f5508004760,
+)
+[(<AddressFamily.AF_INET6: 10>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('::7074:e00d:557f:0', 0, 0, 97)), (<AddressFamily.AF_INET6: 10>, <SocketKind.SOCK_DGRAM: 2>, 17, '', ('::', 0, 0, 0)), (<AddressFamily.AF_INET6: 10>, <SocketKind.SOCK_RAW: 3>, 0, '', ('::90bf:f401:0:0', 0, 0, 245652448)), (<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('127.0.0.1', 0)), (<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_DGRAM: 2>, 17, '', ('127.0.0.1', 0)), (<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_RAW: 3>, 0, '', ('127.0.0.1', 0))]
+>>> socket.getaddrinfo('user-service', None)
+2022-09-08T17:38:17.556108Z  INFO mirrord_layer::socket::ops: getaddrinfo -> result Ok(
+    0x00007f5508003610,
+)
+[(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('10.106.158.180', 0)), (<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_DGRAM: 2>, 17, '', ('10.106.158.180', 0)), (<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_RAW: 3>, 0, '', ('10.106.158.180', 0))]
+>>> 
+```
