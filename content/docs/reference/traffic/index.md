@@ -51,11 +51,16 @@ metalbear-deployment-85c754c75f-6k7mg       1/1     Running   1 (15h ago)   16h
 
 To mirror traffic from remote services to the local development environment, run the services locally with mirrord
 
-
-##### Window 1
+<table>
+<tr>
+</tr>
+<tr>
+<td>
+<center>Window 1</center> 
 
 ```bash
-mehula@mehul-machine:~/mirrord-demo$ ../mirrord/target/debug/mirrord exec -c --pod-name metalbear-deployment-85c754c75f-6k7mg python3 user-service/service.py 
+mehula@mehul-machine:~/mirrord-demo$ ../mirrord/target/debug/mirrord exec -c 
+--pod-name metalbear-deployment-85c754c75f-6k7mg python3 user-service/service.py 
  * Serving Flask app 'service' (lazy loading)
  * Environment: production
    WARNING: This is a development server. Do not use it in a production deployment.
@@ -65,27 +70,44 @@ mehula@mehul-machine:~/mirrord-demo$ ../mirrord/target/debug/mirrord exec -c --p
    WARNING: This is a development server. Do not use it in a production deployment.
  * Running on http://127.0.0.1:33695
  * Running on http://172.16.0.4:33695 (Press CTRL+C to quit)
- 127.0.0.1 - - [08/Sep/2022 15:34:34] "GET /users HTTP/1.1" 200 - // <- Received mirrored traffic from the remote pod
+ 127.0.0.1 - - [08/Sep/2022 15:34:34] "GET /users HTTP/1.1" 200
+// ^ Received mirrored traffic from the remote pod
 ```
 
-##### Window 2
+</td>
+<tr>
+<td>
+<center>Window 2</center>
 
 ```bash
 mehula@mehul-machine:~/mirrord-demo$ curl http://192.168.49.2:32000/users
 [{"Last":"Bear","Name":"Metal"}]
 ```
 
+</td>
+</tr>
+
+</tr>
+</table>
+
 #### Stealing
 
-mirrord can steal network traffic, i.e. intercept it and send it to the local process. This means that the local process's state is directly interacting
-with the incoming network traffic without affecting the remote process.
+mirrord can steal network traffic, i.e. intercept it and send it to the local process. This means that This means that all incoming
+traffic is only handled by the local process.
 
 Example - running `user-service` with mirrord and `--tcp-steal` on:
 
-##### Window 1
+<table>
+<tr>
+</tr>
+<tr>
+<td>
+<center>Window 1</center> 
 
 ```bash
-mehula@mehul-machine:~/mirrord-demo$ ../mirrord/target/debug/mirrord exec -c --tcp-steal --pod-name metalbear-deployment-85c754c75f-6k7mg python3 user-service/service.py 
+mehula@mehul-machine:~/mirrord-demo$ ../mirrord/target/debug/mirrord exec -c 
+--tcp-steal --pod-name metalbear-deployment-85c754c75f-6k7mg 
+python3 user-service/service.py 
  * Serving Flask app 'service' (lazy loading)
  * Environment: production
    WARNING: This is a development server. Do not use it in a production deployment.
@@ -103,21 +125,30 @@ mehula@mehul-machine:~/mirrord-demo$ ../mirrord/target/debug/mirrord exec -c --t
  ^Cmehula@mehul-machine:~/mirrord-demo$ 
 ```
 
-##### Window 2
+</td>
+<tr>
+<td>
+<center>Window 2</center>
 
 ```bash
 // Before running mirrord with `--tcp-steal`
 mehula@mehul-machine:~/mirrord-demo$ curl http://192.168.49.2:32000/users
 [{"Last":"Bear","Name":"Metal"}]
 
-// After running with mirrord and `--tcp-steal` - local process responds instead of the remote
+// After running with mirrord and `--tcp-steal` - local process responds
+ instead of the remote
 mehula@mehul-machine:~/mirrord-demo$ curl http://192.168.49.2:32000/users
 []
-mehula@mehul-machine:~/mirrord-demo$ curl -X POST -H "Content-type: application/json" -d "{\"Name\" : \"Mehul\", \"Last\" : \"Arora\"}" http://192.168.49.2:32000/user
+mehula@mehul-machine:~/mirrord-demo$ curl -X POST -H 
+"Content-type: application/json" 
+-d "{\"Name\" : \"Mehul\", \"Last\" : \"Arora\"}" http://192.168.49.2:32000/user
+
 {"Last":"Arora","Name":"Mehul"}
 mehula@mehul-machine:~/mirrord-demo$ curl http://192.168.49.2:32000/users
 [{"Last":"Arora","Name":"Mehul"}]
-mehula@mehul-machine:~/mirrord-demo$ curl -X POST -H "Content-type: application/json" -d "{\"Name\" : \"Alex\", \"Last\" : \"C\"}" http://192.168.49.2:32000/user
+mehula@mehul-machine:~/mirrord-demo$ curl -X POST -H 
+"Content-type: application/json" 
+-d "{\"Name\" : \"Alex\", \"Last\" : \"C\"}" http://192.168.49.2:32000/user
 {"Last":"C","Name":"Alex"}
 mehula@mehul-machine:~/mirrord-demo$ curl http://192.168.49.2:32000/users
 [{"Last":"Arora","Name":"Mehul"},{"Last":"C","Name":"Alex"}]
@@ -126,6 +157,12 @@ mehula@mehul-machine:~/mirrord-demo$ curl http://192.168.49.2:32000/users
 mehula@mehul-machine:~/mirrord-demo$ curl http://192.168.49.2:32000/users
 [{"Last":"Bear","Name":"Metal"}]
 ```
+
+</td>
+</tr>
+
+</tr>
+</table>
 
 ## Outgoing (TCP/UDP)
 
