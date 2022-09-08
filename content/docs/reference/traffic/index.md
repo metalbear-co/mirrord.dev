@@ -21,7 +21,7 @@ mirrord allows users to debug incoming network traffic in the following ways -
 mirrord's default configuration is to duplicate traffic from the remote pod, i.e. run the local process in the context of cloud environment without
 manipulating incoming traffic.
 
-Let's look at a simple example of this in works, by creating a simple Kubernetes deployment and service -
+Example - create a simple Kubernetes deployment and service -
 
 1. `user-service`: stores registered users.
 
@@ -42,7 +42,7 @@ mehula@mehul-machine:~/mirrord-demo$ curl http://192.168.49.2:31000/index.html
 <html> <head>USERS</head><body><h1> MetalBear Users</h1><p>[{"Last":"Bear","Name":"Metal"}]</p></body></html>
 ```
 
-Now to mirror traffic from remote services to our local development environment we will run the services locally with mirrord,
+To mirror traffic from remote services to the local development environment, run the services locally with mirrord
 
 ```bash
 mehula@mehul-machine:~/mirrord$ kubectl get pods
@@ -51,7 +51,7 @@ metalbear-bff-deployment-597cb4f957-485t5   1/1     Running   1 (15h ago)   16h
 metalbear-deployment-85c754c75f-6k7mg       1/1     Running   1 (15h ago)   16h
 ```
 
-Let's see what happens when we send traffic to the remote pod through our service
+Result -
 
 ##### Window 1
 
@@ -81,7 +81,7 @@ mehula@mehul-machine:~/mirrord-demo$ curl http://192.168.49.2:32000/users
 mirrord can steal network traffic, i.e. intercept it and send it to the local process. This means that the local process's state is directly interacting
 with the incoming network traffic without affecting the remote process.
 
-Running `user-service` with mirrord and `--tcp-steal` on -
+Example - running `user-service` with mirrord and `--tcp-steal` on -
 
 ##### Window 1
 
@@ -143,7 +143,7 @@ mehula@mehul-machine:~/mirrord-demo$ ../mirrord/target/debug/mirrord exec -c -o 
 
 mirrord can resolve DNS queries in the context of the remote pod
 
-Example -
+Example - calling `getaddrinfo` to see if the query is resolved.
 
 ```bash
 Python 3.8.10 (default, Jun 22 2022, 20:18:18) 
