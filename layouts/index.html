@@ -51,7 +51,8 @@
                     tabindex="0">
                     <div class="row justify-content-center">
                         <div class="col-sm-auto text-center">
-                            <iframe width="245px" height="48px" src="https://plugins.jetbrains.com/embeddable/install/19772"></iframe>
+                            <a href="https://plugins.jetbrains.com/plugin/19772-mirrord"
+                                class="btn btn-primary btn-lg px-4 mb-2">Install IntelliJ Plugin</a>
                         </div>
                     </div>
                 </div>
@@ -60,19 +61,19 @@
     </div>
 
     <div class="justify-content-center">
-        <h2 class="headingText">Use Cases</h2>    
+        <h2 class="headingText">Use Cases</h2>
     </div>
 
     <div class="useCases">
         <div class="cases">
             <input type="radio" name="r" id="r1" checked>
             <input type="radio" name="r" id="r2">
-            <input type="radio" name="r" id="r3">   
+            <input type="radio" name="r" id="r3">
             <div class="navigation justify-content-center">
                 <label for="r1" class="caseButton">Development</label>
                 <label for="r2" class="caseButton">Testing</label>
                 <label for="r3" class="caseButton">Troubleshooting</label>
-            </div>     
+            </div>
             <div class="case s1">
                 <p>No more complex and resource-intensive local setups. Plug the process you're developing (or even just
                     your terminal) directly into your staging environment as you work, and quickly test out database
@@ -90,13 +91,13 @@
                     and debug it right in your IDE. Then immediately test your fix, no deployment necessary.</p>
             </div>
         </div>
-        
+
     </div>
-    
+
     <div>
         <div>
             <div class="justify-content-center">
-                <h2 class="headingText">How It Works</h2>    
+                <h2 class="headingText">How It Works</h2>
             </div>
             <img id="howItWorks" src="#" />
             <script>
@@ -106,7 +107,7 @@
                     document.getElementById('howItWorks').src = 'mirrord-how-it-works-light.svg';
                 }
             </script>
-        </div>        
+        </div>
         <p class="howItWorksText">mirrord runs in two places - in the memory of your local process, and as a pod in your cloud environment.
             The two components work together to fuse your local process with its remote counterpart so that inputs to
             the remote pod are mirrored to the local process, and outputs from the local process are tunnelled to the
