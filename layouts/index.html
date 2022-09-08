@@ -22,9 +22,8 @@
                         type="button" role="tab" aria-controls="pills-vscode" aria-selected="false">VS Code</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="pills-intellij-tab" data-bs-toggle="pill"
-                        data-bs-target="#pills-intellij" type="button" role="tab" aria-controls="pills-intellij"
-                        aria-selected="false">IntelliJ</button>
+                    <button class="nav-link" id="pills-intellij-tab" data-bs-toggle="pill" data-bs-target="#pills-intellij"
+                        type="button" role="tab" aria-controls="pills-intellij" aria-selected="false">IntelliJ</button>
                 </li>
         </div>
     </div>
@@ -34,8 +33,7 @@
                 <div class="tab-pane fade show active" id="pills-cli" role="tabpanel" aria-labelledby="pills-cli-tab">
                     <div class="row justify-content-center">
                         <div class="col-sm-auto text-center">
-                            {{ $input := `curl -fsSL
-                            https://raw.githubusercontent.com/metalbear-co/mirrord/main/scripts/install.sh | bash` }}
+                            {{ $input := `curl -fsSL https://raw.githubusercontent.com/metalbear-co/mirrord/main/scripts/install.sh | bash` }}
                             {{ transform.Highlight $input "bash"}}
                         </div>
                     </div>
@@ -54,7 +52,7 @@
                     <div class="row justify-content-center">
                         <div class="col-sm-auto text-center">
                             <a href="https://plugins.jetbrains.com/plugin/19772-mirrord"
-                                class="btn btn-primary btn-lg px-4 mb-2">Go to IntelliJ extension</a>
+                                class="btn btn-primary btn-lg px-4 mb-2">Install IntelliJ extension</a>
                         </div>
                     </div>
                 </div>
@@ -83,17 +81,13 @@
             </div>
 
             <div class="case">
-                <p>Wait for your CR to be approved, for the CI to pass, and for your service to be deployed to staging
-                    only
-                    to break it for everyone else because of some bug you missed. Or use mirrord, and immediately test
-                    your
-                    service in staging conditions, without deployment and with minimal risk to the staging environment.
-                </p>
+                <p>Wait for your CR to be approved, for the CI to pass, and for your service to be deployed to staging only
+                    to break it for everyone else because of some bug you missed. Or use mirrord, and immediately test your
+                    service in staging conditions, without deployment and with minimal risk to the staging environment.</p>
             </div>
 
             <div class="case">
-                <p>Have an issue that doesn't reproduce locally? Reproduce it in staging with your local process plugged
-                    in,
+                <p>Have an issue that doesn't reproduce locally? Reproduce it in staging with your local process plugged in,
                     and debug it right in your IDE. Then immediately test your fix, no deployment necessary.</p>
             </div>
         </div>
@@ -114,8 +108,7 @@
                 }
             </script>
         </div>
-        <p class="howItWorksText">mirrord runs in two places - in the memory of your local process, and as a pod in your
-            cloud environment.
+        <p class="howItWorksText">mirrord runs in two places - in the memory of your local process, and as a pod in your cloud environment.
             The two components work together to fuse your local process with its remote counterpart so that inputs to
             the remote pod are mirrored to the local process, and outputs from the local process are tunnelled to the
             remote pod. This includes network traffic, file access, and environment variable -
