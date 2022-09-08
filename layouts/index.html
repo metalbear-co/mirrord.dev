@@ -22,8 +22,9 @@
                         type="button" role="tab" aria-controls="pills-vscode" aria-selected="false">VS Code</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="pills-intellij-tab" data-bs-toggle="pill" data-bs-target="#pills-intellij"
-                        type="button" role="tab" aria-controls="pills-intellij" aria-selected="false">IntelliJ</button>
+                    <button class="nav-link" id="pills-intellij-tab" data-bs-toggle="pill"
+                        data-bs-target="#pills-intellij" type="button" role="tab" aria-controls="pills-intellij"
+                        aria-selected="false">IntelliJ</button>
                 </li>
         </div>
     </div>
@@ -33,7 +34,8 @@
                 <div class="tab-pane fade show active" id="pills-cli" role="tabpanel" aria-labelledby="pills-cli-tab">
                     <div class="row justify-content-center">
                         <div class="col-sm-auto text-center">
-                            {{ $input := `curl -fsSL https://raw.githubusercontent.com/metalbear-co/mirrord/main/scripts/install.sh | bash` }}
+                            {{ $input := `curl -fsSL
+                            https://raw.githubusercontent.com/metalbear-co/mirrord/main/scripts/install.sh | bash` }}
                             {{ transform.Highlight $input "bash"}}
                         </div>
                     </div>
@@ -51,7 +53,8 @@
                     tabindex="0">
                     <div class="row justify-content-center">
                         <div class="col-sm-auto text-center">
-                            <iframe width="245px" height="48px" src="https://plugins.jetbrains.com/embeddable/install/19772"></iframe>
+                            <a href="https://plugins.jetbrains.com/plugin/19772-mirrord"
+                                class="btn btn-primary btn-lg px-4 mb-2">Go to IntelliJ extension</a>
                         </div>
                     </div>
                 </div>
@@ -60,19 +63,19 @@
     </div>
 
     <div class="justify-content-center">
-        <h2 class="headingText">Use Cases</h2>    
+        <h2 class="headingText">Use Cases</h2>
     </div>
 
     <div class="useCases">
         <div class="cases">
             <input type="radio" name="r" id="r1" checked>
             <input type="radio" name="r" id="r2">
-            <input type="radio" name="r" id="r3">   
+            <input type="radio" name="r" id="r3">
             <div class="navigation justify-content-center">
                 <label for="r1" class="caseButton">Development</label>
                 <label for="r2" class="caseButton">Testing</label>
                 <label for="r3" class="caseButton">Troubleshooting</label>
-            </div>     
+            </div>
             <div class="case s1">
                 <p>No more complex and resource-intensive local setups. Plug the process you're developing (or even just
                     your terminal) directly into your staging environment as you work, and quickly test out database
@@ -80,23 +83,27 @@
             </div>
 
             <div class="case">
-                <p>Wait for your CR to be approved, for the CI to pass, and for your service to be deployed to staging only
-                    to break it for everyone else because of some bug you missed. Or use mirrord, and immediately test your
-                    service in staging conditions, without deployment and with minimal risk to the staging environment.</p>
+                <p>Wait for your CR to be approved, for the CI to pass, and for your service to be deployed to staging
+                    only
+                    to break it for everyone else because of some bug you missed. Or use mirrord, and immediately test
+                    your
+                    service in staging conditions, without deployment and with minimal risk to the staging environment.
+                </p>
             </div>
 
             <div class="case">
-                <p>Have an issue that doesn't reproduce locally? Reproduce it in staging with your local process plugged in,
+                <p>Have an issue that doesn't reproduce locally? Reproduce it in staging with your local process plugged
+                    in,
                     and debug it right in your IDE. Then immediately test your fix, no deployment necessary.</p>
             </div>
         </div>
-        
+
     </div>
-    
+
     <div>
         <div>
             <div class="justify-content-center">
-                <h2 class="headingText">How It Works</h2>    
+                <h2 class="headingText">How It Works</h2>
             </div>
             <img id="howItWorks" src="#" />
             <script>
@@ -106,8 +113,9 @@
                     document.getElementById('howItWorks').src = 'mirrord-how-it-works-light.svg';
                 }
             </script>
-        </div>        
-        <p class="howItWorksText">mirrord runs in two places - in the memory of your local process, and as a pod in your cloud environment.
+        </div>
+        <p class="howItWorksText">mirrord runs in two places - in the memory of your local process, and as a pod in your
+            cloud environment.
             The two components work together to fuse your local process with its remote counterpart so that inputs to
             the remote pod are mirrored to the local process, and outputs from the local process are tunnelled to the
             remote pod. This includes network traffic, file access, and environment variable -
