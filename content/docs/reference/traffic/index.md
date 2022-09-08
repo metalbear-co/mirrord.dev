@@ -23,7 +23,7 @@ manipulating incoming traffic.
 
 Example - create a simple Kubernetes deployment and service:
 
-1. `user-service`: stores registered users.
+- `user-service`: stores registered users
 
 ```bash
 mehula@mehul-machine:~/mirrord$ minikube service list
@@ -93,7 +93,7 @@ mehula@mehul-machine:~/mirrord-demo$ curl http://192.168.49.2:32000/users
 
 #### Stealing
 
-mirrord can steal network traffic, i.e. intercept it and send it to the local process. This means that This means that all incoming
+mirrord can steal network traffic, i.e. intercept it and send it to the local process. This means that all incoming
 traffic is only handled by the local process.
 
 Example - running `user-service` with mirrord and `--tcp-steal` on:
