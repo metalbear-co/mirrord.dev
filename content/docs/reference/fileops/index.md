@@ -18,7 +18,8 @@ mirrord will relay all file access to the target pod by default. (this functiona
 flag on the command line or by unchecking the appropriate box in the IDE plugin. To enable just read-only access,
 `--ro-fs` option.)
 
-For example, if we take this python script:
+For example, the following python script calls the built-in `open` function which translate to something like
+`openat(AT_FDCWD, "/tmp/test", O_RDWR|O_CLOEXEC)` at a lower level:
 
 ```py
 with open("/tmp/test", "r+") as rw_file:
@@ -26,14 +27,13 @@ with open("/tmp/test", "r+") as rw_file:
 print(read_str)
 ```
 
-that calls python's builtin `open` function, and run it with mirrord:
+When we run that python script with mirrord:
 
 ```bash
 mirrord exec -c --pod-name py-serv-deployment-cfc458fd4-bjzjx python3 test.py
 ```
 
-The call to `open` translates to something like `openat(AT_FDCWD, "/tmp/test", O_RDWR|O_CLOEXEC)` at a lower level.
-mirrord overrirdes this call and opens `/tmp/test` on the remote pod.
+mirrord overrides that `openat` call and opens `/tmp/test` on the remote pod.
 
 Currently, the following operations are supported:
 
