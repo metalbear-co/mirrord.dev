@@ -47,7 +47,7 @@ After first initialization the example-idp and example-blog deployments will not
 
 ### Migrations
 
-First establish a connection to the cluster's database in a sperate shell
+First, establish a connection to the cluster's database in a separate shell
 
 ```
 kubectl port-forward svc/example-pg 5432:5432
@@ -88,7 +88,7 @@ Now lets debug the container in the cluster by executing
 mirrord exec -p example-auditor-<hash>-<hash> yarn -- workspace auditor start
 ```
 
-In a separate terminal establish a connection to the blog container by running
+In a separate terminal establish a connection to the remote blog container by running
 
 ```bash
 kubectl port-forward svc/example-blog 8080:8080
@@ -148,7 +148,7 @@ And now lets test it.
 mirrord exec --no-fs -x NODE_ENV -p example-blog-<hash>-<hash> yarn -- workspace blog dev
 ```
 
-> Note connection to the blog container is still required for this step, please reference [Mirroring](#traffic-mirroring)
+> Note connection to the remote blog container via port-forward is still required for this step, please reference [Mirroring](#traffic-mirroring)
 
 Your local service accesses the database from the internal network of the Kubernetes cluster. You should be able to navigate to [http://localhost:8080](http://localhost:8080), and though you receive the result from the server instance running on the cluster, you should still see the **following log in the local machine**:
 
@@ -210,7 +210,7 @@ Lets break down the command
 
 Traffic Steal lets you handle and respond to incoming requests to the pod from your local machine. In contrast to Mirroring, with Steal the response to the incoming request is sent by the local process rather than the remote pod.
 
-First thing we need to establish a connection to the idp so run in a sperate terminal the following command
+First thing we need to establish a connection to the remote idp. In a separate terminal, run the following command
 
 ```bash
 kubectl port-forward svc/example-idp 5556:5556
@@ -223,7 +223,7 @@ email: admin@example.com
 pass: password
 ```
 
-You should see a third blogpost return after the authentication is finished but if you click on it you will get a `Page Not Found`, lets fix it
+You should see a third blogpost return after the authentication is finished but if you click on it you will get a `Page Not Found` message. Lets fix it
 
 Edit `./blog/pages/blogpost/[id].tsx`
 
@@ -262,7 +262,7 @@ And lets see the results by simply adding `--steal` to the previous command
 mirrord exec --no-fs -x NODE_ENV -p example-blog-<hash>-<hash> --steal yarn -- workspace blog dev
 ```
 
-And now refresh the page and the result should return now.
+Refresh the page, and you should now be able to see the result.
 
 > Note connection to the blog container is still required for this step, please reference [Mirroring](#traffic-mirroring)
 
