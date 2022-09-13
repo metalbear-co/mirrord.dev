@@ -19,7 +19,7 @@ mirrord runs on your local machine and in your cluster.
 - kubectl needs to be configured on the local machine.
 
 
-mirrord can be used in two ways:
+mirrord can be used in three ways:
 1. [CLI Tool](#cli-tool)
 2. [VS Code Extension](#vs-code-extension)
 3. [IntelliJ Plugin](#intellij-plugin)
