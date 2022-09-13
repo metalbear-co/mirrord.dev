@@ -23,6 +23,7 @@ toc: true
 
 
 ### Clone Repo
+
 First clone the example repo
 
 ```bash
@@ -31,6 +32,7 @@ cd nodejs-example
 ```
 
 ### Setup Cluster
+
 For this example you will need to create a few deployments and services
 
 ```bash
@@ -103,6 +105,7 @@ Command breakdown
 ||specify the running pod to mirror|executable|executable args|
 
 ## Outgoing Traffic
+
 Another key feature is outgoing traffic tunneling and remote DNS resolution. For example, let's say you want to test a request your service makes to a database, because you encountered some unwanted behavior or just want to develop something new and want to see the real results
 
 Let's make a small change to `./blog/pages/index.tsx` that should print the raw response from the database when accessing the root page of the blog
@@ -272,6 +275,7 @@ mirrord can be used to either mirror incoming traffic without influencing the re
 This allows you to debug your process as if it was already deployed as part of the cluster.
 
 ### Teardown
+
 After you're done with the example you can teardown the cluster with
 
 ```bash
