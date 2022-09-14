@@ -27,8 +27,7 @@ toc: true
 First clone the example repo
 
 ```bash
-git clone https://github.com/metalbear-co/nodejs-example.git
-cd nodejs-example
+git clone https://github.com/metalbear-co/nodejs-example.git && cd nodejs-example
 ```
 
 ### Setup Cluster
