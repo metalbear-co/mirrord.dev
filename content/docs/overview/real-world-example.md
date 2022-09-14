@@ -61,6 +61,8 @@ And then run the migration script
 ./run_migration.sh
 ```
 
+> Note if you don't have golang-migrate installed you need to verify that docker can mount the ./migrations folder. If script fails refer to docker docs for [linux](https://docs.docker.com/desktop/settings/linux/#file-sharing)/[macOS](https://docs.docker.com/desktop/settings/windows/#file-sharing)
+
 ## Traffic Mirroring
 
 A key feature of mirrord is mirroring requests from a Kubernetes container to a local process for debugging purposes.
