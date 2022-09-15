@@ -21,12 +21,10 @@ mirrord lets users debug incoming network traffic by mirroring or stealing the t
 mirrord's default configuration is to the mirror traffic that reaches the remote pod, i.e. run the local process in the context of cloud environment without
 disrupting incoming traffic.
 
-Example - create a simple Kubernetes deployment and service:
-
-- `user-service`: stores registered users
+Example - `user-service` a simple Kubernetes deployment and service that stores registered users.
 
 ```bash
-mehula@mehul-machine:~/mirrord$ minikube service list
+bigbear@metalbear:~/mirrord$ minikube service list
 |-------------|-------------------|--------------|---------------------------|
 |  NAMESPACE  |       NAME        | TARGET PORT  |            URL            |
 |-------------|-------------------|--------------|---------------------------|
@@ -35,15 +33,15 @@ mehula@mehul-machine:~/mirrord$ minikube service list
 | kube-system | kube-dns          | No node port |
 |-------------|-------------------|--------------|---------------------------|
 
-mehula@mehul-machine:~/mirrord-demo$ curl -X POST -H "Content-type: application/json" -d "{\"Name\" : \"Metal\", \"Last\" : \"Bear\"}" http://192.168.49.2:32000/user
+bigbear@metalbear:~/mirrord-demo$ curl -X POST -H "Content-type: application/json" -d "{\"Name\" : \"Metal\", \"Last\" : \"Bear\"}" http://192.168.49.2:32000/user
 {"Last":"Bear","Name":"Metal"}
 
-mehula@mehul-machine:~/mirrord-demo$ curl http://192.168.49.2:31000/index.html
+bigbear@metalbear:~/mirrord-demo$ curl http://192.168.49.2:31000/index.html
 <html> <head>USERS</head><body><h1> MetalBear Users</h1><p>[{"Last":"Bear","Name":"Metal"}]</p></body></html>
 ```
 
 ```bash
-mehula@mehul-machine:~/mirrord$ kubectl get pods
+bigbear@metalbear:~/mirrord$ kubectl get pods
 NAME                                        READY   STATUS    RESTARTS      AGE
 metalbear-bff-deployment-597cb4f957-485t5   1/1     Running   1 (15h ago)   16h
 metalbear-deployment-85c754c75f-6k7mg       1/1     Running   1 (15h ago)   16h
@@ -59,7 +57,7 @@ To mirror traffic from remote services to the local development environment, run
 <center>Window 1</center> 
 
 ```bash
-mehula@mehul-machine:~/mirrord-demo$ ../mirrord/target/debug/mirrord exec -c
+bigbear@metalbear:~/mirrord-demo$ ../mirrord/target/debug/mirrord exec -c
 --no-outgoing --pod-name metalbear-deployment-85c754c75f-6k7mg python3
 user-service/service.py 
  * Serving Flask app 'service' (lazy loading)
@@ -81,7 +79,7 @@ user-service/service.py
 <center>Window 2</center>
 
 ```bash
-mehula@mehul-machine:~/mirrord-demo$ curl http://192.168.49.2:32000/users
+bigbear@metalbear:~/mirrord-demo$ curl http://192.168.49.2:32000/users
 [{"Last":"Bear","Name":"Metal"}]
 ```
 
@@ -106,7 +104,7 @@ Example - running `user-service` with mirrord and `--tcp-steal` on:
 <center>Window 1</center> 
 
 ```bash
-mehula@mehul-machine:~/mirrord-demo$ ../mirrord/target/debug/mirrord exec -c 
+bigbear@metalbear:~/mirrord-demo$ ../mirrord/target/debug/mirrord exec -c 
 --tcp-steal --pod-name metalbear-deployment-85c754c75f-6k7mg 
 python3 user-service/service.py 
  * Serving Flask app 'service' (lazy loading)
@@ -123,7 +121,7 @@ python3 user-service/service.py
  127.0.0.1 - - [08/Sep/2022 15:50:55] "GET /users HTTP/1.1" 200 -
  127.0.0.1 - - [08/Sep/2022 16:57:51] "POST /user HTTP/1.1" 200 -
  127.0.0.1 - - [08/Sep/2022 16:57:54] "GET /users HTTP/1.1" 200 -
- ^Cmehula@mehul-machine:~/mirrord-demo$ 
+ ^Cbigbear@metalbear:~/mirrord-demo$ 
 ```
 
 </td>
@@ -133,29 +131,29 @@ python3 user-service/service.py
 
 ```bash
 // Before running mirrord with `--tcp-steal`
-mehula@mehul-machine:~/mirrord-demo$ curl http://192.168.49.2:32000/users
+bigbear@metalbear:~/mirrord-demo$ curl http://192.168.49.2:32000/users
 [{"Last":"Bear","Name":"Metal"}]
 
 // After running with mirrord and `--tcp-steal` - local process responds
  instead of the remote
-mehula@mehul-machine:~/mirrord-demo$ curl http://192.168.49.2:32000/users
+bigbear@metalbear:~/mirrord-demo$ curl http://192.168.49.2:32000/users
 []
-mehula@mehul-machine:~/mirrord-demo$ curl -X POST -H 
+bigbear@metalbear:~/mirrord-demo$ curl -X POST -H 
 "Content-type: application/json" 
 -d "{\"Name\" : \"Mehul\", \"Last\" : \"Arora\"}" http://192.168.49.2:32000/user
 
 {"Last":"Arora","Name":"Mehul"}
-mehula@mehul-machine:~/mirrord-demo$ curl http://192.168.49.2:32000/users
+bigbear@metalbear:~/mirrord-demo$ curl http://192.168.49.2:32000/users
 [{"Last":"Arora","Name":"Mehul"}]
-mehula@mehul-machine:~/mirrord-demo$ curl -X POST -H 
+bigbear@metalbear:~/mirrord-demo$ curl -X POST -H 
 "Content-type: application/json" 
 -d "{\"Name\" : \"Alex\", \"Last\" : \"C\"}" http://192.168.49.2:32000/user
 {"Last":"C","Name":"Alex"}
-mehula@mehul-machine:~/mirrord-demo$ curl http://192.168.49.2:32000/users
+bigbear@metalbear:~/mirrord-demo$ curl http://192.168.49.2:32000/users
 [{"Last":"Arora","Name":"Mehul"},{"Last":"C","Name":"Alex"}]
 
 // After sending SIGINT to the local process
-mehula@mehul-machine:~/mirrord-demo$ curl http://192.168.49.2:32000/users
+bigbear@metalbear:~/mirrord-demo$ curl http://192.168.49.2:32000/users
 [{"Last":"Bear","Name":"Metal"}]
 ```
 
