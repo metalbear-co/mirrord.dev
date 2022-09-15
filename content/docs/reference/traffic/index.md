@@ -1,5 +1,5 @@
 ---
-title: "Network Traffic"
+title: "Network Traffic (TCP/UDP)"
 description: "Reference to working with network traffic with mirrord"
 date: 2022-08-08T08:48:45+00:00
 lastmod: 2022-08-08T08:48:45+00:00
@@ -12,14 +12,14 @@ weight: 110
 toc: true
 ---
 
-## Incoming (TCP/UDP)
+## Incoming
 
-mirrord allows users to debug incoming network traffic by mirroring and stealing.
+mirrord lets users debug incoming network traffic by mirroring or stealing the traffic sent to the remote pod.
 
 #### Mirroring
 
-mirrord's default configuration is to duplicate traffic from the remote pod, i.e. run the local process in the context of cloud environment without
-manipulating incoming traffic.
+mirrord's default configuration is to the mirror traffic that reaches the remote pod, i.e. run the local process in the context of cloud environment without
+disrupting incoming traffic.
 
 Example - create a simple Kubernetes deployment and service:
 
@@ -93,8 +93,8 @@ mehula@mehul-machine:~/mirrord-demo$ curl http://192.168.49.2:32000/users
 
 #### Stealing
 
-mirrord can steal network traffic, i.e. intercept it and send it to the local process. This means that all incoming
-traffic is only handled by the local process.
+mirrord can steal network traffic, i.e. intercept it and send it to the local process instead of the remote pod.
+This means that all incoming traffic is only handled by the local process.
 
 Example - running `user-service` with mirrord and `--tcp-steal` on:
 
@@ -165,18 +165,13 @@ mehula@mehul-machine:~/mirrord-demo$ curl http://192.168.49.2:32000/users
 </tr>
 </table>
 
-## Outgoing (TCP/UDP)
+## Outgoing
 
-mirrord provides access to outgoing traffic, i.e. local network requests will be redirected to the remote.
+mirrord's outgoing traffic feature intercepts outgoing requests from the local process and sends them through the remote pod instead.
+Responses are then routed back to the local process. A simple use case of this feature is when a user wants their local process to make
+an API call to another service in the k8s cluster, for example, a database read/write.
 
-Example - getting the user list from the remote by sending a `GET` request to port 80 in the context of remote:
-
-```bash
-mehula@mehul-machine:~/mirrord-demo$ ../mirrord/target/debug/mirrord exec -c --pod-name metalbear-deployment-85c754c75f-6k7mg curl localhost:80/users
-[{"Last":"Bear","Name":"Metal"}]
-```
-
-## DNS Resolution (TCP/UDP)
+## DNS Resolution
 
 mirrord can resolve DNS queries in the context of the remote pod
 
@@ -199,3 +194,5 @@ Type "help", "copyright", "credits" or "license" for more information.
 [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('10.106.158.180', 0)), (<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_DGRAM: 2>, 17, '', ('10.106.158.180', 0)), (<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_RAW: 3>, 0, '', ('10.106.158.180', 0))]
 >>> 
 ```
+
+
