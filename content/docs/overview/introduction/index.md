@@ -21,7 +21,7 @@ Traditionally, software development happens in loops, where developers write and
 
 The deployment to staging stage is expensive for several reasons:
 1. It often goes through a CI process, which is often slow (because of e.g. a long automated test suite having to pass in order to progress) and sometimes broken
-2. Since staging environments are usually shared, the environment is occasionally broken when an engineer deploys unstable code.ngineers
+2. Since staging environments are usually shared, the environment is occasionally broken when an engineer deploys unstable code.
 
 With *mirrord*, we're trying to remove the costs associated with deployment to staging, by taking 'deployment' out of the process completely. By plugging your local process directly into the staging environment, you can test your code in cloud conditions without having to go through a long CI process, and without the risk of breaking the environment for other developers.
 
