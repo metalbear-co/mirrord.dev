@@ -18,7 +18,7 @@ mirrord lets users debug incoming network traffic by mirroring or stealing the t
 
 #### Mirroring
 
-mirrord's default configuration is to the mirror traffic that reaches the remote pod, i.e. run the local process in the context of cloud environment without
+mirrord's default configuration is to mirror the traffic that reaches the remote pod, i.e. run the local process in the context of cloud environment without
 disrupting incoming traffic.
 
 Example - `user-service` a simple Kubernetes deployment and service that stores registered users.
