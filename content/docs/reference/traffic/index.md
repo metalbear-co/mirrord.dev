@@ -18,7 +18,7 @@ mirrord lets users debug incoming network traffic by mirroring or stealing the t
 
 #### Mirroring
 
-mirrord's default configuration is to mirror incoming TCP traffic from the remote pod's incoming connections, i.e.
+mirrord's default configuration is to mirror incoming TCP traffic from the remote pod, i.e.
 run the local process in the context of cloud environment without disrupting incoming traffic for the remote pod.
 Any responses by the local process to requests on incoming connections (all outgoing TCP packets on sessions not
 initiated by the process) are dropped, and so whatever application is running on the remote pod can be used normally
