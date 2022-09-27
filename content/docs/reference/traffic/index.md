@@ -172,6 +172,10 @@ sends them through the remote pod instead. Responses are then routed back to the
 A simple use case of this feature is enabling the local process to make an API call to another service in the k8s
 cluster, for example, a database read/write.
 
+For UDP, outgoing traffic is currently only intercepted and forwarded by mirrord if the application binds a non-0 port
+and makes a `connect` call on the socket before sending out messages. Outgoing TCP and UDP forwarding are both enabled
+by default. It can be controlled individually for TCP and UDP or disabled altogether (see `mirrord exec --help`).
+
 > **Note:** If the handling of incoming requests by your app involves outgoing API calls to other services, and mirrord is configured to mirror incoming traffic, then it
 > might be the case that both the remote pod and the local process (which
 > receives mirrored requests) make an outgoing API call to another service for the same incoming request. If that call
@@ -179,10 +183,6 @@ cluster, for example, a database read/write.
 > effect by switching from [traffic mirroring](#mirroring) to [traffic stealing](#stealing) mode. Alternatively, if the
 > service your application makes an API call to is only reachable from within the Kubernetes cluster, you can disable
 > outgoing traffic forwarding, which would make it impossible for your local process to reach that service.
-
-For UDP, outgoing traffic is currently only intercepted and forwarded by mirrord if the application binds a non-0 port
-and makes a `connect` call on the socket before sending out messages. Outgoing TCP and UDP forwarding are both enabled
-by default. It can be controlled individually for TCP and UDP or disabled altogether (see `mirrord exec --help`).
 
 ## DNS Resolution
 
