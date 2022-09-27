@@ -29,7 +29,9 @@ mirrord-layer sends a message to mirrord-agent requesting remote environment var
 
 To include/exclude environment variables selectively, use the `--override-env-vars-include` flag to include and `--override-env-vars-exclude` to exclude with environment variables specified in a `semicolon` separated list.
 
-**Note**: These flags are mutually exclusive. For example, if one chooses to exclude using the `--override-env-vars-exclude` flag, then there is no need to use `--override-env-vars-include="*"` to include all other environment variables.
+> **Note:** These flags are mutually exclusive. For example, if one chooses to exclude using the
+> `--override-env-vars-exclude` flag, then there is no need to use `--override-env-vars-include="*"` to include all
+> other environment variables.
 
 By default, all environment variables are included.
 

@@ -133,5 +133,5 @@ with open("/tmp/test", "w") as file:
     file.write(TEXT)
 ```
 
-**Note:** For read, write, and lseek if the provided `fd` is a valid file descriptor i.e. it refers to a file opened on
-the remote pod then the call is forwarded to the remote pod, otherwise the call is sent to libc.
+> **Note:** For read, write, and lseek if the provided `fd` is a valid file descriptor i.e. it refers to a file
+> opened on the remote pod then the call is forwarded to the remote pod, otherwise the call is sent to libc.

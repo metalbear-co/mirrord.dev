@@ -139,7 +139,8 @@ REPOSITORY                                     TAG       IMAGE ID       CREATED 
 test                                           latest    5080c20a8222   2 hours ago     300MB
 ```
 
-**Note:** mirrord-agent is shipped as a container image as it creates a job with this image, providing it with elevated permissions on the same node as the impersonated pod.
+> **Note:** mirrord-agent is shipped as a container image as it creates a job with this image, providing it with
+> elevated permissions on the same node as the impersonated pod.
 
 ### Build and run mirrord
 
@@ -225,7 +226,7 @@ function handleConnection(conn) {
 ```bash
 MIRRORD_AGENT_IMAGE=test MIRRORD_AGENT_RUST_LOG=debug RUST_LOG=debug target/debug/mirrord exec -c --pod-name py-serv-deployment-ff89b5974-x9tjx node sample/node/app.mjs
 ```
-**Note:** You need to change the pod name here to the name of the pod created on your system.
+> **Note:** You need to change the pod name here to the name of the pod created on your system.
 
 
 ```

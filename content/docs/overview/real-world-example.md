@@ -60,7 +60,9 @@ And then run the migration script
 ./run_migration.sh
 ```
 
-> Note if you don't have golang-migrate installed you need to verify that docker can mount the `./migrations` folder. If the script fails refer to docker docs for [linux](https://docs.docker.com/desktop/settings/linux/#file-sharing)/[macOS](https://docs.docker.com/desktop/settings/mac/#file-sharing).
+> **Note:** if you don't have golang-migrate installed you need to verify that docker can mount the `./migrations`
+> folder. If the script fails refer to docker docs for
+> [linux](https://docs.docker.com/desktop/settings/linux/#file-sharing)/[macOS](https://docs.docker.com/desktop/settings/mac/#file-sharing).
 
 ## Traffic Mirroring
 
@@ -152,7 +154,8 @@ And now lets test it.
 mirrord exec --no-fs -x NODE_ENV -p example-blog-<hash>-<hash> yarn -- workspace blog dev
 ```
 
-> Note connection to the remote blog container via port-forward is still required for this step, please reference [Mirroring](#traffic-mirroring)
+> **Note:** connection to the remote blog container via port-forward is still required for this step, please reference
+> [Mirroring](#traffic-mirroring).
 
 Your local service accesses the database from the internal network of the Kubernetes cluster. You should be able to navigate to [http://localhost:8080](http://localhost:8080), and though you receive the result from the server instance running on the cluster, you should still see the **following log in the local machine**:
 
@@ -268,7 +271,8 @@ mirrord exec --no-fs -x NODE_ENV -p example-blog-<hash>-<hash> --steal yarn -- w
 
 Refresh the page, and you should now be able to see the result.
 
-> Note connection to the blog container is still required for this step, please reference [Mirroring](#traffic-mirroring)
+> **Note:** connection to the blog container is still required for this step, please reference
+> [Mirroring](#traffic-mirroring).
 
 ## Summary
 
