@@ -18,8 +18,10 @@ mirrord lets users debug incoming network traffic by mirroring or stealing the t
 
 #### Mirroring
 
-mirrord's default configuration is to mirror the traffic that reaches the remote pod, i.e. run the local process in the context of cloud environment without
-disrupting incoming traffic.
+mirrord's default configuration is to mirror incoming TCP traffic from the remote pod, i.e.
+run the local process in the context of cloud environment without disrupting incoming traffic for the remote pod.
+Any responses by the local process to the mirrored requests are dropped, and so whatever application is running on the
+remote pod continues to operate normally while the traffic is mirrored to the local process.
 
 Example - `user-service` a simple Kubernetes deployment and service that stores registered users.
 
@@ -165,9 +167,22 @@ bigbear@metalbear:~/mirrord-demo$ curl http://192.168.49.2:32000/users
 
 ## Outgoing
 
-mirrord's outgoing traffic feature intercepts outgoing requests from the local process and sends them through the remote pod instead.
-Responses are then routed back to the local process. A simple use case of this feature is when a user wants their local process to make
-an API call to another service in the k8s cluster, for example, a database read/write.
+mirrord's outgoing traffic feature intercepts outgoing requests from the local process and 
+sends them through the remote pod instead. Responses are then routed back to the local process.
+A simple use case of this feature is enabling the local process to make an API call to another service in the k8s
+cluster, for example, a database read/write.
+
+For UDP, outgoing traffic is currently only intercepted and forwarded by mirrord if the application binds a non-0 port
+and makes a `connect` call on the socket before sending out messages. Outgoing TCP and UDP forwarding are both enabled
+by default. It can be controlled individually for TCP and UDP or disabled altogether (see `mirrord exec --help`).
+
+> **Note:** If the handling of incoming requests by your app involves outgoing API calls to other services, and mirrord is configured to mirror incoming traffic, then it
+> might be the case that both the remote pod and the local process (which
+> receives mirrored requests) make an outgoing API call to another service for the same incoming request. If that call
+> is a write operation to a database, this could lead e.g. to duplicate lines in the database. You can avoid such an
+> effect by switching from [traffic mirroring](#mirroring) to [traffic stealing](#stealing) mode. Alternatively, if the
+> service your application makes an API call to is only reachable from within the Kubernetes cluster, you can disable
+> outgoing traffic forwarding, which would make it impossible for your local process to reach that service.
 
 ## DNS Resolution
 
