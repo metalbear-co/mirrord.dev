@@ -8,7 +8,7 @@ images: []
 menu:
   docs:
     parent: "overview"
-weight: 200
+weight: 121
 toc: true
 ---
 
@@ -18,7 +18,11 @@ Yes, you can use the `--steal` flag to intercept traffic instead of duplicating 
 
 ## What frameworks/languages does mirrord support?
 
-mirrord works by [hooking libc](https://metalbear.co/blog/mirrord-internals-hooking-libc-functions-in-rust-and-fixing-bugs/), so it should work with any language/framework that uses libc. For languages such as Go that might skip libc usage in some cases, [we have a custom support in place](https://metalbear.co/blog/hooking-go-from-rust-hitchhikers-guide-to-the-go-laxy/) (by default, should work out of the box).
+mirrord works by [hooking libc](https://metalbear.co/blog/mirrord-internals-hooking-libc-functions-in-rust-and-fixing-bugs/), so it should work with any language/framework that uses libc (vast majority).
+ 
+This includes: Rust, Python, Java, Kotlin, Ruby, (most languages use libc).
+
+mirrord also has specific support for the following languages that don't use libc: [Go](https://metalbear.co/blog/hooking-go-from-rust-hitchhikers-guide-to-the-go-laxy/)
 
 ## Does mirrord install anything on the cluster?
 
