@@ -12,7 +12,7 @@ weight: 121
 toc: true
 ---
 
-## Can I intercept traffic?
+## Can I intercept traffic instead of duplicating it?
 
 Yes, you can use the `--steal` flag to intercept traffic instead of duplicating it.
 
@@ -20,7 +20,7 @@ Yes, you can use the `--steal` flag to intercept traffic instead of duplicating 
 
 mirrord works by [hooking libc](https://metalbear.co/blog/mirrord-internals-hooking-libc-functions-in-rust-and-fixing-bugs/), so it should work with any language/framework that uses libc (vast majority).
 
-This includes: Rust, Python, Java, Kotlin, Ruby, (most languages use libc).
+This includes: Rust, Node, Python, Java, Kotlin, Ruby, and others (most languages use libc).
 
 mirrord also has specific support for the following languages that don't use libc: [Go](https://metalbear.co/blog/hooking-go-from-rust-hitchhikers-guide-to-the-go-laxy/)
 
