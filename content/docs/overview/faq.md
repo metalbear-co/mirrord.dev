@@ -24,10 +24,10 @@ mirrord works by [hooking libc](https://metalbear.co/blog/mirrord-internals-hook
 
 No, mirrord doesn't install anything on the cluster, nor does it have any persistent state. It does spawn a short-living pod/container to run the proxy but it should be cleaned up after mirrord exits.
 
-## What's the difference between mirrord and Telepresence?
+## How is mirrord different from Telepresence?
 
 The main differences are:
-* mirrord works on process level, meaning it doesn't require you to run a "daemon" locally and it doesn't change your local machine settings. For example if you run another process it *won't* be affected by mirrord.
+* mirrord works on the process level, meaning it doesn't require you to run a "daemon" locally and it doesn't change your local machine settings. For example, if you run another process, it *won't* be affected by mirrord.
 * mirrord doesn't require you to install anything on the cluster.
 * mirrord duplicates traffic and doesn't intercept/steal it by default.
 * As mirrord evolve, we plan to add more "protective" features that reduce side effects on the remote environment (e.g. intercepting specific streams, connecting to only specific resources, CoW filesystem).
