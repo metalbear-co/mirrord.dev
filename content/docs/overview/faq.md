@@ -30,6 +30,5 @@ The main differences are:
 * mirrord works on process level, meaning it doesn't require you to run a "daemon" locally and it doesn't change your local machine settings. For example if you run another process it *won't* be affected by mirrord.
 * mirrord doesn't require you to install anything on the cluster.
 * mirrord duplicates traffic and doesn't intercept/steal it by default.
-* As mirrord evolve, we plan to add more "protective" features that reduce side effects on the remote environment (e.g. intercepting specific streams, connecting to only specific resources, CoW filesystem).
 
 More details can be found in this [GitHub discussion.](https://github.com/metalbear-co/mirrord/discussions/154#discussioncomment-2972127)
