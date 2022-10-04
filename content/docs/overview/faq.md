@@ -19,14 +19,14 @@ Yes, you can use the `--steal` flag to intercept traffic instead of duplicating 
 ## What frameworks/languages does mirrord support?
 
 mirrord works by [hooking libc](https://metalbear.co/blog/mirrord-internals-hooking-libc-functions-in-rust-and-fixing-bugs/), so it should work with any language/framework that uses libc (vast majority).
- 
+
 This includes: Rust, Python, Java, Kotlin, Ruby, (most languages use libc).
 
 mirrord also has specific support for the following languages that don't use libc: [Go](https://metalbear.co/blog/hooking-go-from-rust-hitchhikers-guide-to-the-go-laxy/)
 
 ## Does mirrord install anything on the cluster?
 
-No, mirrord doesn't install anything on the cluster, nor does it have any persistent state. It does spawn a short-living pod/container to run the proxy but it should be cleaned up after mirrord exits.
+No, mirrord doesn't install anything on the cluster, nor does it have any persistent state. It does spawn a short-living pod/container to run the proxy, which is automatically removed when mirrord exits.
 
 ## How is mirrord different from Telepresence?
 
