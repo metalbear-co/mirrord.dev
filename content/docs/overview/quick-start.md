@@ -13,9 +13,8 @@ toc: true
 ---
 
 ### Requirements
-mirrord runs on your local machine and in your cluster.
+mirrord runs on your local machine and in your Kubernetes cluster.
 - MacOS (Intel, Silicon) and Linux (x86_64) are supported for the local machine.
-- Kubernetes is supported for the cloud cluster.
 - kubectl needs to be configured on the local machine.
 
 
@@ -45,17 +44,7 @@ For example:
 mirrord exec --pod-name app-pod-01 python main.py
 ```
 
-Use `mirrord --help` to get all possible commands + arguments.
-
-
-
-#### Configuration
-Most configurations can be set by env and/or by passing a command line flag.
-- `--pod-name`  - Name of the pod to impersonate
-- `-n` | `--pod-namespace` | `MIRRORD_AGENT_IMPERSONATED_POD_NAMESPACE` - Namespace that the impersonated pod exists in (Defaults to “default”)
-- `-a` | `--agent-namespace` | `MIRRORD_AGENT_NAMESPACE` - Namespace to spawn our agent in, (Defaults to “default”).
-- `-l` | `--agent-log-level` | `MIRRORD_AGENT_RUST_LOG` - `RUST_LOG` to set for the agent. See EnvFilter docs
-
+Use `mirrord exec --help` to get all possible commands + arguments.
 
 
 ### VS Code Extension
@@ -67,9 +56,15 @@ To use extension, click the 'Enable mirrord' button in the status bar at the bot
 
 #### Configuration
 Use the Settings button in the status bar to open the settings menu. You can change the following parameters:
-- `Pod Namespace` - The namespace that the pod you want to impersonate exists in.
-- `Agent Namespace` - The namespace to spawn the mirrord agent in.
-
+- `Pod Namespace` - The namespace that the pod you want to impersonate exists in (default: "default").
+- `Agent Namespace` - The namespace to spawn the mirrord agent in (defaults to the same namespace as the pod).
+- `File Operations` - Enable or disable file operations (default: enabled).
+- `Invalid Certificates` - Enable to accept invalid certificates from the Kubernetes API (default: disabled).
+- `Traffic Stealing` - Enable to steal incoming traffic to the remote pod rather than mirror it (default: disabled).
+- `Remote DNS` - Enable to resolve DNS queries on the remote pod (default: enabled).
+- `Outgoing Traffic` - Enable to tunnel outgoing traffic through the remote pod (default: enabled).
+- `Include environment variables` - List of environment variables to import from the remote pod (default: *).
+- `Exclude environment variables` - List of environment variables to exclude from the remote pod (default: none).
 
 ### IntelliJ Plugin
 #### Installation
