@@ -36,3 +36,8 @@ The main differences are:
 * mirrord duplicates traffic and doesn't intercept/steal it by default.
 
 More details can be found in this [GitHub discussion.](https://github.com/metalbear-co/mirrord/discussions/154#discussioncomment-2972127)
+
+## Does mirrord support clusters with a service mesh like Istio or Linkerd?
+
+Yes. However, traffic mirroring isn't currently supported - you can use the --steal argument to steal traffic instead.
+
