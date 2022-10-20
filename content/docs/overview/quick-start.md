@@ -37,11 +37,11 @@ curl -fsSL https://raw.githubusercontent.com/metalbear-co/mirrord/main/scripts/i
 
 To use mirrord to plug a local process into a pod in the cluster configured with kubectl, run:
 ```bash
-mirrord exec --pod-name <pod-name> <command used to run the local process>`
+mirrord exec --target <target-path> <command used to run the local process>`
 ```
 For example:
 ```bash
-mirrord exec --pod-name app-pod-01 python main.py
+mirrord exec --target pod/app-pod-01 python main.py
 ```
 
 Use `mirrord exec --help` to get all possible commands + arguments.
