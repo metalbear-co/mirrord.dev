@@ -41,3 +41,15 @@ More details can be found in this [GitHub discussion.](https://github.com/metalb
 
 Yes. However, traffic mirroring isn't currently supported - you can use the --steal argument to steal traffic instead.
 
+## What if my program just executes locally and there is no effect by mirrord?
+
+There are two known cases where mirrord currently cannot load into the application's process.
+1. [SIP](https://en.wikipedia.org/wiki/System_Integrity_Protection) on Mac. Check the logs for a warning about SIP.
+   mirrord currently can't load into SIP binaries (we're working on it - coming soon). In the meanwhile you could try
+   copying the binary you're trying to run into an unprotected directory (e.g. anywhere in your home directory) and
+   if necessary also remove the signature with `sudo codesign --remove-signature ./<your-binary>`.
+2. Statically linked binaries. Since mirrord is using the dynamic linker to load into the application's process and
+   hook some key functions, it cannot load if the binary is statically linked. Support for statically linked
+   binaries is planned for the long term, but for now you would have to make sure your binaries are dynamically
+   linked in order to use mirrord on them. With Go programs, for example, it is as simple as adding `import "C"` to
+   your program code.
