@@ -26,7 +26,9 @@ mirrord also has specific support for the following languages that don't use lib
 
 ## Does mirrord install anything on the cluster?
 
-No, mirrord doesn't install anything on the cluster, nor does it have any persistent state. It does spawn a short-living pod/container to run the proxy, which is automatically removed when mirrord exits.
+No, mirrord doesn't install anything on the cluster, nor does it have any persistent state. It does spawn a short-living pod/container to run the proxy, which is automatically removed when mirrord exits. 
+
+If you have any restrictions for pulling external images inside your cluster, you have to allow pulling of ghcr.io/metalbear-co/mirrord image.
 
 ## How is mirrord different from Telepresence?
 
