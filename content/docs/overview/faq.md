@@ -41,7 +41,7 @@ More details can be found in this [GitHub discussion.](https://github.com/metalb
 
 Yes. However, traffic mirroring isn't currently supported - you can use the --steal argument to steal traffic instead.
 
-## What if my program just executes locally and there is no effect by mirrord?
+## I've run my program with mirrord but it seems to have no effect, what could be the issue?
 
 There are two known cases where mirrord currently cannot load into the application's process.
 1. [SIP](https://en.wikipedia.org/wiki/System_Integrity_Protection) on Mac. Check the logs for a warning about SIP.
