@@ -45,7 +45,7 @@ Yes. However, traffic mirroring isn't currently supported - you can use the --st
 
 There are currently two known cases where mirrord cannot load into the application's process:
 1. [SIP](https://en.wikipedia.org/wiki/System_Integrity_Protection) on Mac. Check the logs for a warning about SIP.
-   mirrord currently can't load into SIP binaries (we're working on it - coming soon). In the meanwhile you could try
+   mirrord currently can't load into SIP binaries (we're working on a fix). In the meanwhile you could try
    copying the binary you're trying to run into an unprotected directory (e.g. anywhere in your home directory) and
    if necessary also remove the signature with `sudo codesign --remove-signature ./<your-binary>`.
 2. Statically linked binaries. Since mirrord is using the dynamic linker to load into the application's process and
