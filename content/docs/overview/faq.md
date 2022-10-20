@@ -51,5 +51,5 @@ There are currently two known cases where mirrord cannot load into the applicati
 2. Statically linked binaries. Since mirrord uses the dynamic linker to load into the application's process, 
    it cannot load if the binary is statically linked. Support for statically linked
    binaries is planned for the long term, but for now you would have to make sure your binaries are dynamically
-   linked in order to use mirrord on them. With Go programs, for example, it is as simple as adding `import "C"` to
+   linked in order to run them with mirrord. With Go programs, for example, it is as simple as adding `import "C"` to
    your program code.
