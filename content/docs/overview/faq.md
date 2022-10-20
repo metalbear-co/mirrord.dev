@@ -49,7 +49,7 @@ There are currently two known cases where mirrord cannot load into the applicati
    copying the binary you're trying to run into an unprotected directory (e.g. anywhere in your home directory) and
    if it still doesn't work, also remove the signature with `sudo codesign --remove-signature ./<your-binary>`.
 2. Statically linked binaries. Since mirrord uses the dynamic linker to load into the application's process, 
-   hook some key functions, it cannot load if the binary is statically linked. Support for statically linked
+   it cannot load if the binary is statically linked. Support for statically linked
    binaries is planned for the long term, but for now you would have to make sure your binaries are dynamically
    linked in order to use mirrord on them. With Go programs, for example, it is as simple as adding `import "C"` to
    your program code.
