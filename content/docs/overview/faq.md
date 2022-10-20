@@ -43,7 +43,7 @@ Yes. However, traffic mirroring isn't currently supported - you can use the --st
 
 ## I've run my program with mirrord but it seems to have no effect, what could be the issue?
 
-There are two known cases where mirrord currently cannot load into the application's process.
+There are currently two known cases where mirrord cannot load into the application's process:
 1. [SIP](https://en.wikipedia.org/wiki/System_Integrity_Protection) on Mac. Check the logs for a warning about SIP.
    mirrord currently can't load into SIP binaries (we're working on it - coming soon). In the meanwhile you could try
    copying the binary you're trying to run into an unprotected directory (e.g. anywhere in your home directory) and
