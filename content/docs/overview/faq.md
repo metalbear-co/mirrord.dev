@@ -26,7 +26,9 @@ mirrord also has specific support for the following languages that don't use lib
 
 ## Does mirrord install anything on the cluster?
 
-No, mirrord doesn't install anything on the cluster, nor does it have any persistent state. It does spawn a short-living pod/container to run the proxy, which is automatically removed when mirrord exits.
+No, mirrord doesn't install anything on the cluster, nor does it have any persistent state. It does spawn a short-living pod/container to run the proxy, which is automatically removed when mirrord exits. 
+
+If you have any restrictions for pulling external images inside your cluster, you have to allow pulling of ghcr.io/metalbear-co/mirrord image.
 
 ## How is mirrord different from Telepresence?
 
@@ -41,3 +43,15 @@ More details can be found in this [GitHub discussion.](https://github.com/metalb
 
 Yes. However, traffic mirroring isn't currently supported - you can use the --steal argument to steal traffic instead.
 
+## I've run my program with mirrord but it seems to have no effect, what could be the issue?
+
+There are currently two known cases where mirrord cannot load into the application's process:
+1. [SIP](https://en.wikipedia.org/wiki/System_Integrity_Protection) on Mac. Check the logs for a warning about SIP.
+   mirrord currently can't load into SIP binaries (we're working on a fix). In the meanwhile you could try
+   copying the binary you're trying to run into an unprotected directory (e.g. anywhere in your home directory) and
+   if it still doesn't work, also remove the signature with `sudo codesign --remove-signature ./<your-binary>`.
+2. Statically linked binaries. Since mirrord uses the dynamic linker to load into the application's process, 
+   it cannot load if the binary is statically linked. Support for statically linked
+   binaries is planned for the long term, but for now you would have to make sure your binaries are dynamically
+   linked in order to run them with mirrord. With Go programs, for example, it is as simple as adding `import "C"` to
+   your program code.
