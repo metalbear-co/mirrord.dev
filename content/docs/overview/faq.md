@@ -49,7 +49,7 @@ There are currently two known cases where mirrord cannot load into the applicati
 
 ## Why not just use a remote debugger?
 
-When you use a remote debugger, you still have to deploy new code to the cluster. When you plug local code in to the cloud with mirrord, you don't have to wait for cloud deployment. Using mirrord is also less disruptive to the cluster, since the stable version of the code is still running and handling requests.
+When you use a remote debugger, you still have to deploy new code to the cluster. When you plug local code into the cloud with mirrord, you don't have to wait for cloud deployment. Using mirrord is also less disruptive to the cluster, since the stable version of the code is still running and handling requests.
 
 ## Why not just run a copy of the cluster on my machine with e.g. minikube?
 
@@ -59,7 +59,7 @@ Our assumption is that some environments are too complex to run wholly on your l
 
 * By letting you mirror traffic rather than intercept it, the stable version of the code can still run in the cluster and handle requests.
 * By letting you control which functionality runs locally and which runs in the cloud, you can configure mirrord in the way that's safest for your architecture. For example, you can configure mirrord to read files and receive incoming traffic from the cloud, but write files and send outgoing traffic locally.
-Our main goal in future versions of mirrord is to reduce the risk of disruption of the shared enviroment when using mirrord. This will be achieved by providing more granular configuration options (for example, filtering traffic by hostname or protocol), and advanced functionality like copy-on-write for databases.
+Our main goal in future versions of mirrord is to reduce the risk of disruption of the shared environment when using mirrord. This will be achieved by providing more granular configuration options (for example, filtering traffic by hostname or protocol), and advanced functionality like copy-on-write for databases.
 
 ## How is mirrord different from Telepresence?
 
