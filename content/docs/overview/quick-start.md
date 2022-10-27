@@ -13,18 +13,20 @@ toc: true
 ---
 
 ### Requirements
+
 mirrord runs on your local machine and in your Kubernetes cluster.
+
 - MacOS (Intel, Silicon) and Linux (x86_64) are supported for the local machine.
 - kubectl needs to be configured on the local machine.
 
-
 mirrord can be used in three ways:
+
 1. [CLI Tool](#cli-tool)
 2. [VS Code Extension](#vs-code-extension)
 3. [IntelliJ Plugin](#intellij-plugin)
 
-
 ### CLI Tool
+
 #### Installation
 
 To install the CLI, run the following command:
@@ -35,11 +37,14 @@ curl -fsSL https://raw.githubusercontent.com/metalbear-co/mirrord/main/scripts/i
 
 #### Usage
 
-To use mirrord to plug a local process into a pod in the cluster configured with kubectl, run:
+To use mirrord to plug a local process into a pod/deployment in the cluster configured with kubectl, run:
+
 ```bash
 mirrord exec --target <target-path> <command used to run the local process>`
 ```
+
 For example:
+
 ```bash
 mirrord exec --target pod/app-pod-01 python main.py
 ```
@@ -55,7 +60,9 @@ You can install the extension directly in the IDE, or download it from the marke
 To use extension, click the 'Enable mirrord' button in the status bar at the bottom of the window. When you next run a debug session, you'll be prompted with a dropdown listing pods in the namespace you've configured (or the 'default' namespace, if you haven't). Select the pod you want to impersonate, and the debugged process will be plugged into that pod by mirrord.
 
 #### Configuration
+
 Use the Settings button in the status bar to open the settings menu. You can change the following parameters:
+
 - `Pod Namespace` - The namespace that the pod you want to impersonate exists in (default: "default").
 - `Agent Namespace` - The namespace to spawn the mirrord agent in (defaults to the same namespace as the pod).
 - `File Operations` - Enable or disable file operations (default: enabled).

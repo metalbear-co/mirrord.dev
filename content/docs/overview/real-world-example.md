@@ -1,5 +1,5 @@
 ---
-title: "Example: Debugging an Application with mirrord"
+title: "Example"
 description: "Debugging an Application with mirrord .feat NextJS"
 date: 2021-09-13T10:50:00+01:00
 lastmod: 2021-09-13T10:50:00+01:00
@@ -12,9 +12,11 @@ weight: 120
 toc: true
 ---
 
+## Debugging an Application with mirrord .feat NextJS
+
 ## Setup
 
-### Prerequisites 
+### Prerequisites
 
 * [mirrord](https://mirrord.dev/)
 * Available Kubernetes Cluster
@@ -39,6 +41,7 @@ kubectl apply -f app.yaml
 ```
 
 This command will create four deployments and relevant services
+
 * example-pg - Postgres Database
 * example-idp - [Dexidp](https://dexidp.io/) OIDC provider
 * example-blog - NodeJS application located in ./blog
@@ -90,7 +93,7 @@ example-auditor-<hash>-<hash>   1/1     Running   0          5m
 Now lets debug the container in the cluster by executing
 
 ```bash
-mirrord exec -p example-auditor-<hash>-<hash> yarn -- workspace auditor start
+mirrord exec --target pod/example-auditor-<hash>-<hash> yarn -- workspace auditor start
 ```
 
 In a separate terminal establish a connection to the remote blog container by running
@@ -103,7 +106,7 @@ Navigate to [http://localhost:8080](http://localhost:8080) and you should start 
 
 Command breakdown
 
-| mirrord exec | -p example-auditor-\<hash\>-\<hash\> | yarn | -- workspace auditor start |
+| mirrord exec | --target pod/example-auditor-\<hash\>-\<hash\> | yarn | -- workspace auditor start |
 |---|---|---|---|
 ||specify the running pod to mirror|executable|executable args|
 
@@ -151,7 +154,7 @@ example-blog-<hash>-<hash>      1/1     Running   0          5m
 And now lets test it.
 
 ```bash
-mirrord exec --no-fs -x NODE_ENV -p example-blog-<hash>-<hash> yarn -- workspace blog dev
+mirrord exec --no-fs -x NODE_ENV --target pod/example-blog-<hash>-<hash> yarn -- workspace blog dev
 ```
 
 > **Note:** connection to the remote blog container via port-forward is still required for this step, please reference
@@ -206,7 +209,7 @@ Result {
 
 Lets break down the command
 
-| mirrord exec | --no-fs | -x NODE_ENV | -p example-blog-\<hash\>-\<hash\> | yarn | -- workspace blog dev |
+| mirrord exec | --no-fs | -x NODE_ENV | --target pod/example-blog-\<hash\>-\<hash\> | yarn | -- workspace blog dev |
 |---|---|---|---|---|---|
 ||disable fs*|exclude NODE_ENV enviroment variable**|specify the running pod to mirror|executable|executable args|
 
@@ -266,7 +269,7 @@ Edit `./blog/pages/blogpost/[id].tsx`
 And lets see the results by simply adding `--steal` to the previous command
 
 ```bash
-mirrord exec --no-fs -x NODE_ENV -p example-blog-<hash>-<hash> --steal yarn -- workspace blog dev
+mirrord exec --no-fs -x NODE_ENV --target pod/example-blog-<hash>-<hash> --steal yarn -- workspace blog dev
 ```
 
 Refresh the page, and you should now be able to see the result.
