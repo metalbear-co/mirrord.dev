@@ -42,7 +42,7 @@ machine we have `ENV_VAR1` with value `local-value`, then Running the python int
 this:
 
 ```bash
-MIRRORD_AGENT_IMAGE=test MIRRORD_AGENT_RUST_LOG=trace RUST_LOG=debug target/debug/mirrord exec -c --pod-name py-serv-deployment-ff89b5974-x9tjx python3
+MIRRORD_AGENT_IMAGE=test MIRRORD_AGENT_RUST_LOG=trace RUST_LOG=debug target/debug/mirrord exec -c --target pod/py-serv-deployment-ff89b5974-x9tjx python3
 
 Python 3.9.13 (v3.9.13:6de2ca5339, May 17 2022, 11:23:25)
 [Clang 6.0 (clang-600.0.57)] on darwin
@@ -55,7 +55,7 @@ remote-value
 Logs
 
 ```bash
-❯ MIRRORD_AGENT_IMAGE=test MIRRORD_AGENT_RUST_LOG=trace RUST_LOG=debug target/debug/mirrord exec -c --pod-name py-serv-deployment-ff89b5974-x9tjx python3
+❯ MIRRORD_AGENT_IMAGE=test MIRRORD_AGENT_RUST_LOG=trace RUST_LOG=debug target/debug/mirrord exec -c --target pod/py-serv-deployment-ff89b5974-x9tjx python3
 ...
 2022-07-01T17:18:33.744996Z DEBUG mirrord_layer: ClientMessage::GetEnvVarsRequest codec_result Ok(
     (),

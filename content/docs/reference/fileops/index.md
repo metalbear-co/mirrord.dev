@@ -30,7 +30,7 @@ print(read_str)
 When we run that python script with mirrord:
 
 ```bash
-mirrord exec -c --pod-name py-serv-deployment-cfc458fd4-bjzjx python3 test.py
+mirrord exec -c --target py-serv-deployment-cfc458fd4-bjzjx python3 test.py
 ```
 
 mirrord overrides that `openat` call and opens `/tmp/test` on the remote pod.

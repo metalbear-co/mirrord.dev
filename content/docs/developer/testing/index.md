@@ -224,7 +224,7 @@ function handleConnection(conn) {
 </details>
 
 ```bash
-MIRRORD_AGENT_IMAGE=test MIRRORD_AGENT_RUST_LOG=debug RUST_LOG=debug target/debug/mirrord exec -c --pod-name py-serv-deployment-ff89b5974-x9tjx node sample/node/app.mjs
+MIRRORD_AGENT_IMAGE=test MIRRORD_AGENT_RUST_LOG=debug RUST_LOG=debug target/debug/mirrord exec -c --target pod/py-serv-deployment-ff89b5974-x9tjx node sample/node/app.mjs
 ```
 > **Note:** You need to change the pod name here to the name of the pod created on your system.
 

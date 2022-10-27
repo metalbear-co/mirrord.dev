@@ -60,7 +60,7 @@ To mirror traffic from remote services to the local development environment, run
 
 ```bash
 bigbear@metalbear:~/mirrord-demo$ ../mirrord/target/debug/mirrord exec -c
---no-outgoing --pod-name metalbear-deployment-85c754c75f-6k7mg python3
+--no-outgoing --target pod/metalbear-deployment-85c754c75f-6k7mg python3
 user-service/service.py 
  * Serving Flask app 'service' (lazy loading)
  * Environment: production
@@ -103,11 +103,11 @@ Example - running `user-service` with mirrord and `--tcp-steal` on:
 </tr>
 <tr>
 <td>
-<center>Window 1</center> 
+<center>Window 1</center>
 
 ```bash
 bigbear@metalbear:~/mirrord-demo$ ../mirrord/target/debug/mirrord exec -c 
---tcp-steal --pod-name metalbear-deployment-85c754c75f-6k7mg 
+--tcp-steal --target pod/metalbear-deployment-85c754c75f-6k7mg 
 python3 user-service/service.py 
  * Serving Flask app 'service' (lazy loading)
  * Environment: production
