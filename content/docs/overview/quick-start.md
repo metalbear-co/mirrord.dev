@@ -61,17 +61,8 @@ To use extension, click the 'Enable mirrord' button in the status bar at the bot
 
 #### Configuration
 
-Use the Settings button in the status bar to open the settings menu. You can change the following parameters:
-
-- `Pod Namespace` - The namespace that the pod you want to impersonate exists in (default: "default").
-- `Agent Namespace` - The namespace to spawn the mirrord agent in (defaults to the same namespace as the pod).
-- `File Operations` - Enable or disable file operations (default: enabled).
-- `Invalid Certificates` - Enable to accept invalid certificates from the Kubernetes API (default: disabled).
-- `Traffic Stealing` - Enable to steal incoming traffic to the remote pod rather than mirror it (default: disabled).
-- `Remote DNS` - Enable to resolve DNS queries on the remote pod (default: enabled).
-- `Outgoing Traffic` - Enable to tunnel outgoing traffic through the remote pod (default: enabled).
-- `Include environment variables` - List of environment variables to import from the remote pod (default: *).
-- `Exclude environment variables` - List of environment variables to exclude from the remote pod (default: none).
+The VS Code extension reads its configuration from the following file: `<project-path>/.mirrord/mirrord.json`. You can also prepend a prefix, e.g. `my-config.mirrord.json`, or use .toml or .yaml format.
+It's documented [here](https://mirrord.dev/docs/overview/configuration/). It also supports autocomplete when edited in VS Code when the extension is installed.
 
 ### IntelliJ Plugin
 #### Installation
