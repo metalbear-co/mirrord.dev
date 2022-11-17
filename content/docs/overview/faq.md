@@ -34,18 +34,28 @@ Yes, you can use the `--steal` flag to intercept traffic instead of duplicating 
 
 Yes. However, traffic mirroring isn't currently supported - you can use the --steal argument to steal traffic instead.
 
-## I've run my program with mirrord but it seems to have no effect, what could be the issue?
+## I've run my program with mirrord, but it seems to have no effect, what could be the issue?
 
 There are currently two known cases where mirrord cannot load into the application's process:
-1. [SIP](https://en.wikipedia.org/wiki/System_Integrity_Protection) on Mac. Check the logs for a warning about SIP.
-   mirrord currently can't load into SIP binaries (we're working on a fix). In the meanwhile you could try
-   copying the binary you're trying to run into an unprotected directory (e.g. anywhere in your home directory) and
-   if it still doesn't work, also remove the signature with `sudo codesign --remove-signature ./<your-binary>`.
-2. Statically linked binaries. Since mirrord uses the dynamic linker to load into the application's process, 
+1. Statically linked binaries. Since mirrord uses the dynamic linker to load into the application's process,
    it cannot load if the binary is statically linked. Support for statically linked
    binaries is planned for the long term, but for now you would have to make sure your binaries are dynamically
    linked in order to run them with mirrord. With Go programs, for example, it is as simple as adding `import "C"` to
    your program code.
+2. If you are running mirrord via an IDE extension/plugin on MacOS, and the executable you are running is protected by
+   [SIP](https://en.wikipedia.org/wiki/System_Integrity_Protection) (the application you are developing wouldn't be,
+   but the binary that is used to execute it, e.g. `bash` for a bash script, might be protected), mirrord would not be
+   able to load into it. If that is the case, you could try
+   [running mirrord from the command line](https://mirrord.dev/docs/overview/quick-start/#cli-tool) (where SIP
+   bypassing is already implemented) instead of in the IDE. Alternatively, you could try copying the binary you're
+   trying to run to an unprotected directory (e.g. anywhere in your home directory), changing the run configuration
+   to use the copy instead of the original binary, and trying again. If it still doesn't work, also remove the signature
+   from the copy with:
+
+   ```sudo codesign --remove-signature ./<your-binary>```
+
+   Please let us know if you are affected by this issue. Support for running SIP binaries from an IDE is tracked in
+   [issue #747](https://github.com/metalbear-co/mirrord/issues/747).
 
 ## Why not just use a remote debugger?
 
