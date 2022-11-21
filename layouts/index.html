@@ -34,10 +34,10 @@
                     <div class="row justify-content-center">
                         <div class="col-sm-auto text-center">
                             {{ $input := `
-                            # Install using Brew (macOS/Linux)
-                            brew install metalbear-co/mirrord/mirrord
-                            # Install using our install script
-                            curl -fsSL https://raw.githubusercontent.com/metalbear-co/mirrord/main/scripts/install.sh | bash
+# Install using Brew (macOS/Linux)
+brew install metalbear-co/mirrord/mirrord
+# Install using our install script
+curl -fsSL https://raw.githubusercontent.com/metalbear-co/mirrord/main/scripts/install.sh | bash
                             ` }}
                             {{ transform.Highlight $input "bash"}}
                         </div>
