@@ -32,6 +32,12 @@
             <div class="tab-content" id="pills-tabContent">
                 <div class="tab-pane fade show active" id="pills-cli" role="tabpanel" aria-labelledby="pills-cli-tab">
                     <div class="row justify-content-center">
+                        Using Brew:
+                        <div class="col-sm-auto text-center">
+                            {{ $input := `brew install metalbear-co/mirrord/mirrord` }}
+                            {{ transform.Highlight $input "bash"}}
+                        </div>
+                        Install script
                         <div class="col-sm-auto text-center">
                             {{ $input := `curl -fsSL https://raw.githubusercontent.com/metalbear-co/mirrord/main/scripts/install.sh | bash` }}
                             {{ transform.Highlight $input "bash"}}
