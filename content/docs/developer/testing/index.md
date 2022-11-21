@@ -130,7 +130,7 @@ py-serv-deployment-ff89b5974-x9tjx   1/1     Running   0          3h8m
 ### Build mirrord-agent Docker Image
 
 ```bash
-docker build -t test . --file mirrord-agent/Dockerfile
+docker build -t test . --file mirrord/agent/Dockerfile
 ```
 
 ```bash
