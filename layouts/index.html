@@ -16,7 +16,7 @@
                 <li class="nav-item" role="presentation">
                     <button class="nav-link active" id="pills-cli-tab" data-bs-toggle="pill" data-bs-target="#pills-cli"
                         type="button" role="tab" aria-controls="pills-cli" aria-selected="true">CLI</button>
-                </li>
+                </li>                
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="pills-vscode-tab" data-bs-toggle="pill" data-bs-target="#pills-vscode"
                         type="button" role="tab" aria-controls="pills-vscode" aria-selected="false">VS Code</button>
@@ -33,11 +33,18 @@
                 <div class="tab-pane fade show active" id="pills-cli" role="tabpanel" aria-labelledby="pills-cli-tab">
                     <div class="row justify-content-center">
                         <div class="col-sm-auto text-center">
+                            {{ $input := `brew install metalbear-co/mirrord/mirrord` }}
+                            {{ transform.Highlight $input "bash"}}
+                        </div>
+                        <div class="headingText--small text-center">
+                            or
+                        </div>
+                        <div class="col-sm-auto text-center">
                             {{ $input := `curl -fsSL https://raw.githubusercontent.com/metalbear-co/mirrord/main/scripts/install.sh | bash` }}
                             {{ transform.Highlight $input "bash"}}
                         </div>
                     </div>
-                </div>
+                </div>                
                 <div class="tab-pane fade" id="pills-vscode" role="tabpanel" aria-labelledby="pills-vscode-tab"
                     tabindex="0">
                     <div class="row justify-content-center">
