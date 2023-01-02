@@ -1,0 +1,94 @@
+/*------------------------------------------------------------------
+Project:		Tailwindcss Hugo Theme
+Version:		1.0.0
+Last change: 	03/06/2022
+-------------------------------------------------------------------*/
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+[x-cloak] {
+    display: none !important;
+}
+
+body {
+    @apply text-primary-text;
+}
+
+.docs__content p {
+    @apply mb-4;
+}
+
+.docs__content h1,
+.docs__content h2,
+.docs__content h3,
+.docs__content h4 {
+    @apply font-heading font-bold text-primary-text;
+}
+
+.docs__content h1 {
+    @apply text-4xl;
+}
+
+.docs__content h2 {
+    @apply text-2xl pt-8 mt-6 border-t border-dashed border-[#9B9B9B];
+}
+
+.docs__content h3 {
+    @apply text-xl;
+}
+
+.docs__content h4 {
+    @apply text-lg;
+}
+
+.docs__content blockquote {
+    @apply border-l border-solid border-primary pl-6 bg-gray-50 px-2 py-3 mb-3;
+}
+
+.docs__content blockquote p {
+    @apply mb-0;
+}
+
+.docs__content code {
+    @apply py-1 px-2 bg-gray-100 dark:bg-gray-700 rounded-sm;
+}
+
+.docs__content .highlight pre {
+    @apply bg-gray-100;
+}
+
+.docs__toc #TableOfContents ul,
+.docs__toc #TableOfContents ul ul {
+    @apply list-none pl-0;
+}
+
+.docs__toc #TableOfContents ul > li > a {
+    @apply text-primary-text text-sm hover:font-bold;
+}
+
+.docs__content img {
+    @apply mx-auto mt-4 mb-6;
+}
+
+/* Background */
+.docs__content .highlight {
+    @apply relative mb-6;
+}
+
+.docs__content .highlight .chroma {
+    @apply text-slate-100 bg-slate-800 overflow-x-auto py-6 px-2;
+}
+
+.docs__content .highlight .chroma .hl {
+    @apply bg-slate-700;
+}
+
+.docs__content .highlight .chroma code {
+    @apply text-sm bg-slate-800;
+}
+
+.docs__content .button__clipboard {
+    @apply block text-xs text-white bg-primary rounded-md py-1 px-2 ml-auto mb-1;
+}

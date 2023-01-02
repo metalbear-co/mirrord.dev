@@ -1,0 +1,164 @@
+<h2>Any of</h2>
+<div id="container6_2_1" x-data="{
+    selectedId: null,
+    init() {
+        this.$nextTick(() => this.select(this.$id('mytab-id', 1)))
+    },
+    select(id) {
+        this.selectedId = id
+    },
+    isSelected(id) {
+        return this.selectedId === id
+    },
+    whichChild(el, parent) {
+        return Array.from(parent.children).indexOf(el) + 1
+    }
+}" x-id="['mytab-id']" class="mx-auto">
+    <ul x-bind="{
+        ['x-ref']: 'tablist',
+        ['@keydown.right.prevent.stop']() {
+            this.$focus.wrap().next()
+        },
+        ['@keydown.home.prevent.stop']() {
+            this.$focus.first()
+        },
+        ['@keydown.page-up.prevent.stop']() {
+            this.$focus.first()
+        },
+        ['@keydown.left.prevent.stop']() {
+            this.$focus.wrap().prev()
+        },
+        ['@keydown.end.prevent.stop']() {
+            this.$focus.last()
+        },
+        ['@keydown.page-down.prevent.stop']() {
+            this.$focus.last()
+        },
+    }" role="tablist" class="-mb-px flex items-stretch list-none">
+        <li>
+            <button x-bind="{
+                [':id']() {
+                    return this.$id('mytab-id', this.whichChild(this.$el.parentElement, this.$refs.tablist))
+                },
+                ['@click']() {
+                    this.select(this.$el.id)
+                },
+                ['@focus']() {
+                    this.select(this.$el.id)
+                },
+                [':tabindex']() {
+                    return this.isSelected(this.$el.id) ? 0 : -1
+                },
+                [':aria-selected']() {
+                    return this.isSelected(this.$el.id)
+                },
+                [':class']() {
+                    return this.isSelected(this.$el.id) ? 'border-black bg-white' : 'border-transparent'
+                },
+            }" type="button" :class="isSelected($el.id) ? 'border-gray-200 bg-white' : 'border-transparent'"
+                class="inline-flex rounded-t-md border-t border-l border-r px-5 py-2.5 border-gray-200 bg-white"
+                role="tab" id="mytab-id-1-1" tabindex="0" aria-selected="true">Option 1</button>
+        </li>
+
+        <li>
+            <button x-bind="{
+                [':id']() {
+                    return this.$id('mytab-id', this.whichChild(this.$el.parentElement, this.$refs.tablist))
+                },
+                ['@click']() {
+                    this.select(this.$el.id)
+                },
+                ['@focus']() {
+                    this.select(this.$el.id)
+                },
+                [':tabindex']() {
+                    return this.isSelected(this.$el.id) ? 0 : -1
+                },
+                [':aria-selected']() {
+                    return this.isSelected(this.$el.id)
+                },
+                [':class']() {
+                    return this.isSelected(this.$el.id) ? 'border-black bg-white' : 'border-transparent'
+                },
+            }" type="button" :class="isSelected($el.id) ? 'border-gray-200 bg-white' : 'border-transparent'"
+                class="inline-flex rounded-t-md border-t border-l border-r px-5 py-2.5 border-transparent" role="tab"
+                id="mytab-id-1-2" tabindex="-1" aria-selected="false">EnvFileConfig</button>
+        </li>
+    </ul>
+
+    <div role="tabpanels" class="rounded-b-md border border-gray-200 bg-white">
+
+
+        
+
+        <section x-show="isSelected($id('mytab-id', whichChild($el, $el.parentElement)))"
+            :aria-labelledby="$id('mytab-id', whichChild($el, $el.parentElement))" role="tabpanel" class="p-8"
+            aria-labelledby="mytab-id-1-1">
+
+            <div class="breadcrumbs">
+                root
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-3 inline-block text-current"><path fill="currentColor" d="M363.3 100.7l144 144C510.4 247.8 512 251.9 512 255.1s-1.562 8.188-4.688 11.31l-144 144c-6.25 6.25-16.38 6.25-22.62 0s-6.25-16.38 0-22.62l116.7-116.7H16c-8.844 0-16-7.156-16-15.1c0-8.844 7.156-16 16-16h441.4l-116.7-116.7c-6.25-6.25-6.25-16.38 0-22.62S357.1 94.44 363.3 100.7z"></path></svg>
+                <a href="#feature" onclick="anchorLink(&quot;feature&quot;)">feature</a>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-3 inline-block text-current"><path fill="currentColor" d="M363.3 100.7l144 144C510.4 247.8 512 251.9 512 255.1s-1.562 8.188-4.688 11.31l-144 144c-6.25 6.25-16.38 6.25-22.62 0s-6.25-16.38 0-22.62l116.7-116.7H16c-8.844 0-16-7.156-16-15.1c0-8.844 7.156-16 16-16h441.4l-116.7-116.7c-6.25-6.25-6.25-16.38 0-22.62S357.1 94.44 363.3 100.7z"></path></svg>
+                <a href="#feature_env" onclick="anchorLink(&quot;feature_env&quot;)">env</a>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-3 inline-block text-current"><path fill="currentColor" d="M363.3 100.7l144 144C510.4 247.8 512 251.9 512 255.1s-1.562 8.188-4.688 11.31l-144 144c-6.25 6.25-16.38 6.25-22.62 0s-6.25-16.38 0-22.62l116.7-116.7H16c-8.844 0-16-7.156-16-15.1c0-8.844 7.156-16 16-16h441.4l-116.7-116.7c-6.25-6.25-6.25-16.38 0-22.62S357.1 94.44 363.3 100.7z"></path></svg>
+                <a href="#feature_env_anyOf" onclick="anchorLink(&quot;feature_env_anyOf&quot;)">anyOf</a>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-3 inline-block text-current"><path fill="currentColor" d="M363.3 100.7l144 144C510.4 247.8 512 251.9 512 255.1s-1.562 8.188-4.688 11.31l-144 144c-6.25 6.25-16.38 6.25-22.62 0s-6.25-16.38 0-22.62l116.7-116.7H16c-8.844 0-16-7.156-16-15.1c0-8.844 7.156-16 16-16h441.4l-116.7-116.7c-6.25-6.25-6.25-16.38 0-22.62S357.1 94.44 363.3 100.7z"></path></svg>
+                <a href="#feature_env_anyOf_i0" onclick="anchorLink(&quot;feature_env_anyOf_i0&quot;)">item 0</a>
+            </div>
+            <div class="py-4">
+                <span class="text-white bg-gray-500 py-1 px-3 rounded-md">Type: boolean</span>
+            </div>
+
+        </section>
+        <section x-show="isSelected($id('mytab-id', whichChild($el, $el.parentElement)))"
+            :aria-labelledby="$id('mytab-id', whichChild($el, $el.parentElement))" role="tabpanel" class="p-8"
+            aria-labelledby="mytab-id-1-2">
+
+            <div class="breadcrumbs">
+                root
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-3 inline-block text-current"><path fill="currentColor" d="M363.3 100.7l144 144C510.4 247.8 512 251.9 512 255.1s-1.562 8.188-4.688 11.31l-144 144c-6.25 6.25-16.38 6.25-22.62 0s-6.25-16.38 0-22.62l116.7-116.7H16c-8.844 0-16-7.156-16-15.1c0-8.844 7.156-16 16-16h441.4l-116.7-116.7c-6.25-6.25-6.25-16.38 0-22.62S357.1 94.44 363.3 100.7z"></path></svg>
+                <a href="#feature" onclick="anchorLink(&quot;feature&quot;)">feature</a>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-3 inline-block text-current"><path fill="currentColor" d="M363.3 100.7l144 144C510.4 247.8 512 251.9 512 255.1s-1.562 8.188-4.688 11.31l-144 144c-6.25 6.25-16.38 6.25-22.62 0s-6.25-16.38 0-22.62l116.7-116.7H16c-8.844 0-16-7.156-16-15.1c0-8.844 7.156-16 16-16h441.4l-116.7-116.7c-6.25-6.25-6.25-16.38 0-22.62S357.1 94.44 363.3 100.7z"></path></svg>
+                <a href="#feature_env" onclick="anchorLink(&quot;feature_env&quot;)">env</a>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-3 inline-block text-current"><path fill="currentColor" d="M363.3 100.7l144 144C510.4 247.8 512 251.9 512 255.1s-1.562 8.188-4.688 11.31l-144 144c-6.25 6.25-16.38 6.25-22.62 0s-6.25-16.38 0-22.62l116.7-116.7H16c-8.844 0-16-7.156-16-15.1c0-8.844 7.156-16 16-16h441.4l-116.7-116.7c-6.25-6.25-6.25-16.38 0-22.62S357.1 94.44 363.3 100.7z"></path></svg>
+                <a href="#feature_env_anyOf" onclick="anchorLink(&quot;feature_env_anyOf&quot;)">anyOf</a>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-3 inline-block text-current"><path fill="currentColor" d="M363.3 100.7l144 144C510.4 247.8 512 251.9 512 255.1s-1.562 8.188-4.688 11.31l-144 144c-6.25 6.25-16.38 6.25-22.62 0s-6.25-16.38 0-22.62l116.7-116.7H16c-8.844 0-16-7.156-16-15.1c0-8.844 7.156-16 16-16h441.4l-116.7-116.7c-6.25-6.25-6.25-16.38 0-22.62S357.1 94.44 363.3 100.7z"></path></svg>
+                <a href="#feature_env_anyOf_i1" onclick="anchorLink(&quot;feature_env_anyOf_i1&quot;)">Type: object</a>
+            </div>
+            <div class="py-4">
+                <span class="text-white bg-gray-500 py-1 px-3 rounded-md">Type: boolean</span>
+            </div>
+
+            <div class="description" id="collapseDescription_feature_env_anyOf_i1" style="">
+                <p>Allows the user to set or override a local process' environment variables with the ones from a remote pod.</p>
+                <p>Which environment variables to load from the remote pod are controlled by setting either <code>include</code> or
+                    <code>exclude</code>.</p>
+                <p>See the environment variables <a href="https://mirrord.dev/docs/reference/env/">reference</a> for more details.
+                </p>
+                <h2>Examples</h2>
+                <ul>
+                    <li>Include every environment variable from the remote pod (default):</li>
+                </ul>
+                <p>```toml # mirrord-config.toml</p>
+                <p>[feature] env = true</p>
+                <p>[feature.env] include = "*" ```</p>
+                <p>Some environment variables are excluded by default (<code>PATH</code> for example), including these requires
+                    specifying them with <code>include</code>, see [<code>mirrord_agent::env::EnvFilter</code>].</p>
+                <ul>
+                    <li>Include the remote pod's environment variables "PROJECT", "DATABASE":</li>
+                </ul>
+                <p>```toml # mirrord-config.toml</p>
+                <p>[feature] env = true</p>
+                <p>[feature.env] include = "PROJECT;DATABASE" ```</p>
+                <ul>
+                    <li>Exclude the remote pod's environment variables "USER", "SECRET", and include everything else:</li>
+                </ul>
+                <p>```toml # mirrord-config.toml</p>
+                <p>[feature] env = true</p>
+                <p>[feature.env] exclude = "USER;SECRET" ```</p>
+            </div>
+
+        </section>
+    </div>
+</div>

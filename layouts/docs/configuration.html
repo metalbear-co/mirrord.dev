@@ -1,0 +1,614 @@
+{{ define "main" }}
+<div class="bg-body-color lg:pt-[186px] mb-8">
+	<div x-data="{docsNav: false}" class="list__docs container max-w-[1400px] mx-auto pt-6 pb-8 px-4">
+		<div class="docs relative lg:grid lg:grid-cols-12 lg:items-start mb-8">
+			<aside
+				class="lg:col-span-3 lg:sticky lg:left-0 top-full lg:top-[220px] lg:bottom-0 lg:w-full lg:h-screen z-10 transition-all duration-300 ease-[ease] pt-4 lg:pt-0">
+				<div class="flex items-center justify-between lg:hidden mb-8">
+					<div>
+						<h3 class="text-2xl mb-0">Documentation</h3>
+					</div>
+					<div>
+						{{ partial "sidebar/dark-light.html" . }}
+					</div>
+				</div>
+				<div class="flex items-center justify-between mb-6 lg:mb-0">
+					<div class="flex-none w-4/5 lg:w-2/3">
+					{{ partial "sidebar/docs-search.html" . }}
+					</div>
+					<button  @click="docsNav = !docsNav" class="flex-none w-1/5 flex lg:hidden items-center justify-center text-primary-text cursor-pointer border-none outline-none focus:outline-none transition-all duration-300 ease-[ease]">
+						<svg class="transition duration-300 ease-in-out" :class="{'-rotate-180': docsNav === true }" width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path fill="currentColor" d="M8.0001 8.76666C7.82232 8.76666 7.65566 8.73866 7.5001 8.68266C7.34455 8.62755 7.2001 8.53333 7.06677 8.4L0.933435 2.26666C0.688991 2.02222 0.561435 1.71644 0.550769 1.34933C0.539213 0.983107 0.666768 0.666663 0.933435 0.399996C1.17788 0.155552 1.48899 0.0333296 1.86677 0.0333296C2.24455 0.0333296 2.55566 0.155552 2.8001 0.399996L8.0001 5.56666L13.2001 0.399996C13.4445 0.155552 13.7499 0.0275518 14.1161 0.0159962C14.4832 0.00532958 14.8001 0.13333 15.0668 0.399996C15.3112 0.644441 15.4334 0.955552 15.4334 1.33333C15.4334 1.71111 15.3112 2.02222 15.0668 2.26666L8.93344 8.4C8.8001 8.53333 8.65566 8.62755 8.5001 8.68266C8.34455 8.73866 8.17788 8.76666 8.0001 8.76666ZM8.0001 16.7667C7.82232 16.7667 7.65566 16.7387 7.5001 16.6827C7.34455 16.6276 7.2001 16.5333 7.06677 16.4L0.933435 10.2667C0.688991 10.0222 0.561435 9.71644 0.550769 9.34933C0.539213 8.98311 0.666768 8.66666 0.933435 8.4C1.17788 8.15555 1.48899 8.03333 1.86677 8.03333C2.24455 8.03333 2.55566 8.15555 2.8001 8.4L8.0001 13.5667L13.2001 8.4C13.4445 8.15555 13.7499 8.02755 14.1161 8.016C14.4832 8.00533 14.8001 8.13333 15.0668 8.4C15.3112 8.64444 15.4334 8.95555 15.4334 9.33333C15.4334 9.71111 15.3112 10.0222 15.0668 10.2667L8.93344 16.4C8.8001 16.5333 8.65566 16.6276 8.5001 16.6827C8.34455 16.7387 8.17788 16.7667 8.0001 16.7667Z"/>
+						</svg>							
+					</button>
+				</div>
+
+				<div class="origin-top transition-all duration-300 ease-[ease] pt-4 lg:pt-0" :class="docsNav === true ? 'visible scale-y-100 opacity-100' : 'invisible lg:visible scale-y-0 lg:scale-y-100 opacity-0 lg:opacity-100'">
+				{{ partial "sidebar/docs-menu.html" . }}
+				</div>
+			</aside>
+			<div class="lg:col-span-9 lg:col-start-4">
+				<article class="docs__article">
+					<header class="mb-6">
+						<h1 class="text-2xl lg:text-4xl text-primary-text font-heading font-bold">{{ .Title }}</h1>
+						<h2 class="text-2xl lg:text-4xl text-primary-text font-heading font-bold">LayerFileConfig</h2>
+					</header>
+
+					<div>
+						<div>
+							<p><span class="text-white bg-gray-500 py-1 px-3 rounded-md">Type: object</span></p>
+						</div>
+						<div class="docs__description">
+							<p>Main struct for mirrord-layer's configuration</p>
+							<h2>Examples</h2>
+
+							<div class="docs__content">
+								{{- .Content }}
+							</div>
+
+
+
+							<div class="mb-4">
+								<span class="text-white bg-primary font-medium py-1 px-3 rounded-md">No Additional Properties</span>
+							</div>
+							<div x-data="{
+								selected_1: null,
+								selected_2: null,
+								selected_2_1: null,
+								selected_2_2: null,
+								selected_2_3: null,
+								selected_2_4: null,
+								selected_2_5: null,
+								selected_2_6: null,
+								selected_2_7: null,
+								selected_2_8: null,
+								selected_2_9: null,
+								selected_3: null,
+								selected_4: null,
+								selected_5: null,
+								selected_6: null,
+								selected_6_1: null,
+								selected_6_2: null,
+								selected_6_3: null,
+								selected_6_4: null,
+								selected_7: null,
+								selected_8: null,
+								selected_8_1: null,
+								selected_8_2: null,
+							}" class="bg-white border border-[#C9C9C9]">
+								<ul class="list-none p-0 m-0">
+									<li class="relative border-b border-[#C9C9C9] mb-0">
+										<button type="button" class="w-full text-left bg-gray-100 group px-8 py-6" @click="selected_1 !== 1 ? selected_1 = 1 : selected_1 = null">
+											<span class="text-primary font-medium group-hover:underline">accept_invalid_certificates</span>
+										</button>
+				
+										<div class="relative overflow-hidden transition-all max-h-0 duration-700" style=""
+											x-ref="container1"
+											x-bind:style="selected_1 == 1 ? 'max-height: ' + $refs.container1.scrollHeight + 'px' : ''">
+											<div class="py-6 px-8">
+												<div class="breadcrumbs">
+													root
+													{{ partial (printf "svg/icon-%s.svg" "arrow-right") (dict "class" "w-3 inline-block text-current") }}
+													<a href="#accept_invalid_certificates">accept_invalid_certificates</a>
+												</div>
+												<div class="py-4">
+													<span class="text-white bg-gray-500 py-1 px-3 rounded-md">Type: boolean or null</span>
+												</div>
+												<div class="description">
+													<p>Controls whether or not mirrord accepts invalid TLS certificates (e.g. self-signed certificates).</p>
+												</div>
+											</div>
+										</div>
+									</li>
+
+									<li class="relative border-b border-[#C9C9C9] mb-0">
+										<button type="button" class="w-full text-left bg-gray-100 group px-8 py-6" @click="selected_2 !== 2 ? selected_2 = 2 : selected_2 = null">
+											<span class="text-primary font-medium group-hover:underline">agent</span>
+										</button>
+				
+										<div class="relative overflow-hidden transition-all max-h-0 duration-700" style=""
+											x-ref="container2"
+											x-bind:style="selected_2 == 2 ? 'max-height: ' + $refs.container2.scrollHeight + $refs.container2_1.scrollHeight + 'px' : ''">
+											<div class="py-6 px-8">
+												<div class="breadcrumbs">
+													root
+													{{ partial (printf "svg/icon-%s.svg" "arrow-right") (dict "class" "w-3 inline-block text-current") }}
+													<a href="#agent" onclick="anchorLink(&quot;agent&quot;)">agent</a>
+												</div>
+												<div class="py-4">
+													<span class="text-white bg-gray-500 py-1 px-3 rounded-md">Type: object</span>
+												</div>
+												<div class="description">
+													<p>Agent configuration, see [<code class="text-indigo-500 bg-indigo-50 font-code py-[2px] px-2 rounded-md">agent::AgentFileConfig</code>].</p>
+												</div>
+
+												<div class="mb-4">
+													<span class="text-white bg-primary font-medium py-1 px-3 rounded-md">No Additional Properties</span>
+												</div>
+												<div class="bg-white border border-[#C9C9C9]">
+													<ul class="list-none p-0 m-0">
+														<li class="relative border-b border-[#C9C9C9] mb-0">
+															<button type="button" class="w-full text-left bg-gray-100 group px-8 py-6" @click="selected_2_1 !== 1 ? selected_2_1 = 1 : selected_2_1 = null">
+																<span class="text-primary font-medium group-hover:underline">communication_timeout</span>
+															</button>
+									
+															<div class="relative overflow-hidden transition-all max-h-0 duration-700" style=""
+																x-ref="container2_1"
+																x-bind:style="selected_2_1 == 1 ? 'max-height: ' + $refs.container2_1.scrollHeight + 'px' : ''">
+																<div class="py-6 px-8">
+																	<div class="breadcrumbs">
+																		root
+																		{{ partial (printf "svg/icon-%s.svg" "arrow-right") (dict "class" "w-3 inline-block text-current") }}
+																		<a href="#agent" onclick="anchorLink(&quot;agent&quot;)">agent</a>
+																		{{ partial (printf "svg/icon-%s.svg" "arrow-right") (dict "class" "w-3 inline-block text-current") }}
+																		<a href="#agent_communication_timeout" onclick="anchorLink(&quot;agent_communication_timeout&quot;)">communication_timeout</a>
+																	</div>
+																	<div class="py-4">
+																		<span class="text-white bg-gray-500 py-1 px-3 rounded-md mr-4">Type: integer or null</span>
+																		<span class="text-white bg-primary py-1 px-3 rounded-md">Format: uint16</span>
+																	</div>
+																	<div class="description">
+																		<p>Controls how long the agent lives when there are no connections.</p>
+																		<p>Each connection has its own heartbeat mechanism, so even if the local application has no messages, the agent stays alive until there are no more heartbeat messages.</p>
+																	</div>
+																</div>
+															</div>
+														</li>
+					
+														<li class="relative border-b border-[#C9C9C9] mb-0">
+															<button type="button" class="w-full text-left bg-gray-100 group px-8 py-6" @click="selected_2_2 !== 2 ? selected_2_2 = 2 : selected_2_2 = null">
+																<span class="text-primary font-medium group-hover:underline">ephemeral</span>
+															</button>
+									
+															<div class="relative overflow-hidden transition-all max-h-0 duration-700" style=""
+																x-ref="container2_2"
+																x-bind:style="selected_2_2 == 2 ? 'max-height: ' + $refs.container2_2.scrollHeight + 'px' : ''">
+																<div class="py-6 px-8">
+																	<div class="breadcrumbs">
+																		root
+																		{{ partial (printf "svg/icon-%s.svg" "arrow-right") (dict "class" "w-3 inline-block text-current") }}
+																		<a href="#agent" onclick="anchorLink(&quot;agent&quot;)">agent</a>
+																		{{ partial (printf "svg/icon-%s.svg" "arrow-right") (dict "class" "w-3 inline-block text-current") }}
+																		<a href="#agent_ephemeral" onclick="anchorLink(&quot;agent_ephemeral&quot;)">ephemeral</a>
+																	</div>
+																	<div class="py-4">
+																		<span class="text-white bg-gray-500 py-1 px-3 rounded-md">Type: boolean or null</span>
+																	</div>
+																	<div class="description">
+																		<p>Runs the agent as an <a href="https://kubernetes.io/docs/concepts/workloads/pods/ephemeral-containers/">ephemeral container</a></p>
+																	</div>
+																</div>
+															</div>
+														</li>
+
+														<li class="relative border-b border-[#C9C9C9] mb-0">
+															<button type="button" class="w-full text-left bg-gray-100 group px-8 py-6" @click="selected_2_3 !== 3 ? selected_2_3 = 3 : selected_2_3 = null">
+																<span class="text-primary font-medium group-hover:underline">image</span>
+															</button>
+									
+															<div class="relative overflow-hidden transition-all max-h-0 duration-700" style=""
+																x-ref="container2_3"
+																x-bind:style="selected_2_3 == 3 ? 'max-height: ' + $refs.container2_3.scrollHeight + 'px' : ''">
+																<div class="py-6 px-8">
+																	<div class="breadcrumbs">
+																		root
+																		{{ partial (printf "svg/icon-%s.svg" "arrow-right") (dict "class" "w-3 inline-block text-current") }}
+																		<a href="#agent" onclick="anchorLink(&quot;agent&quot;)">agent</a>
+																		{{ partial (printf "svg/icon-%s.svg" "arrow-right") (dict "class" "w-3 inline-block text-current") }}
+																		<a href="#agent_image" onclick="anchorLink(&quot;agent_image&quot;)">image</a>
+																	</div>
+																	<div class="py-4">
+																		<span class="text-white bg-gray-500 py-1 px-3 rounded-md">Type: string or null</span>
+																	</div>
+																	<div class="description">
+																		<p>Name of the agent's docker image.</p>
+																		<p>Useful when a custom build of mirrord-agent is required, or when using an internal registry.</p>
+																		<p>Defaults to the latest stable image.</p>
+																	</div>
+																</div>
+															</div>
+														</li>
+
+														<li class="relative border-b border-[#C9C9C9] mb-0">
+															<button type="button" class="w-full text-left bg-gray-100 group px-8 py-6" @click="selected_2_4 !== 4 ? selected_2_4 = 4 : selected_2_4 = null">
+																<span class="text-primary font-medium group-hover:underline">image_pull_policy</span>
+															</button>
+									
+															<div class="relative overflow-hidden transition-all max-h-0 duration-700" style=""
+																x-ref="container2_4"
+																x-bind:style="selected_2_4 == 4 ? 'max-height: ' + $refs.container2_4.scrollHeight + 'px' : ''">
+																<div class="py-6 px-8">
+																	<div class="breadcrumbs">
+																		root
+																		{{ partial (printf "svg/icon-%s.svg" "arrow-right") (dict "class" "w-3 inline-block text-current") }}
+																		<a href="#agent" onclick="anchorLink(&quot;agent&quot;)">agent</a>
+																		{{ partial (printf "svg/icon-%s.svg" "arrow-right") (dict "class" "w-3 inline-block text-current") }}
+																		<a href="#agent_image_pull_policy" onclick="anchorLink(&quot;agent_image_pull_policy&quot;)">image_pull_policy</a>
+																	</div>
+																	<div class="py-4">
+																		<span class="text-white bg-gray-500 py-1 px-3 rounded-md">Type: string or null</span>
+																	</div>
+																	<div class="description">
+																		<p>Controls when a new agent image is downloaded.</p>
+																		<p>Supports any valid kubernetes <a
+																				href="https://kubernetes.io/docs/concepts/containers/images/#image-pull-policy">image pull policy</a>
+																		</p>
+																	</div>
+																</div>
+															</div>
+														</li>
+
+														<li class="relative border-b border-[#C9C9C9] mb-0">
+															<button type="button" class="w-full text-left bg-gray-100 group px-8 py-6" @click="selected_2_5 !== 5 ? selected_2_5 = 5 : selected_2_5 = null">
+																<span class="text-primary font-medium group-hover:underline">log_level</span>
+															</button>
+									
+															<div class="relative overflow-hidden transition-all max-h-0 duration-700" style=""
+																x-ref="container2_5"
+																x-bind:style="selected_2_5 == 5 ? 'max-height: ' + $refs.container2_5.scrollHeight + 'px' : ''">
+																<div class="py-6 px-8">
+																	<div class="breadcrumbs">
+																		root
+																		{{ partial (printf "svg/icon-%s.svg" "arrow-right") (dict "class" "w-3 inline-block text-current") }}
+																		<a href="#agent" onclick="anchorLink(&quot;agent&quot;)">agent</a>
+																		{{ partial (printf "svg/icon-%s.svg" "arrow-right") (dict "class" "w-3 inline-block text-current") }}
+																		<a href="#agent_log_level" onclick="anchorLink(&quot;agent_log_level&quot;)">log_level</a>
+																	</div>
+																	<div class="py-4">
+																		<span class="text-white bg-gray-500 py-1 px-3 rounded-md">Type: string or null</span>
+																	</div>
+																	<div class="description">
+																		<p>Log level for the agent.</p>
+																		<p>Supports anything that would work with <code class="text-indigo-500 bg-indigo-50 font-code py-[2px] px-2 rounded-md">RUST_LOG</code>.</p>
+																	</div>
+																</div>
+															</div>
+														</li>
+
+														<li class="relative border-b border-[#C9C9C9] mb-0">
+															<button type="button" class="w-full text-left bg-gray-100 group px-8 py-6" @click="selected_2_6 !== 6 ? selected_2_6 = 6 : selected_2_6 = null">
+																<span class="text-primary font-medium group-hover:underline">namespace</span>
+															</button>
+									
+															<div class="relative overflow-hidden transition-all max-h-0 duration-700" style=""
+																x-ref="container2_6"
+																x-bind:style="selected_2_6 == 6 ? 'max-height: ' + $refs.container2_6.scrollHeight + 'px' : ''">
+																<div class="py-6 px-8">
+																	<div class="breadcrumbs">
+																		root
+																		{{ partial (printf "svg/icon-%s.svg" "arrow-right") (dict "class" "w-3 inline-block text-current") }}
+																		<a href="#agent" onclick="anchorLink(&quot;agent&quot;)">agent</a>
+																		{{ partial (printf "svg/icon-%s.svg" "arrow-right") (dict "class" "w-3 inline-block text-current") }}
+																		<a href="#agent_namespace" onclick="anchorLink(&quot;agent_namespace&quot;)">namespace</a>
+																	</div>
+																	<div class="py-4">
+																		<span class="text-white bg-gray-500 py-1 px-3 rounded-md">Type: string or null</span>
+																	</div>
+																	<div class="description">
+																		<p>Namespace where the agent shall live.</p>
+																		<p>Defaults to the current kubernetes namespace.</p>
+																	</div>
+																</div>
+															</div>
+														</li>
+
+														<li class="relative border-b border-[#C9C9C9] mb-0">
+															<button type="button" class="w-full text-left bg-gray-100 group px-8 py-6" @click="selected_2_7 !== 7 ? selected_2_7 = 7 : selected_2_7 = null">
+																<span class="text-primary font-medium group-hover:underline">network_interface</span>
+															</button>
+									
+															<div class="relative overflow-hidden transition-all max-h-0 duration-700" style=""
+																x-ref="container2_7"
+																x-bind:style="selected_2_7 == 7 ? 'max-height: ' + $refs.container2_7.scrollHeight + 'px' : ''">
+																<div class="py-6 px-8">
+																	<div class="breadcrumbs">
+																		root
+																		{{ partial (printf "svg/icon-%s.svg" "arrow-right") (dict "class" "w-3 inline-block text-current") }}
+																		<a href="#agent" onclick="anchorLink(&quot;agent&quot;)">agent</a>
+																		{{ partial (printf "svg/icon-%s.svg" "arrow-right") (dict "class" "w-3 inline-block text-current") }}
+																		<a href="#agent_network_interface" onclick="anchorLink(&quot;agent_network_interface&quot;)">network_interface</a>
+																	</div>
+																	<div class="py-4">
+																		<span class="text-white bg-gray-500 py-1 px-3 rounded-md">Type: string or null</span>
+																	</div>
+																	<div class="description">
+																		<p>Which network interface to use for mirroring.</p>
+																		<p>The default behavior is try to access the internet and use that interface and if that fails it uses eth0.</p>
+																	</div>
+																</div>
+															</div>
+														</li>
+
+														<li class="relative border-b border-[#C9C9C9] mb-0">
+															<button type="button" class="w-full text-left bg-gray-100 group px-8 py-6" @click="selected_2_8 !== 8 ? selected_2_8 = 8 : selected_2_8 = null">
+																<span class="text-primary font-medium group-hover:underline">startup_timeout</span>
+															</button>
+									
+															<div class="relative overflow-hidden transition-all max-h-0 duration-700" style="max-height: 248px" x-ref="container2_8" x-bind:style="selected_2_8 == 8 ? 'max-height: ' + $refs.container2_8.scrollHeight + 'px' : ''">
+																<div class="py-6 px-8">
+																	<div class="breadcrumbs">
+																		root
+																		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-3 inline-block text-current"><path fill="currentColor" d="M363.3 100.7l144 144C510.4 247.8 512 251.9 512 255.1s-1.562 8.188-4.688 11.31l-144 144c-6.25 6.25-16.38 6.25-22.62 0s-6.25-16.38 0-22.62l116.7-116.7H16c-8.844 0-16-7.156-16-15.1c0-8.844 7.156-16 16-16h441.4l-116.7-116.7c-6.25-6.25-6.25-16.38 0-22.62S357.1 94.44 363.3 100.7z"></path></svg>
+																		<a href="#agent" onclick="anchorLink(&quot;agent&quot;)">agent</a>
+																		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-3 inline-block text-current"><path fill="currentColor" d="M363.3 100.7l144 144C510.4 247.8 512 251.9 512 255.1s-1.562 8.188-4.688 11.31l-144 144c-6.25 6.25-16.38 6.25-22.62 0s-6.25-16.38 0-22.62l116.7-116.7H16c-8.844 0-16-7.156-16-15.1c0-8.844 7.156-16 16-16h441.4l-116.7-116.7c-6.25-6.25-6.25-16.38 0-22.62S357.1 94.44 363.3 100.7z"></path></svg>
+																		<a href="#agent_startup_timeout" onclick="anchorLink(&quot;agent_startup_timeout&quot;)">startup_timeout</a>
+																	</div>
+																	<div class="py-4">
+																		<span class="text-white bg-gray-500 py-1 px-3 rounded-md mr-4">Type: integer or null</span>
+																		<span class="text-white bg-primary py-1 px-3 rounded-md">Format: uint64</span>
+																	</div>
+																	<div class="description">
+																		<p>Controls how long to wait for the agent to finish initialization.</p>
+																		<p>If initialization takes longer than this value, mirrord exits.</p>
+																	</div>
+																</div>
+															</div>
+														</li>
+
+														<li class="relative mb-0">
+															<button type="button" class="w-full text-left bg-gray-100 group px-8 py-6" @click="selected_2_9 !== 9 ? selected_2_9 = 9 : selected_2_9 = null">
+																<span class="text-primary font-medium group-hover:underline">ttl</span>
+															</button>
+									
+															<div class="relative overflow-hidden transition-all max-h-0 duration-700" style="max-height: 248px" x-ref="container2_9" x-bind:style="selected_2_9 == 9 ? 'max-height: ' + $refs.container2_9.scrollHeight + 'px' : ''">
+																<div class="py-6 px-8">
+																	<div class="breadcrumbs">
+																		root
+																		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-3 inline-block text-current"><path fill="currentColor" d="M363.3 100.7l144 144C510.4 247.8 512 251.9 512 255.1s-1.562 8.188-4.688 11.31l-144 144c-6.25 6.25-16.38 6.25-22.62 0s-6.25-16.38 0-22.62l116.7-116.7H16c-8.844 0-16-7.156-16-15.1c0-8.844 7.156-16 16-16h441.4l-116.7-116.7c-6.25-6.25-6.25-16.38 0-22.62S357.1 94.44 363.3 100.7z"></path></svg>
+																		<a href="#agent" onclick="anchorLink(&quot;agent&quot;)">agent</a>
+																		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-3 inline-block text-current"><path fill="currentColor" d="M363.3 100.7l144 144C510.4 247.8 512 251.9 512 255.1s-1.562 8.188-4.688 11.31l-144 144c-6.25 6.25-16.38 6.25-22.62 0s-6.25-16.38 0-22.62l116.7-116.7H16c-8.844 0-16-7.156-16-15.1c0-8.844 7.156-16 16-16h441.4l-116.7-116.7c-6.25-6.25-6.25-16.38 0-22.62S357.1 94.44 363.3 100.7z"></path></svg>
+																		<a href="#agent_ttl" onclick="anchorLink(&quot;agent_ttl&quot;)">ttl</a>
+																	</div>
+																	<div class="py-4">
+																		<span class="text-white bg-gray-500 py-1 px-3 rounded-md mr-4">Type: integer or null</span>
+																		<span class="text-white bg-primary py-1 px-3 rounded-md">Format: uint64</span>
+																	</div>
+																	<div class="description">
+																		<p>Controls how long the agent pod persists for, after the local process terminated (in seconds).</p>
+																		<p>Can be useful for collecting logs.</p>
+																	</div>
+																</div>
+															</div>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</li>
+
+									<li class="relative border-b border-[#C9C9C9] mb-0">
+										<button type="button" class="w-full text-left bg-gray-100 group px-8 py-6" @click="selected_3 !== 3 ? selected_3 = 3 : selected_3 = null">
+											<span class="text-primary font-medium group-hover:underline">connect_agent_name</span>
+										</button>
+				
+										<div class="relative overflow-hidden transition-all max-h-0 duration-700" style=""
+											x-ref="container3"
+											x-bind:style="selected_3 == 3 ? 'max-height: ' + $refs.container3.scrollHeight + 'px' : ''">
+											<div class="py-6 px-8">
+												<div class="breadcrumbs">
+													root
+													{{ partial (printf "svg/icon-%s.svg" "arrow-right") (dict "class" "w-3 inline-block text-current") }}
+													<a href="#connect_agent_name" onclick="anchorLink(&quot;connect_agent_name&quot;)">connect_agent_name</a>
+												</div>
+												<div class="py-4">
+													<span class="text-white bg-gray-500 py-1 px-3 rounded-md">Type: string or null</span>
+												</div>
+												<div class="description">
+													<p>Agent name that already exists that we can connect to.</p>
+												</div>
+											</div>
+										</div>
+									</li>
+
+									<li class="relative border-b border-[#C9C9C9] mb-0">
+										<button type="button" class="w-full text-left bg-gray-100 group px-8 py-6" @click="selected_4 !== 4 ? selected_4 = 4 : selected_4 = null">
+											<span class="text-primary font-medium group-hover:underline">connect_agent_port</span>
+										</button>
+				
+										<div class="relative overflow-hidden transition-all max-h-0 duration-700" style=""
+											x-ref="container4"
+											x-bind:style="selected_4 == 4 ? 'max-height: ' + $refs.container4.scrollHeight + 'px' : ''">
+											<div class="py-6 px-8">
+												<div class="breadcrumbs">
+													root
+													{{ partial (printf "svg/icon-%s.svg" "arrow-right") (dict "class" "w-3 inline-block text-current") }}
+													<a href="#connect_agent_port" onclick="anchorLink(&quot;connect_agent_port&quot;)">connect_agent_port</a>
+												</div>
+												<div class="py-4">
+													<span class="text-white bg-gray-500 py-1 px-3 rounded-md mr-4">Type: integer or null</span>
+													<span class="text-white bg-primary py-1 px-3 rounded-md">Format: uint16</span>
+												</div>
+												<div class="description">
+													<p>Agent listen port that already exists that we can connect to.</p>
+												</div>
+											</div>
+										</div>
+									</li>
+
+									<li class="relative border-b border-[#C9C9C9] mb-0">
+										<button type="button" class="w-full text-left bg-gray-100 group px-8 py-6" @click="selected_5 !== 5 ? selected_5 = 5 : selected_5 = null">
+											<span class="text-primary font-medium group-hover:underline">connect_tcp</span>
+										</button>
+				
+										<div class="relative overflow-hidden transition-all max-h-0 duration-700" style=""
+											x-ref="container5"
+											x-bind:style="selected_5 == 5 ? 'max-height: ' + $refs.container5.scrollHeight + 'px' : ''">
+											<div class="py-6 px-8">
+												<div class="breadcrumbs">
+													root
+													{{ partial (printf "svg/icon-%s.svg" "arrow-right") (dict "class" "w-3 inline-block text-current") }}
+													<a href="#connect_tcp" onclick="anchorLink(&quot;connect_tcp&quot;)">connect_tcp</a>
+												</div>
+												<div class="py-4">
+													<span class="text-white bg-gray-500 py-1 px-3 rounded-md">Type: string or null</span>
+												</div>
+												<div class="description">
+													<p>IP:PORT to connect to instead of using k8s api, for testing purposes.</p>
+												</div>
+											</div>
+										</div>
+									</li>
+
+									<li class="relative border-b border-[#C9C9C9] mb-0">
+										<button type="button" class="w-full text-left bg-gray-100 group px-8 py-6" @click="selected_6 !== 6 ? selected_6 = 6 : selected_6 = null">
+											<span class="text-primary font-medium group-hover:underline">feature</span>
+										</button>
+				
+										<div class="relative overflow-hidden transition-all max-h-0 duration-700" style=""
+											x-ref="container6"
+											x-bind:style="selected_6 == 6 ? 'max-height: ' + $refs.container6.scrollHeight + $refs.container6_2.scrollHeight + document.getElementById('container6_2_1').scrollHeight + 'px' : ''">
+											<div class="py-6 px-8">
+												<div class="breadcrumbs">
+													root
+													{{ partial (printf "svg/icon-%s.svg" "arrow-right") (dict "class" "w-3 inline-block text-current") }}
+													<a href="#feature" onclick="anchorLink(&quot;feature&quot;)">feature</a>
+												</div>
+												<div class="py-4">
+													<span class="text-white bg-gray-500 py-1 px-3 rounded-md">Type: object</span>
+												</div>
+												<div class="description">
+													<p>Controls mirrord features, see [<code class="text-indigo-500 bg-indigo-50 font-code py-[2px] px-2 rounded-md">feature::FeatureFileConfig</code>].</p>
+												</div>
+
+												<div class="mb-4">
+													<span class="text-white bg-primary font-medium py-1 px-3 rounded-md">No Additional Properties</span>
+												</div>
+												<div class="bg-white border border-[#C9C9C9]">
+													<ul class="list-none p-0 m-0">
+														<li class="relative border-b border-[#C9C9C9] mb-0">
+															<button type="button" class="w-full text-left bg-gray-100 group px-8 py-6" @click="selected_6_1 !== 1 ? selected_6_1 = 1 : selected_6_1 = null">
+																<span class="text-primary font-medium group-hover:underline">capture_error_trace</span>
+															</button>
+									
+															<div class="relative overflow-hidden transition-all max-h-0 duration-700" style="" x-ref="container6_1" x-bind:style="selected_6_1 == 1 ? 'max-height: ' + $refs.container6_1.scrollHeight + 'px' : ''">
+																<div class="py-6 px-8">
+																	<div class="breadcrumbs">
+																		root
+																		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-3 inline-block text-current"><path fill="currentColor" d="M363.3 100.7l144 144C510.4 247.8 512 251.9 512 255.1s-1.562 8.188-4.688 11.31l-144 144c-6.25 6.25-16.38 6.25-22.62 0s-6.25-16.38 0-22.62l116.7-116.7H16c-8.844 0-16-7.156-16-15.1c0-8.844 7.156-16 16-16h441.4l-116.7-116.7c-6.25-6.25-6.25-16.38 0-22.62S357.1 94.44 363.3 100.7z"></path></svg>
+																		<a href="#feature" onclick="anchorLink(&quot;feature&quot;)">feature</a>
+																		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-3 inline-block text-current"><path fill="currentColor" d="M363.3 100.7l144 144C510.4 247.8 512 251.9 512 255.1s-1.562 8.188-4.688 11.31l-144 144c-6.25 6.25-16.38 6.25-22.62 0s-6.25-16.38 0-22.62l116.7-116.7H16c-8.844 0-16-7.156-16-15.1c0-8.844 7.156-16 16-16h441.4l-116.7-116.7c-6.25-6.25-6.25-16.38 0-22.62S357.1 94.44 363.3 100.7z"></path></svg>
+																		<a href="#feature_capture_error_trace" onclick="anchorLink(&quot;feature_capture_error_trace&quot;)">capture_error_trace</a>
+																	</div>
+																	<div class="py-4">
+																		<span class="text-white bg-gray-500 py-1 px-3 rounded-md mr-4">Type: boolean or null</span>
+																		<span class="text-white bg-green-500 py-1 px-3 rounded-md">Default: null</span>
+																	</div>
+																	<div class="description">
+																		<p>Controls the crash reporting feature.</p>
+																		<p>With this feature enabled, mirrord generates a nice crash report log.</p>
+																	</div>
+																</div>
+															</div>
+														</li>
+					
+														<li class="relative border-b border-[#C9C9C9] mb-0">
+															<button type="button" class="w-full text-left bg-gray-100 group px-8 py-6" @click="selected_6_2 !== 2 ? selected_6_2 = 2 : selected_6_2 = null">
+																<span class="text-primary font-medium group-hover:underline">env</span>
+															</button>
+									
+															<div class="relative overflow-hidden transition-all max-h-0 duration-700" style="" x-ref="container6_2" x-bind:style="selected_6_2 == 2 ? 'max-height: ' + $refs.container6_2.scrollHeight + 'px' : ''">
+																<div class="py-6 px-8">
+																	<div class="breadcrumbs">
+																		root
+																		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-3 inline-block text-current"><path fill="currentColor" d="M363.3 100.7l144 144C510.4 247.8 512 251.9 512 255.1s-1.562 8.188-4.688 11.31l-144 144c-6.25 6.25-16.38 6.25-22.62 0s-6.25-16.38 0-22.62l116.7-116.7H16c-8.844 0-16-7.156-16-15.1c0-8.844 7.156-16 16-16h441.4l-116.7-116.7c-6.25-6.25-6.25-16.38 0-22.62S357.1 94.44 363.3 100.7z"></path></svg>
+																		<a href="#feature" onclick="anchorLink(&quot;feature&quot;)">feature</a>
+																		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-3 inline-block text-current"><path fill="currentColor" d="M363.3 100.7l144 144C510.4 247.8 512 251.9 512 255.1s-1.562 8.188-4.688 11.31l-144 144c-6.25 6.25-16.38 6.25-22.62 0s-6.25-16.38 0-22.62l116.7-116.7H16c-8.844 0-16-7.156-16-15.1c0-8.844 7.156-16 16-16h441.4l-116.7-116.7c-6.25-6.25-6.25-16.38 0-22.62S357.1 94.44 363.3 100.7z"></path></svg>
+																		<a href="#feature_env" onclick="anchorLink(&quot;feature_env&quot;)">env</a>
+																	</div>
+																	<div class="py-4">
+																		<span class="text-white bg-gray-500 py-1 px-3 rounded-md">Type: object</span>
+																	</div>
+																	<div class="description">
+																		<p>Controls the environment variables feature, see [<code class="text-indigo-500 bg-indigo-50 font-code py-[2px] px-2 rounded-md">EnvFileConfig</code>].</p>
+																		<p>For more information, check the environment variables <a href="https://mirrord.dev/docs/reference/env/">technical
+																				reference</a>.</p>
+																	</div>
+
+																	{{ partial "overview/feature-env-tab.html" . }}
+
+																</div>
+															</div>
+														</li>
+
+														<li class="relative border-b border-[#C9C9C9] mb-0">
+															<button type="button" class="w-full text-left bg-gray-100 group px-8 py-6" @click="selected_6_3 !== 3 ? selected_6_3 = 3 : selected_6_3 = null">
+																<span class="text-primary font-medium group-hover:underline">fs</span>
+															</button>
+									
+															<div class="relative overflow-hidden transition-all max-h-0 duration-700" style="" x-ref="container2_3" x-bind:style="selected_6_3 == 3 ? 'max-height: ' + $refs.container2_3.scrollHeight + 'px' : ''">
+																<div class="py-6 px-8">
+																	<div class="breadcrumbs">
+																		root
+																		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-3 inline-block text-current"><path fill="currentColor" d="M363.3 100.7l144 144C510.4 247.8 512 251.9 512 255.1s-1.562 8.188-4.688 11.31l-144 144c-6.25 6.25-16.38 6.25-22.62 0s-6.25-16.38 0-22.62l116.7-116.7H16c-8.844 0-16-7.156-16-15.1c0-8.844 7.156-16 16-16h441.4l-116.7-116.7c-6.25-6.25-6.25-16.38 0-22.62S357.1 94.44 363.3 100.7z"></path></svg>
+																		<a href="#feature" onclick="anchorLink(&quot;feature&quot;)">feature</a>
+																		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-3 inline-block text-current"><path fill="currentColor" d="M363.3 100.7l144 144C510.4 247.8 512 251.9 512 255.1s-1.562 8.188-4.688 11.31l-144 144c-6.25 6.25-16.38 6.25-22.62 0s-6.25-16.38 0-22.62l116.7-116.7H16c-8.844 0-16-7.156-16-15.1c0-8.844 7.156-16 16-16h441.4l-116.7-116.7c-6.25-6.25-6.25-16.38 0-22.62S357.1 94.44 363.3 100.7z"></path></svg>
+																		<a href="#feature_fs" onclick="anchorLink(&quot;feature_fs&quot;)">fs</a>
+																	</div>
+																	<div class="py-4">
+																		<span class="text-white bg-gray-500 py-1 px-3 rounded-md">Type: object</span>
+																	</div>
+																	<div class="description">
+																		<p>Controls the file operations feature, see [<code class="text-indigo-500 bg-indigo-50 font-code py-[2px] px-2 rounded-md">FsUserConfig</code>].</p>
+																		<p>For more information, check the file operations <a href="https://mirrord.dev/docs/reference/fileops/">technical
+																				reference</a>.</p>
+																	</div>
+																</div>
+															</div>
+														</li>
+
+														<li class="relative mb-0">
+															<button type="button" class="w-full text-left bg-gray-100 group px-8 py-6" @click="selected_6_4 !== 4 ? selected_6_4 = 4 : selected_6_4 = null">
+																<span class="text-primary font-medium group-hover:underline">network</span>
+															</button>
+									
+															<div class="relative overflow-hidden transition-all max-h-0 duration-700" style="" x-ref="container2_4" x-bind:style="selected_6_4 == 4 ? 'max-height: ' + $refs.container2_4.scrollHeight + 'px' : ''">
+																<div class="py-6 px-8">
+																	<div class="breadcrumbs">
+																		root
+																		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-3 inline-block text-current"><path fill="currentColor" d="M363.3 100.7l144 144C510.4 247.8 512 251.9 512 255.1s-1.562 8.188-4.688 11.31l-144 144c-6.25 6.25-16.38 6.25-22.62 0s-6.25-16.38 0-22.62l116.7-116.7H16c-8.844 0-16-7.156-16-15.1c0-8.844 7.156-16 16-16h441.4l-116.7-116.7c-6.25-6.25-6.25-16.38 0-22.62S357.1 94.44 363.3 100.7z"></path></svg>
+																		<a href="#feature" onclick="anchorLink(&quot;feature&quot;)">feature</a>
+																		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-3 inline-block text-current"><path fill="currentColor" d="M363.3 100.7l144 144C510.4 247.8 512 251.9 512 255.1s-1.562 8.188-4.688 11.31l-144 144c-6.25 6.25-16.38 6.25-22.62 0s-6.25-16.38 0-22.62l116.7-116.7H16c-8.844 0-16-7.156-16-15.1c0-8.844 7.156-16 16-16h441.4l-116.7-116.7c-6.25-6.25-6.25-16.38 0-22.62S357.1 94.44 363.3 100.7z"></path></svg>
+																		<a href="#feature_network" onclick="anchorLink(&quot;feature_network&quot;)">network</a>
+																	</div>
+																	<div class="py-4">
+																		<span class="text-white bg-gray-500 py-1 px-3 rounded-md">Type: object</span>
+																	</div>
+																	<div class="description">
+																		<p>Controls the network feature, see [<code class="text-indigo-500 bg-indigo-50 font-code py-[2px] px-2 rounded-md">NetworkFileConfig</code>].</p>
+																		<p>For more information, check the network traffic <a href="https://mirrord.dev/docs/reference/traffic/">technical
+																				reference</a>.</p>
+																	</div>
+																</div>
+															</div>
+														</li>
+													</ul>
+												</div>
+
+											</div>
+										</div>
+									</li>
+				
+
+				
+								</ul>
+							</div>
+
+
+
+
+
+
+
+
+						</div>
+					</div>
+				</article>
+				<div class="page-footer-meta d-flex flex-column flex-md-row justify-content-between">
+					{{ partial "main/edit-page.html" . }}
+				</div>
+				{{ partial "main/docs-navigation.html" . }}
+			</div>
+		</div>
+	</div>
+</div>
+{{ end }}

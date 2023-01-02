@@ -1,0 +1,28 @@
+---
+title: mirrord - Rethinking cloud development
+baseURL: https://mirrord.dev/
+languageCode: en-US
+defaultContentLanguage: en
+preserveTaxonomyNames: true
+metaDataFormat: yaml
+googleAnalytics: "" # example : UA-123-45
+paginate: 5
+summaryLength: 8
+permalinks:
+  pages: "/:slug/"
+  page: /:slug/
+  blog: "/:slug/"
+disableKinds:
+- RSS
+imaging:
+  quality: 100
+build:
+  writeStats: true
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+  highlight:
+    noClasses: false
+    style: solarized-dark256
+    tabWidth: 4

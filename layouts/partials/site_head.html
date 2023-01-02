@@ -1,0 +1,23 @@
+<head>
+    <meta charset="utf-8">
+    {{- hugo.Generator }}
+    <title>{{ if .Title }}{{ .Title }} | {{ end }}{{ site.Title }}</title>
+    <meta name="author" content="{{ site.Params.author }}">
+    <meta name="description" content="{{ with .Params.description }} {{.}} {{else}} {{ with site.Params.description }} {{.}} {{end}} {{end}}">
+    {{- "<!-- mobile responsive meta -->" | safeHTML}}
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    <!-- favicon -->
+    {{- partialCached "favicon" . }}
+    <!-- js -->
+    <!-- {{ partialCached "site_js" . }} -->
+    {{- partial "site_js" . }}
+    <!-- style -->
+    {{- partial "site_style" . }}
+    {{- partial "site_head_seo.html" . }}
+
+    <link rel="canonical" href="{{ .RelPermalink }}">
+
+    {{- template "_internal/schema.html" . }}
+    {{- template "_internal/google_analytics.html" . }}
+
+</head>

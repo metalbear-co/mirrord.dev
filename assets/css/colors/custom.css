@@ -1,0 +1,15 @@
+:root {
+  --primary: {{ .Site.Data.theme.colors.primary | default "#756DF3" }};
+  --secondary: {{ .Site.Data.theme.colors.secondary | default "#756DF3" }};
+  --tertiary: {{ .Site.Data.theme.colors.tertiary | default "#F46262" }};
+  --primary-text: #222222;
+  --body-color: #FBFBFD;
+  --font-heading: {{ .Site.Data.theme.fonts.font_heading | default "Poppins" }}, 'sans-serif';
+  --font-body: {{ .Site.Data.theme.fonts.font_body | default "Poppins" }}, 'sans-serif';
+  --font-code: 'IBM Plex Mono', monospace;
+}
+
+[data-theme="dark"] {
+  --primary-text: #FFFFFF;
+  --body-color: #202020;
+}

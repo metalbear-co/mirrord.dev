@@ -1,0 +1,61 @@
+main:
+- name: Home
+  url: /
+  weight: 10
+- name: Docs
+  url: /docs/overview/introduction/
+  weight: 20
+- name: Get started
+  url: /docs/overview/quick-start/
+  weight: 30
+- identifier: blog
+  name: blog
+  url: "https://metalbear.co/blog"
+  weight: 40
+- identifier: support
+  name: Support
+  url: "/"
+  weight: 50
+docs:
+  - name: Overview
+    weight: 10
+    identifier: overview
+    url: /docs/overview/
+  - name: Help
+    weight: 60
+    identifier: help
+    url: /docs/help/
+social:
+- name: Github
+  pre: github
+  url: https://github.com/metalbear-co/mirrord
+  weight: 10
+- name: Discord
+  pre: discord
+  url: https://discord.com/invite/pSKEdmNZcK
+  weight: 20
+- name: Twitter
+  pre: twitter
+  url: https://twitter.com/metalbearco
+  weight: 30
+- name: Linkedin
+  pre: linkedin
+  url: https://linkedin.com/metalbearco
+  weight: 40
+footer_social:
+- name: Discord
+  pre: discord-solid
+  url: https://discord.com/invite/pSKEdmNZcK
+  weight: 10
+- name: Github
+  pre: github-solid
+  url: https://github.com/metalbear-co/mirrord
+  weight: 20
+- name: Twitter
+  pre: twitter-solid
+  url: https://twitter.com/metalbearco
+  weight: 30
+- name: Linkedin
+  pre: linkedin-solid
+  url: https://linkedin.com/metalbearco
+  weight: 40

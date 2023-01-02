@@ -1,0 +1,8 @@
+description: mirrord - Rethinking cloud development
+# Your favicon must be located in the assets/images folder
+favicon: images/favicon.png
+author: Mirrord.dev
+repoHost: GitHub
+docsRepo: 'https://github.com/metalbear-co/mirrord.dev'
+docsRepoBranch: master
+docsRepoSubPath: ''

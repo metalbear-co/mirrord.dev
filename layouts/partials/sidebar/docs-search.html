@@ -1,0 +1,9 @@
+<form>
+    <div class="relative lg:mb-10 after:absolute after:content-['Ctrl_+_/'] after:top-[11px] after:right-2 after:text-primary-text after:text-[#222222] after:bg-[#D9D9D9] after:text-[10px] after:rounded-[5px] after:leading-none after:pt-[5px] after:pb-[4px] after:px-[6px]">
+        <input id="search" class="w-full bg-white dark:bg-[rgba(255,_255,_255,_0.2)] block placeholder:text-primary-text placeholder:text-xs rounded-full border border-solid border-primary-text dark:border-white focus:outline-none py-2 pl-10 pr-4" type="search" placeholder="Search docs..." aria-label="Search Docs..." autocomplete="off">
+        <div class="absolute top-[1px] left-0 w-12 h-10 flex items-center justify-center">
+            {{ partial (printf "svg/icon-%s.svg" "search") (dict "class" "w-4 h-4 text-current") }}
+        </div>
+        <div id="suggestions" class="suggestion bg-gray-50 rounded-lg"></div>
+    </div>
+</form>
