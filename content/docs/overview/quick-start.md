@@ -23,7 +23,6 @@ mirrord runs on your local machine and in your Kubernetes cluster.
 
 #### Remote Requirements
 
-- Kubernetes cluster
 - Docker or containerd runtime (containerd is the most common). If you'd like support for other runtimes to be added, please let us know by [opening an issue on GitHub](https://github.com/metalbear-co/mirrord/issues/new?assignees=&labels=enhancement&template=feature_request.md).
 - Linux Kernel version 4.20+
 
