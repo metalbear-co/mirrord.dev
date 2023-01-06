@@ -16,8 +16,16 @@ toc: true
 
 mirrord runs on your local machine and in your Kubernetes cluster.
 
-- MacOS (Intel, Silicon) and Linux (x86_64) are supported for the local machine.
+#### Local Requirements
+
+- MacOS (Intel, Silicon) and Linux (x86_64) are supported for the local machine. Windows users can use mirrord using WSL (IDE plugins supported as well)
 - kubectl needs to be configured on the local machine.
+
+#### Remote Requirements
+
+- Kubernetes cluster
+- Docker or Containerd runtime (containerd is most common) - We can support more, please let us know if you need.
+- Linux Kernel version 4.20+
 
 mirrord can be used in three ways:
 
