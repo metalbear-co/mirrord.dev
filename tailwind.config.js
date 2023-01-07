@@ -85,6 +85,7 @@ module.exports = {
 				tertiary: 'var(--tertiary)',
 				'primary-text': 'var(--primary-text)',
 				'body-color': 'var(--body-color)',
+				'border-color': 'var(--border-color)',
 			},
 			fontFamily: {
 				heading: ['var(--font-heading)'],

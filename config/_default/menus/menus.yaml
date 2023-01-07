@@ -5,7 +5,7 @@ main:
 - name: Docs
   url: /docs/overview/introduction/
   weight: 20
-- name: Get started
+- name: Quick Start
   url: /docs/overview/quick-start/
   weight: 30
 - identifier: blog
@@ -14,7 +14,7 @@ main:
   weight: 40
 - identifier: support
   name: Support
-  url: "/"
+  url: "/#get-support"
   weight: 50
 docs:
   - name: Overview

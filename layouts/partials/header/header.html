@@ -1,6 +1,6 @@
 {{- $site := .Site }}
 <header x-data="{sideNav: false}" class="header bg-[#FBFBFD] {{ if (eq .Section "docs") }}lg:fixed lg:w-full lg:z-30 lg:rounded-bl-[200px] py-8{{ else }}py-6{{ end }}">
-    <div class="container w-full max-w-screen-xl relative mx-auto {{ if (eq .Section "docs") }}px-4 lg:px-12 {{ else }}px-4{{ end }}">
+    <div class="header__container {{ if (eq .Section "docs") }}header__container-docs {{ else }}header__container-all{{ end }}">
         <div class="grid grid-cols-12 items-center">
             <div class="nav__brand col-span-11 lg:col-span-2">
                 <a class="navbar__logo flex items-center w-3/4" href="{{ "/" | relLangURL }}" aria-label="{{ .Site.Params.Title }}" title="Back to home">
@@ -24,9 +24,9 @@
                 </button>
             </div>
             <div class="nav__wrapper col-span-10 fixed lg:static w-full h-screen lg:h-auto left-0 top-0 flex justify-end lg:block transition-all duration-300 ease-[ease] z-20"
-                :class="sideNav ? 'visible' : 'invisible lg:visible'">
+                :class="sideNav ? 'nav__wrapper-active' : 'nav__wrapper-not-active'">
                 <nav x-data="{ selectedMenu: null }"
-                    class="w-full h-full lg:h-auto lg:flex lg:items-center lg:justify-between bg-white lg:bg-transparent transition-all duration-300 ease-[ease]"
+                    class="nav__menu w-full h-full lg:h-auto lg:flex lg:items-center lg:justify-between transition-all duration-300 ease-[ease]"
                     :class="sideNav ? 'mr-0' : '-mr-[100%]'">
                     <div class="nav__brand-mobile lg:hidden px-6 pt-12 mb-6">
                         <a class="navbar__logo flex items-center justify-center" href="{{ "/" | relLangURL }}" aria-label="{{ .Site.Params.Title }}"
@@ -43,7 +43,7 @@
                         {{- $active = or $active (and (eq .Name ($section | humanize)) (eq $current.Section $section)) -}}
                         {{- $active = or $active (and (eq .Name "Blog") (eq $current.Section "blog" "contributors")) -}}
                         <li @click="selectedMenu !== {{ $index }} ? selectedMenu = {{ $index }} : selectedMenu = null"
-                            class="menu__item relative group font-heading text-[#222222] text-center transition duration-300 ease-[ease] mb-0 px-4">
+                            class="menu__item relative group font-heading text-[#222222] text-center transition duration-300 ease-[ease]">
                             {{- if .HasChildren }}
                             <button
                                 class="w-full flex items-center justify-center lg:justify-start text-current cursor-pointer focus:outline-none">
@@ -76,9 +76,9 @@
                                 {{- end }}
                             </ul>
                             {{- else }}
-                            <a class="menu__item-link block lg:inline-block text-xl lg:text-sm text-current hover:font-semibold uppercase lg:capitalize py-4 lg:py-2 px-2 {{ if $active }}active lg:border-b-4 lg:border-solid lg:border-tertiary{{ end }}"
+                            <a class="menu__item-link block lg:inline-block text-xl lg:text-sm text-current hover:font-semibold uppercase lg:capitalize lg:relative{{ if $active }} active-link{{ end }}"
                                 href="{{.URL | relLangURL}}">
-                                <span>{{ .Name | safeHTML }}</span>{{- .Post -}}
+                                <span class="text-[#222222]">{{ if eq .Name "Quick Start" }}{{ replace .Name .Name "Get Started" }}{{ else }}{{ .Name | safeHTML }}{{ end }}</span>{{- .Post -}}
                             </a>
                             {{- end }}
                         </li>

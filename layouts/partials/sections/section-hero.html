@@ -1,9 +1,20 @@
-<div class="bg-[#FBFBFD] rounded-bl-[125px] lg:rounded-bl-[180px]">
+<div x-data="{ 
+    init() {
+        new Typed('#text-typed',{
+            strings : ['faster', 'safer', 'easier'],
+            typeSpeed : 90,
+            delaySpeed : 300,
+            backSpeed: 40,
+            cursorChar: '_',
+            loop : true
+          });
+    }
+  }" class="bg-[#FBFBFD] rounded-bl-[125px] lg:rounded-bl-[180px]">
     <div class="container w-full max-w-screen-xl mx-auto px-6">
         <div class="lg:flex py-8 lg:py-16">
             <div class="lg:flex-none lg:w-1/2">
                 <h1 class="text-[#222222] text-4xl lg:text-6xl text-center lg:text-left font-code font-bold leading-snug lg:leading-normal mb-6">
-                    Cloud development <br><span class="text-primary">made faste_</span>
+                    Cloud development <br><span>made </span><span id="text-typed" class="text-primary"></span>
                 </h1>
                 <div class="w-11/12 lg:pr-12 mb-6 lg:mb-12">
                     <p class="text-center lg:text-left text-sm lg:text-lg text-[#222222]">Run your service in the context of your cloud environment, with access to other microservices,
@@ -20,7 +31,7 @@
 
                 <div class="flex flex-col lg:flex-row items-center space-y-8 lg:space-y-0 lg:space-x-12 mb-8 lg:mb-16">
                     <a class="w-[165px] lg:w-[280px] h-[46px] lg:h-[52px] flex items-center justify-center text-white hover:text-[#222222] bg-primary hover:bg-white border border-solid border-[#222222] rounded-[6px] lg:rounded-[10px] shadow-[-5px_5px_0px_#000000] lg:shadow-[-9px_8px_0px_#000000] transition-colors duration-200 ease-[ease]"
-                        href="/#use-cases">Try it Now</a>
+                        href="/#installation">Try it Now</a>
                     <a class="text-[#222222] hover:font-medium leading-loose border-b hover:border-b-2 border-solid border-[#222222]" href="/docs/overview/introduction/">Learn More</a>
                 </div>
                 <div class="lg:w-3/4">

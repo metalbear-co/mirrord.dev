@@ -1,18 +1,17 @@
-{{- $lazysizes := resources.Get "js/lazysizes@5.3.2.min.js" }}
 {{- $persist := resources.Get "js/persist@3.10.2.min.js" }}
 {{- $splide := resources.Get "js/splide.min.js" }}
 {{- $clipboard := resources.Get "js/clipboard.min.js" }}
+{{- $alpineClipboard := resources.Get "js/alpine-clipboard.js" }}
 {{- $copy := resources.Get "js/copy.js" }}
+{{- $typed := resources.Get "js/typed.js" }}
 {{- $flexsearch := resources.Get "js/flexsearch@0.7.31.js" }}
 {{- $indexTemplate := resources.Get "js/search.js" -}}
 {{- $search := $indexTemplate | resources.ExecuteAsTemplate "index.js" . -}}
 {{- $alpine := resources.Get "js/alpinejs@3.9.1.min.js" }}
 {{- $newsletter := resources.Get "js/newsletter.js" }}
 
-{{- $js := slice $lazysizes $splide $flexsearch $persist $alpine | resources.Concat "js/main.js" }}
+{{- $js := slice $splide $alpineClipboard $flexsearch $typed $persist $alpine | resources.Concat "js/main.js" }}
 {{- $js_min := $js | resources.Minify }}
-
-<script src="https://cdn.jsdelivr.net/npm/@ryangjchandler/alpine-clipboard@2.x.x/dist/alpine-clipboard.js" defer></script>
 
 <script src="{{ $js_min.RelPermalink }}" defer></script>
 {{- if (eq .Section "docs") }}
