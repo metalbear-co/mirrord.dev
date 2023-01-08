@@ -779,14 +779,14 @@ table td {
   float: left;
 }
 
-.mx-auto {
-  margin-left: auto;
-  margin-right: auto;
-}
-
 .my-3 {
   margin-top: 0.75rem;
   margin-bottom: 0.75rem;
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .mb-0 {
@@ -1315,13 +1315,13 @@ table td {
   border-color: rgb(201 201 201 / var(--tw-border-opacity));
 }
 
-.bg-body-color {
-  background-color: var(--body-color);
-}
-
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
+.bg-body-color {
+  background-color: var(--body-color);
 }
 
 .bg-\[\#FBFBFD\] {
@@ -1533,12 +1533,12 @@ table td {
   text-align: right;
 }
 
-.font-heading {
-  font-family: var(--font-heading);
-}
-
 .font-body {
   font-family: var(--font-body);
+}
+
+.font-heading {
+  font-family: var(--font-heading);
 }
 
 .font-code {
