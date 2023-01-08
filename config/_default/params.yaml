@@ -1,5 +1,3 @@
-# Your favicon must be located in the assets/images folder
-favicon: static/favicon.svg
 author: mirrord.dev
 repoHost: GitHub
 docsRepo: 'https://github.com/metalbear-co/mirrord.dev'
@@ -12,7 +10,7 @@ description: >-
   mirrord is a cli/IDE extension that lets backend developers run their local
   code in the context of the remote environment.
 images:
-  - logo.png
+  - logo.jpg
 ogLocale: en_US
 domainTLD: mirrord.dev
 titleHome: mirrord
@@ -25,10 +23,10 @@ schemaAuthorTwitter: 'https://twitter.com/metalbearco'
 schemaAuthorLinkedIn: 'https://www.linkedin.com/company/metalbearco/'
 schemaAuthorGitHub: 'https://github.com/metalbear-co'
 schemaLocale: en-US
-schemaLogo: logo.png
+schemaLogo: logo.jpg
 schemaLogoWidth: 512
 schemaLogoHeight: 512
-schemaImage: logo.png
+schemaImage: logo.jpg
 schemaImageWidth: 1280
 schemaImageHeight: 640
 schemaTwitter: 'https://twitter.com/metalbearco'
