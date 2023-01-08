@@ -779,18 +779,14 @@ table td {
   float: left;
 }
 
-.m-0 {
-  margin: 0px;
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .my-3 {
   margin-top: 0.75rem;
   margin-bottom: 0.75rem;
-}
-
-.mx-auto {
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .mb-0 {
@@ -863,10 +859,6 @@ table td {
 
 .mr-3 {
   margin-right: 0.75rem;
-}
-
-.ml-6 {
-  margin-left: 1.5rem;
 }
 
 .block {
@@ -1323,13 +1315,13 @@ table td {
   border-color: rgb(201 201 201 / var(--tw-border-opacity));
 }
 
+.bg-body-color {
+  background-color: var(--body-color);
+}
+
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-}
-
-.bg-body-color {
-  background-color: var(--body-color);
 }
 
 .bg-\[\#FBFBFD\] {
@@ -1541,12 +1533,12 @@ table td {
   text-align: right;
 }
 
-.font-body {
-  font-family: var(--font-body);
-}
-
 .font-heading {
   font-family: var(--font-heading);
+}
+
+.font-body {
+  font-family: var(--font-body);
 }
 
 .font-code {
@@ -2063,10 +2055,6 @@ body {
   line-height: 2.5rem;
 }
 
-/* .docs__content h2 {
-    @apply text-2xl lg:text-3xl pt-8 mt-6 border-t border-dashed border-[#9B9B9B];
-} */
-
 .docs__content h2 {
   font-size: 1.5rem;
   line-height: 2rem;
@@ -2196,6 +2184,53 @@ body {
 .dark .docs__content > pre > code {
   --tw-bg-opacity: 1;
   background-color: rgb(30 41 59 / var(--tw-bg-opacity));
+}
+
+.docs__menu {
+  margin: 0px;
+  padding-left: 0px;
+}
+
+@media (min-width: 1024px) {
+  .docs__menu {
+    padding-right: 1.5rem;
+  }
+}
+
+.docs__menu-item {
+  margin-bottom: 1rem;
+}
+
+.docs__submenu {
+  margin: 0px;
+  margin-left: 1.5rem;
+  padding: 0px;
+}
+
+.docs__submenu:first-child {
+  margin-top: 1rem;
+}
+
+@media (min-width: 1024px) {
+  .docs__submenu {
+    margin: 0px;
+  }
+}
+
+.docs__submenu-link {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
+.docs__submenu-link:hover {
+  color: var(--primary-text);
+  -webkit-text-decoration-line: none;
+          text-decoration-line: none;
+}
+
+.docs__submenu-link-active {
+  --tw-text-opacity: 1;
+  color: rgb(117 109 243 / var(--tw-text-opacity));
 }
 
 /* TOC */
@@ -2451,6 +2486,11 @@ body {
   color: rgb(117 109 243 / var(--tw-text-opacity));
 }
 
+.docs__content a:hover {
+  --tw-text-opacity: 1;
+  color: rgb(117 109 243 / var(--tw-text-opacity));
+}
+
 .docs__content .accordion .card {
   border-width: 1px;
   border-color: var(--border-color);
@@ -2688,10 +2728,6 @@ body {
 .after\:content-\[\'Ctrl_\+_\/\'\]::after {
   --tw-content: 'Ctrl + /';
   content: var(--tw-content);
-}
-
-.first\:mt-4:first-child {
-  margin-top: 1rem;
 }
 
 .last\:hidden:last-child {
@@ -3125,10 +3161,6 @@ body {
     padding-top: 6rem;
   }
 
-  .lg\:pr-6 {
-    padding-right: 1.5rem;
-  }
-
   .lg\:pb-0 {
     padding-bottom: 0px;
   }
@@ -3217,5 +3249,7 @@ body {
     opacity: 1;
   }
 }
+
+
 
 

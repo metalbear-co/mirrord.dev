@@ -117,10 +117,6 @@ body {
     @apply text-4xl;
 }
 
-/* .docs__content h2 {
-    @apply text-2xl lg:text-3xl pt-8 mt-6 border-t border-dashed border-[#9B9B9B];
-} */
-
 .docs__content h2 {
     @apply text-2xl lg:text-3xl;
 }
@@ -181,6 +177,26 @@ body {
 
 .docs__content > pre > code {
     @apply text-slate-100 bg-slate-800 dark:bg-slate-800;
+}
+
+.docs__menu {
+    @apply pl-0 lg:pr-6 m-0;
+}
+
+.docs__menu-item {
+    @apply mb-4;
+}
+
+.docs__submenu {
+    @apply p-0 ml-6 first:mt-4 m-0 lg:m-0;
+}
+
+.docs__submenu-link {
+    @apply py-3 hover:text-primary-text hover:no-underline;
+}
+
+.docs__submenu-link-active {
+    @apply text-[#756DF3];
 }
 
 /* TOC */
@@ -292,7 +308,7 @@ body {
 }
 
 .docs__content a {
-    @apply text-[#756DF3];
+    @apply text-[#756DF3] hover:text-[#756DF3];
 }
 
 .docs__content .accordion .card {
@@ -350,5 +366,7 @@ body {
 .docs__content .accordion .card .card-body .nav-tabs .nav-link.active {
     @apply bg-body-color;
 }
+
+
 
 

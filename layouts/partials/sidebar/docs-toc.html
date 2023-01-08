@@ -8,7 +8,7 @@
     <ul>
       <template x-for="(toc, index) in tableOfContents">
         <li x-on:click="activeToc = index ">
-          <a :href='toc.querySelector("a") != null && toc.firstChild.tagName === "A" ? toc.firstChild.getAttribute("href") : "" ' :class="activeToc === index ? 'toc-active' : ''" x-text="toc.firstChild.text"></a>
+          <a :href='toc.querySelector("a") != null && toc.firstChild.tagName === "A" ? toc.firstChild.getAttribute("href") : "" ' :class="activeToc === index ? 'toc-active' : ''" x-text='toc.querySelector("a") != null && toc.firstChild.tagName === "A" ? toc.firstChild.text : "" '></a>
         </li>
       </template>
     </ul>

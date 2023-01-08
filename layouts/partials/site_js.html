@@ -1,16 +1,17 @@
-{{- $persist := resources.Get "js/persist@3.10.2.min.js" }}
+<!-- vendor -->
+{{- $alpine := resources.Get "js/vendor/alpinejs/dist/cdn.min.js" }}
+{{- $clipboard := resources.Get "js/vendor/clipboard/dist/clipboard.min.js" }}
+{{- $flexsearch := resources.Get "js/vendor/flexsearch/dist/flexsearch.bundle.js" }}
+{{- $typed := resources.Get "js/vendor/typed.js/lib/typed.min.js" }}
+
+<!-- local js -->
 {{- $splide := resources.Get "js/splide.min.js" }}
-{{- $clipboard := resources.Get "js/clipboard.min.js" }}
 {{- $alpineClipboard := resources.Get "js/alpine-clipboard.js" }}
 {{- $copy := resources.Get "js/copy.js" }}
-{{- $typed := resources.Get "js/typed.js" }}
-{{- $flexsearch := resources.Get "js/flexsearch@0.7.31.js" }}
 {{- $indexTemplate := resources.Get "js/search.js" -}}
 {{- $search := $indexTemplate | resources.ExecuteAsTemplate "index.js" . -}}
-{{- $alpine := resources.Get "js/alpinejs@3.9.1.min.js" }}
-{{- $newsletter := resources.Get "js/newsletter.js" }}
 
-{{- $js := slice $splide $alpineClipboard $flexsearch $typed $persist $alpine | resources.Concat "js/main.js" }}
+{{- $js := slice $splide $alpineClipboard $flexsearch $typed $alpine | resources.Concat "js/main.js" }}
 {{- $js_min := $js | resources.Minify }}
 
 <script src="{{ $js_min.RelPermalink }}" defer></script>

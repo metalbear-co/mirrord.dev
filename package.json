@@ -1,20 +1,33 @@
 {
-    "name": "tailwindflow",
+    "name": "mirrord",
     "version": "1.0.0",
-    "description": "TailwindFlow",
+    "description": "mirrord dev",
     "main": "index.js",
     "repository": {
         "type": "git",
-        "url": "https://github.com/kreasify/tailwindflow"
+        "url": "https://github.com/metalbear-co/mirrord.dev"
     },
-    "author": "Akhlis <github@akhlis>",
+    "author": "MetalBear <contact@metalbear.co>",
     "license": "MIT",
     "scripts": {
+        "init": "shx rm -rf .git && git init -b main",
+        "create": "exec-bin node_modules/.bin/hugo/hugo new",
+        "prestart": "npm run clean",
+        "start": "exec-bin node_modules/.bin/hugo/hugo server --bind=0.0.0.0 --disableFastRender",
+        "prebuild": "npm run clean",
+        "build": "exec-bin node_modules/.bin/hugo/hugo --gc --minify -e $HUGO_ENVIRONMENT",
+        "build:preview": "npm run build -D -F",
+        "clean": "shx rm -rf public resources",
+        "clean:install": "shx rm -rf package-lock.json node_modules ",
         "dev": "concurrently npm:watch:*",
         "watch:tw": "tailwindcss -i ./assets/css/styles.css -o ./assets/css/site.css --watch",
-        "watch:hugo": "hugo server hugo server --disableFastRender",
-        "build": "hugo --gc --minify",
-        "start": "hugo server --bind 192.168.1.106"
+        "watch:hugo": "exec-bin node_modules/.bin/hugo/hugo server --disableFastRender",
+        "build:hugo": "hugo --gc --minify",
+        "start:hugo": "hugo server",
+        "precheck": "npm version",
+        "check": "exec-bin node_modules/.bin/hugo/hugo version",
+        "postinstall": "hugo-installer --version otherDependencies.hugo --extended --destination node_modules/.bin/hugo",
+        "version": "auto-changelog -p && git add CHANGELOG.md"
     },
     "browserslist": [
         "last 2 version",
@@ -22,7 +35,15 @@
         "maintained node versions",
         "not dead"
     ],
-    "dependencies": {
+    "devDependencies": {
+        "alpinejs": "^3.10.5",
+        "clipboard": "^2.0.11",
+        "concurrently": "^7.6.0",
+        "exec-bin": "^1.0.0",
+        "flexsearch": "^0.7.31",
+        "hugo-installer": "^4.0.1",
+        "shx": "^0.3.4",
+        "typed.js": "^2.0.12",
         "@tailwindcss/aspect-ratio": "^0.4.0",
         "autoprefixer": "^10.4.7",
         "postcss": "^8.4.14",
@@ -30,7 +51,7 @@
         "postcss-import": "^14.1.0",
         "tailwindcss": "^3.1.4"
     },
-    "devDependencies": {
-        "concurrently": "^7.6.0"
+    "otherDependencies": {
+        "hugo": "0.109.0"
     }
 }

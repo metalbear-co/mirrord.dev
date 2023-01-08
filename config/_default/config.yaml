@@ -5,7 +5,6 @@ languageCode: en-US
 defaultContentLanguage: en
 preserveTaxonomyNames: true
 metaDataFormat: yaml
-googleAnalytics: "" # example : UA-123-45
 paginate: 5
 summaryLength: 8
 permalinks:
@@ -26,3 +25,21 @@ markup:
     noClasses: false
     style: solarized-dark256
     tabWidth: 4
+module:
+  hugoVersion:
+    extended: true
+    min: 0.95.0
+    max: ''
+  mounts:
+    - source: assets
+      target: assets
+    - source: static
+      target: static
+    - source: node_modules/alpinejs
+      target: assets/js/vendor/alpinejs
+    - source: node_modules/clipboard
+      target: assets/js/vendor/clipboard
+    - source: node_modules/flexsearch
+      target: assets/js/vendor/flexsearch
+    - source: node_modules/typed.js
+      target: assets/js/vendor/typed.js
