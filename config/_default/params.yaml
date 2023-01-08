@@ -12,7 +12,7 @@ description: >-
   mirrord is a cli/IDE extension that lets backend developers run their local
   code in the context of the remote environment.
 images:
-  - android-chrome-512x512.png
+  - logo.png
 ogLocale: en_US
 domainTLD: mirrord.dev
 titleHome: mirrord
@@ -25,10 +25,10 @@ schemaAuthorTwitter: 'https://twitter.com/metalbearco'
 schemaAuthorLinkedIn: 'https://www.linkedin.com/company/metalbearco/'
 schemaAuthorGitHub: 'https://github.com/metalbear-co'
 schemaLocale: en-US
-schemaLogo: android-chrome-512x512.png
+schemaLogo: logo.png
 schemaLogoWidth: 512
 schemaLogoHeight: 512
-schemaImage: android-chrome-512x512.png
+schemaImage: logo.png
 schemaImageWidth: 1280
 schemaImageHeight: 640
 schemaTwitter: 'https://twitter.com/metalbearco'
