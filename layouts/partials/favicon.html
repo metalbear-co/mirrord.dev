@@ -1,14 +1,5 @@
-{{- $favicon:= .Site.Params.favicon }}
-{{- if $favicon }}
-{{- if fileExists (add `assets/` $favicon) }}
-{{- $favicon:= resources.Get $favicon }}
-{{- $favicon_16:= $favicon.Resize "16x png"}}
-{{- $favicon_32:= $favicon.Resize "32x png"}}
-{{- $favicon_180:= $favicon.Resize "180x png"}}
-<link rel="shortcut icon" href="{{$favicon_32.RelPermalink}}" type="image/x-icon">
-<link rel="icon" href="{{$favicon_32.RelPermalink}}" type="image/x-icon">
-<link rel="icon" type="image/png" sizes="16x16" href="{{$favicon_16.RelPermalink}}">
-<link rel="icon" type="image/png" sizes="32x32" href="{{$favicon_32.RelPermalink}}">
-<link rel="apple-touch-icon" sizes="180x180" href="{{$favicon_180.RelPermalink}}">
-{{- end }}
-{{- end }}
+<link rel="icon" type="image/svg+xml" href="{{ "favicon.svg" | absURL }}">
+<link rel="apple-touch-icon" sizes="180x180" href="{{ "apple-touch-icon.png" | absURL }}">
+<link rel="icon" type="image/png" sizes="32x32" href="{{ "favicon-32x32.png" | absURL }}">
+<link rel="icon" type="image/png" sizes="16x16" href="{{ "favicon-16x16.png" | absURL }}">
+<link rel="manifest" crossorigin="use-credentials" href="{{ "site.webmanifest" | absURL }}">
