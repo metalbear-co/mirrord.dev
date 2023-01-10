@@ -168,7 +168,7 @@ bigbear@metalbear:~/mirrord-demo$ curl http://192.168.49.2:32000/users
 ##### Filtering Incoming Traffic by HTTP Headers
 
 Currently only supported in `steal` mode: mirrord lets you specify a regular expression to filter HTTP requests with.
-When specified, all the headers of each HTTP request that arrives at the "impersonated" target are checked against
+When specified, all the headers of each HTTP request that arrives at the remote target are checked against
 the regular expression. If any of the headers match, the request will be stolen, otherwise, it will be sent to the
 remote target.
 For each `Header-Name`, `Header-Value` pair, your regular expression will be matched against `Header-Name:
