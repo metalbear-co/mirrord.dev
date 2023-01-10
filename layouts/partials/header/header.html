@@ -1,6 +1,6 @@
 {{- $site := .Site }}
-<header x-data="{sideNav: false}" class="header bg-[#FBFBFD] {{ if (eq .Section "docs") }}lg:fixed lg:w-full lg:z-30 lg:rounded-bl-[200px] py-8{{ else }}py-6{{ end }}">
-    <div class="header__container {{ if (eq .Section "docs") }}header__container-docs {{ else }}header__container-all{{ end }}">
+<header x-data="{sideNav: false}" class="header bg-[#FBFBFD] py-8 {{ if (eq .Section "docs") }}lg:fixed lg:w-full lg:z-30 lg:rounded-bl-[200px]{{ end }}">
+    <div class="header__container header__container-all">
         <div class="grid grid-cols-12 items-center">
             <div class="nav__brand col-span-11 lg:col-span-2">
                 <a class="navbar__logo flex items-center w-3/4" href="{{ "/" | relLangURL }}" aria-label="{{ .Site.Params.Title }}" title="Back to home">
@@ -76,9 +76,9 @@
                                 {{- end }}
                             </ul>
                             {{- else }}
-                            <a class="menu__item-link block lg:inline-block text-xl lg:text-sm text-current hover:font-semibold uppercase lg:capitalize lg:relative{{ if $active }} active-link{{ end }}"
+                            <a class='menu__item-link block lg:inline-block text-xl lg:text-sm text-current hover:font-semibold uppercase lg:capitalize lg:relative {{ if $active }} active-link {{ end }} {{ if eq $current.Title "Quick Start" }} {{ if eq .Name "Docs" }} none-line {{ end }} {{ end }}'
                                 href="{{.URL | relLangURL}}">
-                                <span class="text-[#222222]">{{ if eq .Name "Quick Start" }}{{ replace .Name .Name "Get Started" }}{{ else }}{{ .Name | safeHTML }}{{ end }}</span>{{- .Post -}}
+                                <span class="text-[#222222]">{{ if eq .Name "Quick Start" }}{{ replace .Name .Name "Get Started" }}{{ else }}{{ .Name | safeHTML }}{{ end }}</span>{{- .Post -}}  
                             </a>
                             {{- end }}
                         </li>

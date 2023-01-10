@@ -1,10 +1,7 @@
 <!doctype html>
 <html lang="{{ .Site.LanguageCode | default `en-US` }}">
 {{- partial "site_head.html" . }}
-
-<body x-data="{ darkMode: localStorage.getItem('dark') === 'true'} "
-  x-init="$watch('darkMode', val => localStorage.setItem('dark', val))" x-bind:class="{ 'dark': darkMode }"
-  :data-theme="darkMode ? 'dark' : 'light'" class="font-body bg-white">
+<body x-data="{darkMode: $persist(true)}" class="font-body {{ if .IsHome }}bg-white {{ else }}bg-[#FBFBFD] dark:bg-[#202020]{{ end }}" :class="{ 'dark': darkMode }" :data-theme="darkMode ? 'dark' : 'light'">
 
   {{- partial "header/header.html" . }}
   {{- block "main" . }}{{ end }}

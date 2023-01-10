@@ -1,10 +1,10 @@
 {{ define "main" }}
-<div class="bg-body-color transition-all duration-300 ease-[ease] lg:pt-[186px]">
-	<div x-data="{docsNav: false}" class="docs container max-w-[1400px] mx-auto lg:pt-6 px-4">
-		<div class="docs relative lg:grid lg:grid-cols-12 lg:items-start">
+<div class="single__page">
+	<div x-data="{docsNav: false}" class="docs__container">
+		<div class="docs__wrapper docs">
 			<aside
-				class="lg:col-span-3 lg:sticky lg:left-0 top-full lg:top-[220px] lg:bottom-0 lg:w-full lg:h-screen z-10 transition-all duration-300 ease-[ease]">
-				<div class="flex items-center justify-between lg:hidden pt-4 mb-8">
+				class="docs__sidebar--left lg:col-span-3 lg:sticky lg:left-0 top-full lg:top-[220px] lg:bottom-0 lg:w-full lg:h-screen z-10 transition-all duration-300 ease-[ease]">
+				<div class="docs__sidebar-mobile">
 					<div>
 						<h3 class="text-2xl mb-0">Documentation</h3>
 					</div>
@@ -12,7 +12,7 @@
 						{{ partial "sidebar/dark-light.html" . }}
 					</div>
 				</div>
-				<div class="flex items-center justify-between mb-6 lg:mb-0">
+				<div class="docs__sidebar-search">
 					<div class="flex-none w-4/5 lg:w-2/3">
 					{{ partial "sidebar/docs-search.html" . }}
 					</div>
@@ -23,7 +23,7 @@
 					</button>
 				</div>
 
-				<div class="origin-top transition-all duration-300 ease-[ease] pt-4 lg:pt-0" :class="docsNav === true ? 'static visible scale-y-100 opacity-100' : 'absolute lg:static invisible lg:visible scale-y-0 lg:scale-y-100 opacity-0 lg:opacity-100'">
+				<div class="docs__sidebar-wrapper" :class="docsNav === true ? 'docs__sidebar-wrapper--active' : 'docs__sidebar-wrapper--not-active'">
 				{{ partial "sidebar/docs-menu.html" . }}
 				</div>
 
@@ -46,7 +46,7 @@
 				{{ partial "main/docs-navigation.html" . }}
 			</div>
 			<aside
-				class="lg:col-span-2 lg:col-start-11 hidden lg:block lg:sticky left-0 top-0 lg:top-[220px] bottom-0 w-full h-screen z-10 transition-all duration-300 ease-[ease]">
+				class="docs__sidebar--right lg:col-span-2 lg:col-start-11 hidden lg:block lg:sticky left-0 top-0 lg:top-[220px] bottom-0 w-full h-screen z-10 transition-all duration-300 ease-[ease]">
 				{{ partial "sidebar/dark-light.html" . }}
 				{{ partial "sidebar/docs-toc.html" . }}
 			</aside>

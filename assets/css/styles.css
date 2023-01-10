@@ -62,6 +62,10 @@ body {
     @apply lg:before:absolute lg:before:left-0 lg:before:-bottom-[2px] lg:before:w-full lg:before:bg-tertiary lg:before:h-[4px];
 }
 
+.none-line {
+    @apply lg:before:bg-transparent;
+}
+
 /* footer */
 .footer {
     @apply bg-[#756DF3];
@@ -99,6 +103,10 @@ body {
 
 .typed-cursor {
     @apply text-primary;
+}
+
+.single__page {
+    @apply bg-[#FBFBFD] dark:bg-[#202020] transition-all duration-300 ease-[ease] lg:pt-[186px];
 }
 
 .docs__content p,
@@ -180,15 +188,35 @@ body {
 }
 
 .docs__menu {
-    @apply pl-0 lg:pr-6 m-0;
+    @apply p-0 ml-6 lg:m-0;
 }
 
 .docs__menu-item {
-    @apply mb-4;
+    @apply text-primary-text mb-4;
 }
 
 .docs__submenu {
-    @apply p-0 ml-6 first:mt-4 m-0 lg:m-0;
+    @apply p-0 ml-6 lg:m-0;
+}
+
+.docs__submenu:not(.show) {
+    @apply hidden;
+}
+
+/* [x-cloak="docs-submenu"] { 
+    @apply static visible scale-y-100 opacity-100;
+} */
+
+/* .docs__submenu--active {
+    @apply static visible scale-y-100 opacity-100;
+}
+
+.docs__submenu--notactive {
+    @apply absolute invisible scale-y-0 opacity-0;
+} */
+
+.docs__submenu-item {
+    @apply first:mt-4 m-0;
 }
 
 .docs__submenu-link {
@@ -288,7 +316,20 @@ body {
 }
 
 .docs__sidebar-wrapper--not-active {
-    @apply invisible lg:visible scale-y-0 lg:scale-y-100 opacity-0 lg:opacity-100;
+    @apply absolute lg:static invisible lg:visible scale-y-0 lg:scale-y-100 opacity-0 lg:opacity-100;
+}
+
+.docs__sidebar--left .darkmode__button,
+.docs__sidebar--right .darkmode__button {
+    @apply w-full outline-none cursor-pointer relative;
+}
+
+.search-form__wrapper {
+    @apply relative lg:mb-10 after:absolute after:content-['Ctrl_+_/'] after:top-[11px] after:right-2 after:text-primary-text after:text-[#222222] after:bg-[#D9D9D9] after:text-[10px] after:rounded-[5px] after:leading-none after:pt-[5px] after:pb-[4px] after:px-[6px];
+}
+
+.search-form__input {
+    @apply w-full text-primary-text bg-white dark:bg-[rgba(255,_255,_255,_0.2)] block placeholder:text-primary-text placeholder:text-xs rounded-full border border-solid border-primary-text dark:border-white focus:outline-none py-2 pl-10 pr-4;
 }
 
 .docs__content div.text-right {
@@ -357,6 +398,10 @@ body {
 
 .docs__content .accordion .card .card-body .badge.value-type {
     @apply text-sm font-medium px-3;
+}
+
+.docs__content .accordion .card .card-body .nav-tabs {
+    @apply border-b-0;
 }
 
 .docs__content .accordion .card .card-body .nav-tabs .nav-link {

@@ -4,6 +4,7 @@
   --tertiary: {{ .Site.Data.theme.colors.tertiary | default "#F46262" }};
   --primary-text: #222222;
   --body-color: #FBFBFD;
+  --body-hover-color: #f3f4f6;
   --border-color: #C9C9C9;
   --font-heading: {{ .Site.Data.theme.fonts.font_heading | default "Poppins" }}, 'sans-serif';
   --font-body: {{ .Site.Data.theme.fonts.font_body | default "Poppins" }}, 'sans-serif';
@@ -13,5 +14,6 @@
 [data-theme="dark"] {
   --primary-text: #FFFFFF;
   --body-color: #202020;
+  --body-hover-color: #ffffff33;
   --border-color: #C9C9C9;
 }

@@ -3,9 +3,16 @@ title: mirrord
 baseURL: https://mirrord.dev/
 languageCode: en-US
 defaultContentLanguage: en
+canonifyURLs: false
+disableAliases: true
+disableHugoGeneratorInject: true
+enableEmoji: true
+enableGitInfo: false
+enableRobotsTXT: true
+paginate: 7
+rssLimit: 10
 preserveTaxonomyNames: true
 metaDataFormat: yaml
-paginate: 5
 summaryLength: 8
 permalinks:
   pages: "/:slug/"
@@ -25,6 +32,49 @@ markup:
     noClasses: false
     style: solarized-dark256
     tabWidth: 4
+outputs:
+  home:
+    - HTML
+    - RSS
+    - REDIRECTS
+    - HEADERS
+  section:
+    - HTML
+mediaTypes:
+  text/netlify:
+    suffixes:
+      - ''
+    delimiter: ''
+outputFormats:
+  REDIRECTS:
+    mediaType: text/netlify
+    baseName: _redirects
+    isPlainText: true
+    notAlternative: true
+  HEADERS:
+    mediaType: text/netlify
+    baseName: _headers
+    isPlainText: true
+    notAlternative: true
+  SITEMAP:
+    mediaType: application/xml
+    baseName: sitemap
+    isHTML: false
+    isPlainText: true
+    noUgly: true
+    rel: sitemap
+caches:
+  getjson:
+    dir: ':cacheDir/:project'
+    maxAge: 10s
+sitemap:
+  changefreq: weekly
+  filename: sitemap.xml
+  priority: 0.5
+minify:
+  tdewolff:
+    html:
+      keepWhitespace: false
 module:
   hugoVersion:
     extended: true
