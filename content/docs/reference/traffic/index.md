@@ -179,7 +179,7 @@ The regular expression is evaluated with the [fancy_regex](https://docs.rs/fancy
 rust crate.
 
 ###### Specifying a Filter
-The HTTP header filter can be specified in the mirrord configuration by setting the incoming mode to
+The HTTP header filter can be specified in the mirrord configuration file by setting the incoming mode to
 `steal` and specifying a filter in `feature.network.incoming.http_header_filter.filter`.
 A filter cannot be specified via an argument in the command line interface.
 
