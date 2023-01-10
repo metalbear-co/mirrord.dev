@@ -190,7 +190,7 @@ or via the `MIRRORD_HTTP_HEADER_FILTER_PORTS` environment variable. By default, 
 if a filter is specified, which means that the mirrord agent checks each new connection on those ports for HTTP, and if
 the connection has valid HTTP messages, they are filtered with the header filter.
 
-Currently only supporting HTTP version 1.
+Currently only HTTP version 1 is supported.
 
 ## Outgoing
 
