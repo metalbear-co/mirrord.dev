@@ -181,7 +181,6 @@ rust crate.
 ###### Specifying a Filter
 The HTTP header filter can be specified in the mirrord configuration file by setting the incoming mode to
 `steal` and specifying a filter in `feature.network.incoming.http_header_filter.filter`.
-A filter cannot be specified via an argument in the command line interface.
 
 ###### Setting Custom HTTP Ports
 The configuration also allows specifying custom HTTP ports under `feature.network.incoming.http_header_filter.ports`.
