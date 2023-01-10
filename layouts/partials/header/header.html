@@ -4,7 +4,7 @@
         <div class="grid grid-cols-12 items-center">
             <div class="nav__brand col-span-11 lg:col-span-2">
                 <a class="navbar__logo flex items-center w-3/4" href="{{ "/" | relLangURL }}" aria-label="{{ .Site.Params.Title }}" title="Back to home">
-                    {{- partial "svg/logo.svg" . }}
+                    <img src="/logo.png">
                 </a>
             </div>
             <div class="nav__toggle col-span-1 h-8 flex items-center justify-end lg:hidden">
@@ -31,7 +31,7 @@
                     <div class="nav__brand-mobile lg:hidden px-6 pt-12 mb-6">
                         <a class="navbar__logo flex items-center justify-center" href="{{ "/" | relLangURL }}" aria-label="{{ .Site.Params.Title }}"
                             title="Back to home">
-                            {{- partial "svg/logo-mobile.svg" . }}
+                            <img src="/logo_mobile.png">
                         </a>
                     </div>
                     <ul class="navbar__menu menu lg:flex list-none pl-0 mb-0">
