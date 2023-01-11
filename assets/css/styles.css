@@ -8,8 +8,8 @@ Last change: 	03/06/2022
 @tailwind components;
 @tailwind utilities;
 
-[x-cloak] {
-    display: none !important;
+[x-cloak="mobile"] { 
+    @apply hidden lg:block;
 }
 
 *, *::before, *::after {
@@ -322,6 +322,10 @@ body {
 .docs__sidebar--left .darkmode__button,
 .docs__sidebar--right .darkmode__button {
     @apply w-full outline-none cursor-pointer relative;
+}
+
+.darkmode__slider.dark-slider {
+    @apply translate-x-6;
 }
 
 .search-form__wrapper {

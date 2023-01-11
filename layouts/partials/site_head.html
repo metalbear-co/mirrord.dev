@@ -17,9 +17,19 @@
 
     <script defer data-domain="mirrord.dev" src="https://plausible.io/js/script.js"></script>
     <link rel="canonical" href="{{ .RelPermalink }}">
-    <link rel="manifest" crossorigin="use-credentials" href="{{ "site.webmanifest" | absURL }}">
 
     {{- template "_internal/schema.html" . }}
     {{- template "_internal/google_analytics.html" . }}
+
+    <script>
+        // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            document.documentElement.setAttribute('data-theme', "dark")
+        } else {
+            document.documentElement.classList.remove('dark')
+            document.documentElement.removeAttribute("data-theme")
+        }
+    </script>
 
 </head>

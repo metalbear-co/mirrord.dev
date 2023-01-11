@@ -23,7 +23,7 @@
                     </svg>
                 </button>
             </div>
-            <div class="nav__wrapper col-span-10 fixed lg:static w-full h-screen lg:h-auto left-0 top-0 flex justify-end lg:block transition-all duration-300 ease-[ease] z-20"
+            <div x-cloak="mobile" class="nav__wrapper col-span-10 fixed lg:static w-full h-screen lg:h-auto left-0 top-0 flex justify-end lg:block transition-all duration-300 ease-[ease] z-20"
                 :class="sideNav ? 'nav__wrapper-active' : 'nav__wrapper-not-active'">
                 <nav x-data="{ selectedMenu: null }"
                     class="nav__menu w-full h-full lg:h-auto lg:flex lg:items-center lg:justify-between transition-all duration-300 ease-[ease]"

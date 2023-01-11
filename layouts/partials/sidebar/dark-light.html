@@ -14,10 +14,10 @@
 
     <div class="w-[36px] h-4 relative flex items-center">
         <div class="w-[36px] h-[6px] bg-[#D9D9D9] rounded-full absolute top-[5px] left-0"></div>
-        <button class="darkmode__button" @click="darkMode = !darkMode">
-            <span
-                class="w-4 h-4 flex items-center justify-center bg-primary-text rounded-full transition-all duration-300 ease-[ease]"
-                :class="darkMode ? 'translate-x-6' : ''">
+        <button id="theme-toggle" class="darkmode__button">
+            <span id="theme-toggle-slider"
+                class="darkmode__slider w-4 h-4 flex items-center justify-center bg-primary-text rounded-full transition-all duration-300 ease-[ease]"
+                >
             </span>
         </button>
     </div>
