@@ -1,0 +1,80 @@
+<div id="installation" x-data="{selectedTab: 1}">
+    <div class="container w-full max-w-screen-lg mx-auto pt-8 lg:pt-16 px-6">
+        <header class="text-center mb-4">
+            <h2 class="text-base text-[#222222] font-semibold uppercase mb-1">Cli</h2>
+            <div class="w-12 h-[4px] bg-tertiary mx-auto"></div>
+        </header>
+        <div class="flex items-center justify-center space-x-4">
+            <button @click="selectedTab = 1" class="cursor-pointer leading-[24px] text-[#222222]">
+                <span class="inline-block text-sm leading-[24px]" :class="{ 'text-primary': selectedTab == 1 }">brew</span>
+            </button>
+
+            <div class="w-[1px] h-3 bg-[#222222]"></div>
+
+            <button @click="selectedTab = 2" class="cursor-pointer leading-[24px] text-[#222222]">
+                <span class="inline-block text-sm leading-[24px]" :class="{ 'text-primary': selectedTab == 2 }">curl</span>
+            </button>
+        </div>
+
+        <div class="w-full">
+            <!-- selected 1 -->
+            <div x-show="selectedTab == 1" class="py-4 min-h-[132px] max-w-md mx-auto">
+                <div x-data="{ 
+                    brew: 'brew install metalbear-co/mirrord/mirrord', 
+                    isCopy: false,
+                    init() {
+                        setInterval(() => {
+                          this.isCopy = false;
+                        }, 1000);
+                    }
+                }">
+                    <div class="border-2 border-solid border-[#222222] rounded-[7px] relative pt-8">
+                        <pre class="leading-[0] overflow-x-hidden hover:overflow-x-auto pb-6 px-4 text-center">
+                            <code class="language-bash font-code font-normal text-sm text-[#222222] block">brew install metalbear-co/mirrord/mirrord</code>
+                        </pre>
+                        <button class="absolute w-16 top-1 right-1" @click="isCopy = true">
+                            <div x-clipboard="brew" class="text-primary">
+                                <div x-show="isCopy === false">
+                                {{ partial (printf "svg/icon-%s.svg" "copy") (dict "class" "w-4 text-current ml-auto") }}
+                                </div>
+                                <div x-show="isCopy === true">
+                                    <span class="text-sm text-primary">Copied!</span>
+                                </div>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- selected 2 -->
+            <div x-show="selectedTab == 2" class="py-4 min-h-[132px] max-w-4xl mx-auto">
+                <div
+                    x-data="{ 
+                        curl: 'curl -fsSL https://raw.githubusercontent.com/metalbear-co/mirrord/main/scripts/install.sh | bash',
+                        isCopy: false,
+                        init() {
+                            setInterval(() => {
+                            this.isCopy = false;
+                            }, 1000);
+                        }
+                     }">
+                    <div class="border-2 border-solid border-[#222222] rounded-[7px] relative pt-8">
+                        <pre class="leading-[0] overflow-x-hidden hover:overflow-x-auto pb-6 px-4 text-center">
+                            <code class="language-bash font-code font-normal text-sm text-[#222222] block">curl -fsSL https://raw.githubusercontent.com/metalbear-co/mirrord/main/scripts/install.sh | bash</code>
+                        </pre>
+                        <button class="absolute w-16 top-1 right-1" @click="isCopy = true">
+                            <div x-clipboard="curl" class="text-primary">
+                                <div x-show="isCopy === false">
+                                {{ partial (printf "svg/icon-%s.svg" "copy") (dict "class" "w-4 text-current ml-auto") }}
+                                </div>
+                                <div x-show="isCopy === true">
+                                    <span class="text-sm text-primary">Copied!</span>
+                                </div>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

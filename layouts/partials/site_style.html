@@ -1,0 +1,19 @@
+{{/* styles */}}
+{{- $options := dict "inlineImports" true }}
+{{- $palette := print "css/colors/" .Site.Data.theme.palette ".css" }}
+{{- $colors := resources.Get $palette }}
+{{- $color := $colors | resources.ExecuteAsTemplate "_colors.css" . }}
+{{- $styles := resources.Get "css/site.css" }}
+{{- $highlighter := resources.Get "css/partials/highlighter.css" }}
+{{- $splide := resources.Get "css/partials/splide.min.css" }}
+{{- $search := resources.Get "css/partials/search.css" }}
+{{- $bundle := slice $color $styles $highlighter $splide $search | resources.Concat "css/main.css" }}
+{{- $styles = $bundle | resources.PostCSS $options }}
+{{- if  hugo.IsProduction }}
+{{- $styles = $styles | minify | fingerprint | resources.PostProcess }}
+{{- end }}
+<link href="{{ $styles.RelPermalink }}" rel="stylesheet" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">

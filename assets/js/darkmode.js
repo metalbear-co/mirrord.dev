@@ -1,45 +1,79 @@
-const mode = document.getElementById('mode');
+var themeToggleSlider = document.getElementById('theme-toggle-slider');
+var themeToggleSliderMobile = document.getElementById('theme-toggle-slider-mobile');
 
-if (mode !== null) {
+// Change the slide inside the button based on previous settings
+if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    themeToggleSlider.classList.add('dark-slider');
+    themeToggleSliderMobile.classList.add('dark-slider');
+} else {
+    themeToggleSlider.classList.remove('dark-slider');
+    themeToggleSliderMobile.classList.remove('dark-slider');
+}
 
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+var themeToggleBtn = document.getElementById('theme-toggle');
 
-    if (event.matches) {
+themeToggleBtn.addEventListener('click', function() {
 
-      localStorage.setItem('theme', 'dark');
-      document.documentElement.setAttribute('data-dark-mode', '');
+    // toggle slider inside button
+    themeToggleSlider.classList.toggle('dark-slider');
 
+    // if set via local storage previously
+    if (localStorage.getItem('color-theme')) {
+        if (localStorage.getItem('color-theme') === 'light') {
+            document.documentElement.classList.add('dark');
+            document.documentElement.setAttribute('data-theme', "dark")
+            localStorage.setItem('color-theme', 'dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+            document.documentElement.removeAttribute("data-theme")
+            localStorage.setItem('color-theme', 'light');
+        }
+
+    // if NOT set via local storage previously
     } else {
-
-      localStorage.setItem('theme', 'light');
-      document.documentElement.removeAttribute('data-dark-mode');
-
-    }
-
-  })
-
-  mode.addEventListener('click', () => {
-
-    document.documentElement.toggleAttribute('data-dark-mode');
-    localStorage.setItem('theme', document.documentElement.hasAttribute('data-dark-mode') ? 'dark' : 'light');
-
-    var howItWorksID = document.getElementById("howItWorks");
-    if (document.documentElement.hasAttribute('data-dark-mode')) {
-      howItWorksID.src = "mirrord-how-it-works-dark.svg";
-    } else {
-      howItWorksID.src = "mirrord-how-it-works-light.svg";
+        if (document.documentElement.classList.contains('dark')) {
+            document.documentElement.classList.remove('dark');
+            document.documentElement.removeAttribute("data-theme")
+            localStorage.setItem('color-theme', 'light');
+        } else {
+            document.documentElement.classList.add('dark');
+            document.documentElement.setAttribute('data-theme', "dark")
+            localStorage.setItem('color-theme', 'dark');
+        }
     }
     
-  });
+});
 
-  if (localStorage.getItem('theme') === 'dark') {
+var themeToggleBtnMobile = document.getElementById('theme-toggle-mobile');
 
-    document.documentElement.setAttribute('data-dark-mode', '');
+themeToggleBtnMobile.addEventListener('click', function() {
 
-  } else {
+    // toggle slider inside button
+    themeToggleSliderMobile.classList.toggle('dark-slider');
 
-    document.documentElement.removeAttribute('data-dark-mode');
+    // if set via local storage previously
+    if (localStorage.getItem('color-theme')) {
+        if (localStorage.getItem('color-theme') === 'light') {
+            document.documentElement.classList.add('dark');
+            document.documentElement.setAttribute('data-theme', "dark")
+            localStorage.setItem('color-theme', 'dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+            document.documentElement.removeAttribute("data-theme")
+            localStorage.setItem('color-theme', 'light');
+        }
 
-  }
-
-}
+    // if NOT set via local storage previously
+    } else {
+        if (document.documentElement.classList.contains('dark')) {
+            document.documentElement.classList.remove('dark');
+            document.documentElement.removeAttribute("data-theme")
+            localStorage.setItem('color-theme', 'light');
+        } else {
+            document.documentElement.classList.add('dark');
+            document.documentElement.setAttribute('data-theme', "dark")
+            localStorage.setItem('color-theme', 'dark');
+        }
+    }
+    
+});

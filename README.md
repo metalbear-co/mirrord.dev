@@ -6,4 +6,4 @@ This repository is [MIT Licensed](LICENSE).
 
 
 ### Running
-`npm run start`
+`yarn run dev`

@@ -1,10 +1,5 @@
-{{ define "main" }}
-<div class="row justify-content-center">
-  <div class="col-md-12 col-lg-10 col-xl-8">
-    <article>
-      <h1>{{ .Title }}</h1>
-      {{ .Content }}
-    </article>
-  </div>
-</div>
-{{ end }}
+{{- define "main" }}
+<main id="site-main" class="site__main single-page">
+    {{ partial "page_single.html" . }}
+</main>
+{{- end }}

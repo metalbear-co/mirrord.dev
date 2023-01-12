@@ -1,6 +1,21 @@
-{{ if and (ne .Params.toc false) (ne .TableOfContents "<nav id=\"TableOfContents\"></nav>") -}}
-  <div class="page-links">
-    <h3>On this page</h3>
+<div x-data="{
+  activeToc: null,
+  tableOfContents: document.querySelectorAll('.toc__mobile .docs__toc #TableOfContents ul li')
+}" class="docs__toc border-b lg:border-b-0 lg:border-l border-dashed lg:border-solid border-[#C9C9C9] lg:pl-6 pt-6 pb-2 lg:pt-0 lg:pb-0 mb-8 lg:m-0">
+  <h3 class="text-sm text-primary-text font-bold uppercase mb-4">On this page</h3>
+  
+  <nav class="docs-nav__toc">
+    <ul>
+      <template x-for="(toc, index) in tableOfContents">
+        <li x-on:click="activeToc = index ">
+          <a :href='toc.querySelector("a") != null && toc.firstChild.tagName === "A" ? toc.firstChild.getAttribute("href") : "" ' :class="activeToc === index ? 'toc-active' : ''" x-text='toc.querySelector("a") != null && toc.firstChild.tagName === "A" ? toc.firstChild.text : "" '></a>
+        </li>
+      </template>
+    </ul>
+  </nav>
+
+  <div class="hidden">
     {{ .TableOfContents }}
   </div>
-{{ end -}}
+
+</div>

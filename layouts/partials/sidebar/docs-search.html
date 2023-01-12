@@ -1,0 +1,9 @@
+<form>
+    <div class="search-form__wrapper">
+        <input id="search" class="search-form__input" type="search" placeholder="Search docs..." aria-label="Search Docs..." autocomplete="off">
+        <div class="text-primary-text absolute top-[1px] left-0 w-12 h-10 flex items-center justify-center">
+            {{ partial (printf "svg/icon-%s.svg" "search") (dict "class" "w-4 h-4 text-current") }}
+        </div>
+        <div id="suggestions" class="suggestion bg-gray-50 dark:bg-body-color rounded-lg shadow-md"></div>
+    </div>
+</form>
