@@ -62,6 +62,11 @@
                                 <span class="font-bold">Safe: </span>
                                 <span class="block lg:inline-block">Concurrently test on the same cloud environment</span>
                             </div>
+                        </li>
+                        <li class="flex flex-col lg:flex-row items-center lg:items-start space-y-2 lg:space-y-0 lg:space-x-4 mb-4">
+                            <div class="text-tertiary pt-1">
+                                {{ partial (printf "svg/icon-%s.svg" "check") (dict "class" "w-4 h-4 text-current") }}
+                            </div>
                             <div class="text-sm text-center lg:text-left leading-normal">
                                 <span class="font-bold">Free and open-source (MIT): </span>
                                 <span class="block lg:inline-block">No strings attached</span>
