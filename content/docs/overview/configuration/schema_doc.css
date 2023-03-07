@@ -1,3 +1,10 @@
+body {
+  font: 16px/1.5em "Overpass", "Open Sans", Helvetica, sans-serif;
+  color: #333;
+  font-weight: 300;
+  padding: 40px;
+}
+
 .btn.btn-link {
     font-size: 18px;
 }
@@ -32,7 +39,7 @@
 }
 
 .description.collapse:not(.show) {
-    /* max-height: 100px !important; */
+    max-height: 100px !important;
     overflow: hidden;
 
     display: -webkit-box;
