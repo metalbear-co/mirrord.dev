@@ -14,9 +14,8 @@ toc: true
 
 ## Overview
 
-mirrord will relay all file access to the target pod by default. (this functionality can be disabled using `--no-fs`
-flag on the command line or by unchecking the appropriate box in the IDE plugin. To enable just read-only access,
-`--ro-fs` option.)
+mirrord will relay all file access to the target pod by default. (this functionality can be disabled using `--fs-mode local`
+flag on the command line or by setting `mode` in the configuration file in the IDE plugin.)
 
 For example, the following python script calls the built-in `open` function which translate to something like
 `openat(AT_FDCWD, "/tmp/test", O_RDWR|O_CLOEXEC)` at a lower level:

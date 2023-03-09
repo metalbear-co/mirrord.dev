@@ -154,7 +154,7 @@ example-blog-<hash>-<hash>      1/1     Running   0          5m
 And now lets test it.
 
 ```bash
-mirrord exec --no-fs -x NODE_ENV --target pod/example-blog-<hash>-<hash> yarn -- workspace blog dev
+mirrord exec --fs-mode local -x NODE_ENV --target pod/example-blog-<hash>-<hash> yarn -- workspace blog dev
 ```
 
 > **Note:** connection to the remote blog container via port-forward is still required for this step, please reference
@@ -209,7 +209,7 @@ Result {
 
 Lets break down the command
 
-| mirrord exec | --no-fs | -x NODE_ENV | --target pod/example-blog-\<hash\>-\<hash\> | yarn | -- workspace blog dev |
+| mirrord exec | --fs-mode local | -x NODE_ENV | --target pod/example-blog-\<hash\>-\<hash\> | yarn | -- workspace blog dev |
 |---|---|---|---|---|---|
 ||disable fs*|exclude NODE_ENV enviroment variable**|specify the running pod to mirror|executable|executable args|
 
@@ -269,7 +269,7 @@ Edit `./blog/pages/blogpost/[id].tsx`
 And lets see the results by simply adding `--steal` to the previous command
 
 ```bash
-mirrord exec --no-fs -x NODE_ENV --target pod/example-blog-<hash>-<hash> --steal yarn -- workspace blog dev
+mirrord exec --fs-mode local -x NODE_ENV --target pod/example-blog-<hash>-<hash> --steal yarn -- workspace blog dev
 ```
 
 Refresh the page, and you should now be able to see the result.
