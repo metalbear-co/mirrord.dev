@@ -19,7 +19,7 @@ mirrord is composed of the following components:
 - `mirrord-cli` - Rust binary that wraps the behavior of mirrord-layer in a user friendly CLI.
 - `VS Code extension` - Exposes the same functionality as - mirrord-cli within the VS Code IDE.
 - `IntelliJ plugin` - Exposes the same functionality as - mirrord-cli within the IntelliJ IDEs.
-{{<figure src="architecture.svg" alt="mirrord - Architecure" class="white-background center large-width">}}
+{{<figure src="architecture.svg" alt="mirrord - Architecure" class="bg-white center">}}
 
 #### mirrord-agent
 
