@@ -20,6 +20,7 @@ toc: true
 
 * [mirrord](https://mirrord.dev/)
 * Available Kubernetes Cluster
+  * Note: at the moment, because it uses `kubectl port-forward`, the tutorial does not support clusters with a service mesh like Istio or linkerd.
 * [NodeJS](https://nodejs.org/en/) + [Yarn](https://www.npmjs.com/package/yarn)
 * (optional) [golang-migrate](https://github.com/golang-migrate/migrate)
 
@@ -112,7 +113,7 @@ Command breakdown
 
 ## Outgoing Traffic
 
-Another key feature is outgoing traffic tunneling and remote DNS resolution. For example, let's say you want to test a request your service makes to a database, because you encountered some unwanted behavior or just want to develop something new and want to see the real results
+Another key feature is outgoing traffic tunneling and remote DNS resolution. For example, let's say you want to test a request your service makes to a database.
 
 Let's make a small change to `./blog/pages/index.tsx` that should print the raw response from the database when accessing the root page of the blog
 
@@ -149,9 +150,7 @@ NAME                            READY   STATUS    RESTARTS   AGE
 example-blog-<hash>-<hash>      1/1     Running   0          5m
 ```
 
-> \<hash\> should be the deployment and replica-set hashes generated on your cluster
-
-And now lets test it.
+And now lets test it:
 
 ```bash
 mirrord exec --fs-mode local -x NODE_ENV --target pod/example-blog-<hash>-<hash> yarn -- workspace blog dev
@@ -211,16 +210,16 @@ Lets break down the command
 
 | mirrord exec | --fs-mode local | -x NODE_ENV | --target pod/example-blog-\<hash\>-\<hash\> | yarn | -- workspace blog dev |
 |---|---|---|---|---|---|
-||disable fs*|exclude NODE_ENV enviroment variable**|specify the running pod to mirror|executable|executable args|
+||disable remote file access*|exclude the NODE_ENV environment variable**|specify the running pod to mirror|executable|executable args|
 
-\* need to disable remote fs access because of yarn caching</br>
-\*\* NODE_ENV is used in webpack for compilation and it can cause conflict when running the app with dev command
+\* need to disable remote file access because of yarn caching</br>
+\*\* NODE_ENV is used in webpack for compilation and it can cause conflicts when running the app with dev command
 
 ## Traffic Steal
 
 Traffic Steal lets you handle and respond to incoming requests to the pod from your local machine. In contrast to Mirroring, with Steal the response to the incoming request is sent by the local process rather than the remote pod.
 
-First thing we need to establish a connection to the remote idp. In a separate terminal, run the following command
+First, we need to establish a connection to the remote IDP. In a separate terminal, run the following command:
 
 ```bash
 kubectl port-forward svc/example-idp 5556:5556
@@ -279,7 +278,7 @@ Refresh the page, and you should now be able to see the result.
 
 ## Summary
 
-mirrord can be used to either mirror incoming traffic without influencing the return values or it can be used to "override" the container, both options with full access to other resources in the cluster I.E databases other services or even mounted filesystem/configmap/secret.<br/>
+mirrord can be used to either mirror incoming traffic without influencing the return values or it can be used to "override" the container, both options with full access to other resources in the cluster, e.g. databases, other services, mounted filesystem/configmap/secrets.<br/>
 This allows you to debug your process as if it was already deployed as part of the cluster.
 
 ### Teardown
