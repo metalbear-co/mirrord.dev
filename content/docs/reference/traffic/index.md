@@ -16,7 +16,7 @@ toc: true
 
 mirrord lets users debug incoming network traffic by mirroring or stealing the traffic sent to the remote pod.
 
-#### Mirroring
+### Mirroring
 
 mirrord's default configuration is to mirror incoming TCP traffic from the remote pod, i.e.
 run the local process in the context of cloud environment without disrupting incoming traffic for the remote pod.
@@ -91,7 +91,7 @@ bigbear@metalbear:~/mirrord-demo$ curl http://192.168.49.2:32000/users
 </tr>
 </table>
 
-#### Stealing
+### Stealing
 
 mirrord can steal network traffic, i.e. intercept it and send it to the local process instead of the remote pod.
 This means that all incoming traffic is only handled by the local process.
@@ -165,7 +165,7 @@ bigbear@metalbear:~/mirrord-demo$ curl http://192.168.49.2:32000/users
 </tr>
 </table>
 
-##### Filtering Incoming Traffic by HTTP Headers
+#### Filtering Incoming Traffic by HTTP Headers
 
 Currently only supported in `steal` mode: mirrord lets you specify a regular expression to filter HTTP requests with.
 When specified, all the headers of each HTTP request that arrives at the remote target are checked against
@@ -178,11 +178,11 @@ or header values. The filter `^X-MyFilter:` would match only requests that have 
 The regular expression is evaluated with the [fancy_regex](https://docs.rs/fancy-regex/0.10.0/fancy_regex/index.html)
 rust crate.
 
-###### Specifying a Filter
+##### Specifying a Filter
 The HTTP header filter can be specified in the mirrord configuration file by setting the incoming mode to
 `steal` and specifying a filter in `feature.network.incoming.http_header_filter.filter`.
 
-###### Setting Custom HTTP Ports
+##### Setting Custom HTTP Ports
 The configuration also allows specifying custom HTTP ports under `feature.network.incoming.http_header_filter.ports`.
 By default, ports 80 and 8080 are used as HTTP ports if a filter is specified, which means that the mirrord agent
 checks each new connection on those ports for HTTP, and if the connection has valid HTTP messages, they are filtered
