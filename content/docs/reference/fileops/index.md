@@ -34,18 +34,6 @@ mirrord exec -c --target py-serv-deployment-cfc458fd4-bjzjx python3 test.py
 
 mirrord overrides that `openat` call and opens `/tmp/test` on the remote pod.
 
-Currently, the following operations are supported:
-
-- open
-- openat
-- fopen
-- fdopen
-- read
-- fread
-- fileno
-- lseek
-- write
-
 ## How does it work?
 
 {{<figure src="mirrord-fileops.png" alt="mirrord - fileops" class="white-background center large-width">}}

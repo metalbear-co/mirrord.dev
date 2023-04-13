@@ -188,8 +188,6 @@ By default, ports 80 and 8080 are used as HTTP ports if a filter is specified, w
 checks each new connection on those ports for HTTP, and if the connection has valid HTTP messages, they are filtered
 with the header filter.
 
-Currently only HTTP version 1 is supported.
-
 ## Outgoing
 
 mirrord's outgoing traffic feature intercepts outgoing requests from the local process and 
