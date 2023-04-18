@@ -12,4 +12,4 @@ weight: 121
 toc: true
 ---
 
-Need Help? Open a [discussion](https://github.com/metalbear-co/mirrord/discussions) or join our Discord server [here](https://discord.gg/pSKEdmNZcK).
+Need Help? Open a [discussion](https://github.com/metalbear-co/mirrord/discussions) or join our Discord server [here](https://discord.gg/metalbear).
