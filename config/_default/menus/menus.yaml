@@ -29,7 +29,7 @@ social:
   weight: 10
 - name: Discord
   pre: discord
-  url: https://discord.com/invite/pSKEdmNZcK
+  url: https://discord.gg/metalbear
   weight: 20
 - name: Twitter
   pre: twitter
@@ -42,7 +42,7 @@ social:
 footer_social:
 - name: Discord
   pre: discord-solid
-  url: https://discord.com/invite/pSKEdmNZcK
+  url: https://discord.gg/metalbear
   weight: 10
 - name: Github
   pre: github-solid
