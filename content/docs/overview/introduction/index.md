@@ -39,7 +39,7 @@ When you start your local process with mirrord, it creates a pod in your cloud e
   * Listen to incoming traffic from the agent, instead of local sockets.
   * Intercept outgoing traffic and send it out from the remote pod, instead of locally.
   * Read and write files to the remote file system.
-* Replace the process' environment variables with those of the remote pod.
+* Merge the process' environment variables with those of the remote pod.
 
 The remote part of this logic is handled by the agent, which runs in the network namespace of the remote pod, and can access its file system and environment variables.
 
