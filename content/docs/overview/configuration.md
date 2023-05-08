@@ -103,8 +103,8 @@ Read more [here](https://kubernetes.io/docs/concepts/containers/images/).
 {
   "agent": {
     "image_pull_secrets": [
-      "very-secret": "secret-key",
-      "very-secret": "keep-your-secrets"
+      { "very-secret": "secret-key" },
+      { "very-secret": "keep-your-secrets" }
     ]
   }
 }
@@ -145,7 +145,7 @@ Defaults to `60`.
 Which network interface to use for mirroring.
 
 The default behavior is try to access the internet and use that interface. If that fails
-it uses eth0.
+it uses `eth0`.
 <!-- struct AgentConfig::variant pause -->
 ## pause
 
@@ -162,15 +162,7 @@ Flushes existing connections when starting to steal, might fix issues where conn
 aren't stolen (due to being already established)
 
 Defaults to `true`.
-<!-- file src/config/from_env.rs -->
-<!-- struct FromEnvWithError -->
-This is the same as `FromEnv` but doesn't discard the error
-returned from parse. This is for parsing `Target`.
-I (A.H) couldn't find any better way to do this since you can't
-do specialization on associated types.
 <!-- file src/config.rs -->
-<!-- enum ConfigError -->
-Error that would be returned from [MirrordConfig::generate_config]
 <!-- trait MirrordConfig -->
 Main configuration creation trait of mirrord-config
 <!-- trait MirrordConfig::type Generated -->
@@ -474,7 +466,7 @@ mirrord file operations.
 ```
 <!-- file src/incoming/http_filter.rs -->
 <!-- struct HttpHeaderFilterConfig -->
-# http_header_filter
+# filter
 
 Filter configuration for the HTTP traffic stealer feature.
 
@@ -485,18 +477,7 @@ requests to their original destinations.
 Only does something when [`IncomingConfig`](super::IncomingConfig) is set as
 [`IncomingMode::Steal`](super::IncomingMode::Steal), ignored otherwise.
 
-## Types
-
-```json
-{
-  "filter": null | String,
-  "ports": Number | [Number],
-}
-```
-
-## Sample
-
-- `config.json`:
+## Example `http_header_filter` config
 
 ```json
 {
@@ -534,27 +515,37 @@ Incoming traffic supports 2 modes of operation:
 1. Mirror (**default**): Sniffs the TCP data from a port, and forwards a copy to the interested
 listeners;
 
-2. Steal: Captures the TCP data from a port, and forwards it (depending on how it's configured,
-see [`IncomingMode::Steal`]);
+2. Steal: Captures the TCP data from a port, and forwards it to the local process,  see
+[`steal`](#steal);
 <!-- struct IncomingAdvancedFileConfig::variant mode -->
+## mode
+
 Allows selecting between mirrorring or stealing traffic.
 
 See [`IncomingMode`] for details.
 <!-- struct IncomingAdvancedFileConfig::variant http_header_filter -->
-Sets up the HTTP traffic filter (currently, only for [`IncomingMode::Steal`]).
+## filter
 
-See [`HttpHeaderFilterConfig`] for details.
+Sets up the HTTP traffic filter (currently, only useful when `incoming: steal`).
+
+See [`filter`](#filter) for details.
 <!-- struct IncomingAdvancedFileConfig::variant port_mapping -->
+## port_mapping
+
 Mapping for local ports to remote ports.
 
 This is useful when you want to mirror/steal a port to a different port on the remote
-machine. For example, your local process listens on port 9333 and the container listens
-on port 80. You'd use [[9333, 80]]
+machine. For example, your local process listens on port `9333` and the container listens
+on port `80`. You'd use `[[9333, 80]]`
 <!-- struct IncomingAdvancedFileConfig::variant ignore_localhost -->
+## ignore_localhost
+
 Consider removing when adding https://github.com/metalbear-co/mirrord/issues/702
 <!-- struct IncomingAdvancedFileConfig::variant ignore_ports -->
-Ports to ignore when mirroring/stealing traffic. Useful if you want
-specific ports to be used locally only.
+## ignore_ports
+
+Ports to ignore when mirroring/stealing traffic. Useful if you want specific ports to be
+used locally only.
 <!-- struct IncomingConfig -->
 # incoming
 
