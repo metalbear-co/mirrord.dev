@@ -1,3 +1,17 @@
+---
+title: "Configuration"
+description: "mirrord Configuration"
+date: 2021-09-13T10:50:00+01:00
+lastmod: 2021-09-13T10:50:00+01:00
+draft: false
+images: []
+menu:
+  docs:
+    parent: "overview"
+weight: 121
+toc: true
+---
+
 <!-- file src/lib.rs -->
 <!-- struct LayerConfig -->
 # Mirrord configuration
