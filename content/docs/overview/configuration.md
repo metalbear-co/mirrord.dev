@@ -217,19 +217,148 @@ Agent listen port that already exists that we can connect to.
 <!-- struct LayerConfig::variant agent -->
 ### agent {#root-agent}
 
-Agent configuration, see [`agent`](##agent) for more advanced usage.
+Configuration for the mirrord-agent pod that is spawned in the Kubernetes cluster.
+
+We provide sane defaults for this option, so you don't have to set up anything here.
+
 
 ```json
 {
   "agent": {
-    "log_level": "debug",
-    "image": "custom-ghcr/images/mirrord:latest",
-    "image_pull_policy": "Always",
-    "ttl": 180,
+    "log_level": "info",
+    "namespace": "default",
+    "image": "ghcr.io/metalbear-co/mirrord:latest",
+    "image_pull_policy": "IfNotPresent",
+    "image_pull_secrets": [ { "secret-key": "secret" } ],
+    "ttl": 30,
+    "ephemeral": false,
+    "communication_timeout": 30,
+    "startup_timeout": 360,
+    "network_interface": "eth0",
+    "pause": false,
+    "flush_connections": false,
   }
 }
 ```
-<!-- struct LayerConfig::variant feature -->
+
+#### agent.log_level {#agent-log_level}
+
+Log level for the agent.
+
+Supports any string that would work with `RUST_LOG`.
+
+```json
+{
+  "agent": {
+    "log_level": "mirrord=debug,warn",
+  }
+}
+```
+
+#### agent.namespace {#agent-namespace}
+
+Namespace where the agent shall live.
+
+Defaults to the current kubernetes namespace.
+
+#### agent.image {#agent-image}
+
+Name of the agent's docker image.
+
+Useful when a custom build of mirrord-agent is required, or when using an internal
+registry.
+
+Defaults to the latest stable image `"ghcr.io/metalbear-co/mirrord:latest"`.
+
+```json
+{
+  "agent": {
+    "image": "internal.repo/images/mirrord:latest"
+  }
+}
+```
+
+#### agent.image_pull_policy {#agent-image_pull_policy}
+
+Controls when a new agent image is downloaded.
+
+Supports any valid kubernetes
+[image pull policy](https://kubernetes.io/docs/concepts/containers/images/#image-pull-policy)
+
+Defaults to `"IfNotPresent"`
+
+#### agent.image_pull_secrets {#agent-image_pull_secrets}
+
+List of secrets the agent pod has access to.
+
+Takes an array of hash with the format `{ name: <secret-name> }`.
+
+Read more [here](https://kubernetes.io/docs/concepts/containers/images/).
+
+```json
+{
+  "agent": {
+    "image_pull_secrets": [
+      { "very-secret": "secret-key" },
+      { "very-secret": "keep-your-secrets" }
+    ]
+  }
+}
+```
+
+#### agent.ttl {#agent-ttl}
+
+Controls how long the agent pod persists for after the agent exits (in seconds).
+
+Can be useful for collecting logs.
+
+Defaults to `1`.
+
+#### agent.ephemeral {#agent-ephemeral}
+
+Runs the agent as an
+[ephemeral container](https://kubernetes.io/docs/concepts/workloads/pods/ephemeral-containers/)
+
+Defaults to `false`.
+
+#### agent.communication_timeout {#agent-communication_timeout}
+
+Controls how long the agent lives when there are no connections.
+
+Each connection has its own heartbeat mechanism, so even if the local application has no
+messages, the agent stays alive until there are no more heartbeat messages.
+
+#### agent.startup_timeout {#agent-startup_timeout}
+
+Controls how long to wait for the agent to finish initialization.
+
+If initialization takes longer than this value, mirrord exits.
+
+Defaults to `60`.
+
+#### agent.network_interface {#agent-network_interface}
+
+Which network interface to use for mirroring.
+
+The default behavior is try to access the internet and use that interface. If that fails
+it uses `eth0`.
+
+#### agent.pause {#agent-pause}
+
+Controls target pause feature. Unstable.
+
+With this feature enabled, the remote container is paused while clients are connected to
+the agent.
+
+Defaults to `false`.
+
+#### agent.flush_connections {#agent-flush_connections}
+
+Flushes existing connections when starting to steal, might fix issues where connections
+aren't stolen (due to being already established)
+
+Defaults to `true`.
+
 ### feature {#root-feature}
 
 Controls mirrord features, see [`feature`](##feature) to learn how to set up mirrord
@@ -863,154 +992,7 @@ more details.
 Resolve DNS via the remote pod.
 
 Defaults to `true`.
-<!-- file src/agent.rs -->
-<!-- struct AgentConfig -->
-## agent
 
-Configuration for the mirrord-agent pod that is spawned in the Kubernetes cluster.
-
-### Minimal `agent` config
-
-We provide sane defaults for this option, so you don't have to set up anything here.
-
-### Advanced `agent` config
-
-```json
-{
-  "agent": {
-    "log_level": "info",
-    "namespace": "default",
-    "image": "ghcr.io/metalbear-co/mirrord:latest",
-    "image_pull_policy": "IfNotPresent",
-    "image_pull_secrets": [ { "secret-key": "secret" } ],
-    "ttl": 30,
-    "ephemeral": false,
-    "communication_timeout": 30,
-    "startup_timeout": 360,
-    "network_interface": "eth0",
-    "pause": false,
-    "flush_connections": false,
-  }
-}
-```
-<!-- struct AgentConfig::variant log_level -->
-### log_level
-
-Log level for the agent.
-
-Supports any string that would work with `RUST_LOG`.
-
-```json
-{
-  "agent": {
-    "log_level": "mirrord=debug,warn",
-  }
-}
-```
-<!-- struct AgentConfig::variant namespace -->
-### namespace
-
-Namespace where the agent shall live.
-
-Defaults to the current kubernetes namespace.
-<!-- struct AgentConfig::variant image -->
-### image
-
-Name of the agent's docker image.
-
-Useful when a custom build of mirrord-agent is required, or when using an internal
-registry.
-
-Defaults to the latest stable image `"ghcr.io/metalbear-co/mirrord:latest"`.
-
-```json
-{
-  "agent": {
-    "image": "internal.repo/images/mirrord:latest"
-  }
-}
-```
-<!-- struct AgentConfig::variant image_pull_policy -->
-### image_pull_policy
-
-Controls when a new agent image is downloaded.
-
-Supports any valid kubernetes
-[image pull policy](https://kubernetes.io/docs/concepts/containers/images/#image-pull-policy)
-
-Defaults to `"IfNotPresent"`
-<!-- struct AgentConfig::variant image_pull_secrets -->
-### image_pull_secrets
-
-List of secrets the agent pod has access to.
-
-Takes an array of hash with the format `{ name: <secret-name> }`.
-
-Read more [here](https://kubernetes.io/docs/concepts/containers/images/).
-
-```json
-{
-  "agent": {
-    "image_pull_secrets": [
-      { "very-secret": "secret-key" },
-      { "very-secret": "keep-your-secrets" }
-    ]
-  }
-}
-```
-<!-- struct AgentConfig::variant ttl -->
-### ttl
-
-Controls how long the agent pod persists for after the agent exits (in seconds).
-
-Can be useful for collecting logs.
-
-Defaults to `1`.
-<!-- struct AgentConfig::variant ephemeral -->
-### ephemeral
-
-Runs the agent as an
-[ephemeral container](https://kubernetes.io/docs/concepts/workloads/pods/ephemeral-containers/)
-
-Defaults to `false`.
-<!-- struct AgentConfig::variant communication_timeout -->
-### communication_timeout
-
-Controls how long the agent lives when there are no connections.
-
-Each connection has its own heartbeat mechanism, so even if the local application has no
-messages, the agent stays alive until there are no more heartbeat messages.
-<!-- struct AgentConfig::variant startup_timeout -->
-### startup_timeout
-
-Controls how long to wait for the agent to finish initialization.
-
-If initialization takes longer than this value, mirrord exits.
-
-Defaults to `60`.
-<!-- struct AgentConfig::variant network_interface -->
-### network_interface
-
-Which network interface to use for mirroring.
-
-The default behavior is try to access the internet and use that interface. If that fails
-it uses `eth0`.
-<!-- struct AgentConfig::variant pause -->
-### pause
-
-Controls target pause feature. Unstable.
-
-With this feature enabled, the remote container is paused while clients are connected to
-the agent.
-
-Defaults to `false`.
-<!-- struct AgentConfig::variant flush_connections -->
-### flush_connections
-
-Flushes existing connections when starting to steal, might fix issues where connections
-aren't stolen (due to being already established)
-
-Defaults to `true`.
 
 <!-- file src/target.rs -->
 <!-- enum TargetFileConfig -->
