@@ -90,7 +90,7 @@ see their respective documentations to learn more.
           "filter": "host: api\..+",
           "ports": [80, 8080]
         },
-        "port_mapping": [[ 7777: 8888 ]],
+        "port_mapping": [[ 7777, 8888 ]],
         "ignore_localhost": false,
         "ignore_ports": [9999, 10000]
       },
@@ -411,7 +411,7 @@ And a full specification:
           "filter": "host: api\..+",
           "ports": [80, 8080]
         },
-        "port_mapping": [{ 7777: 8888 }],
+        "port_mapping": [[ 7777, 8888 ]],
         "ignore_localhost": false,
         "ignore_ports": [9999, 10000]
       },
@@ -607,7 +607,7 @@ for more details.
           "filter": "host: api\..+",
           "ports": [80, 8080]
         },
-        "port_mapping": [[ 7777: 8888 ]],
+        "port_mapping": [[ 7777, 8888 ]],
         "ignore_localhost": false,
         "ignore_ports": [9999, 10000],
       },
@@ -636,7 +636,7 @@ Incoming traffic supports 2 modes of operation:
 listeners;
 
 2. Steal: Captures the TCP data from a port, and forwards it to the local process, see
-[`steal`](##steal);
+[`"mode": "steal"`](#feature-network-incoming-mode);
 
 #### Minimal `incoming` config
 
@@ -662,7 +662,7 @@ listeners;
           "filter": "host: api\..+",
           "ports": [80, 8080]
         },
-        "port_mapping": [[ 7777: 8888 ]],
+        "port_mapping": [[ 7777, 8888 ]],
         "ignore_localhost": false,
         "ignore_ports": [9999, 10000]
       }
@@ -671,7 +671,7 @@ listeners;
 }
 ```
 
-#### feature.network.incoming.mode
+#### feature.network.incoming.mode {#feature-network-incoming-mode}
 
 Allows selecting between mirrorring or stealing traffic.
 
@@ -690,7 +690,7 @@ additional configuration is needed);
 data on a port is HTTP (in a best-effort kind of way, not guaranteed to be HTTP), and
 steals the traffic on the port if it is HTTP;
 
-#### feature.network.incoming.filter
+#### feature.network.incoming.filter {#feature-network-incoming-filter}
 
 Filter configuration for the HTTP traffic stealer feature.
 
@@ -708,7 +708,7 @@ Only does something when [`feature.network.incoming.mode`](#feature-network-inco
 }
 ```
 
-#### feature.network.incoming.port_mapping {#feature.network.incoming.port_mapping}
+#### feature.network.incoming.port_mapping {#feature-network-incoming-port_mapping}
 
 Mapping for local ports to remote ports.
 
@@ -716,11 +716,10 @@ This is useful when you want to mirror/steal a port to a different port on the r
 machine. For example, your local process listens on port `9333` and the container listens
 on port `80`. You'd use `[[9333, 80]]`
 
-#### feature.network.incoming.ignore_localhost {#feature.network.incoming.ignore_localhost}
+#### feature.network.incoming.ignore_localhost {#feature-network-incoming-ignore_localhost}
 
-Consider removing when adding https://github.com/metalbear-co/mirrord/issues/702
 
-#### feature.network.incoming.ignore_ports {#feature.network.incoming.ignore_ports}
+#### feature.network.incoming.ignore_ports {#feature-network-incoming-ignore_ports}
 
 Ports to ignore when mirroring/stealing traffic. Useful if you want specific ports to be
 used locally only.
