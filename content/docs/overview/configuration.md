@@ -757,7 +757,7 @@ details.
 }
 ```
 
-#### feature.network.outgoing.tcp
+#### feature.network.outgoing.tcp {#feature.network.outgoing.tcp}
 
 Defaults to `true`.
 
@@ -830,8 +830,3 @@ while `/usr/bin/bash` would apply only for that binary).
  "sip_binaries": "bash;python"
 }
 ```
-
-
-
-
-
