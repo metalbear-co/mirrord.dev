@@ -575,15 +575,221 @@ if file matching the pattern is opened for writing or read/write it will be open
 
 Specify file path patterns that if matched will be opened locally.
 
-<!-- struct FeatureConfig::variant network -->
-### feature.network {#feature-network}
+## feature.network {#feature-network}
 
-Controls the network feature, see [`network`](#network).
+Controls mirrord network operations.
 
-For more information, check the network traffic
-[technical reference](https://mirrord.dev/docs/reference/traffic/).
-<!-- struct FeatureConfig::variant capture_error_trace -->
-### feature.capture_error_trace {#feature-capture_error_trace}
+See the network traffic [reference](https://mirrord.dev/docs/reference/traffic/)
+for more details.
+
+- Minimal config:
+
+```json
+{
+  "feature": {
+    "network": {
+      "incoming": "mirror",
+      "outgoing": true
+    }
+  }
+}
+```
+
+- Advanced config:
+
+```json
+{
+  "feature": {
+    "network": {
+      "incoming": {
+        "mode": "steal",
+        "http_header_filter": {
+          "filter": "host: api\..+",
+          "ports": [80, 8080]
+        },
+        "port_mapping": [[ 7777: 8888 ]],
+        "ignore_localhost": false,
+        "ignore_ports": [9999, 10000],
+      },
+      "outgoing": {
+        "tcp": true,
+        "udp": true,
+        "ignore_localhost": false,
+        "unix_streams": "bear.+"
+      },
+      "dns": false
+    }
+  }
+}
+```
+
+### feature.network.incoming {#feature-network-incoming}
+
+Controls the incoming TCP traffic feature.
+
+See the incoming [reference](https://mirrord.dev/docs/reference/traffic/#incoming) for more
+details.
+
+Incoming traffic supports 2 modes of operation:
+
+1. Mirror (**default**): Sniffs the TCP data from a port, and forwards a copy to the interested
+listeners;
+
+2. Steal: Captures the TCP data from a port, and forwards it to the local process, see
+[`steal`](##steal);
+
+#### Minimal `incoming` config
+
+```json
+{
+  "feature": {
+    "network": {
+      "incoming": "steal"
+    }
+  }
+}
+```
+
+#### Advanced `incoming` config
+
+```json
+{
+  "feature": {
+    "network": {
+      "incoming": {
+        "mode": "steal",
+        "http_header_filter": {
+          "filter": "host: api\..+",
+          "ports": [80, 8080]
+        },
+        "port_mapping": [[ 7777: 8888 ]],
+        "ignore_localhost": false,
+        "ignore_ports": [9999, 10000]
+      }
+    }
+  }
+}
+```
+
+#### feature.network.incoming.mode
+
+Allows selecting between mirrorring or stealing traffic.
+
+Can be set to either `"mirror"` (default) or `"steal"`.
+
+- `"mirror"`: Sniffs on TCP port, and send a copy of the data to listeners.
+- `"steal"`:
+
+Stealer supports 2 modes of operation:
+
+1. Port traffic stealing: Steals all TCP data from a port, which is selected whenever the
+user listens in a TCP socket (enabling the feature is enough to make this work, no
+additional configuration is needed);
+
+2. HTTP traffic stealing: Steals only HTTP traffic, mirrord tries to detect if the incoming
+data on a port is HTTP (in a best-effort kind of way, not guaranteed to be HTTP), and
+steals the traffic on the port if it is HTTP;
+
+#### feature.network.incoming.filter
+
+Filter configuration for the HTTP traffic stealer feature.
+
+Allows the user to set a filter (regex) for the HTTP headers, so that the stealer traffic
+feature only captures HTTP requests that match the specified filter, forwarding unmatched
+requests to their original destinations.
+
+Only does something when [`feature.network.incoming.mode`](#feature-network-incoming-mode) is set as
+`"steal"`, ignored otherwise.
+
+```json
+{
+  "filter": "host: api\..+",
+  "ports": [80, 8080]
+}
+```
+
+#### feature.network.incoming.port_mapping {#feature.network.incoming.port_mapping}
+
+Mapping for local ports to remote ports.
+
+This is useful when you want to mirror/steal a port to a different port on the remote
+machine. For example, your local process listens on port `9333` and the container listens
+on port `80`. You'd use `[[9333, 80]]`
+
+#### feature.network.incoming.ignore_localhost {#feature.network.incoming.ignore_localhost}
+
+Consider removing when adding https://github.com/metalbear-co/mirrord/issues/702
+
+#### feature.network.incoming.ignore_ports {#feature.network.incoming.ignore_ports}
+
+Ports to ignore when mirroring/stealing traffic. Useful if you want specific ports to be
+used locally only.
+
+### feature.network.outgoing {#feature-network-outgoing}
+
+Tunnel outgoing network operations through mirrord.
+
+See the outgoing [reference](https://mirrord.dev/docs/reference/traffic/#outgoing) for more
+details.
+
+```json
+{
+  "feature": {
+    "network": {
+      "outgoing": true,
+    }
+  }
+}
+```
+
+```json
+{
+  "feature": {
+    "network": {
+      "outgoing": {
+        "tcp": true,
+        "udp": true,
+        "ignore_localhost": false,
+        "unix_streams": "bear.+"
+      }
+    }
+  }
+}
+```
+
+#### feature.network.outgoing.tcp
+
+Defaults to `true`.
+
+#### feature.network.outgoing.udp {#feature.network.outgoing.udp}
+
+Defaults to `true`.
+
+#### feature.network.outgoing.ignore_localhost {#feature.network.outgoing.ignore_localhost}
+
+Defaults to `false`.
+
+#### feature.network.outgoing.unix_streams {#feature.network.outgoing.unix_streams}
+
+Connect to these unix streams remotely (and to all other paths locally).
+
+You can either specify a single value or an array of values.
+Each value is interpreted as a regular expression
+([Supported Syntax](https://docs.rs/regex/1.7.1/regex/index.html#syntax)).
+
+When your application connects to a unix socket, the target address will be converted to a
+string (non-utf8 bytes are replaced by a placeholder character) and matched against the set
+of regexes specified here. If there is a match, mirrord will connect your application with
+the target unix socket address on the target pod. Otherwise, it will leave the connection
+to happen locally on your machine.
+
+### feature.network.dns {#feature-network-dns}
+
+Resolve DNS via the remote pod.
+
+Defaults to `true`.
+
+## feature.capture_error_trace {#feature-capture_error_trace}
 
 Controls the crash reporting feature.
 
@@ -625,353 +831,7 @@ while `/usr/bin/bash` would apply only for that binary).
 }
 ```
 
-<!-- file src/feature/network/incoming/http_filter.rs -->
-<!-- struct HttpHeaderFilterConfig -->
-## filter (http)
 
-Filter configuration for the HTTP traffic stealer feature.
 
-Allows the user to set a filter (regex) for the HTTP headers, so that the stealer traffic
-feature only captures HTTP requests that match the specified filter, forwarding unmatched
-requests to their original destinations.
 
-Only does something when [`IncomingConfig`](super::IncomingConfig) is set as
-[`IncomingMode::Steal`](super::IncomingMode::Steal), ignored otherwise.
 
-## Example `filter` config
-
-```json
-{
-  "filter": "host: api\..+",
-  "ports": [80, 8080]
-}
-```
-<!-- struct HttpHeaderFilterConfig::variant filter -->
-## filter
-
-Used to match against the requests captured by the mirrord-agent pod.
-
-Supports regexes validated by the
-[`fancy-regex`](https://docs.rs/fancy-regex/latest/fancy_regex/) crate.
-
-The HTTP traffic feature converts the HTTP headers to `HeaderKey: HeaderValue`,
-case-insensitive.
-<!-- struct HttpHeaderFilterConfig::variant ports -->
-## ports
-
-Activate the HTTP traffic filter only for these ports.
-<!-- file src/feature/network/incoming.rs -->
-<!-- enum IncomingFileConfig -->
-## incoming (network)
-
-Controls the incoming TCP traffic feature.
-
-See the incoming [reference](https://mirrord.dev/docs/reference/traffic/#incoming) for more
-details.
-
-Incoming traffic supports 2 modes of operation:
-
-1. Mirror (**default**): Sniffs the TCP data from a port, and forwards a copy to the interested
-listeners;
-
-2. Steal: Captures the TCP data from a port, and forwards it to the local process, see
-[`steal`](##steal);
-
-## Minimal `incoming` config
-
-```json
-{
-  "feature": {
-    "network": {
-      "incoming": "steal"
-    }
-  }
-}
-```
-
-## Advanced `incoming` config
-
-```json
-{
-  "feature": {
-    "network": {
-      "incoming": {
-        "mode": "steal",
-        "http_header_filter": {
-          "filter": "host: api\..+",
-          "ports": [80, 8080]
-        },
-        "port_mapping": [[ 7777: 8888 ]],
-        "ignore_localhost": false,
-        "ignore_ports": [9999, 10000]
-      }
-    }
-  }
-}
-```
-<!-- struct IncomingAdvancedFileConfig -->
-## incoming (advanced setup)
-
-Advanced user configuration for network incoming traffic.
-<!-- struct IncomingAdvancedFileConfig::variant mode -->
-## mode
-
-Allows selecting between mirrorring or stealing traffic.
-
-See [`mode`](##mode (incoming)) for details.
-<!-- struct IncomingAdvancedFileConfig::variant http_header_filter -->
-## filter
-
-Sets up the HTTP traffic filter (currently, only useful when `incoming: steal`).
-
-See [`filter`](##filter) for details.
-<!-- struct IncomingAdvancedFileConfig::variant port_mapping -->
-## port_mapping
-
-Mapping for local ports to remote ports.
-
-This is useful when you want to mirror/steal a port to a different port on the remote
-machine. For example, your local process listens on port `9333` and the container listens
-on port `80`. You'd use `[[9333, 80]]`
-<!-- struct IncomingAdvancedFileConfig::variant ignore_localhost -->
-## ignore_localhost
-
-Consider removing when adding https://github.com/metalbear-co/mirrord/issues/702
-<!-- struct IncomingAdvancedFileConfig::variant ignore_ports -->
-## ignore_ports
-
-Ports to ignore when mirroring/stealing traffic. Useful if you want specific ports to be
-used locally only.
-<!-- struct IncomingConfig -->
-## incoming
-
-Sets up how mirrord handles incoming network packets.
-
-## Minimal `incoming` config
-
-```json
-{
-  "feature": {
-    "network": {
-      "incoming": "steal"
-    }
-  }
-}
-```
-
-## Advanced `incoming` config
-
-```json
-{
-  "feature": {
-    "network": {
-      "incoming": {
-        "mode": "steal",
-        "http_header_filter": {
-          "filter": "host: api\..+",
-          "ports": [80, 8080]
-        }
-      }
-    }
-  }
-}
-```
-<!-- struct IncomingConfig::variant mode -->
-## mode
-
-See incoming [`mode`](##mode (network incoming)) for more details.
-<!-- struct IncomingConfig::variant http_header_filter -->
-## filter
-
-See [`filter`](##filter (http)) for more details.
-<!-- struct IncomingConfig::variant port_mapping -->
-## port_mapping
-<!-- struct IncomingConfig::variant ignore_localhost -->
-## ignore_localhost
-<!-- struct IncomingConfig::variant ignore_ports -->
-## ignore_ports
-<!-- enum IncomingMode -->
-## mode (network incoming)
-
-Mode of operation for the incoming TCP traffic feature.
-
-Can be set to either `"mirror"` (default) or `"steal"`.
-<!-- enum IncomingMode::variant Mirror -->
-## mirror
-
-Sniffs on TCP port, and send a copy of the data to listeners.
-<!-- enum IncomingMode::variant Steal -->
-## steal
-
-Stealer supports 2 modes of operation:
-
-1. Port traffic stealing: Steals all TCP data from a port, which is selected whenever the
-user listens in a TCP socket (enabling the feature is enough to make this work, no
-additional configuration is needed);
-
-2. HTTP traffic stealing: Steals only HTTP traffic, mirrord tries to detect if the incoming
-data on a port is HTTP (in a best-effort kind of way, not guaranteed to be HTTP), and
-steals the traffic on the port if it is HTTP;
-<!-- file src/feature/network/outgoing.rs -->
-<!-- struct OutgoingConfig -->
-## outgoing
-
-Controls the outgoing TCP traffic feature.
-
-See the outgoing [reference](https://mirrord.dev/docs/reference/traffic/#outgoing) for more
-details.
-
-## Minimal `outgoing` config
-
-```json
-{
-  "feature": {
-    "network": {
-      "outgoing": true,
-    }
-  }
-}
-```
-
-## Advanced `outgoing` config
-
-```json
-{
-  "feature": {
-    "network": {
-      "outgoing": {
-        "tcp": true,
-        "udp": true,
-        "ignore_localhost": false,
-        "unix_streams": "bear.+"
-      }
-    }
-  }
-}
-```
-<!-- struct OutgoingConfig::variant tcp -->
-## tcp
-
-Defaults to `true`.
-<!-- struct OutgoingConfig::variant udp -->
-## udp
-
-Defaults to `true`.
-<!-- struct OutgoingConfig::variant ignore_localhost -->
-## ignore_localhost
-
-Defaults to `false`.
-<!-- struct OutgoingConfig::variant unix_streams -->
-## unix_streams
-
-Connect to these unix streams remotely (and to all other paths locally).
-
-You can either specify a single value or an array of values.
-Each value is interpreted as a regular expression
-([Supported Syntax](https://docs.rs/regex/1.7.1/regex/index.html#syntax)).
-
-When your application connects to a unix socket, the target address will be converted to a
-string (non-utf8 bytes are replaced by a placeholder character) and matched against the set
-of regexes specified here. If there is a match, mirrord will connect your application with
-the target unix socket address on the target pod. Otherwise, it will leave the connection
-to happen locally on your machine.
-<!-- file src/feature/network.rs -->
-<!-- struct NetworkConfig -->
-## network
-
-Controls mirrord network operations.
-
-See the network traffic [reference](https://mirrord.dev/docs/reference/traffic/)
-for more details.
-
-## Minimal `network` config
-
-```json
-{
-  "feature": {
-    "network": {
-      "incoming": "mirror",
-      "outgoing": true
-    }
-  }
-}
-```
-
-## Advanced `network` config
-
-```json
-{
-  "feature": {
-    "network": {
-      "incoming": {
-        "mode": "steal",
-        "http_header_filter": {
-          "filter": "host: api\..+",
-          "ports": [80, 8080]
-        },
-        "port_mapping": [[ 7777: 8888 ]],
-        "ignore_localhost": false,
-        "ignore_ports": [9999, 10000],
-      },
-      "outgoing": {
-        "tcp": true,
-        "udp": true,
-        "ignore_localhost": false,
-        "unix_streams": "bear.+"
-      },
-      "dns": false
-    }
-  }
-}
-```
-<!-- struct NetworkConfig::variant incoming -->
-## incoming
-
-Handles incoming network traffic, see [`incoming`](##incoming) for more details.
-<!-- struct NetworkConfig::variant outgoing -->
-## outgoing
-
-Tunnel outgoing network operations through mirrord, see [`outgoing`](##outgoing) for
-more details.
-<!-- struct NetworkConfig::variant dns -->
-## dns
-
-Resolve DNS via the remote pod.
-
-Defaults to `true`.
-
-
-<!-- file src/target.rs -->
-<!-- enum TargetFileConfig -->
-## target {#target}
-
-<!-- file src/util.rs -->
-<!-- fn with_env_vars -->
-Sets environment variables to the given value for the duration of the closure.
-Restores the previous values when the closure completes or panics, before unwinding the
-panic.
-<!-- file src/config.rs -->
-<!-- trait MirrordConfig -->
-Main configuration creation trait of mirrord-config
-<!-- trait MirrordConfig::type Generated -->
-The resulting struct you plan on using in the rest of your code
-<!-- trait MirrordConfig::fn generate_config -->
-Load configuration from all sources and output as [Self::Generated]
-<!-- trait FromMirrordConfig -->
-Lookup trait for accessing type implementing [MirrordConfig] from [MirrordConfig::Generated]
-<!-- file derive/src/config/flag.rs -->
-<!-- struct ConfigFlags -->
-
-
-<!-- file derive/src/config/field.rs -->
-<!-- struct ConfigField -->
-
-
-<!-- impl ConfigField::fn is_option -->
-Check if field is `Option<T>` and if so return type of `T`
-<!-- impl ConfigField::fn definition -->
-
-
-<!-- impl ConfigField::fn implmentation -->
-
-//* ```
