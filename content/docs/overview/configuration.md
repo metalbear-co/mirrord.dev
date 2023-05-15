@@ -40,8 +40,8 @@ The minimal configuration defaults to:
 
 ## Advanced `config.json` {#root-advanced}
 
-Both [`fs`](##fs) and [`network`](##network) also support a simplified configuration, see their
-respective documentations to learn more.
+Both [`fs`](#feature-fs) and [`network`](#feature-network) also support a simplified configuration, 
+see their respective documentations to learn more.
 
 ```json
 {
@@ -111,14 +111,14 @@ respective documentations to learn more.
 ```
 
 ## Options {#root-options}
-<!-- struct LayerConfig::variant accept_invalid_certificates -->
+
 ### accept_invalid_certificates {#root-accept_invalid_certificates}
 
 Controls whether or not mirrord accepts invalid TLS certificates (e.g. self-signed
 certificates).
 
 Defaults to `false`.
-<!-- struct LayerConfig::variant skip_processes -->
+
 ### skip_processes {#root-skip_processes}
 
 Allows mirrord to skip unwanted processes.
@@ -133,7 +133,7 @@ Accepts a single value, or multiple values separated by `;`.
   "skip_processes": "bash;node"
 }
 ```
-<!-- struct LayerConfig::variant target -->
+
 ### target {#root-target}
 
 Specifies the running pod to mirror, see [`target`](##target) for more details.
@@ -144,12 +144,47 @@ The simplified configuration supports:
 - `podname/{sample-pod}/[container]/{sample-container}`;
 - `deployment/{sample-deployment}/[container]/{sample-container}`;
 
+Specifies the target and namespace to mirror, see [`path`](##path) for a list of accepted values
+for the `target` option.
+
+Supports a minimal setup with:
+
 ```json
 {
   "target": "pod/bear-pod"
 }
 ```
-<!-- struct LayerConfig::variant connect_tcp -->
+
+Or a full setup:
+
+```json
+{
+  "target": {
+    "path": {
+      "pod": "bear-pod"
+    },
+    "namespace": "default"
+  }
+}
+```
+
+#### target.path {#target-path}
+
+Specifies the running pod (or deployment) to mirror.
+
+Supports:
+- `pod/{sample-pod}`;
+- `podname/{sample-pod}`;
+- `deployment/{sample-deployment}`;
+- `container/{sample-container}`;
+- `containername/{sample-container}`.
+
+#### target.namespace {#target-namespace}
+
+Namespace where the target lives.
+
+Defaults to `"default"`.
+
 ### connect_tcp {#root-connect_tcp}
 
 IP:PORT to connect to instead of using k8s api, for testing purposes.
@@ -981,52 +1016,6 @@ Defaults to `true`.
 <!-- enum TargetFileConfig -->
 ## target {#target}
 
-Specifies the target and namespace to mirror, see [`path`](##path) for a list of accepted values
-for the `target` option.
-
-### Minimal `target` config {#target-minimal}
-
-```json
-{
-  "target": "pod/bear-pod"
-}
-```
-
-### Advanced `target` config {#target-advanced}
-
-```json
-{
-  "target": {
-    "path": {
-      "pod": "bear-pod"
-    },
-    "namespace": "default"
-  }
-}
-```
-
-### target.path {#target-path}
-
-Specifies the running pod (or deployment) to mirror.
-
-Supports:
-- `pod/{sample-pod}`;
-- `podname/{sample-pod}`;
-- `deployment/{sample-deployment}`;
-- `container/{sample-container}`;
-- `containername/{sample-container}`.
-
-### target.namespace {#target-namespace}
-
-The namespace of the remote pod.
-
-Defaults to `"default"`.
-<!-- struct TargetConfig::variant namespace -->
-### target.namespace
-
-Namespace where the target lives.
-
-Defaults to `"default"`.
 <!-- file src/util.rs -->
 <!-- fn with_env_vars -->
 Sets environment variables to the given value for the duration of the closure.
