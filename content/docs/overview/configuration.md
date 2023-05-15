@@ -110,16 +110,16 @@ see their respective documentations to learn more.
 }
 ```
 
-## Options {#root-options}
+# Options {#root-options}
 
-### accept_invalid_certificates {#root-accept_invalid_certificates}
+## accept_invalid_certificates {#root-accept_invalid_certificates}
 
 Controls whether or not mirrord accepts invalid TLS certificates (e.g. self-signed
 certificates).
 
 Defaults to `false`.
 
-### skip_processes {#root-skip_processes}
+## skip_processes {#root-skip_processes}
 
 Allows mirrord to skip unwanted processes.
 
@@ -134,7 +134,7 @@ Accepts a single value, or multiple values separated by `;`.
 }
 ```
 
-### target {#root-target}
+## target {#root-target}
 
 Specifies the running pod to mirror, see [`target`](##target) for more details.
 
@@ -168,7 +168,7 @@ Or a full setup:
 }
 ```
 
-#### target.path {#target-path}
+### target.path {#target-path}
 
 Specifies the running pod (or deployment) to mirror.
 
@@ -179,13 +179,13 @@ Supports:
 - `container/{sample-container}`;
 - `containername/{sample-container}`.
 
-#### target.namespace {#target-namespace}
+### target.namespace {#target-namespace}
 
 Namespace where the target lives.
 
 Defaults to `"default"`.
 
-### connect_tcp {#root-connect_tcp}
+## connect_tcp {#root-connect_tcp}
 
 IP:PORT to connect to instead of using k8s api, for testing purposes.
 
@@ -194,8 +194,8 @@ IP:PORT to connect to instead of using k8s api, for testing purposes.
   "connect_tcp": "10.10.0.100:7777"
 }
 ```
-<!-- struct LayerConfig::variant connect_agent_name -->
-### connect_agent_name {#root-connect_agent_name}
+
+## connect_agent_name {#root-connect_agent_name}
 
 Agent name that already exists that we can connect to.
 
@@ -204,8 +204,8 @@ Agent name that already exists that we can connect to.
   "connect_agent_name": "mirrord-agent-still-alive"
 }
 ```
-<!-- struct LayerConfig::variant connect_agent_port -->
-### connect_agent_port {#root-connect_agent_port}
+
+## connect_agent_port {#root-connect_agent_port}
 
 Agent listen port that already exists that we can connect to.
 
@@ -214,13 +214,12 @@ Agent listen port that already exists that we can connect to.
   "connect_agent_port": "8888"
 }
 ```
-<!-- struct LayerConfig::variant agent -->
-### agent {#root-agent}
+
+## agent {#root-agent}
 
 Configuration for the mirrord-agent pod that is spawned in the Kubernetes cluster.
 
 We provide sane defaults for this option, so you don't have to set up anything here.
-
 
 ```json
 {
@@ -241,7 +240,7 @@ We provide sane defaults for this option, so you don't have to set up anything h
 }
 ```
 
-#### agent.log_level {#agent-log_level}
+### agent.log_level {#agent-log_level}
 
 Log level for the agent.
 
@@ -255,13 +254,13 @@ Supports any string that would work with `RUST_LOG`.
 }
 ```
 
-#### agent.namespace {#agent-namespace}
+### agent.namespace {#agent-namespace}
 
 Namespace where the agent shall live.
 
 Defaults to the current kubernetes namespace.
 
-#### agent.image {#agent-image}
+### agent.image {#agent-image}
 
 Name of the agent's docker image.
 
@@ -278,7 +277,7 @@ Defaults to the latest stable image `"ghcr.io/metalbear-co/mirrord:latest"`.
 }
 ```
 
-#### agent.image_pull_policy {#agent-image_pull_policy}
+### agent.image_pull_policy {#agent-image_pull_policy}
 
 Controls when a new agent image is downloaded.
 
@@ -287,7 +286,7 @@ Supports any valid kubernetes
 
 Defaults to `"IfNotPresent"`
 
-#### agent.image_pull_secrets {#agent-image_pull_secrets}
+### agent.image_pull_secrets {#agent-image_pull_secrets}
 
 List of secrets the agent pod has access to.
 
@@ -306,7 +305,7 @@ Read more [here](https://kubernetes.io/docs/concepts/containers/images/).
 }
 ```
 
-#### agent.ttl {#agent-ttl}
+### agent.ttl {#agent-ttl}
 
 Controls how long the agent pod persists for after the agent exits (in seconds).
 
@@ -314,21 +313,21 @@ Can be useful for collecting logs.
 
 Defaults to `1`.
 
-#### agent.ephemeral {#agent-ephemeral}
+### agent.ephemeral {#agent-ephemeral}
 
 Runs the agent as an
 [ephemeral container](https://kubernetes.io/docs/concepts/workloads/pods/ephemeral-containers/)
 
 Defaults to `false`.
 
-#### agent.communication_timeout {#agent-communication_timeout}
+### agent.communication_timeout {#agent-communication_timeout}
 
 Controls how long the agent lives when there are no connections.
 
 Each connection has its own heartbeat mechanism, so even if the local application has no
 messages, the agent stays alive until there are no more heartbeat messages.
 
-#### agent.startup_timeout {#agent-startup_timeout}
+### agent.startup_timeout {#agent-startup_timeout}
 
 Controls how long to wait for the agent to finish initialization.
 
@@ -336,14 +335,14 @@ If initialization takes longer than this value, mirrord exits.
 
 Defaults to `60`.
 
-#### agent.network_interface {#agent-network_interface}
+### agent.network_interface {#agent-network_interface}
 
 Which network interface to use for mirroring.
 
 The default behavior is try to access the internet and use that interface. If that fails
 it uses `eth0`.
 
-#### agent.pause {#agent-pause}
+### agent.pause {#agent-pause}
 
 Controls target pause feature. Unstable.
 
@@ -352,22 +351,19 @@ the agent.
 
 Defaults to `false`.
 
-#### agent.flush_connections {#agent-flush_connections}
+### agent.flush_connections {#agent-flush_connections}
 
 Flushes existing connections when starting to steal, might fix issues where connections
 aren't stolen (due to being already established)
 
 Defaults to `true`.
 
-### feature {#root-feature}
+# feature {#root-feature}
 
 Controls mirrord features, see [`feature`](##feature) to learn how to set up mirrord
 only the features you want, and the
 [technical reference, Technical Reference](https://mirrord.dev/docs/reference/)
 to learn more about what each feature does.
-
-
-#### Minimal `feature` config {#feature-minimal}
 
 The [`fs`](#fs) and [`network`](#network) options have support for a shortened version.
 
@@ -389,7 +385,7 @@ The [`fs`](#fs) and [`network`](#network) options have support for a shortened v
 }
 ```
 
-#### Advanced `feature` config {#feature-advanced}
+And a full specification:
 
 ```json
 {
@@ -432,7 +428,7 @@ The [`fs`](#fs) and [`network`](#network) options have support for a shortened v
 }
 ```
 
-#### feature.env {#feature-env}
+## feature.env {#feature-env}
 
 Allows the user to set or override the local process' environment variables with the ones from
 the remote pod.
@@ -457,7 +453,7 @@ See the environment variables [reference](https://mirrord.dev/docs/reference/env
 }
 ```
 
-##### feature.env.include {#feature-env-include}
+### feature.env.include {#feature-env-include}
 
 Include only these remote environment variables in the local process.
 
@@ -466,21 +462,21 @@ Value is a list separated by ";".
 Some environment variables are excluded by default (`PATH` for example), including these
 requires specifying them with `include`
 
-##### feature.env.exclude {#feature-env-exclude}
+### feature.env.exclude {#feature-env-exclude}
 
 Include the remote environment variables in the local process that are **NOT** specified by
 this option.
 
 Value is a list separated by ";".
 
-##### feature.env.override {#feature-env-override}
+### feature.env.override {#feature-env-override}
 
 Allows setting or overriding environment variables (locally) with a custom value.
 
 For example, if the remote pod has an environment variable `REGION=1`, but this is an
 undesirable value, it's possible to use `overrides` to set `REGION=2` (locally) instead.
 
-#### feature.fs {#feature-fs}
+## feature.fs {#feature-fs}
 
 Allows the user to specify the default behavior for file operations:
 
@@ -538,7 +534,7 @@ Or fully with:
 }
 ```
 
-##### feature.fs.mode {#feature-fs-mode}
+### feature.fs.mode {#feature-fs-mode}
 
 Configuration for enabling read-only or read-write file operations.
 
@@ -550,44 +546,44 @@ Default option for general file configuration.
 
 The accepted values are: `"local"`, `"localwithoverrides`, `"read"`, or `"write`.
 
-###### feature.fs.mode.local {#feature-fs-mode-local}
+#### feature.fs.mode.local {#feature-fs-mode-local}
 
 mirrord won't do anything fs-related, all operations will be local.
 
-###### feature.fs.mode.localwithoverrides {#feature-fs-mode-localwithoverrides}
+#### feature.fs.mode.localwithoverrides {#feature-fs-mode-localwithoverrides}
 
 mirrord will run overrides on some file operations, but most will be local.
 
-###### feature.fs.mode.read {#feature-fs-mode-read}
+#### feature.fs.mode.read {#feature-fs-mode-read}
 
 mirrord will read files from the remote, but won't write to them.
 
-###### feature.fs.mode.write {#feature-fs-mode-write}
+#### feature.fs.mode.write {#feature-fs-mode-write}
 
 mirrord will read/write from the remote.
 
-##### feature.fs.read_write {#feature-fs-read_write}
+### feature.fs.read_write {#feature-fs-read_write}
 
 Specify file path patterns that if matched will be read and written to the remote.
 
-##### feature.fs.read_only {#feature-fs-read_only}
+### feature.fs.read_only {#feature-fs-read_only}
 
 Specify file path patterns that if matched will be read from the remote.
 if file matching the pattern is opened for writing or read/write it will be opened locally.
 
-##### feature.fs.local {#feature-fs-local}
+### feature.fs.local {#feature-fs-local}
 
 Specify file path patterns that if matched will be opened locally.
 
 <!-- struct FeatureConfig::variant network -->
-#### feature.network {#feature-network}
+### feature.network {#feature-network}
 
 Controls the network feature, see [`network`](#network).
 
 For more information, check the network traffic
 [technical reference](https://mirrord.dev/docs/reference/traffic/).
 <!-- struct FeatureConfig::variant capture_error_trace -->
-#### feature.capture_error_trace {#feature-capture_error_trace}
+### feature.capture_error_trace {#feature-capture_error_trace}
 
 Controls the crash reporting feature.
 
@@ -596,13 +592,13 @@ With this feature enabled, mirrord generates a nice crash report log.
 Defaults to `false`.
 
 <!-- struct LayerConfig::variant operator -->
-### operator {#root-operator}
+## operator {#root-operator}
 
 Allow to lookup if operator is installed on cluster and use it.
 
 Defaults to `true`.
 <!-- struct LayerConfig::variant kubeconfig -->
-### kubeconfig {#root-kubeconfig}
+## kubeconfig {#root-kubeconfig}
 
 Path to a kubeconfig file, if not specified, will use `KUBECONFIG`, or `~/.kube/config`, or
 the in-cluster config.
@@ -613,7 +609,7 @@ the in-cluster config.
 }
 ```
 <!-- struct LayerConfig::variant sip_binaries -->
-### sip_binaries {#root-sip_binaries}
+## sip_binaries {#root-sip_binaries}
 
 Binaries to patch (macOS SIP).
 
@@ -628,55 +624,6 @@ while `/usr/bin/bash` would apply only for that binary).
  "sip_binaries": "bash;python"
 }
 ```
-<!-- file src/feature/fs/mode.rs -->
-<!-- enum FsModeConfig -->
-<!-- file src/feature/fs/advanced.rs -->
-<!-- struct FsConfig -->
-## feature.fs (advanced setup)
-
-Advanced user configuration for file operations.
-
-<!-- impl FsConfig::fn is_active -->
-Checks if fs operations are active
-<!-- file src/feature/fs.rs -->
-<!-- enum FsUserConfig -->
-## feature.fs {#fs}
-
-Changes file operations behavior based on user configuration.
-
-See the file operations [reference](https://mirrord.dev/docs/reference/fileops/)
-for more details, and [fs advanced](#fs-advanced) for more information on how to fully setup
-mirrord file operations.
-
-### Minimal `fs` config {#fs-minimal}
-
-```json
-{
-  "feature": {
-    "fs": "read"
-  }
-}
-```
-
-### Advanced `fs` config {#fs-advanced}
-
-```json
-{
-  "feature": {
-    "fs": {
-      "mode": "write",
-      "read_write": ".+\.json" ,
-      "read_only": [ ".+\.yaml", ".+important-file\.txt" ],
-      "local": [ ".+\.js", ".+\.mjs" ]
-    }
-  }
-}
-```
-<!-- enum FsUserConfig::variant Advanced -->
-Allows the user to specify both [`FsModeConfig`] (as above), and configuration for the
-overrides.
-<!-- file src/feature/env.rs -->
-<!-- struct EnvConfig -->
 
 <!-- file src/feature/network/incoming/http_filter.rs -->
 <!-- struct HttpHeaderFilterConfig -->
@@ -691,7 +638,7 @@ requests to their original destinations.
 Only does something when [`IncomingConfig`](super::IncomingConfig) is set as
 [`IncomingMode::Steal`](super::IncomingMode::Steal), ignored otherwise.
 
-### Example `filter` config
+## Example `filter` config
 
 ```json
 {
@@ -700,7 +647,7 @@ Only does something when [`IncomingConfig`](super::IncomingConfig) is set as
 }
 ```
 <!-- struct HttpHeaderFilterConfig::variant filter -->
-### filter
+## filter
 
 Used to match against the requests captured by the mirrord-agent pod.
 
@@ -710,7 +657,7 @@ Supports regexes validated by the
 The HTTP traffic feature converts the HTTP headers to `HeaderKey: HeaderValue`,
 case-insensitive.
 <!-- struct HttpHeaderFilterConfig::variant ports -->
-### ports
+## ports
 
 Activate the HTTP traffic filter only for these ports.
 <!-- file src/feature/network/incoming.rs -->
@@ -730,7 +677,7 @@ listeners;
 2. Steal: Captures the TCP data from a port, and forwards it to the local process, see
 [`steal`](##steal);
 
-### Minimal `incoming` config
+## Minimal `incoming` config
 
 ```json
 {
@@ -742,7 +689,7 @@ listeners;
 }
 ```
 
-### Advanced `incoming` config
+## Advanced `incoming` config
 
 ```json
 {
@@ -767,19 +714,19 @@ listeners;
 
 Advanced user configuration for network incoming traffic.
 <!-- struct IncomingAdvancedFileConfig::variant mode -->
-### mode
+## mode
 
 Allows selecting between mirrorring or stealing traffic.
 
 See [`mode`](##mode (incoming)) for details.
 <!-- struct IncomingAdvancedFileConfig::variant http_header_filter -->
-### filter
+## filter
 
 Sets up the HTTP traffic filter (currently, only useful when `incoming: steal`).
 
 See [`filter`](##filter) for details.
 <!-- struct IncomingAdvancedFileConfig::variant port_mapping -->
-### port_mapping
+## port_mapping
 
 Mapping for local ports to remote ports.
 
@@ -787,11 +734,11 @@ This is useful when you want to mirror/steal a port to a different port on the r
 machine. For example, your local process listens on port `9333` and the container listens
 on port `80`. You'd use `[[9333, 80]]`
 <!-- struct IncomingAdvancedFileConfig::variant ignore_localhost -->
-### ignore_localhost
+## ignore_localhost
 
 Consider removing when adding https://github.com/metalbear-co/mirrord/issues/702
 <!-- struct IncomingAdvancedFileConfig::variant ignore_ports -->
-### ignore_ports
+## ignore_ports
 
 Ports to ignore when mirroring/stealing traffic. Useful if you want specific ports to be
 used locally only.
@@ -800,7 +747,7 @@ used locally only.
 
 Sets up how mirrord handles incoming network packets.
 
-### Minimal `incoming` config
+## Minimal `incoming` config
 
 ```json
 {
@@ -812,7 +759,7 @@ Sets up how mirrord handles incoming network packets.
 }
 ```
 
-### Advanced `incoming` config
+## Advanced `incoming` config
 
 ```json
 {
@@ -830,19 +777,19 @@ Sets up how mirrord handles incoming network packets.
 }
 ```
 <!-- struct IncomingConfig::variant mode -->
-### mode
+## mode
 
 See incoming [`mode`](##mode (network incoming)) for more details.
 <!-- struct IncomingConfig::variant http_header_filter -->
-### filter
+## filter
 
 See [`filter`](##filter (http)) for more details.
 <!-- struct IncomingConfig::variant port_mapping -->
-### port_mapping
+## port_mapping
 <!-- struct IncomingConfig::variant ignore_localhost -->
-### ignore_localhost
+## ignore_localhost
 <!-- struct IncomingConfig::variant ignore_ports -->
-### ignore_ports
+## ignore_ports
 <!-- enum IncomingMode -->
 ## mode (network incoming)
 
@@ -850,11 +797,11 @@ Mode of operation for the incoming TCP traffic feature.
 
 Can be set to either `"mirror"` (default) or `"steal"`.
 <!-- enum IncomingMode::variant Mirror -->
-### mirror
+## mirror
 
 Sniffs on TCP port, and send a copy of the data to listeners.
 <!-- enum IncomingMode::variant Steal -->
-### steal
+## steal
 
 Stealer supports 2 modes of operation:
 
@@ -874,7 +821,7 @@ Controls the outgoing TCP traffic feature.
 See the outgoing [reference](https://mirrord.dev/docs/reference/traffic/#outgoing) for more
 details.
 
-### Minimal `outgoing` config
+## Minimal `outgoing` config
 
 ```json
 {
@@ -886,7 +833,7 @@ details.
 }
 ```
 
-### Advanced `outgoing` config
+## Advanced `outgoing` config
 
 ```json
 {
@@ -937,7 +884,7 @@ Controls mirrord network operations.
 See the network traffic [reference](https://mirrord.dev/docs/reference/traffic/)
 for more details.
 
-### Minimal `network` config
+## Minimal `network` config
 
 ```json
 {
@@ -950,7 +897,7 @@ for more details.
 }
 ```
 
-### Advanced `network` config
+## Advanced `network` config
 
 ```json
 {
@@ -978,16 +925,16 @@ for more details.
 }
 ```
 <!-- struct NetworkConfig::variant incoming -->
-### incoming
+## incoming
 
 Handles incoming network traffic, see [`incoming`](##incoming) for more details.
 <!-- struct NetworkConfig::variant outgoing -->
-### outgoing
+## outgoing
 
 Tunnel outgoing network operations through mirrord, see [`outgoing`](##outgoing) for
 more details.
 <!-- struct NetworkConfig::variant dns -->
-### dns
+## dns
 
 Resolve DNS via the remote pod.
 
