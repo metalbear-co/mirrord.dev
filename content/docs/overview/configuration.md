@@ -12,25 +12,21 @@ weight: 121
 toc: true
 ---
 
-<!-- file src/lib.rs -->
-<!-- struct LayerConfig -->
 # Mirrord configuration {#root}
 
 Mirrord allows for a high degree of customization when it comes to which features you want to
 enable, and how they should function.
 
-Mirrord features can be setup with the [`feature`](##feature) option, you'll also need to set
-up [`target`](##target) for mirrord to impersonate.
+Mirrord features can be setup with the [`feature`](#root-feature) option.
 
 ## Minimal `config.json` {#root-minimal}
 
-Most of the configuration fields have a default value, so all you really need is to specify a
-[`target`](##target) to impersonate.
+Most of the configuration fields have a default value.
 
 The minimal configuration defaults to:
-- [`network`](##network) in `"mirror"` mode;
+- [`network`](#feature-network) in `"mirror"` mode;
 - outgoing traffic enabled for both TCP and UDP
-- [`fs`](##fs) set to `"read"` (read-only file operations).
+- [`fs`](#feature-fs) set to `"read"` (read-only file operations).
 
 ```json
 {
@@ -136,16 +132,14 @@ Accepts a single value, or multiple values separated by `;`.
 
 ## target {#root-target}
 
-Specifies the running pod to mirror, see [`target`](##target) for more details.
+Specifies the target and namespace to mirror, see [`path`](#target-path) for a list of accepted
+values for the `target` option.
 
 The simplified configuration supports:
 
 - `pod/{sample-pod}/[container]/{sample-container}`;
 - `podname/{sample-pod}/[container]/{sample-container}`;
 - `deployment/{sample-deployment}/[container]/{sample-container}`;
-
-Specifies the target and namespace to mirror, see [`path`](##path) for a list of accepted values
-for the `target` option.
 
 Supports a minimal setup with:
 
@@ -360,12 +354,14 @@ Defaults to `true`.
 
 # feature {#root-feature}
 
-Controls mirrord features, see [`feature`](##feature) to learn how to set up mirrord
-only the features you want, and the
+Controls mirrord features.
+
+See the
 [technical reference, Technical Reference](https://mirrord.dev/docs/reference/)
 to learn more about what each feature does.
 
-The [`fs`](#fs) and [`network`](#network) options have support for a shortened version.
+The [`fs`](#feature-fs) and [`network`](#feature-network) options have support for a shortened
+version.
 
 ```json
 {
@@ -796,13 +792,12 @@ With this feature enabled, mirrord generates a nice crash report log.
 
 Defaults to `false`.
 
-<!-- struct LayerConfig::variant operator -->
 ## operator {#root-operator}
 
 Allow to lookup if operator is installed on cluster and use it.
 
 Defaults to `true`.
-<!-- struct LayerConfig::variant kubeconfig -->
+
 ## kubeconfig {#root-kubeconfig}
 
 Path to a kubeconfig file, if not specified, will use `KUBECONFIG`, or `~/.kube/config`, or
@@ -813,7 +808,7 @@ the in-cluster config.
  "kubeconfig": "~/bear/kube-config"
 }
 ```
-<!-- struct LayerConfig::variant sip_binaries -->
+
 ## sip_binaries {#root-sip_binaries}
 
 Binaries to patch (macOS SIP).
