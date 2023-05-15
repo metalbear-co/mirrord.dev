@@ -202,14 +202,45 @@ only the features you want, and the
 [technical reference, Technical Reference](https://mirrord.dev/docs/reference/)
 to learn more about what each feature does.
 
+
+#### Minimal `feature` config {#feature-minimal}
+
+The [`fs`](#fs) and [`network`](#network) options have support for a shortened version.
+
 ```json
 {
   "feature": {
     "env": {
+      "include": "DATABASE_USER;PUBLIC_ENV",
       "exclude": "DATABASE_PASSWORD;SECRET_ENV",
+      "overrides": {
+        "DATABASE_CONNECTION": "db://localhost:7777/my-db",
+        "LOCAL_BEAR": "panda"
+      }
+    },
+    "fs": "read",
+    "network": "mirror",
+    "capture_error_trace": false
+  }
+}
+```
+
+#### Advanced `feature` config {#feature-advanced}
+
+```json
+{
+  "feature": {
+    "env": {
+      "include": "DATABASE_USER;PUBLIC_ENV",
+      "exclude": "DATABASE_PASSWORD;SECRET_ENV",
+      "overrides": {
+        "DATABASE_CONNECTION": "db://localhost:7777/my-db",
+        "LOCAL_BEAR": "panda"
+      }
     },
     "fs": {
       "mode": "write",
+      "read_write": ".+\.json" ,
       "read_only": [ ".+\.yaml", ".+important-file\.txt" ],
       "local": [ ".+\.js", ".+\.mjs" ]
     },
@@ -218,15 +249,188 @@ to learn more about what each feature does.
         "mode": "steal",
         "http_header_filter": {
           "filter": "host: api\..+",
-        }
+          "ports": [80, 8080]
+        },
+        "port_mapping": [{ 7777: 8888 }],
+        "ignore_localhost": false,
+        "ignore_ports": [9999, 10000]
       },
       "outgoing": {
-        "udp": false,
+        "tcp": true,
+        "udp": true,
+        "ignore_localhost": false,
+        "unix_streams": "bear.+"
+      },
+      "dns": false
+    },
+    "capture_error_trace": false
+  }
+}
+```
+
+#### feature.env {#feature-env}
+
+Allows the user to set or override the local process' environment variables with the ones from
+the remote pod.
+
+Which environment variables to load from the remote pod are controlled by setting either
+[`include`](#feature-env-include) or [`exclude`](#feature-env-exclude).
+
+See the environment variables [reference](https://mirrord.dev/docs/reference/env/) for more details.
+
+```json
+{
+  "feature": {
+    "env": {
+      "include": "DATABASE_USER;PUBLIC_ENV",
+      "exclude": "DATABASE_PASSWORD;SECRET_ENV",
+      "override": {
+        "DATABASE_CONNECTION": "db://localhost:7777/my-db",
+        "LOCAL_BEAR": "panda"
       }
     }
   }
 }
 ```
+
+##### feature.env.include {#feature-env-include}
+
+Include only these remote environment variables in the local process.
+
+Value is a list separated by ";".
+
+Some environment variables are excluded by default (`PATH` for example), including these
+requires specifying them with `include`
+
+##### feature.env.exclude {#feature-env-exclude}
+
+Include the remote environment variables in the local process that are **NOT** specified by
+this option.
+
+Value is a list separated by ";".
+
+##### feature.env.override {#feature-env-override}
+
+Allows setting or overriding environment variables (locally) with a custom value.
+
+For example, if the remote pod has an environment variable `REGION=1`, but this is an
+undesirable value, it's possible to use `overrides` to set `REGION=2` (locally) instead.
+
+#### feature.fs {#feature-fs}
+
+Allows the user to specify the default behavior for file operations:
+
+1. `"read"` - Read from the remote file system (default)
+2. `"write"` - Read/Write from the remote file system.
+3. `"local"` - Read from the local file system.
+5. `"disable"` - Disable file operations.
+
+Besides the default behavior, user can specify behavior for specific regex patterns. Case
+insensitive.
+
+1. `"read_write"` - List of patterns that should be read/write remotely.
+2. `"read_only"` - List of patterns that should be read only remotely.
+3. `"local"` - List of patterns that should be read locally.
+
+The logic for choosing the behavior is as follows:
+
+1. Check if one of the patterns match the file path, do the corresponding action. There's no
+specified order if two lists match the same path, we will use the first one (and we do not
+guarantee what is first).
+
+**Warning**: Specifying the same path in two lists is unsupported and can lead to undefined
+behaviour.
+
+2. Check our "special list" - we have an internal at compile time list
+for different behavior based on patterns    to provide better UX.
+
+3. If none of the above match, use the default behavior (mode).
+
+For more information, check the file operations
+[technical reference](https://mirrord.dev/docs/reference/fileops/).
+
+You can specify this config with just:
+
+```json
+{
+  "feature": {
+    "fs": "write"
+  }
+}
+```
+
+Or fully with:
+
+```json
+{
+  "feature": {
+    "fs": {
+      "mode": "write",
+      "read_write": ".+\.json" ,
+      "read_only": [ ".+\.yaml", ".+important-file\.txt" ],
+      "local": [ ".+\.js", ".+\.mjs" ]
+    }
+  }
+}
+```
+
+##### feature.fs.mode {#feature-fs-mode}
+
+Configuration for enabling read-only or read-write file operations.
+
+These options are overriden by user specified overrides and mirrord default overrides.
+
+If you set [`"localwithoverrides"`](#feature-fs-mode-localwithoverrides) then some files can be 
+read/write remotely based on our default/user specified. 
+Default option for general file configuration.
+
+The accepted values are: `"local"`, `"localwithoverrides`, `"read"`, or `"write`.
+
+###### feature.fs.mode.local {#feature-fs-mode-local}
+
+mirrord won't do anything fs-related, all operations will be local.
+
+###### feature.fs.mode.localwithoverrides {#feature-fs-mode-localwithoverrides}
+
+mirrord will run overrides on some file operations, but most will be local.
+
+###### feature.fs.mode.read {#feature-fs-mode-read}
+
+mirrord will read files from the remote, but won't write to them.
+
+###### feature.fs.mode.write {#feature-fs-mode-write}
+
+mirrord will read/write from the remote.
+
+##### feature.fs.read_write {#feature-fs-read_write}
+
+Specify file path patterns that if matched will be read and written to the remote.
+
+##### feature.fs.read_only {#feature-fs-read_only}
+
+Specify file path patterns that if matched will be read from the remote.
+if file matching the pattern is opened for writing or read/write it will be opened locally.
+
+##### feature.fs.local {#feature-fs-local}
+
+Specify file path patterns that if matched will be opened locally.
+
+<!-- struct FeatureConfig::variant network -->
+#### feature.network {#feature-network}
+
+Controls the network feature, see [`network`](#network).
+
+For more information, check the network traffic
+[technical reference](https://mirrord.dev/docs/reference/traffic/).
+<!-- struct FeatureConfig::variant capture_error_trace -->
+#### feature.capture_error_trace {#feature-capture_error_trace}
+
+Controls the crash reporting feature.
+
+With this feature enabled, mirrord generates a nice crash report log.
+
+Defaults to `false`.
+
 <!-- struct LayerConfig::variant operator -->
 ### operator {#root-operator}
 
@@ -262,97 +466,12 @@ while `/usr/bin/bash` would apply only for that binary).
 ```
 <!-- file src/feature/fs/mode.rs -->
 <!-- enum FsModeConfig -->
-## mode (fs)
-
-Configuration for enabling read-only or read-write file operations.
-
-These options are overriden by user specified overrides and mirrord default overrides.
-
-If you set [`localwithoverrides`](###localwithoverrides) then some files can be read/write
-remotely based on our default/user specified. Default option for general file configuration.
-
-The accepted values are: `"local"`, `"localwithoverrides`, `"read"`, or `"write`.
-<!-- enum FsModeConfig::variant Local -->
-### local
-
-mirrord won't do anything fs-related, all operations will be local.
-<!-- enum FsModeConfig::variant LocalWithOverrides -->
-### localwithoverrides
-
-mirrord will run overrides on some file operations, but most will be local.
-<!-- enum FsModeConfig::variant Read -->
-### read
-
-mirrord will read files from the remote, but won't write to them.
-<!-- enum FsModeConfig::variant Write -->
-### write
-
-mirrord will read/write from the remote.
 <!-- file src/feature/fs/advanced.rs -->
 <!-- struct FsConfig -->
 ## feature.fs (advanced setup)
 
 Advanced user configuration for file operations.
 
-Allows the user to specify the default behavior for file operations:
-
-1. `"read"` - Read from the remote file system (default)
-2. `"write"` - Read/Write from the remote file system.
-3. `"local"` - Read from the local file system.
-4. `"disable"` - Disable file operations.
-
-Besides the default behavior, user can specify behavior for specific regex patterns. Case
-insensitive.
-
-1. `"read_write"` - List of patterns that should be read/write remotely.
-2. `"read_only"` - List of patterns that should be read only remotely.
-3. `"local"` - List of patterns that should be read locally.
-
-The logic for choosing the behavior is as follows:
-
-1. Check if one of the patterns match the file path, do the corresponding action. There's no
-specified order if two lists match the same path, we will use the first one (and we do not
-guarantee what is first).
-
-**Warning**: Specifying the same path in two lists is unsupported and can lead to undefined
-behaviour.
-
-2. Check our "special list" - we have an internal at compile time list
-for different behavior based on patterns    to provide better UX.
-
-3. If none of the above match, use the default behavior (mode).
-
-### Advanced `fs` config
-
-```json
-{
-  "feature": {
-    "fs": {
-      "mode": "write",
-      "read_write": ".+\.json" ,
-      "read_only": [ ".+\.yaml", ".+important-file\.txt" ],
-      "local": [ ".+\.js", ".+\.mjs" ]
-    }
-  }
-}
-```
-<!-- struct FsConfig::variant mode -->
-### feature.fs.mode
-
-File operations mode, defaults to read-only, see [`mode`](##mode).
-<!-- struct FsConfig::variant read_write -->
-### feature.fs.read_write
-
-Specify file path patterns that if matched will be read and written to the remote.
-<!-- struct FsConfig::variant read_only -->
-### feature.fs.read_only
-
-Specify file path patterns that if matched will be read from the remote.
-if file matching the pattern is opened for writing or read/write it will be opened locally.
-<!-- struct FsConfig::variant local -->
-### feature.fs.local
-
-Specify file path patterns that if matched will be opened locally.
 <!-- impl FsConfig::fn is_active -->
 Checks if fs operations are active
 <!-- file src/feature/fs.rs -->
@@ -394,56 +513,7 @@ Allows the user to specify both [`FsModeConfig`] (as above), and configuration f
 overrides.
 <!-- file src/feature/env.rs -->
 <!-- struct EnvConfig -->
-## env
 
-Allows the user to set or override the local process' environment variables with the ones from
-the remote pod.
-
-Which environment variables to load from the remote pod are controlled by setting either
-[`include`](##include) or [`exclude`](##exclude).
-
-See the environment variables [reference](https://mirrord.dev/docs/reference/env/) for more
-details.
-
-### Example `env` config
-
-```json
-{
-  "feature": {
-    "env": {
-      "include": "DATABASE_USER;PUBLIC_ENV",
-      "exclude": "DATABASE_PASSWORD;SECRET_ENV",
-      "override": {
-        "DATABASE_CONNECTION": "db://localhost:7777/my-db",
-        "LOCAL_BEAR": "panda"
-      }
-    }
-  }
-}
-```
-<!-- struct EnvConfig::variant include -->
-### include
-
-Include only these remote environment variables in the local process.
-
-Value is a list separated by ";".
-
-Some environment variables are excluded by default (`PATH` for example), including these
-requires specifying them with `include`
-<!-- struct EnvConfig::variant exclude -->
-### exclude
-
-Include the remote environment variables in the local process that are **NOT** specified by
-this option.
-
-Value is a list separated by ";".
-<!-- struct EnvConfig::variant overrides -->
-### override
-
-Allows setting or overriding environment variables (locally) with a custom value.
-
-For example, if the remote pod has an environment variable `REGION=1`, but this is an
-undesirable value, it's possible to use `overrides` to set `REGION=2` (locally) instead.
 <!-- file src/feature/network/incoming/http_filter.rs -->
 <!-- struct HttpHeaderFilterConfig -->
 ## filter (http)
@@ -906,108 +976,7 @@ Flushes existing connections when starting to steal, might fix issues where conn
 aren't stolen (due to being already established)
 
 Defaults to `true`.
-<!-- file src/feature.rs -->
-<!-- struct FeatureConfig -->
-## feature {#feature}
 
-Configuration for mirrord features.
-
-For more information, check the [technical reference](https://mirrord.dev/docs/reference/)
-of the feature.
-
-### Minimal `feature` config {#feature-minimal}
-
-The [`fs`](#fs) and [`network`](#network) options have support for a shortened version.
-
-```json
-{
-  "feature": {
-    "env": {
-      "include": "DATABASE_USER;PUBLIC_ENV",
-      "exclude": "DATABASE_PASSWORD;SECRET_ENV",
-      "overrides": {
-        "DATABASE_CONNECTION": "db://localhost:7777/my-db",
-        "LOCAL_BEAR": "panda"
-      }
-    },
-    "fs": "read",
-    "network": "mirror",
-    "capture_error_trace": false
-  }
-}
-```
-
-### Advanced `feature` config {#feature-advanced}
-
-```json
-{
-  "feature": {
-    "env": {
-      "include": "DATABASE_USER;PUBLIC_ENV",
-      "exclude": "DATABASE_PASSWORD;SECRET_ENV",
-      "overrides": {
-        "DATABASE_CONNECTION": "db://localhost:7777/my-db",
-        "LOCAL_BEAR": "panda"
-      }
-    },
-    "fs": {
-      "mode": "write",
-      "read_write": ".+\.json" ,
-      "read_only": [ ".+\.yaml", ".+important-file\.txt" ],
-      "local": [ ".+\.js", ".+\.mjs" ]
-    },
-    "network": {
-      "incoming": {
-        "mode": "steal",
-        "http_header_filter": {
-          "filter": "host: api\..+",
-          "ports": [80, 8080]
-        },
-        "port_mapping": [{ 7777: 8888 }],
-        "ignore_localhost": false,
-        "ignore_ports": [9999, 10000]
-      },
-      "outgoing": {
-        "tcp": true,
-        "udp": true,
-        "ignore_localhost": false,
-        "unix_streams": "bear.+"
-      },
-      "dns": false
-    },
-    "capture_error_trace": false
-  }
-}
-```
-<!-- struct FeatureConfig::variant env -->
-### feature.env {#feature-env}
-
-Controls the environment variables feature, see [`env`](#env).
-
-For more information, check the environment variables
-[technical reference](https://mirrord.dev/docs/reference/env/).
-<!-- struct FeatureConfig::variant fs -->
-### feature.fs {#feature-fs}
-
-Controls the file operations feature, see [`fs`](#fs).
-
-For more information, check the file operations
-[technical reference](https://mirrord.dev/docs/reference/fileops/).
-<!-- struct FeatureConfig::variant network -->
-### feature.network {#feature-network}
-
-Controls the network feature, see [`network`](#network).
-
-For more information, check the network traffic
-[technical reference](https://mirrord.dev/docs/reference/traffic/).
-<!-- struct FeatureConfig::variant capture_error_trace -->
-### feature.capture_error_trace {#feature-capture_error_trace}
-
-Controls the crash reporting feature.
-
-With this feature enabled, mirrord generates a nice crash report log.
-
-Defaults to `false`.
 <!-- file src/target.rs -->
 <!-- enum TargetFileConfig -->
 ## target {#target}
