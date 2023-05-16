@@ -19,25 +19,27 @@ enable, and how they should function.
 
 Mirrord features can be setup with the [`feature`](#root-feature) option.
 
-## Minimal `config.json` {#root-minimal}
+All of the configuration fields have a default value (or accept _nothing_), so a minimal 
+configuration would be no configuration at all.
 
-Most of the configuration fields have a default value.
+Some fields support a shortened (basic) setup.
 
-The minimal configuration defaults to:
-- [`network`](#feature-network) in `"mirror"` mode;
-- outgoing traffic enabled for both TCP and UDP
-- [`fs`](#feature-fs) set to `"read"` (read-only file operations).
+### Shortened `config.json` {#root-shortened}
+
+- Showing only fields that have a shortened version.
 
 ```json
 {
-  "target": "pod/bear-pod"
+  "target": "pod/bear-pod",
+  "feature": {
+    "env": true,
+    "fs": "read",
+    "network": true,
+  },
 }
 ```
 
-## Advanced `config.json` {#root-advanced}
-
-Both [`fs`](#feature-fs) and [`network`](#feature-network) also support a simplified configuration, 
-see their respective documentations to learn more.
+### Complete `config.json` {#root-complete}
 
 ```json
 {
@@ -141,7 +143,7 @@ The simplified configuration supports:
 - `podname/{sample-pod}/[container]/{sample-container}`;
 - `deployment/{sample-deployment}/[container]/{sample-container}`;
 
-Supports a minimal setup with:
+Shortened setup:
 
 ```json
 {
@@ -149,7 +151,7 @@ Supports a minimal setup with:
 }
 ```
 
-Or a full setup:
+Complete setup:
 
 ```json
 {
@@ -192,6 +194,11 @@ IP:PORT to connect to instead of using k8s api, for testing purposes.
 ## connect_agent_name {#root-connect_agent_name}
 
 Agent name that already exists that we can connect to.
+
+Keep in mind that the intention here is to allow reusing a long living mirrord-agent pod, and 
+**not** to connect multiple (simultaneos) mirrord instances to a single mirrord-agent, as the later 
+is not properly supported without the use of 
+[mirrord-operator](https://metalbear.co/#waitlist-form).
 
 ```json
 {
@@ -238,7 +245,9 @@ We provide sane defaults for this option, so you don't have to set up anything h
 
 Log level for the agent.
 
-Supports any string that would work with `RUST_LOG`.
+
+Supports `"trace"`, `"debug"`, `"info"`, `"warn"`, `"error"`, or any string that would work 
+with `RUST_LOG`.
 
 ```json
 {
@@ -258,8 +267,7 @@ Defaults to the current kubernetes namespace.
 
 Name of the agent's docker image.
 
-Useful when a custom build of mirrord-agent is required, or when using an internal
-registry.
+Useful when a custom build of mirrord-agent is required, or when using an internal registry.
 
 Defaults to the latest stable image `"ghcr.io/metalbear-co/mirrord:latest"`.
 
@@ -275,7 +283,7 @@ Defaults to the latest stable image `"ghcr.io/metalbear-co/mirrord:latest"`.
 
 Controls when a new agent image is downloaded.
 
-Supports any valid kubernetes
+Supports `"IfNotPresent"`, `"Always"`, `"Never"`, or any valid kubernetes
 [image pull policy](https://kubernetes.io/docs/concepts/containers/images/#image-pull-policy)
 
 Defaults to `"IfNotPresent"`
@@ -338,7 +346,9 @@ it uses `eth0`.
 
 ### agent.pause {#agent-pause}
 
-Controls target pause feature. Unstable.
+**Unstable**
+
+Controls target pause feature.
 
 With this feature enabled, the remote container is paused while clients are connected to
 the agent.
@@ -360,28 +370,8 @@ See the
 [technical reference, Technical Reference](https://mirrord.dev/docs/reference/)
 to learn more about what each feature does.
 
-The [`fs`](#feature-fs) and [`network`](#feature-network) options have support for a shortened
-version.
-
-```json
-{
-  "feature": {
-    "env": {
-      "include": "DATABASE_USER;PUBLIC_ENV",
-      "exclude": "DATABASE_PASSWORD;SECRET_ENV",
-      "overrides": {
-        "DATABASE_CONNECTION": "db://localhost:7777/my-db",
-        "LOCAL_BEAR": "panda"
-      }
-    },
-    "fs": "read",
-    "network": "mirror",
-    "capture_error_trace": false
-  }
-}
-```
-
-And a full specification:
+The [`env`](#feature-env), [`fs`](#feature-fs) and [`network`](#feature-network) options have 
+support for a shortened version, that you can see [here](#root-shortened).
 
 ```json
 {
@@ -463,6 +453,9 @@ requires specifying them with `include`
 Include the remote environment variables in the local process that are **NOT** specified by
 this option.
 
+Some of the variables that are excluded by default:
+`PATH`, `HOME`, `HOMEPATH`, `CLASSPATH`, `JAVA_EXE`, `JAVA_HOME`, `PYTHONPATH`.
+
 Value is a list separated by ";".
 
 ### feature.env.override {#feature-env-override}
@@ -481,8 +474,8 @@ Allows the user to specify the default behavior for file operations:
 3. `"local"` - Read from the local file system.
 5. `"disable"` - Disable file operations.
 
-Besides the default behavior, user can specify behavior for specific regex patterns. Case
-insensitive.
+Besides the default behavior, the user can specify behavior for specific regex patterns. 
+Case insensitive.
 
 1. `"read_write"` - List of patterns that should be read/write remotely.
 2. `"read_only"` - List of patterns that should be read only remotely.
@@ -505,18 +498,6 @@ for different behavior based on patterns    to provide better UX.
 For more information, check the file operations
 [technical reference](https://mirrord.dev/docs/reference/fileops/).
 
-You can specify this config with just:
-
-```json
-{
-  "feature": {
-    "fs": "write"
-  }
-}
-```
-
-Or fully with:
-
 ```json
 {
   "feature": {
@@ -537,7 +518,7 @@ Configuration for enabling read-only or read-write file operations.
 These options are overriden by user specified overrides and mirrord default overrides.
 
 If you set [`"localwithoverrides"`](#feature-fs-mode-localwithoverrides) then some files can be 
-read/write remotely based on our default/user specified. 
+read/write remotely based on our default/user specified.  
 Default option for general file configuration.
 
 The accepted values are: `"local"`, `"localwithoverrides`, `"read"`, or `"write`.
@@ -577,21 +558,6 @@ Controls mirrord network operations.
 
 See the network traffic [reference](https://mirrord.dev/docs/reference/traffic/)
 for more details.
-
-- Minimal config:
-
-```json
-{
-  "feature": {
-    "network": {
-      "incoming": "mirror",
-      "outgoing": true
-    }
-  }
-}
-```
-
-- Advanced config:
 
 ```json
 {
@@ -634,7 +600,7 @@ listeners;
 2. Steal: Captures the TCP data from a port, and forwards it to the local process, see
 [`"mode": "steal"`](#feature-network-incoming-mode);
 
-#### Minimal `incoming` config
+Steals all the incoming traffic:
 
 ```json
 {
@@ -646,7 +612,8 @@ listeners;
 }
 ```
 
-#### Advanced `incoming` config
+Steals only traffic that matches the 
+[`http_header_filter`](#feature-network-incoming-http_header_filter) (steals only HTTP traffic).
 
 ```json
 {
@@ -674,15 +641,12 @@ Allows selecting between mirrorring or stealing traffic.
 Can be set to either `"mirror"` (default) or `"steal"`.
 
 - `"mirror"`: Sniffs on TCP port, and send a copy of the data to listeners.
-- `"steal"`:
-
-Stealer supports 2 modes of operation:
-
-1. Port traffic stealing: Steals all TCP data from a port, which is selected whenever the
+- `"steal"`: Supports 2 modes of operation:
+  1. Port traffic stealing: Steals all TCP data from a port, which is selected whenever the
 user listens in a TCP socket (enabling the feature is enough to make this work, no
 additional configuration is needed);
 
-2. HTTP traffic stealing: Steals only HTTP traffic, mirrord tries to detect if the incoming
+  2. HTTP traffic stealing: Steals only HTTP traffic, mirrord tries to detect if the incoming
 data on a port is HTTP (in a best-effort kind of way, not guaranteed to be HTTP), and
 steals the traffic on the port if it is HTTP;
 
@@ -717,8 +681,11 @@ on port `80`. You'd use `[[9333, 80]]`
 
 #### feature.network.incoming.ignore_ports {#feature-network-incoming-ignore_ports}
 
-Ports to ignore when mirroring/stealing traffic. Useful if you want specific ports to be
-used locally only.
+Ports to ignore when mirroring/stealing traffic, these ports will remain local.
+
+Can be especially useful when [`feature.network.incoming.mode`](#feature-network-incoming-mode) is 
+set to `"stealer"`, and you want to avoid redirecting traffic from some ports (for example, traffic
+from a health probe, or other heartbeat-like traffic).
 
 ### feature.network.outgoing {#feature-network-outgoing}
 
@@ -726,16 +693,6 @@ Tunnel outgoing network operations through mirrord.
 
 See the outgoing [reference](https://mirrord.dev/docs/reference/traffic/#outgoing) for more
 details.
-
-```json
-{
-  "feature": {
-    "network": {
-      "outgoing": true,
-    }
-  }
-}
-```
 
 ```json
 {
