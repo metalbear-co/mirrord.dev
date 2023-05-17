@@ -12,7 +12,7 @@ weight: 121
 toc: true
 ---
 
-# Mirrord configuration {#root}
+# Setting up mirrord {#root}
 
 Mirrord allows for a high degree of customization when it comes to which features you want to
 enable, and how they should function.
