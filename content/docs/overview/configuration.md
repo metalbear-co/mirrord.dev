@@ -34,8 +34,8 @@ Some fields support a shortened (basic) setup.
   "feature": {
     "env": true,
     "fs": "read",
-    "network": true,
-  },
+    "network": true
+  }
 }
 ```
 
@@ -47,7 +47,7 @@ Some fields support a shortened (basic) setup.
   "skip_processes": "ide-debugger",
   "target": {
     "path": "pod/bear-pod",
-    "namespace": "default",
+    "namespace": "default"
   },
   "connect_tcp": null,
   "connect_agent_name": "mirrord-agent-still-alive",
@@ -64,7 +64,7 @@ Some fields support a shortened (basic) setup.
     "startup_timeout": 360,
     "network_interface": "eth0",
     "pause": false,
-    "flush_connections": true,
+    "flush_connections": true
   },
   "feature": {
     "env": {
@@ -104,7 +104,7 @@ Some fields support a shortened (basic) setup.
   },
   "operator": true,
   "kubeconfig": "~/.kube/config",
-  "sip_binaries": "bash",
+  "sip_binaries": "bash"
 }
 ```
 
@@ -252,7 +252,7 @@ with `RUST_LOG`.
 ```json
 {
   "agent": {
-    "log_level": "mirrord=debug,warn",
+    "log_level": "mirrord=debug,warn"
   }
 }
 ```
@@ -571,7 +571,7 @@ for more details.
         },
         "port_mapping": [[ 7777, 8888 ]],
         "ignore_localhost": false,
-        "ignore_ports": [9999, 10000],
+        "ignore_ports": [9999, 10000]
       },
       "outgoing": {
         "tcp": true,
