@@ -11,6 +11,8 @@ description: >-
   code in the context of the remote environment.
 images:
   - logo.jpg
+options:
+  - scrollSpy: true
 ogLocale: en_US
 domainTLD: mirrord.dev
 titleHome: mirrord

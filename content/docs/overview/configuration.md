@@ -1,8 +1,8 @@
 ---
 title: "Configuration"
 description: "Config"
-date: 2020-11-16T13:59:39+01:00
-lastmod: 2020-11-16T13:59:39+01:00
+date: 2023-05-17T13:59:39+01:00
+lastmod: 2023-05-17T13:59:39+01:00
 draft: false
 images: []
 menu:
