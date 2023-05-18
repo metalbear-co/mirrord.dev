@@ -14,19 +14,16 @@ toc: true
 
 # Setting up mirrord {#root}
 
-Mirrord allows for a high degree of customization when it comes to which features you want to
+mirrord allows for a high degree of customization when it comes to which features you want to
 enable, and how they should function.
 
-Mirrord features can be setup with the [`feature`](#root-feature) option.
+All of the configuration fields have a default value, so a minimal configuration would be no 
+configuration at all.
 
-All of the configuration fields have a default value (or accept _nothing_), so a minimal 
-configuration would be no configuration at all.
-
-Some fields support a shortened (basic) setup.
-
-### Shortened `config.json` {#root-shortened}
-
-- Showing only fields that have a shortened version.
+To help you get started, here are examples of a basic configuration file, and a complete 
+configuration file containing all fields.
+ 
+### Basic `config.json` {#root-basic}
 
 ```json
 {
@@ -137,13 +134,13 @@ Accepts a single value, or multiple values separated by `;`.
 Specifies the target and namespace to mirror, see [`path`](#target-path) for a list of accepted
 values for the `target` option.
 
-The simplified configuration supports:
+The basic configuration supports:
 
 - `pod/{sample-pod}/[container]/{sample-container}`;
 - `podname/{sample-pod}/[container]/{sample-container}`;
 - `deployment/{sample-deployment}/[container]/{sample-container}`;
 
-Shortened setup:
+Basic setup:
 
 ```json
 {
@@ -196,7 +193,7 @@ IP:PORT to connect to instead of using k8s api, for testing purposes.
 Agent name that already exists that we can connect to.
 
 Keep in mind that the intention here is to allow reusing a long living mirrord-agent pod, and 
-**not** to connect multiple (simultaneos) mirrord instances to a single mirrord-agent, as the later 
+**not** to connect multiple (simultaneous) mirrord instances to a single mirrord-agent, as the later 
 is not properly supported without the use of 
 [mirrord-operator](https://metalbear.co/#waitlist-form).
 
@@ -366,12 +363,11 @@ Defaults to `true`.
 
 Controls mirrord features.
 
-See the
-[technical reference, Technical Reference](https://mirrord.dev/docs/reference/)
-to learn more about what each feature does.
+See the [technical reference](https://mirrord.dev/docs/reference/) to learn more about what each 
+feature does.
 
 The [`env`](#feature-env), [`fs`](#feature-fs) and [`network`](#feature-network) options have 
-support for a shortened version, that you can see [here](#root-shortened).
+support for a basic version, that you can see [here](#root-basic).
 
 ```json
 {
