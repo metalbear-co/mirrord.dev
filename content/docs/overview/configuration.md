@@ -168,7 +168,7 @@ Supports:
 
 - `pod/{sample-pod}`;
 - `deployment/{sample-deployment}`;
-- `container/{sample-container}`;
+- `pod/{sample-pod}/container/{sample-container}`;
 
 ### target.namespace {#target-namespace}
 
