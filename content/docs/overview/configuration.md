@@ -186,21 +186,6 @@ IP:PORT to connect to instead of using k8s api, for testing purposes.
 }
 ```
 
-## connect_agent_name {#root-connect_agent_name}
-
-Agent name that already exists that we can connect to.
-
-Keep in mind that the intention here is to allow reusing a long living mirrord-agent pod, and 
-**not** to connect multiple (simultaneous) mirrord instances to a single mirrord-agent, as the later 
-is not properly supported without the use of 
-[mirrord-operator](https://metalbear.co/#waitlist-form).
-
-```json
-{
-  "connect_agent_name": "mirrord-agent-still-alive"
-}
-```
-
 ## connect_agent_port {#root-connect_agent_port}
 
 Agent listen port that already exists that we can connect to.
