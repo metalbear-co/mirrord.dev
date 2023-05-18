@@ -2,7 +2,7 @@
 title: "Configuration"
 description: "Config"
 date: 2023-05-17T13:59:39+01:00
-lastmod: 2023-05-17T13:59:39+01:00
+lastmod: 2023-05-18T13:59:39+01:00
 draft: false
 images: []
 menu:
