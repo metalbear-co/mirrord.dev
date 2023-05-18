@@ -45,8 +45,6 @@ configuration file containing all fields.
     "namespace": "default"
   },
   "connect_tcp": null,
-  "connect_agent_name": "mirrord-agent-still-alive",
-  "connect_agent_port": "7777",
   "agent": {
     "log_level": "info",
     "namespace": "default",
@@ -211,16 +209,6 @@ Supports:
 Namespace where the target lives.
 
 Defaults to `"default"`.
-
-## connect_agent_port {#root-connect_agent_port}
-
-Agent listen port that already exists that we can connect to.
-
-```json
-{
-  "connect_agent_port": "8888"
-}
-```
 
 ## agent {#root-agent}
 
