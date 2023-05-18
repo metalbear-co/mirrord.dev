@@ -127,6 +127,49 @@ Accepts a single value, or multiple values separated by `;`.
 }
 ```
 
+## connect_tcp {#root-connect_tcp}
+
+IP:PORT to connect to instead of using k8s api, for testing purposes.
+
+```json
+{
+  "connect_tcp": "10.10.0.100:7777"
+}
+```
+
+## operator {#root-operator}
+
+Allow to lookup if operator is installed on cluster and use it.
+
+Defaults to `true`.
+
+## kubeconfig {#root-kubeconfig}
+
+Path to a kubeconfig file, if not specified, will use `KUBECONFIG`, or `~/.kube/config`, or
+the in-cluster config.
+
+```json
+{
+ "kubeconfig": "~/bear/kube-config"
+}
+```
+
+## sip_binaries {#root-sip_binaries}
+
+Binaries to patch (macOS SIP).
+
+Use this when mirrord isn't loaded to protected binaries that weren't automatically
+patched.
+
+Runs `endswith` on the binary path (so `bash` would apply to any binary ending with `bash`
+while `/usr/bin/bash` would apply only for that binary).
+
+```json
+{
+ "sip_binaries": "bash;python"
+}
+```
+
 ## target {#root-target}
 
 Specifies the target and namespace to mirror, see [`path`](#target-path) for a list of accepted
@@ -168,16 +211,6 @@ Supports:
 Namespace where the target lives.
 
 Defaults to `"default"`.
-
-## connect_tcp {#root-connect_tcp}
-
-IP:PORT to connect to instead of using k8s api, for testing purposes.
-
-```json
-{
-  "connect_tcp": "10.10.0.100:7777"
-}
-```
 
 ## connect_agent_port {#root-connect_agent_port}
 
@@ -720,36 +753,3 @@ Controls the crash reporting feature.
 With this feature enabled, mirrord generates a nice crash report log.
 
 Defaults to `false`.
-
-## operator {#root-operator}
-
-Allow to lookup if operator is installed on cluster and use it.
-
-Defaults to `true`.
-
-## kubeconfig {#root-kubeconfig}
-
-Path to a kubeconfig file, if not specified, will use `KUBECONFIG`, or `~/.kube/config`, or
-the in-cluster config.
-
-```json
-{
- "kubeconfig": "~/bear/kube-config"
-}
-```
-
-## sip_binaries {#root-sip_binaries}
-
-Binaries to patch (macOS SIP).
-
-Use this when mirrord isn't loaded to protected binaries that weren't automatically
-patched.
-
-Runs `endswith` on the binary path (so `bash` would apply to any binary ending with `bash`
-while `/usr/bin/bash` would apply only for that binary).
-
-```json
-{
- "sip_binaries": "bash;python"
-}
-```
