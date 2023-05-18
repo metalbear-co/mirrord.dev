@@ -2284,6 +2284,8 @@ body {
   margin-bottom: 0px;
   list-style-type: none;
   padding-left: 0px;
+  height: 480px;
+  overflow-y: auto;
 }
 
 .docs__toc #TableOfContents ul > li, 
