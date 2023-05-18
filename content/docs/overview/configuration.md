@@ -137,7 +137,6 @@ values for the `target` option.
 The basic configuration supports:
 
 - `pod/{sample-pod}/[container]/{sample-container}`;
-- `podname/{sample-pod}/[container]/{sample-container}`;
 - `deployment/{sample-deployment}/[container]/{sample-container}`;
 
 Basic setup:
@@ -166,11 +165,10 @@ Complete setup:
 Specifies the running pod (or deployment) to mirror.
 
 Supports:
+
 - `pod/{sample-pod}`;
-- `podname/{sample-pod}`;
 - `deployment/{sample-deployment}`;
 - `container/{sample-container}`;
-- `containername/{sample-container}`.
 
 ### target.namespace {#target-namespace}
 
