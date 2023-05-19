@@ -19,16 +19,16 @@ access to the remote target's network environment, file system and environment v
 configuration (you can specify a target but tell mirrord not to access its file system, for example).
 When a target is specified, [mirrord's agent](/docs/overview/architecture/#mirrord-agent) will be created on the same
 node as the target pod.
-There are several kinds of possible targets, that are explained below. There are also multiple ways to specify a
-target for mirrord - you can specify it in a configuration file, in an IDE dialog, or on CLI with an argument or an
+The several kinds of supported targets are detailed below. There are also multiple ways to specify a
+target for mirrord: you can specify it in a configuration file, in an IDE dialog, or in the CLI with an argument or an
 environment variable.
 
 ### Running without a target
 
 When no target is specified, mirrord will start a *targetless* agent. That can be useful when you want to connect to
-services from within the cluster, but you don't have any target that you want to "impersonate". When running
+services from within the cluster, but you don't have any target that you want to "impersonate" - like when running an external utility or a new microservice. When running
 targetless, mirrord will forward any connections initiated by your application to be sent out of the cluster, but it
-will not mirror or steal incoming traffic, as a targetless agent is not connected to any kubernetes service and does not
+will not mirror or steal incoming traffic, as a targetless agent is not connected to any Kubernetes service and does not
 expose any ports. This means that if your application binds a port and listens on it, that will all happen locally,
 on your machine. You can use this fact to run management programs (like e.g. pgAdmin) and have them listen for
 connections on `localhost`, but connect to remote services in the cluster.
@@ -56,9 +56,9 @@ namespace.
 
 ## Specifying a target
 
-There are multiple ways to specify a target for a run. You can pick whichever one is most convenient for you.
+There are multiple ways to specify a target.
 In all the possible interfaces for specifying a target, the basic format is `<resource-type>/<resource-name>`
-followed by optional `/container/<container-name>`. So for specifying a target without specifying a container you
+optionally followed by `/container/<container-name>`. So for specifying a target without specifying a container you
 can pass
 
 ```
@@ -84,7 +84,7 @@ And for also specifying a container, you just add `/container/<CONTAINER-NAME>` 
 ### Using a configuration file
 
 The target path from the last section is set under the `target.path` field. The target's namespace can be set under
-`target.namespace`.
+`target.namespace`. By default, the namespace currently specified in the local `kubeconfig` is used.
 
 ```json
 {
@@ -97,10 +97,10 @@ The target path from the last section is set under the `target.path` field. The 
 
 ### Using an IDE's dialog
 
-If you are running from your IDE with the mirrord extension/plugin, and you didn't specify a target via a
+If you are running one of mirrord's IDE extensions and you didn't specify a target via a
 configuration file, a dialog will pop up for you to pick a target. If you want to choose a target from a different
-namespace than the one currently configured to be used by `kubectl`, you can set a target namespace in the
-[configuration file](#using-a-configuration-file), and the dialog will then contain potential targets out of that
+namespace you can set a target namespace in the
+[configuration file](#using-a-configuration-file), and the dialog will then contain targets in that
 namespace.
 Choose the `No Target ("targetless")` option in the dialog in order to run without a target.
 
