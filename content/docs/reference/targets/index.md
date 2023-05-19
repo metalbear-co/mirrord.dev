@@ -36,8 +36,8 @@ connections on `localhost`, but connect to remote services in the cluster.
 In order to run targetless, you need to not specify a target in the configuration file, in case you are using one.
 In your IDE you can pick the `No Target ("targetless")` option in the target selection dialog (or just not make a
 selection).
-Moreover, the [environment variable used to specify a target](#using-an-environment-variable) has to be unset
-(or set to an empty value) if you want to run targetless.
+Moreover, you should make sure [the environment variable used to specify a target](#using-an-environment-variable)
+isn't set (or is set to an empty value) if you want to run targetless.
 
 > **Note:** In order to set the namespace the agent is going to be created in, set the agent namespace, not the
 > target namespace. That value can be set via the `agent.namespace` configuration file field, the -a CLI argument,
