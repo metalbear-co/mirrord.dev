@@ -76,10 +76,12 @@ e.g. `pod/lolz-64698df9b7-6plq8`,
 And for also specifying a container, you just add `/container/<CONTAINER-NAME>` at the end, e.g.
 `pod/lolz-64698df9b7-6plq8/container/main-container`.
 
-### Using a configuration file
+### Using a [configuration file](https://mirrord.dev/docs/overview/configuration/)
 
-The target path from the last section is set under the `target.path` field. The target's namespace can be set under
-`target.namespace`. By default, the namespace currently specified in the local `kubeconfig` is used.
+The target path from the last section is set under the
+[`target.path`](https://mirrord.dev/docs/overview/configuration/#target-path) field. The target's namespace can be set
+under [`target.namespace`](https://mirrord.dev/docs/overview/configuration/#target-namespace). By default, the namespace
+currently specified in the local `kubeconfig` is used.
 
 ```json
 {
