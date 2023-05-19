@@ -14,13 +14,13 @@ toc: true
 
 ## Overview
 
-You can specify a target on your cluster for mirrord. When specified, mirrord will give your local application
+You can specify a target on your cluster for mirrord, giving your local application
 access to the remote target's network environment, file system and environment variables, according to the
-configuration (you can specify a target but tell mirrord not to access its file system, for example).
-When a target is specified, [mirrord's agent](/docs/overview/architecture/#mirrord-agent) will be created on the same
+[configuration](https://mirrord.dev/docs/overview/configuration/).
+When a target is specified, a [mirrord-agent](/docs/overview/architecture/#mirrord-agent) pod will be created on the same
 node as the target pod.
 The several kinds of supported targets are detailed below. There are also multiple ways to specify a
-target for mirrord: you can specify it in a configuration file, in an IDE dialog, or in the CLI with an argument or an
+target for mirrord: you can do it in a configuration file, in an IDE dialog, or in the CLI with an argument or an
 environment variable.
 
 ### Running without a target
