@@ -48,7 +48,7 @@ Moreover, the [environment variable used to specify a target](#using-an-environm
 You can either target a pod or a deployment, and you can also name a specific container in that deployment or pod to
 target. When targeting a pod without specifying a container, the first container found in that pod will be targeted.
 When targeting a deployment without specifying a container, the first container of the first pod found in the
-deployment will be used.
+deployment will be used (impersonating all pods in a deployment is supported in [mirrord for teams](https://metalbear.co/#waitlist-form)).
 
 You can specify a target namespace if the target should be found in that namespace instead of the namespace that is
 currently used by `kubectl`. See the different interfaces below for possible ways of specifying the target and its
@@ -60,11 +60,6 @@ There are multiple ways to specify a target.
 In all the possible interfaces for specifying a target, the basic format is `<resource-type>/<resource-name>`
 optionally followed by `/container/<container-name>`. So for specifying a target without specifying a container you
 can pass
-
-```
-deployment/<YOUR-DEPLOYMENT-NAME>
-```
-e.g. `deployment/lolz`,
 
 ```
 deploy/<YOUR-DEPLOYMENT-NAME>
