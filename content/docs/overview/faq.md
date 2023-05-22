@@ -75,6 +75,7 @@ Our main goal in future versions of mirrord is to reduce the risk of disruption 
 
 The main differences are:
 * mirrord works on the process level, meaning it doesn't require you to run a "daemon" locally and it doesn't change your local machine settings. For example, if you run another process, it *won't* be affected by mirrord.
+* This means that you can run **many** services at the same time, each in different context without needing containers.
 * mirrord doesn't require you to install anything on the cluster.
 * mirrord duplicates traffic and doesn't intercept/steal it by default.
 
