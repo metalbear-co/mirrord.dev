@@ -30,8 +30,8 @@ services from within the cluster, but you don't have any target that you want to
 targetless, mirrord will forward any connections initiated by your application to be sent out of the cluster, but it
 will not mirror or steal incoming traffic, as a targetless agent is not connected to any Kubernetes service and does not
 expose any ports. This means that if your application binds a port and listens on it, that will all happen locally,
-on your machine. You can use this fact to run management programs (like e.g. pgAdmin) and have them listen for
-connections on `localhost`, but connect to remote services in the cluster.
+on your machine. So if you're using a management program that exposes a web interface, you can have it listen for
+connections on `localhost`, and connect to remote services in the cluster.
 
 In order to run targetless, you need to not specify a target in the configuration file, in case you are using one.
 In your IDE you can pick the `No Target ("targetless")` option in the target selection dialog (or just not make a
