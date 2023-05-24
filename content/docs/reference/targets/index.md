@@ -37,7 +37,7 @@ In order to run targetless, you need to not specify a target in the configuratio
 In your IDE you can pick the `No Target ("targetless")` option in the target selection dialog (or just not make a
 selection).
 Moreover, you should make sure [the environment variable used to specify a target](#using-an-environment-variable)
-isn't set (or is set to an empty value) if you want to run targetless.
+isn't set (or is set to an empty value).
 
 > **Note:** In order to set the namespace the agent is going to be created in, set the agent namespace, not the
 > target namespace. That value can be set via the [`agent.namespace` configuration file field](https://mirrord.dev/docs/overview/configuration/#agent-namespace), the -a CLI argument,
