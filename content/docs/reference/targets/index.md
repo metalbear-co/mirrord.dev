@@ -23,26 +23,6 @@ The several kinds of supported targets are detailed below. There are also multip
 target for mirrord: you can do it in a configuration file, in an IDE dialog, or in the CLI with an argument or an
 environment variable.
 
-### Running without a target
-
-When no target is specified, mirrord will start a *targetless* agent. That can be useful when you want to connect to
-services from within the cluster, but you don't have any target that you want to "impersonate" - like when running an external utility or a new microservice. When running
-targetless, mirrord will forward any connections initiated by your application to be sent out of the cluster, but it
-will not mirror or steal incoming traffic, as a targetless agent is not connected to any Kubernetes service and does not
-expose any ports. This means that if your application binds a port and listens on it, that will all happen locally,
-on your machine. So if you're using a management program that exposes a web interface, you can have it listen for
-connections on `localhost`, and connect to remote services in the cluster.
-
-In order to run targetless, you need to not specify a target in the configuration file, in case you are using one.
-In your IDE you can pick the `No Target ("targetless")` option in the target selection dialog (or just not make a
-selection).
-Moreover, you should make sure [the environment variable used to specify a target](#using-an-environment-variable)
-isn't set (or is set to an empty value).
-
-> **Note:** In order to set the namespace the agent is going to be created in, set the agent namespace, not the
-> target namespace. That value can be set via the [`agent.namespace` configuration file field](https://mirrord.dev/docs/overview/configuration/#agent-namespace), the -a CLI argument,
-> or the `MIRRORD_AGENT_NAMESPACE` environment variable.
-
 ## Possible targets
 
 You can either target a pod or a deployment, and you can also name a specific container in that deployment or pod to
@@ -112,3 +92,23 @@ if other values are set in a configuration file or in environment variables.
 You can set the target using the environment variable `MIRRORD_IMPERSONATED_TARGET` and the target's namespace using
 the environment variable `MIRRORD_TARGET_NAMESPACE`. Values specified by environment variables will be used even if
 other values are set in a configuration file.
+
+## Running without a target
+
+When no target is specified, mirrord will start a *targetless* agent. That can be useful when you want to connect to
+services from within the cluster, but you don't have any target that you want to "impersonate" - like when running an external utility or a new microservice. When running
+targetless, mirrord will forward any connections initiated by your application to be sent out of the cluster, but it
+will not mirror or steal incoming traffic, as a targetless agent is not connected to any Kubernetes service and does not
+expose any ports. This means that if your application binds a port and listens on it, that will all happen locally,
+on your machine. So if you're using a management program that exposes a web interface, you can have it listen for
+connections on `localhost`, and connect to remote services in the cluster.
+
+In order to run targetless, you need to not specify a target in the configuration file, in case you are using one.
+In your IDE you can pick the `No Target ("targetless")` option in the target selection dialog (or just not make a
+selection).
+Moreover, you should make sure [the environment variable used to specify a target](#using-an-environment-variable)
+isn't set (or is set to an empty value).
+
+> **Note:** In order to set the namespace the agent is going to be created in, set the agent namespace, not the
+> target namespace. That value can be set via the [`agent.namespace` configuration file field](https://mirrord.dev/docs/overview/configuration/#agent-namespace), the -a CLI argument,
+> or the `MIRRORD_AGENT_NAMESPACE` environment variable.
