@@ -36,8 +36,12 @@ mirrord can be used in three ways:
 
 #### Installation
 
-To install the CLI, run the following command:
+To install the CLI, run:
 
+```bash
+brew install metalbear-co/mirrord/mirrord
+```
+or
 ```bash
 curl -fsSL https://raw.githubusercontent.com/metalbear-co/mirrord/main/scripts/install.sh | bash
 ```
@@ -63,7 +67,7 @@ Use `mirrord exec --help` to get all possible commands + arguments.
 
 #### Installation
 
-You can install the extension directly in the IDE, or download it from the marketplace [here](https://marketplace.visualstudio.com/items?itemName=MetalBear.mirrord).
+You can install the extension directly in the IDE (Extensions -> search for 'mirrord'), or download it from the marketplace [here](https://marketplace.visualstudio.com/items?itemName=MetalBear.mirrord).
 
 #### Usage
 
@@ -72,7 +76,7 @@ To use extension, click the 'Enable mirrord' button in the status bar at the bot
 #### Configuration
 
 The VS Code extension reads its configuration from the following file: `<project-path>/.mirrord/mirrord.json`. You can also prepend a prefix, e.g. `my-config.mirrord.json`, or use .toml or .yaml format.
-It's documented [here](https://mirrord.dev/docs/overview/configuration/). It also supports autocomplete when edited in VS Code when the extension is installed.
+Configuration options are listed [here](https://mirrord.dev/docs/overview/configuration/). The configuration file also supports autocomplete when edited in VS Code when the extension is installed.
 
 ### IntelliJ Plugin
 
@@ -86,10 +90,5 @@ To use extension, click the mirrord icon in the Navigation Toolbar at the top ri
 
 #### Configuration
 
-Some configuration is currently available when selecting the pod to impersonate:
-- `Enable File Operations` - Enable to override your process' file reads and writes to use the pod's filesystem instead.
-- `Enable Remote DNS` - Enable to override your process' DNS lookups to use the pod's DNS instead.
-- `Enable Ephemeral Containers` - Enable to use ephemeral containers to run the mirrord agent, rather than a Job.
-- `Agent Log Level` - The log level for the mirrord agent.
-- `Layer Log Level` - The log level for the mirrord layer.
-
+The IntelliJ plugin reads its configuration from the following file: `<project-path>/.mirrord/mirrord.json`. You can also prepend a prefix, e.g. `my-config.mirrord.json`, or use .toml or .yaml format.
+Configuration options are listed [here](https://mirrord.dev/docs/overview/configuration/).
