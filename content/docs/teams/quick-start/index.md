@@ -17,7 +17,7 @@ toc: true
 ## Installing the mirrord Operator
 NOTE: This has to be performed by a user with elevated permissions to the cluster.
 
-1. Install the mirrord CLI.
+1. Install the [mirrord CLI](/docs/overview/quick-start/#cli-tool).
 2. Run the `mirrord operator setup` command. The base of the command is:
 ​
 `mirrord operator setup [OPTIONS] | kubectl apply -f -`
