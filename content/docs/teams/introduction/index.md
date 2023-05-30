@@ -30,6 +30,8 @@ In the basic version of mirrord, mirrord injects itself into the local process, 
 
 In mirrord for Teams, we introduce a new component - the mirrord Operator. The Operator is a Kubernetes operator that runs persistently in the cluster and manages the mirrord instances trying to access it. The Operator itself is the one creating mirrord agents, so individual users no longer need elevated Kubernetes permissions to use mirrord. Additionally, a centralized component makes possible things like simultaneous use, or limiting access or specific actions to certain cluster components.
 
+{{<figure src="operator-architecture.svg" alt="mirrord - Architecture">}}
+
 ## Supported Features
 The following functionality is currently available in mirrord for Teams that isn't available in the open-source version:
 - **Simultaneous use** - multiple users can use mirrord on the same pod at the same time.
