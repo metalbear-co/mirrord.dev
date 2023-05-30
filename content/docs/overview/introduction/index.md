@@ -32,7 +32,7 @@ With *mirrord*, we're trying to remove the costs associated with deployment to s
 
 mirrord runs in two places - in the memory of your local process (`mirrord-layer`), and as a pod in your cloud environment (`mirrord-agent`).
 
-{{<figure src="../architecture/architecture.svg" alt="mirrord - Basic Architecture" class="bg-white center large-width" style="overflow:hidden; width:795px" >}}
+{{<figure src="../architecture/architecture.svg" alt="mirrord - Basic Architecture" class="bg-white center large-width zoomable" style="overflow:hidden; width:795px" >}}
 
 When you start your local process with mirrord, it creates a pod in your cloud environment, which listens in on the pod you've passed as an argument. `mirrord-layer` then does the following:
 * Override the process' syscalls to:

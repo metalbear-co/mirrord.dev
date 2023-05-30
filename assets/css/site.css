@@ -3276,6 +3276,11 @@ body {
   .group:hover .lg\:group-hover\:opacity-100 {
     opacity: 1;
   }
+
+  .medium-zoom-image--opened {
+    z-index: 9999;
+  }
+
 }
 
 
