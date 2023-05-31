@@ -2,7 +2,7 @@
 title: "Testing & Development"
 description: "Setup environment for testing and developing mirrord"
 date: 2022-06-15T08:48:45+00:00
-lastmod: 2022-06-15T08:48:45+00:00
+lastmod: 2023-05-31T08:48:45+00:00
 draft: false
 images: []
 menu:
@@ -293,3 +293,11 @@ Run Cargo test
 ```bash
 cargo test --package tests
 ```
+
+### Build `configuration.md`
+
+To generate the `configuration.md` that you see in the [docs page](https://mirrord.dev/docs/overview/configuration/)
+we use the `medschool` tool as such:
+
+1. `cd` into `mirrod/mirrod/config`;
+2. run `medschool` (from wherever the tool is built, for example `./target/release/medschool`);
