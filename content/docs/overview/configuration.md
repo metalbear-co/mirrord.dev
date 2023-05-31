@@ -2,7 +2,7 @@
 title: "Configuration"
 description: "Config"
 date: 2023-05-17T13:59:39+01:00
-lastmod: 2023-05-18T13:59:39+01:00
+lastmod: 2023-31-18T13:59:39+01:00
 draft: false
 images: []
 menu:
@@ -40,6 +40,7 @@ configuration file containing all fields.
 {
   "accept_invalid_certificates": false,
   "skip_processes": "ide-debugger",
+  "pause": false,
   "target": {
     "path": "pod/bear-pod",
     "namespace": "default"
@@ -56,7 +57,6 @@ configuration file containing all fields.
     "communication_timeout": 30,
     "startup_timeout": 360,
     "network_interface": "eth0",
-    "pause": false,
     "flush_connections": true
   },
   "feature": {
@@ -103,8 +103,14 @@ configuration file containing all fields.
 
 # Options {#root-options}
 
-## pause {#root-pause}
+## accept_invalid_certificates {#root-accept_invalid_certificates}
 
+Controls whether or not mirrord accepts invalid TLS certificates (e.g. self-signed
+certificates).
+
+Defaults to `false`.
+
+## pause {#root-pause}
 Controls target pause feature. Unstable.
 
 With this feature enabled, the remote container is paused while this layer is connected to
@@ -117,13 +123,6 @@ Defaults to `false`.
 Allow to lookup if operator is installed on cluster and use it.
 
 Defaults to `true`.
-
-## accept_invalid_certificates {#root-accept_invalid_certificates}
-
-Controls whether or not mirrord accepts invalid TLS certificates (e.g. self-signed
-certificates).
-
-Defaults to `false`.
 
 ## sip_binaries {#root-sip_binaries}
 
@@ -138,6 +137,17 @@ while `/usr/bin/bash` would apply only for that binary).
 ```json
 {
  "sip_binaries": "bash;python"
+}
+```
+
+## kubeconfig {#root-kubeconfig}
+
+Path to a kubeconfig file, if not specified, will use `KUBECONFIG`, or `~/.kube/config`, or
+the in-cluster config.
+
+```json
+{
+ "kubeconfig": "~/bear/kube-config"
 }
 ```
 
@@ -162,17 +172,6 @@ IP:PORT to connect to instead of using k8s api, for testing purposes.
 ```json
 {
   "connect_tcp": "10.10.0.100:7777"
-}
-```
-
-## kubeconfig {#root-kubeconfig}
-
-Path to a kubeconfig file, if not specified, will use `KUBECONFIG`, or `~/.kube/config`, or
-the in-cluster config.
-
-```json
-{
- "kubeconfig": "~/bear/kube-config"
 }
 ```
 
@@ -201,12 +200,13 @@ We provide sane defaults for this option, so you don't have to set up anything h
 }
 ```
 
-### agent.communication_timeout {#agent-communication_timeout}
+### agent.startup_timeout {#agent-startup_timeout}
 
-Controls how long the agent lives when there are no connections.
+Controls how long to wait for the agent to finish initialization.
 
-Each connection has its own heartbeat mechanism, so even if the local application has no
-messages, the agent stays alive until there are no more heartbeat messages.
+If initialization takes longer than this value, mirrord exits.
+
+Defaults to `60`.
 
 ### agent.ttl {#agent-ttl}
 
@@ -216,13 +216,12 @@ Can be useful for collecting logs.
 
 Defaults to `1`.
 
-### agent.startup_timeout {#agent-startup_timeout}
+### agent.communication_timeout {#agent-communication_timeout}
 
-Controls how long to wait for the agent to finish initialization.
+Controls how long the agent lives when there are no connections.
 
-If initialization takes longer than this value, mirrord exits.
-
-Defaults to `60`.
+Each connection has its own heartbeat mechanism, so even if the local application has no
+messages, the agent stays alive until there are no more heartbeat messages.
 
 ### agent.flush_connections {#agent-flush_connections}
 
@@ -238,6 +237,22 @@ Runs the agent as an
 
 Defaults to `false`.
 
+### agent.log_level {#agent-log_level}
+
+Log level for the agent.
+
+
+Supports `"trace"`, `"debug"`, `"info"`, `"warn"`, `"error"`, or any string that would work
+with `RUST_LOG`.
+
+```json
+{
+  "agent": {
+    "log_level": "mirrord=debug,warn"
+  }
+}
+```
+
 ### agent.network_interface {#agent-network_interface}
 
 Which network interface to use for mirroring.
@@ -245,11 +260,22 @@ Which network interface to use for mirroring.
 The default behavior is try to access the internet and use that interface. If that fails
 it uses `eth0`.
 
-### agent.namespace {#agent-namespace}
+### agent.image {#agent-image}
 
-Namespace where the agent shall live.
+Name of the agent's docker image.
 
-Defaults to the current kubernetes namespace.
+Useful when a custom build of mirrord-agent is required, or when using an internal
+registry.
+
+Defaults to the latest stable image `"ghcr.io/metalbear-co/mirrord:latest"`.
+
+```json
+{
+  "agent": {
+    "image": "internal.repo/images/mirrord:latest"
+  }
+}
+```
 
 ### agent.image_pull_policy {#agent-image_pull_policy}
 
@@ -279,38 +305,11 @@ Read more [here](https://kubernetes.io/docs/concepts/containers/images/).
 }
 ```
 
-### agent.image {#agent-image}
+### agent.namespace {#agent-namespace}
 
-Name of the agent's docker image.
+Namespace where the agent shall live.
 
-Useful when a custom build of mirrord-agent is required, or when using an internal
-registry.
-
-Defaults to the latest stable image `"ghcr.io/metalbear-co/mirrord:latest"`.
-
-```json
-{
-  "agent": {
-    "image": "internal.repo/images/mirrord:latest"
-  }
-}
-```
-
-### agent.log_level {#agent-log_level}
-
-Log level for the agent.
-
-
-Supports `"trace"`, `"debug"`, `"info"`, `"warn"`, `"error"`, or any string that would work
-with `RUST_LOG`.
-
-```json
-{
-  "agent": {
-    "log_level": "mirrord=debug,warn"
-  }
-}
-```
+Defaults to the current kubernetes namespace.
 
 ## target {#root-target}
 Specifies the target and namespace to mirror, see [`path`](#target-path) for a list of
@@ -343,6 +342,12 @@ Complete setup:
 }
 ```
 
+### target.namespace {#target-namespace}
+
+Namespace where the target lives.
+
+Defaults to `"default"`.
+
 ### target.path {#target-path}
 
 Specifies the running pod (or deployment) to mirror.
@@ -353,12 +358,6 @@ Supports:
 - `deployment/{sample-deployment}`;
 - `container/{sample-container}`;
 - `containername/{sample-container}`.
-
-### target.namespace {#target-namespace}
-
-Namespace where the target lives.
-
-Defaults to `"default"`.
 
 # feature {#root-feature}
 Controls mirrord features.
@@ -464,10 +463,6 @@ For more information, check the file operations
 }
 ```
 
-### feature.fs.local {#feature-fs-local}
-
-Specify file path patterns that if matched will be opened locally.
-
 ### feature.fs.read_write {#feature-fs-read_write}
 
 Specify file path patterns that if matched will be read and written to the remote.
@@ -476,6 +471,10 @@ Specify file path patterns that if matched will be read and written to the remot
 
 Specify file path patterns that if matched will be read from the remote.
 if file matching the pattern is opened for writing or read/write it will be opened locally.
+
+### feature.fs.local {#feature-fs-local}
+
+Specify file path patterns that if matched will be opened locally.
 
 ### feature.fs.mode {#feature-fs-mode}
 Configuration for enabling read-only or read-write file operations.
@@ -512,15 +511,6 @@ See the environment variables [reference](https://mirrord.dev/docs/reference/env
 }
 ```
 
-### feature.env.include {#feature-env-include}
-
-Include only these remote environment variables in the local process.
-
-Value is a list separated by ";".
-
-Some environment variables are excluded by default (`PATH` for example), including these
-requires specifying them with `include`
-
 ### feature.env.exclude {#feature-env-exclude}
 
 Include the remote environment variables in the local process that are **NOT** specified by
@@ -531,12 +521,14 @@ Some of the variables that are excluded by default:
 
 Value is a list separated by ";".
 
-### feature.env.override {#feature-env-override}
+### feature.env.include {#feature-env-include}
 
-Allows setting or overriding environment variables (locally) with a custom value.
+Include only these remote environment variables in the local process.
 
-For example, if the remote pod has an environment variable `REGION=1`, but this is an
-undesirable value, it's possible to use `overrides` to set `REGION=2` (locally) instead.
+Value is a list separated by ";".
+
+Some environment variables are excluded by default (`PATH` for example), including these
+requires specifying them with `include`
 
 ## feature.network {#feature-network}
 Controls mirrord network operations.
@@ -624,6 +616,14 @@ Steals only traffic that matches the
 }
 ```
 
+#### feature.network.incoming.port_mapping {#feature-network-incoming-port_mapping}
+
+Mapping for local ports to remote ports.
+
+This is useful when you want to mirror/steal a port to a different port on the remote
+machine. For example, your local process listens on port `9333` and the container listens
+on port `80`. You'd use `[[9333, 80]]`
+
 #### feature.network.incoming.ignore_ports {#feature-network-incoming-ignore_ports}
 
 Ports to ignore when mirroring/stealing traffic, these ports will remain local.
@@ -632,14 +632,6 @@ Can be especially useful when
 [`feature.network.incoming.mode`](#feature-network-incoming-mode) is set to `"stealer"
 `, and you want to avoid redirecting traffic from some ports (for example, traffic from
 a health probe, or other heartbeat-like traffic).
-
-#### feature.network.incoming.port_mapping {#feature-network-incoming-port_mapping}
-
-Mapping for local ports to remote ports.
-
-This is useful when you want to mirror/steal a port to a different port on the remote
-machine. For example, your local process listens on port `9333` and the container listens
-on port `80`. You'd use `[[9333, 80]]`
 
 #### feature.network.incoming.ignore_localhost {#feature-network-incoming-ignore_localhost}
 
@@ -715,10 +707,6 @@ details.
 }
 ```
 
-#### feature.network.outgoing.tcp {#feature.network.outgoing.tcp}
-
-Defaults to `true`.
-
 #### feature.network.outgoing.udp {#feature.network.outgoing.udp}
 
 Defaults to `true`.
@@ -726,6 +714,10 @@ Defaults to `true`.
 #### feature.network.outgoing.ignore_localhost {#feature.network.outgoing.ignore_localhost}
 
 Defaults to `false`.
+
+#### feature.network.outgoing.tcp {#feature.network.outgoing.tcp}
+
+Defaults to `true`.
 
 #### feature.network.outgoing.unix_streams {#feature.network.outgoing.unix_streams}
 
