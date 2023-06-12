@@ -12,9 +12,9 @@ weight: 122
 toc: true
 ---
 
-Contributing has many forms, and we welcome any feedback/help.
-Those are the common ways:
-- Report a bug you found to our [issue tracker](https://github.com/metalbear-co/mirrord/issues).
+There are many ways you can contribute to mirrord, like:
+- Write code! See our guide [here](https://github.com/metalbear-co/mirrord/blob/main/CONTRIBUTING.md).
+- Report a bug you found in our [issue tracker](https://github.com/metalbear-co/mirrord/issues).
 - Suggest a feature/improvement in a discussion on our [GitHub discussions](https://github.com/metalbear-co/mirrord/discussions).
 - Write a blog post about your experience with mirrord. We will love to share it!
 - Fix/implement an issue from our [issue tracker](https://github.com/metalbear-co/mirrord/issues), please let us know that you're working on an issue beforehand so we can provide help and reduce double-work.
