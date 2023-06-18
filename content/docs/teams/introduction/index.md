@@ -28,12 +28,12 @@ As you might have guessed, this is where **mirrord for Teams** comes in.
 
 In the basic version of mirrord, mirrord injects itself into the local process, and creates a pod in the Kubernetes cluster. It's completely standalone, and is unaware of other instances of mirrord running on the same cluster. 
 
-In mirrord for Teams, we introduce a new component - the mirrord Operator. The Operator is a Kubernetes operator that runs persistently in the cluster and manages the mirrord instances trying to access it. The Operator itself is the one creating mirrord agents, so individual users no longer need elevated Kubernetes permissions to use mirrord. Additionally, a centralized component makes possible things like simultaneous use, or limiting access or specific actions to certain cluster components.
+In mirrord for Teams, we introduce a new component - the mirrord Operator. The Operator is a Kubernetes operator that runs persistently in the cluster and manages the mirrord instances trying to access it. The Operator itself is the one creating mirrord agents, so individual users no longer need elevated Kubernetes permissions to use mirrord. Additionally, a centralized component makes possible things like concurrent use, or limiting access or specific actions to certain cluster components.
 
 {{<figure src="operator-architecture.svg" alt="mirrord for Teams - Architecture" class="zoomable">}}
 
 ## Supported Features
 The following functionality is currently available in mirrord for Teams that isn't available in the open-source version:
-- **Simultaneous use** - multiple users can use mirrord on the same pod at the same time.
+- **Concurrent use** - multiple users can use mirrord on the same pod at the same time.
 - **Better security and RBAC** - with the mirrord Operator, users no longer need permissions to create privileged pods - only the Operator does. In addition, permissions can be managed within Kubernetes to allow or prevent users from impersonating specific targets.
 - **Deployment-level mirroring/interception** - deployments with more than one pod can be mirrored/intercepted in their entirety.

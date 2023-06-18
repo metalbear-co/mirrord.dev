@@ -73,7 +73,7 @@ Our main goal in future versions of mirrord is to reduce the risk of disruption 
 
 ## How is mirrord different from Telepresence?
 
-The main differences are:
+mirrord can be a great alternative to Telepresence. The main differences are:
 * mirrord works on the process level, meaning it doesn't require you to run a "daemon" locally and it doesn't change your local machine settings. For example, if you run another process, it *won't* be affected by mirrord.
 * This means that you can run **multiple** services at the same time, each in a different context and without needing to containerize them.
 * mirrord doesn't require you to install anything on the cluster.
