@@ -18,7 +18,7 @@ toc: true
 
 ### Prerequisites
 
-* [mirrord][here]({{< ref "/" >}} "mirrord")
+* [mirrord]({{< ref "/" >}} "mirrord")
 * Available Kubernetes Cluster
   * Note: at the moment, because it uses `kubectl port-forward`, the tutorial does not support clusters with a service mesh like Istio or linkerd.
 * [NodeJS](https://nodejs.org/en/) + [Yarn](https://www.npmjs.com/package/yarn)
