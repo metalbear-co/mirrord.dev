@@ -91,12 +91,12 @@ More details on what the operator provides can be read [here]({{< ref "/docs/tea
 ## I can't create privileged container in my cluster
 
 mirrord works by creating an agent in the remote cluster, that accesses another pod's namespaces (see more about it [here.](https://metalbear.co/blog/getting-started-with-ephemeral-containers/)).
-If you can't do that, we suggest considering using our operator. The operator is provided as part of [mirrord for Teams]({{< ref "/docs/teams/introduction" >}} "mirrord for Teams") and lets you provide users access to using mirrord, instead of creating priveleged pods. You'd still need to provide the operator the ability to spawn
+If you can't give your end users permissions to create privileged pods, we suggest trying out [mirrord for Teams]({{< ref "/docs/teams/introduction" >}} "mirrord for Teams"). It adds a Kubernetes operator that acts as a control plane for mirrord clients, and lets them work with mirrord without creating privileged pods themselves.
 priveleged pods, but now only *it* will be able to do it, instead of any user.
-[Let us know](hello@metalbear.co) if that might also problematic for you, and we'd try to figure a solution that matches your security policies.
+If mirrord for Teams doesn't work for you either, [let us know](hello@metalbear.co) and we'll try to figure a solution that matches your security policies.
 
 ## Can I use mirrord with Openshift?
 
-Yes. mirrord works with OpenShift. Having said that, OpenShift usually ships with a security policy that doesn't allow us to create our pod.
-You would need to tweak your `scc` settings - more information [here](https://docs.openshift.com/container-platform/3.11/admin_guide/manage_scc.html).
+Yes, mirrord works with OpenShift. However, OpenShift usually ships with a default security policy that doesn't let mirrord create pods.
+To fix this, you would need to tweak your `scc` settings - more information [here](https://docs.openshift.com/container-platform/3.11/admin_guide/manage_scc.html).
 In order to keep your environment with best security standards, we recommend considering using [mirrord for Teams]({{< ref "/docs/teams/introduction" >}} "mirrord for Teams") that will allow you to create the security context only for mirrord Operator instead for all potential users of mirrord. (see above question for more info)
