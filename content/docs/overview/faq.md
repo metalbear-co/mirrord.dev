@@ -85,12 +85,12 @@ More details can be found in this [GitHub discussion.](https://github.com/metalb
 ## Is mirrord free?
 
 mirrord is free and open source (MIT License).
-Our paid offering include an operator that adds a control plane for mirrord and is used automatically by mirrord when found.
-More details on what the operator provides can be read [here]({{< ref "/docs/teams/introduction" >}} "mirrord for Teams")
+Our paid offering, mirrord for Teams, includes a Kubernetes operator that acts as a control plane for mirrord.
+You can read more about it [here]({{< ref "/docs/teams/introduction" >}} "mirrord for Teams").
 
-## I can't create privileged container in my cluster
+## What if I can't create privileged containers in my cluster?
 
-mirrord works by creating an agent in the remote cluster, that accesses another pod's namespaces (see more about it [here.](https://metalbear.co/blog/getting-started-with-ephemeral-containers/)).
+mirrord works by creating an agent on a privileged pod in the remote cluster that accesses another pod's namespaces (read more about it [here.](https://metalbear.co/blog/getting-started-with-ephemeral-containers/)).
 If you can't give your end users permissions to create privileged pods, we suggest trying out [mirrord for Teams]({{< ref "/docs/teams/introduction" >}} "mirrord for Teams"). It adds a Kubernetes operator that acts as a control plane for mirrord clients, and lets them work with mirrord without creating privileged pods themselves.
 priveleged pods, but now only *it* will be able to do it, instead of any user.
 If mirrord for Teams doesn't work for you either, [let us know](hello@metalbear.co) and we'll try to figure a solution that matches your security policies.
