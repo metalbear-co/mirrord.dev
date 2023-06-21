@@ -99,4 +99,4 @@ If mirrord for Teams doesn't work for you either, [let us know](hello@metalbear.
 
 Yes, mirrord works with OpenShift. However, OpenShift usually ships with a default security policy that doesn't let mirrord create pods.
 To fix this, you would need to tweak your `scc` settings - more information [here](https://docs.openshift.com/container-platform/3.11/admin_guide/manage_scc.html).
-In order to keep your environment with best security standards, we recommend considering using [mirrord for Teams]({{< ref "/docs/teams/introduction" >}} "mirrord for Teams") that will allow you to create the security context only for mirrord Operator instead for all potential users of mirrord. (see above question for more info)
+If you'd rather keep the default security policies, we recommend trying out [mirrord for Teams]({{< ref "/docs/teams/introduction" >}} "mirrord for Teams"). See [this question](#i-cant-create-privileged-container-in-my-cluster) for more info.
