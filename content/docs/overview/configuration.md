@@ -1,3 +1,17 @@
+---
+title: "Configuration"
+description: "Config"
+date: 2023-05-17T13:59:39+01:00
+lastmod: 2023-06-21T13:59:39+01:00
+draft: false
+images: []
+menu:
+  docs:
+    parent: "overview"
+weight: 121
+toc: true
+---
+
 mirrord allows for a high degree of customization when it comes to which features you want to
 enable, and how they should function.
 
