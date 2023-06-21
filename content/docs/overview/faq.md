@@ -46,7 +46,7 @@ There are currently two known cases where mirrord cannot load into the applicati
    [SIP](https://en.wikipedia.org/wiki/System_Integrity_Protection) (the application you are developing wouldn't be,
    but the binary that is used to execute it, e.g. `bash` for a bash script, might be protected), mirrord would not be
    able to load into it. If that is the case, you could try
-   [running mirrord from the command line](https://mirrord.dev/docs/overview/quick-start/#cli-tool) (where SIP
+   [running mirrord from the command line]({{< ref "/docs/overview/quick-start/#cli-tool" >}} "cli tool getting started") (where SIP
    bypassing is already implemented) instead of in the IDE. Alternatively, you could try copying the binary you're
    trying to run to an unprotected directory (e.g. anywhere in your home directory), changing the run configuration
    to use the copy instead of the original binary, and trying again. If it still doesn't work, also remove the signature
@@ -81,3 +81,15 @@ mirrord can be a great alternative to Telepresence. The main differences are:
 * mirrord can be run through one of our IDE extensions: we support [IntelliJ](https://plugins.jetbrains.com/plugin/19772-mirrord) and [VS Code](vscode:extension/MetalBear.mirrord).
 
 More details can be found in this [GitHub discussion.](https://github.com/metalbear-co/mirrord/discussions/154#discussioncomment-2972127)
+
+## Is mirrord free?
+
+mirrord is free and open source (MIT License).
+Our paid offering include an operator that adds a control plane for mirrord and is used automatically by mirrord when found.
+More details on what the operator provides can be read [here]({{< ref "/docs/teams/introduction" >}} "mirrord for Teams")
+
+## I can't create priveleged container in my cluster
+
+mirrord works by creating an agent in the remote cluster, that accesses another pod's namespaces (see more about it [here.](https://metalbear.co/blog/getting-started-with-ephemeral-containers/)).
+If you can't do that, we suggest considering using our operator. The operator is provided as part of [mirrord for Teams]({{< ref "/docs/teams/introduction" >}} "mirrord for Teams") and lets you provide users access to using mirrord, instead of creating priveleged pods. You'd still need to provide the operator the ability to spawn
+priveleged pods, but now only *it* will be able to do it, instead of any user.
