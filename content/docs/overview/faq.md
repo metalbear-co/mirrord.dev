@@ -93,6 +93,7 @@ More details on what the operator provides can be read [here]({{< ref "/docs/tea
 mirrord works by creating an agent in the remote cluster, that accesses another pod's namespaces (see more about it [here.](https://metalbear.co/blog/getting-started-with-ephemeral-containers/)).
 If you can't do that, we suggest considering using our operator. The operator is provided as part of [mirrord for Teams]({{< ref "/docs/teams/introduction" >}} "mirrord for Teams") and lets you provide users access to using mirrord, instead of creating priveleged pods. You'd still need to provide the operator the ability to spawn
 priveleged pods, but now only *it* will be able to do it, instead of any user.
+[Let us know](hello@metalbear.co) if that might also problematic for you, and we'd try to figure a solution that matches your security policies.
 
 ## Can I use mirrord with Openshift?
 
