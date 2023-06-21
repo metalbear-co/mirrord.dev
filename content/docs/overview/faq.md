@@ -92,7 +92,6 @@ You can read more about it [here]({{< ref "/docs/teams/introduction" >}} "mirror
 
 mirrord works by creating an agent on a privileged pod in the remote cluster that accesses another pod's namespaces (read more about it [here](https://metalbear.co/blog/getting-started-with-ephemeral-containers/)).
 If you can't give your end users permissions to create privileged pods, we suggest trying out [mirrord for Teams]({{< ref "/docs/teams/introduction" >}} "mirrord for Teams"). It adds a Kubernetes operator that acts as a control plane for mirrord clients, and lets them work with mirrord without creating privileged pods themselves.
-priveleged pods, but now only *it* will be able to do it, instead of any user.
 If mirrord for Teams doesn't work for you either, [let us know](hello@metalbear.co) and we'll try to figure a solution that matches your security policies.
 
 ## Can I use mirrord with Openshift?
