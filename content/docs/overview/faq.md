@@ -46,7 +46,7 @@ There are currently two known cases where mirrord cannot load into the applicati
    [SIP](https://en.wikipedia.org/wiki/System_Integrity_Protection) (the application you are developing wouldn't be,
    but the binary that is used to execute it, e.g. `bash` for a bash script, might be protected), mirrord would not be
    able to load into it. If that is the case, you could try
-   [running mirrord from the command line](https://mirrord.dev/docs/overview/quick-start/#cli-tool) (where SIP
+   [running mirrord from the command line]({{< ref "/docs/overview/quick-start#cli-tool" >}} "cli tool getting started") (where SIP
    bypassing is already implemented) instead of in the IDE. Alternatively, you could try copying the binary you're
    trying to run to an unprotected directory (e.g. anywhere in your home directory), changing the run configuration
    to use the copy instead of the original binary, and trying again. If it still doesn't work, also remove the signature
@@ -81,3 +81,21 @@ mirrord can be a great alternative to Telepresence. The main differences are:
 * mirrord can be run through one of our IDE extensions: we support [IntelliJ](https://plugins.jetbrains.com/plugin/19772-mirrord) and [VS Code](vscode:extension/MetalBear.mirrord).
 
 More details can be found in this [GitHub discussion.](https://github.com/metalbear-co/mirrord/discussions/154#discussioncomment-2972127)
+
+## Is mirrord free?
+
+mirrord is free and open source (MIT License).
+Our paid offering, mirrord for Teams, includes a Kubernetes operator that acts as a control plane for mirrord.
+You can read more about it [here]({{< ref "/docs/teams/introduction" >}} "mirrord for Teams").
+
+## What if I can't create privileged containers in my cluster?
+
+mirrord works by creating an agent on a privileged pod in the remote cluster that accesses another pod's namespaces (read more about it [here](https://metalbear.co/blog/getting-started-with-ephemeral-containers/)).
+If you can't give your end users permissions to create privileged pods, we suggest trying out [mirrord for Teams]({{< ref "/docs/teams/introduction" >}} "mirrord for Teams"). It adds a Kubernetes operator that acts as a control plane for mirrord clients, and lets them work with mirrord without creating privileged pods themselves.
+If mirrord for Teams doesn't work for you either, [let us know](hello@metalbear.co) and we'll try to figure a solution that matches your security policies.
+
+## Can I use mirrord with Openshift?
+
+Yes, mirrord works with OpenShift. However, OpenShift usually ships with a default security policy that doesn't let mirrord create pods.
+To fix this, you would need to tweak your `scc` settings - more information [here](https://docs.openshift.com/container-platform/3.11/admin_guide/manage_scc.html).
+If you'd rather keep the default security policies, we recommend trying out [mirrord for Teams]({{< ref "/docs/teams/introduction" >}} "mirrord for Teams"). See [this question](#i-cant-create-privileged-container-in-my-cluster) for more info.

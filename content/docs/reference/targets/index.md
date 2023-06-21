@@ -110,5 +110,5 @@ Moreover, you should make sure [the environment variable used to specify a targe
 isn't set (or is set to an empty value).
 
 > **Note:** In order to set the namespace the agent is going to be created in, set the agent namespace, not the
-> target namespace. That value can be set via the [`agent.namespace` configuration file field](https://mirrord.dev/docs/overview/configuration/#agent-namespace), the `-a` CLI argument,
+> target namespace. That value can be set via the [`agent.namespace` configuration file field]({{< ref "/docs/overview/configuration#agent-namespace" >}} "agent namespace configuration"), the `-a` CLI argument,
 > or the `MIRRORD_AGENT_NAMESPACE` environment variable.

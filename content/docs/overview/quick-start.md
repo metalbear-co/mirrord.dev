@@ -76,7 +76,7 @@ To use extension, click the 'Enable mirrord' button in the status bar at the bot
 #### Configuration
 
 The VS Code extension reads its configuration from the following file: `<project-path>/.mirrord/mirrord.json`. You can also prepend a prefix, e.g. `my-config.mirrord.json`, or use .toml or .yaml format.
-Configuration options are listed [here](https://mirrord.dev/docs/overview/configuration/). The configuration file also supports autocomplete when edited in VS Code when the extension is installed.
+Configuration options are listed [here]({{< ref "/docs/overview/configuration" >}} "configuration"). The configuration file also supports autocomplete when edited in VS Code when the extension is installed.
 
 ### IntelliJ Plugin
 
@@ -91,4 +91,4 @@ To use extension, click the mirrord icon in the Navigation Toolbar at the top ri
 #### Configuration
 
 The IntelliJ plugin reads its configuration from the following file: `<project-path>/.mirrord/mirrord.json`. You can also prepend a prefix, e.g. `my-config.mirrord.json`, or use .toml or .yaml format.
-Configuration options are listed [here](https://mirrord.dev/docs/overview/configuration/).
+Configuration options are listed [here]({{< ref "/docs/overview/configuration" >}} "configuration").
