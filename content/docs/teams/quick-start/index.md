@@ -1,5 +1,5 @@
 ---
-title: "Quick Start"
+title: "Quick Start - mirrord for Teams"
 description: "Get started with mirrord for Teams"
 date: 2022-05-26T08:48:57+00:00
 lastmod: 2022-05-26T08:48:57+00:00
