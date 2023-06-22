@@ -2,7 +2,7 @@
 title: "Configuration"
 description: "Config"
 date: 2023-05-17T13:59:39+01:00
-lastmod: 2023-31-18T13:59:39+01:00
+lastmod: 2023-06-21T13:59:39+01:00
 draft: false
 images: []
 menu:
@@ -110,6 +110,12 @@ certificates).
 
 Defaults to `false`.
 
+## operator {#root-operator}
+
+Allow to lookup if operator is installed on cluster and use it.
+
+Defaults to `true`.
+
 ## pause {#root-pause}
 Controls target pause feature. Unstable.
 
@@ -118,11 +124,26 @@ the agent.
 
 Defaults to `false`.
 
-## operator {#root-operator}
+## connect_tcp {#root-connect_tpc}
 
-Allow to lookup if operator is installed on cluster and use it.
+IP:PORT to connect to instead of using k8s api, for testing purposes.
 
-Defaults to `true`.
+```json
+{
+  "connect_tcp": "10.10.0.100:7777"
+}
+```
+
+## kubeconfig {#root-kubeconfig}
+
+Path to a kubeconfig file, if not specified, will use `KUBECONFIG`, or `~/.kube/config`, or
+the in-cluster config.
+
+```json
+{
+ "kubeconfig": "~/bear/kube-config"
+}
+```
 
 ## sip_binaries {#root-sip_binaries}
 
@@ -140,17 +161,6 @@ while `/usr/bin/bash` would apply only for that binary).
 }
 ```
 
-## kubeconfig {#root-kubeconfig}
-
-Path to a kubeconfig file, if not specified, will use `KUBECONFIG`, or `~/.kube/config`, or
-the in-cluster config.
-
-```json
-{
- "kubeconfig": "~/bear/kube-config"
-}
-```
-
 ## skip_processes {#root-skip_processes}
 
 Allows mirrord to skip unwanted processes.
@@ -165,18 +175,7 @@ Accepts a single value, or multiple values separated by `;`.
 }
 ```
 
-## connect_tcp {#root-connect_tpc}
-
-IP:PORT to connect to instead of using k8s api, for testing purposes.
-
-```json
-{
-  "connect_tcp": "10.10.0.100:7777"
-}
-```
-
 ## agent {#root-agent}
-
 Configuration for the mirrord-agent pod that is spawned in the Kubernetes cluster.
 
 We provide sane defaults for this option, so you don't have to set up anything here.
@@ -200,6 +199,13 @@ We provide sane defaults for this option, so you don't have to set up anything h
 }
 ```
 
+### agent.communication_timeout {#agent-communication_timeout}
+
+Controls how long the agent lives when there are no connections.
+
+Each connection has its own heartbeat mechanism, so even if the local application has no
+messages, the agent stays alive until there are no more heartbeat messages.
+
 ### agent.startup_timeout {#agent-startup_timeout}
 
 Controls how long to wait for the agent to finish initialization.
@@ -216,20 +222,6 @@ Can be useful for collecting logs.
 
 Defaults to `1`.
 
-### agent.communication_timeout {#agent-communication_timeout}
-
-Controls how long the agent lives when there are no connections.
-
-Each connection has its own heartbeat mechanism, so even if the local application has no
-messages, the agent stays alive until there are no more heartbeat messages.
-
-### agent.flush_connections {#agent-flush_connections}
-
-Flushes existing connections when starting to steal, might fix issues where connections
-aren't stolen (due to being already established)
-
-Defaults to `true`.
-
 ### agent.ephemeral {#agent-ephemeral}
 
 Runs the agent as an
@@ -237,28 +229,12 @@ Runs the agent as an
 
 Defaults to `false`.
 
-### agent.log_level {#agent-log_level}
+### agent.flush_connections {#agent-flush_connections}
 
-Log level for the agent.
+Flushes existing connections when starting to steal, might fix issues where connections
+aren't stolen (due to being already established)
 
-
-Supports `"trace"`, `"debug"`, `"info"`, `"warn"`, `"error"`, or any string that would work
-with `RUST_LOG`.
-
-```json
-{
-  "agent": {
-    "log_level": "mirrord=debug,warn"
-  }
-}
-```
-
-### agent.network_interface {#agent-network_interface}
-
-Which network interface to use for mirroring.
-
-The default behavior is try to access the internet and use that interface. If that fails
-it uses `eth0`.
+Defaults to `true`.
 
 ### agent.image {#agent-image}
 
@@ -305,11 +281,34 @@ Read more [here](https://kubernetes.io/docs/concepts/containers/images/).
 }
 ```
 
+### agent.log_level {#agent-log_level}
+
+Log level for the agent.
+
+
+Supports `"trace"`, `"debug"`, `"info"`, `"warn"`, `"error"`, or any string that would work
+with `RUST_LOG`.
+
+```json
+{
+  "agent": {
+    "log_level": "mirrord=debug,warn"
+  }
+}
+```
+
 ### agent.namespace {#agent-namespace}
 
 Namespace where the agent shall live.
 
 Defaults to the current kubernetes namespace.
+
+### agent.network_interface {#agent-network_interface}
+
+Which network interface to use for mirroring.
+
+The default behavior is try to access the internet and use that interface. If that fails
+it uses `eth0`.
 
 ## target {#root-target}
 Specifies the target and namespace to mirror, see [`path`](#target-path) for a list of
@@ -463,18 +462,18 @@ For more information, check the file operations
 }
 ```
 
-### feature.fs.read_write {#feature-fs-read_write}
+### feature.fs.local {#feature-fs-local}
 
-Specify file path patterns that if matched will be read and written to the remote.
+Specify file path patterns that if matched will be opened locally.
 
 ### feature.fs.read_only {#feature-fs-read_only}
 
 Specify file path patterns that if matched will be read from the remote.
 if file matching the pattern is opened for writing or read/write it will be opened locally.
 
-### feature.fs.local {#feature-fs-local}
+### feature.fs.read_write {#feature-fs-read_write}
 
-Specify file path patterns that if matched will be opened locally.
+Specify file path patterns that if matched will be read and written to the remote.
 
 ### feature.fs.mode {#feature-fs-mode}
 Configuration for enabling read-only or read-write file operations.
@@ -529,6 +528,13 @@ Value is a list separated by ";".
 
 Some environment variables are excluded by default (`PATH` for example), including these
 requires specifying them with `include`
+
+### feature.env.override {#feature-env-override}
+
+Allows setting or overriding environment variables (locally) with a custom value.
+
+For example, if the remote pod has an environment variable `REGION=1`, but this is an
+undesirable value, it's possible to use `overrides` to set `REGION=2` (locally) instead.
 
 ## feature.network {#feature-network}
 Controls mirrord network operations.
@@ -610,19 +616,12 @@ Steals only traffic that matches the
         "port_mapping": [[ 7777, 8888 ]],
         "ignore_localhost": false,
         "ignore_ports": [9999, 10000]
+        "listen_ports": [[80, 8111]]
       }
     }
   }
 }
 ```
-
-#### feature.network.incoming.port_mapping {#feature-network-incoming-port_mapping}
-
-Mapping for local ports to remote ports.
-
-This is useful when you want to mirror/steal a port to a different port on the remote
-machine. For example, your local process listens on port `9333` and the container listens
-on port `80`. You'd use `[[9333, 80]]`
 
 #### feature.network.incoming.ignore_ports {#feature-network-incoming-ignore_ports}
 
@@ -632,6 +631,29 @@ Can be especially useful when
 [`feature.network.incoming.mode`](#feature-network-incoming-mode) is set to `"stealer"
 `, and you want to avoid redirecting traffic from some ports (for example, traffic from
 a health probe, or other heartbeat-like traffic).
+
+#### feature.network.incoming.listen_ports {#feature-network-incoming-listen_ports}
+
+Mapping for local ports to actually used local ports.
+When application listens on a port while steal/mirror is active
+we fallback to random ports to avoid port conflicts.
+Using this configuration will always use the specified port.
+If this configuration doesn't exist, mirrord will try to listen on the original port
+and if it fails it will assign a random port
+
+This is useful when you want to access ports exposed by your service locally
+For example, if you have a service that listens on port `80` and you want to access it,
+you probably can't listen on `80` without sudo, so you can use `[[80, 4480]]`
+then access it on `4480` while getting traffic from remote `80`.
+The value of `port_mapping` doesn't affect this.
+
+#### feature.network.incoming.port_mapping {#feature-network-incoming-port_mapping}
+
+Mapping for local ports to remote ports.
+
+This is useful when you want to mirror/steal a port to a different port on the remote
+machine. For example, your local process listens on port `9333` and the container listens
+on port `80`. You'd use `[[9333, 80]]`
 
 #### feature.network.incoming.ignore_localhost {#feature-network-incoming-ignore_localhost}
 
@@ -652,9 +674,58 @@ additional configuration is needed);
 data on a port is HTTP (in a best-effort kind of way, not guaranteed to be HTTP), and
 steals the traffic on the port if it is HTTP;
 
+#### feature.network.incoming.filter {#feature-network-incoming-http-filter}
+Filter configuration for the HTTP traffic stealer feature.
+
+Allows the user to set a filter (regex) for the HTTP headers, so that the stealer traffic
+feature only captures HTTP requests that match the specified filter, forwarding unmatched
+requests to their original destinations.
+
+Only does something when [`feature.network.incoming.mode`](#feature-network-incoming-mode) is
+set as `"steal"`, ignored otherwise.
+
+for example, to filter based on header:
+```json
+{
+  "header_filter": "host: api\..+",
+}
+```
+
+for example, to filter based on path
+```json
+{
+  "path_filter": "host: api\..+",
+}
+```
+
+##### feature.network.incoming.http_filter.header_filter {#feature-network-incoming-http-header-filter}
+
+
+Supports regexes validated by the
+[`fancy-regex`](https://docs.rs/fancy-regex/latest/fancy_regex/) crate.
+
+The HTTP traffic feature converts the HTTP headers to `HeaderKey: HeaderValue`,
+case-insensitive.
+
+##### feature.network.incoming.http_filter.path_filter {#feature-network-incoming-http-path-filter}
+
+
+Supports regexes validated by the
+[`fancy-regex`](https://docs.rs/fancy-regex/latest/fancy_regex/) crate.
+
+Case insensitive.
+
+##### feature.network.incoming.http_header_filter.ports {#feature-network-incoming-http_header_filter-ports}
+
+Activate the HTTP traffic filter only for these ports.
+
+Other ports will still be stolen (when `"steal`" is being used), they're just not checked
+for HTTP filtering.
+
 #### feature.network.incoming.filter {#feature-network-incoming-filter}
 Filter configuration for the HTTP traffic stealer feature.
 
+DEPRECATED - USE http_filter instead, unless using old operator/agent version (pre 3.46.0)
 Allows the user to set a filter (regex) for the HTTP headers, so that the stealer traffic
 feature only captures HTTP requests that match the specified filter, forwarding unmatched
 requests to their original destinations.
@@ -671,7 +742,6 @@ set as `"steal"`, ignored otherwise.
 
 ##### feature.network.incoming.http_header_filter.filter {#feature-network-incoming-http_header_filter-filter}
 
-Used to match against the requests captured by the mirrord-agent pod.
 
 Supports regexes validated by the
 [`fancy-regex`](https://docs.rs/fancy-regex/latest/fancy_regex/) crate.
@@ -707,15 +777,15 @@ details.
 }
 ```
 
-#### feature.network.outgoing.udp {#feature.network.outgoing.udp}
-
-Defaults to `true`.
-
 #### feature.network.outgoing.ignore_localhost {#feature.network.outgoing.ignore_localhost}
 
 Defaults to `false`.
 
 #### feature.network.outgoing.tcp {#feature.network.outgoing.tcp}
+
+Defaults to `true`.
+
+#### feature.network.outgoing.udp {#feature.network.outgoing.udp}
 
 Defaults to `true`.
 
