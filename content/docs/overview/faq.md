@@ -42,20 +42,15 @@ There are currently two known cases where mirrord cannot load into the applicati
    binaries is planned for the long term, but for now you would have to make sure your binaries are dynamically
    linked in order to run them with mirrord. With Go programs, for example, it is as simple as adding `import "C"` to
    your program code.
-2. If you are running mirrord via an IDE extension/plugin on MacOS, and the executable you are running is protected by
+2. If you are running mirrord on MacOS and the executable you are running is protected by
    [SIP](https://en.wikipedia.org/wiki/System_Integrity_Protection) (the application you are developing wouldn't be,
-   but the binary that is used to execute it, e.g. `bash` for a bash script, might be protected), mirrord would not be
-   able to load into it. If that is the case, you could try
-   [running mirrord from the command line]({{< ref "/docs/overview/quick-start#cli-tool" >}} "cli tool getting started") (where SIP
-   bypassing is already implemented) instead of in the IDE. Alternatively, you could try copying the binary you're
-   trying to run to an unprotected directory (e.g. anywhere in your home directory), changing the run configuration
+   but the binary that is used to execute it, e.g. `bash` for a bash script, might be protected), mirrord might have trouble loading into it (mirrord can generally bypass SIP, but there are still some unhandled edge cases). If that is the case, you could try copying the binary you're trying to run to an unprotected directory (e.g. anywhere in your home directory), changing the IDE run configuration or the CLI
    to use the copy instead of the original binary, and trying again. If it still doesn't work, also remove the signature
    from the copy with:
 
    ```sudo codesign --remove-signature ./<your-binary>```
 
-   Please let us know if you are affected by this issue. Support for running SIP binaries from an IDE is tracked in
-   [issue #747](https://github.com/metalbear-co/mirrord/issues/747).
+   Please let us know if you're having trouble with SIP by opening an issue on [GitHub](https://github.com/metalbear-co/mirrord) or talking to us on [Discord](https://discord.gg/metalbear).
 
 ## Why not just use a remote debugger?
 
