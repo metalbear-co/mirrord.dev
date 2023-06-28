@@ -14,6 +14,8 @@ toc: true
 
 > mirrord for Teams is currently in closed beta. Go [here](https://metalbear.co/#waitlist-form) to join the waitlist.
 
+mirrord for Teams adds a new component to the mirrord architecture: the mirrord Operator. The mirrord Operator is a Kubernetes Operator that runs on your cluster and manages mirrord clients running against the cluster. To start using mirrord for Teams on a Kubernetes cluster, all you need to do is install the Operator - once it's installed, all mirrord clients will use it automatically when impersonating targets on the cluster.
+
 ## Installing the mirrord Operator
 NOTE: This has to be performed by a user with elevated permissions to the cluster.
 
@@ -32,8 +34,8 @@ Options:
 - (Optional) `--namespace` 
         Set namespace of mirrord operator (default: mirrord)
 ​
-So final command should look like
+So the final command should look like
 ​
 `mirrord operator setup --accept-tos --license-key <license-key> | kubectl apply -f -`
-​
-After installing the operator, all mirrord clients will use it automatically when impersonating targets on the cluster.
+
+You should now be able to see the `mirrord-operator` deployment when running `kubectl get deployments -n mirrord`. Also, when you run mirrord, you'll see the `connected to operator` step in its progress reports.
