@@ -13,7 +13,7 @@ weight: 100
 toc: true
 ---
 
-mirrord is an open-source tool that lets developers run local processes in the context of their cloud environment. It’s meant to provide the benefits of running your service on a cloud environment (e.g. staging) without actually going through the hassle of deploying it there, and without disrupting the environment by deploying untested code.
+mirrord is an open-source tool that lets developers run local processes in the context of their cloud environment. It makes it incredibly easy to test your code on a cloud environment (e.g. staging) without actually going through the hassle of Dockerization, CI, or deployment, and without disrupting the environment by deploying untested code. Instead of saving it for the last step, now you can shift-left on cloud testing you can test your code in the cloud from the very beginning of your development process.
 
 ## Why?
 
@@ -26,7 +26,9 @@ Deployment to staging can be costly for several reasons:
 1. It often involves a CI process, which may be slow (because of e.g. a long automated test suite having to pass in order to progress) and sometimes broken.
 2. Since staging environments are shared, the environment is occasionally broken when an engineer deploys unstable code.
 
-With *mirrord*, we're trying to remove the costs associated with deployment to staging, by taking 'deployment' out of the process completely. By plugging your local process directly into the staging environment, you can test your code in cloud conditions without having to go through a long CI process, and without the risk of breaking the environment for other developers.
+mirrord removes the costs associated with deployment to staging, by taking 'deployment' out of the process completely. By plugging your local process directly into the staging environment, you can test your code in cloud conditions without having to go through a long CI process, and without the risk of breaking the environment for other developers. 
+
+However, the point of mirrord is not just to make that final step in the dev loop of testing in staging quicker. mirrord makes running your code in the cloud easy, fast and safe, so you can **shift left on cloud testing**, and test your code in the cloud from the very beginning of your development process. Instead of spending your time running local environments, writing mocks, test fixtures, and so on - why not just test your code on staging itself?
 
 ## How It Works
 
