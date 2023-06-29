@@ -15,11 +15,10 @@
 {{- $instantPage := resources.Get "js/instant.page.js" -}}
 {{- $instantPage := $instantPage | js.Build -}}
 
-{{- $js := slice $splide $alpineClipboard $flexsearch $typed $persist $alpine | resources.Concat "js/main.js" }}
+{{- $js := slice $splide $alpineClipboard $flexsearch $typed $persist $alpine $instantPage | resources.Concat "js/main.js" }}
 {{- $js_min := $js | resources.Minify }}
 
 <script src="{{ $js_min.RelPermalink }}" defer></script>
-<script src="{{ $instantPage.RelPermalink }}" type="module"></script>
 {{- if (eq .Section "docs") }}
 <script src="{{ $search.RelPermalink }}" defer></script>
 <script src="{{ $clipboard.RelPermalink }}" defer></script>
