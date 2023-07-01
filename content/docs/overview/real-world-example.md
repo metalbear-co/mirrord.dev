@@ -3,7 +3,7 @@ title: "Example"
 description: "Debugging an Application with mirrord .feat NextJS"
 date: 2021-09-13T10:50:00+01:00
 lastmod: 2021-09-13T10:50:00+01:00
-draft: false
+draft: true
 images: []
 menu:
   docs:
