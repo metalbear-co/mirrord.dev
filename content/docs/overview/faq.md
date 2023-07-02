@@ -32,7 +32,7 @@ Yes, you can use the `--steal` flag to intercept traffic instead of duplicating 
 
 ## Does mirrord support clusters with a service mesh like Istio or Linkerd?
 
-Yes. However, traffic mirroring isn't currently supported - you can use the --steal argument to steal traffic instead.
+Yes. However, traffic mirroring isn't currently supported - you can use the `--steal` flag to steal traffic instead.
 
 ## I've run my program with mirrord, but it seems to have no effect, what could be the issue?
 
