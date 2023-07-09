@@ -31,7 +31,7 @@
               </li>
             {{ else }}
               {{ $active_link := in $currentPage.RelPermalink .RelPermalink }}
-              <li class="docs__submenu-item"><a class="docs__submenu-link block text-sm font-medium hover:font-bold transition-all duration-200 ease-[ease] {{ if $active_link }}docs__submenu-link-active {{ else }}text-primary-text{{ end }}" href="{{ .Permalink }}">{{ .Title }}</a></li>
+              <li class="docs__submenu-item"><a class="docs__submenu-link block text-sm font-medium hover:font-bold transition-all duration-200 ease-[ease] {{ if $active_link }}docs__submenu-link-active {{ else }}text-primary-text{{ end }}" href="{{ .Permalink }}">{{ .LinkTitle }}</a></li>
             {{ end }}
           {{ end }}
         </ul>
