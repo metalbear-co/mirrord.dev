@@ -25,6 +25,12 @@ mirrord is composed of the following components:
 
 mirrord-agent is a Kubernetes job that runs in the same namespace as the pod being impersonated in the cluster. This lets the mirrored-agent sniff the network traffic and gain access to the filesystem of the impersonated pod. It then relays file operations from the local process to the impersonated pod and incoming traffic from the impersonated pod to the local process. Outgoing traffic is intercepted at the local process and emitted by the agent as if originating from the impersonated pod. The connection between the agent and the impersonated pod is terminated if the agent pod hits a timeout.
 
+mirrord-agent does **not** run as a privileged container in the cluster. However, it requires some [Linux capabilities](https://man7.org/linux/man-pages/man7/capabilities.7.html) to be able to impersonate the targeted pod. These capabilities are:
+
+- `CAP_NET_ADMIN` - required for modifying routing tables
+- `CAP_SYS_PTRACE` - required for reading target pod environment
+- `CAP_SYS_ADMIN` - required for joining target pod network namespace
+
 #### mirrord-layer
 
 mirrord-layer is a `.dylib` file for OSX systems and `.so` file on Linux distributions. mirrord-layer is loaded through `LD_PRELOAD/DYLD_INSERT_LIBRARIES` environment variable with the local process, which lets mirrord-layer selectively override libc functions. The overridden functions are then responsible for maintaining coordination between the process and incoming/outgoing requests for network traffic/file access. mirrord-layer sends and receives events from the agent using port-forwarding.
