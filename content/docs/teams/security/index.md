@@ -9,7 +9,7 @@ linktitle: "Security"
 menu:
   docs:
     teams:
-weight: 100
+weight: 1
 toc: true
 ---
 
