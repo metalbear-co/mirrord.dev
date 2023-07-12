@@ -27,7 +27,7 @@ mirrord-agent is a Kubernetes job that runs in the same namespace as the pod bei
 
 mirrord-agent does **not** run as a privileged container in the cluster. However, it requires some [Linux capabilities](https://man7.org/linux/man-pages/man7/capabilities.7.html) to be able to impersonate the targeted pod. These capabilities are:
 
-- `CAP_NET_ADMIN` - required for modifying routing tables
+- `CAP_NET_ADMIN` and `CAP_NET_RAW` - required for modifying routing tables
 - `CAP_SYS_PTRACE` - required for reading target pod environment
 - `CAP_SYS_ADMIN` - required for joining target pod network namespace
 
