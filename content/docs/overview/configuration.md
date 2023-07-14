@@ -2,7 +2,7 @@
 title: "Configuration"
 description: "Config"
 date: 2023-05-17T13:59:39+01:00
-lastmod: 2023-06-21T13:59:39+01:00
+lastmod: 2023-07-14T13:59:39+01:00
 draft: false
 images: []
 menu:
@@ -88,16 +88,19 @@ configuration file containing all fields.
       "outgoing": {
         "tcp": true,
         "udp": true,
+        "filter": {
+          "local": ["tcp://1.1.1.0/24:1337", "1.1.5.0/24", "google.com", ":53"],
+        },
         "ignore_localhost": false,
         "unix_streams": "bear.+"
       },
       "dns": false
     },
-    "capture_error_trace": false
   },
   "operator": true,
   "kubeconfig": "~/.kube/config",
   "sip_binaries": "bash"
+  "telemetry": true,
 }
 ```
 
@@ -123,6 +126,12 @@ With this feature enabled, the remote container is paused while this layer is co
 the agent.
 
 Defaults to `false`.
+
+## telemetry {#root-telemetry}
+Controls whether or not mirrord sends telemetry data to MetalBear cloud.
+Telemetry sent doesn't contain personal identifiers or any data that
+should be considered sensitive. It is used to improve the product.
+[For more information](https://github.com/metalbear-co/mirrord/blob/main/TELEMETRY.md)
 
 ## connect_tcp {#root-connect_tpc}
 
@@ -310,6 +319,12 @@ Which network interface to use for mirroring.
 The default behavior is try to access the internet and use that interface. If that fails
 it uses `eth0`.
 
+### agent.disabled_capabilities {#agent-disabled_capabilities}
+
+Disables specified Linux capabilities for the agent container.
+If nothing is disabled here, agent uses `NET_ADMIN`, `NET_RAW`, `SYS_PTRACE` and
+`SYS_ADMIN`.
+
 ## target {#root-target}
 Specifies the target and namespace to mirror, see [`path`](#target-path) for a list of
 accepted values for the `target` option.
@@ -399,23 +414,17 @@ have support for a shortened version, that you can see [here](#root-shortened).
       "outgoing": {
         "tcp": true,
         "udp": true,
+        "filter": {
+          "local": ["tcp://1.1.1.0/24:1337", "1.1.5.0/24", "google.com", ":53"],
+        },
         "ignore_localhost": false,
         "unix_streams": "bear.+"
       },
       "dns": false
     },
-    "capture_error_trace": false
   }
 }
 ```
-
-## feature.capture_error_trace {#feature-capture_error_trace}
-
-Controls the crash reporting feature.
-
-With this feature enabled, mirrord generates a nice crash report log.
-
-Defaults to `false`.
 
 ## feature.fs {#feature-fs}
 Allows the user to specify the default behavior for file operations:
@@ -559,6 +568,9 @@ for more details.
       "outgoing": {
         "tcp": true,
         "udp": true,
+        "filter": {
+          "local": ["tcp://1.1.1.0/24:1337", "1.1.5.0/24", "google.com", ":53"],
+        },
         "ignore_localhost": false,
         "unix_streams": "bear.+"
       },
@@ -674,6 +686,15 @@ additional configuration is needed);
 data on a port is HTTP (in a best-effort kind of way, not guaranteed to be HTTP), and
 steals the traffic on the port if it is HTTP;
 
+#### feature.network.incoming.on_concurrent_steal {#feature-network-incoming-on_concurrent_steal}
+(Operator Only): Allows overriding port locks
+
+Can be set to either `"continue"` or `"override"`.
+
+- `"continue"`: Continue with normal execution
+- `"override"`: If port lock detected then override it with new lock and force close the
+  original locking connection.
+
 #### feature.network.incoming.filter {#feature-network-incoming-http-filter}
 Filter configuration for the HTTP traffic stealer feature.
 
@@ -762,6 +783,8 @@ Tunnel outgoing network operations through mirrord.
 See the outgoing [reference](https://mirrord.dev/docs/reference/traffic/#outgoing) for more
 details.
 
+The `remote` and `local` config for this feature are **mutually** exclusive.
+
 ```json
 {
   "feature": {
@@ -770,6 +793,9 @@ details.
         "tcp": true,
         "udp": true,
         "ignore_localhost": false,
+        "filter": {
+          "local": ["tcp://1.1.1.0/24:1337", "1.1.5.0/24", "google.com", ":53"],
+        },
         "unix_streams": "bear.+"
       }
     }
@@ -802,4 +828,47 @@ string (non-utf8 bytes are replaced by a placeholder character) and matched agai
 of regexes specified here. If there is a match, mirrord will connect your application with
 the target unix socket address on the target pod. Otherwise, it will leave the connection
 to happen locally on your machine.
+
+#### feature.network.outgoing.filter {#feature.network.outgoing.filter}
+
+Unstable: the precise syntax of this config is subject to change.
+List of addresses/ports/subnets that should be sent through either the remote pod or local app,
+depending how you set this up with either `remote` or `local`.
+
+You may use this option to specify when outgoing traffic is sent from the remote pod (which
+is the default behavior when you enable outgoing traffic), or from the local app (default when
+you have outgoing traffic disabled).
+
+Takes a list of values, such as:
+
+- Only UDP traffic on subnet `1.1.1.0/24` on port 1337 will go through the remote pod.
+
+```json
+{
+  "remote": ["udp://1.1.1.0/24:1337"]
+}
+
+- Only UDP and TCP traffic on resolved address of `google.com` on port `1337` and `7331`
+will go through the remote pod.
+```json
+{
+  "remote": ["google.com:1337", "google.com:7331"]
+}
+```
+
+- Only TCP traffic on `localhost` on port 1337 will go through the local app, the rest will
+  be emmited remotely in the cluster.
+```json
+{
+  "local": ["tcp://localhost:1337"]
+}
+
+- Only outgoing traffic on port `1337` and `7331` will go through the local app.
+```json
+{
+  "local": [":1337", ":7331"]
+}
+```
+
+Valid values follow this pattern: `[protocol]://[name|address|subnet/mask]:[port]`.
 
