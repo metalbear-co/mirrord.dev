@@ -2,7 +2,7 @@
 title: "Configuration"
 description: "Config"
 date: 2023-05-17T13:59:39+01:00
-lastmod: 2023-06-21T13:59:39+01:00
+lastmod: 2023-07-14T13:59:39+01:00
 draft: false
 images: []
 menu:
@@ -88,6 +88,9 @@ configuration file containing all fields.
       "outgoing": {
         "tcp": true,
         "udp": true,
+        "filter": {
+          "local": ["tcp://1.1.1.0/24:1337", "1.1.5.0/24", "google.com", ":53"]
+        },
         "ignore_localhost": false,
         "unix_streams": "bear.+"
       },
@@ -97,7 +100,7 @@ configuration file containing all fields.
   "operator": true,
   "kubeconfig": "~/.kube/config",
   "sip_binaries": "bash",
-  "telemetry": true,
+  "telemetry": true
 }
 ```
 
@@ -411,6 +414,9 @@ have support for a shortened version, that you can see [here](#root-shortened).
       "outgoing": {
         "tcp": true,
         "udp": true,
+        "filter": {
+          "local": ["tcp://1.1.1.0/24:1337", "1.1.5.0/24", "google.com", ":53"]
+        },
         "ignore_localhost": false,
         "unix_streams": "bear.+"
       },
@@ -562,6 +568,9 @@ for more details.
       "outgoing": {
         "tcp": true,
         "udp": true,
+        "filter": {
+          "local": ["tcp://1.1.1.0/24:1337", "1.1.5.0/24", "google.com", ":53"]
+        },
         "ignore_localhost": false,
         "unix_streams": "bear.+"
       },
@@ -774,6 +783,8 @@ Tunnel outgoing network operations through mirrord.
 See the outgoing [reference](https://mirrord.dev/docs/reference/traffic/#outgoing) for more
 details.
 
+The `remote` and `local` config for this feature are **mutually** exclusive.
+
 ```json
 {
   "feature": {
@@ -782,6 +793,9 @@ details.
         "tcp": true,
         "udp": true,
         "ignore_localhost": false,
+        "filter": {
+          "local": ["tcp://1.1.1.0/24:1337", "1.1.5.0/24", "google.com", ":53"]
+        },
         "unix_streams": "bear.+"
       }
     }
@@ -814,4 +828,50 @@ string (non-utf8 bytes are replaced by a placeholder character) and matched agai
 of regexes specified here. If there is a match, mirrord will connect your application with
 the target unix socket address on the target pod. Otherwise, it will leave the connection
 to happen locally on your machine.
+
+#### feature.network.outgoing.filter {#feature.network.outgoing.filter}
+
+Unstable: the precise syntax of this config is subject to change.
+List of addresses/ports/subnets that should be sent through either the remote pod or local app,
+depending how you set this up with either `remote` or `local`.
+
+You may use this option to specify when outgoing traffic is sent from the remote pod (which
+is the default behavior when you enable outgoing traffic), or from the local app (default when
+you have outgoing traffic disabled).
+
+Takes a list of values, such as:
+
+- Only UDP traffic on subnet `1.1.1.0/24` on port 1337 will go through the remote pod.
+
+```json
+{
+  "remote": ["udp://1.1.1.0/24:1337"]
+}
+```
+
+- Only UDP and TCP traffic on resolved address of `google.com` on port `1337` and `7331`
+will go through the remote pod.
+```json
+{
+  "remote": ["google.com:1337", "google.com:7331"]
+}
+```
+
+- Only TCP traffic on `localhost` on port 1337 will go through the local app, the rest will be
+  emmited remotely in the cluster.
+
+```json
+{
+  "local": ["tcp://localhost:1337"]
+}
+```
+
+- Only outgoing traffic on port `1337` and `7331` will go through the local app.
+```json
+{
+  "local": [":1337", ":7331"]
+}
+```
+
+Valid values follow this pattern: `[protocol]://[name|address|subnet/mask]:[port]`.
 
