@@ -99,7 +99,7 @@ configuration file containing all fields.
   },
   "operator": true,
   "kubeconfig": "~/.kube/config",
-  "sip_binaries": "bash"
+  "sip_binaries": "bash",
   "telemetry": true,
 }
 ```
