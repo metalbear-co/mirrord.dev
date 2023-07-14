@@ -31,6 +31,9 @@ mirrord-agent does **not** run as a privileged container in the cluster. However
 - `CAP_SYS_PTRACE` - required for reading target pod environment
 - `CAP_SYS_ADMIN` - required for joining target pod network namespace
 
+However, you can disable any subset of those in the [configuration]({{< ref "/docs/overview/configuration" >}} "configuration").
+This will possibly limit mirrord functionalities or even make it unusable in some setups.
+
 #### mirrord-layer
 
 mirrord-layer is a `.dylib` file for OSX systems and `.so` file on Linux distributions. mirrord-layer is loaded through `LD_PRELOAD/DYLD_INSERT_LIBRARIES` environment variable with the local process, which lets mirrord-layer selectively override libc functions. The overridden functions are then responsible for maintaining coordination between the process and incoming/outgoing requests for network traffic/file access. mirrord-layer sends and receives events from the agent using port-forwarding.
