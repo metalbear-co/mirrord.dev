@@ -31,7 +31,7 @@ mirrord-agent does **not** run as a privileged container in the cluster. However
 - `CAP_SYS_PTRACE` - required for reading target pod environment
 - `CAP_SYS_ADMIN` - required for joining target pod network namespace
 
-However, you can disable any subset of those in the [configuration]({{< ref "/docs/overview/configuration" >}} "configuration").
+However, you can disable any subset of those in the configuration using [agent.disabled_capabilities]({{< ref "/docs/overview/configuration#agent-disabled_capabilities" >}}) option.
 This will possibly limit mirrord functionalities or even make it unusable in some setups.
 
 #### mirrord-layer
