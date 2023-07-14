@@ -93,11 +93,11 @@ configuration file containing all fields.
       },
       "dns": false
     },
-    "capture_error_trace": false
   },
   "operator": true,
   "kubeconfig": "~/.kube/config",
-  "sip_binaries": "bash"
+  "sip_binaries": "bash",
+  "telemetry": true,
 }
 ```
 
@@ -123,6 +123,12 @@ With this feature enabled, the remote container is paused while this layer is co
 the agent.
 
 Defaults to `false`.
+
+## telemetry {#root-telemetry}
+Controls whether or not mirrord sends telemetry data to MetalBear cloud.
+Telemetry sent doesn't contain personal identifiers or any data that
+should be considered sensitive. It is used to improve the product.
+[For more information](https://github.com/metalbear-co/mirrord/blob/main/TELEMETRY.md)
 
 ## connect_tcp {#root-connect_tpc}
 
@@ -310,6 +316,12 @@ Which network interface to use for mirroring.
 The default behavior is try to access the internet and use that interface. If that fails
 it uses `eth0`.
 
+### agent.disabled_capabilities {#agent-disabled_capabilities}
+
+Disables specified Linux capabilities for the agent container.
+If nothing is disabled here, agent uses `NET_ADMIN`, `NET_RAW`, `SYS_PTRACE` and
+`SYS_ADMIN`.
+
 ## target {#root-target}
 Specifies the target and namespace to mirror, see [`path`](#target-path) for a list of
 accepted values for the `target` option.
@@ -404,18 +416,9 @@ have support for a shortened version, that you can see [here](#root-shortened).
       },
       "dns": false
     },
-    "capture_error_trace": false
   }
 }
 ```
-
-## feature.capture_error_trace {#feature-capture_error_trace}
-
-Controls the crash reporting feature.
-
-With this feature enabled, mirrord generates a nice crash report log.
-
-Defaults to `false`.
 
 ## feature.fs {#feature-fs}
 Allows the user to specify the default behavior for file operations:
@@ -673,6 +676,15 @@ additional configuration is needed);
 2. HTTP traffic stealing: Steals only HTTP traffic, mirrord tries to detect if the incoming
 data on a port is HTTP (in a best-effort kind of way, not guaranteed to be HTTP), and
 steals the traffic on the port if it is HTTP;
+
+#### feature.network.incoming.on_concurrent_steal {#feature-network-incoming-on_concurrent_steal}
+(Operator Only): Allows overriding port locks
+
+Can be set to either `"continue"` or `"override"`.
+
+- `"continue"`: Continue with normal execution
+- `"override"`: If port lock detected then override it with new lock and force close the
+  original locking connection.
 
 #### feature.network.incoming.filter {#feature-network-incoming-http-filter}
 Filter configuration for the HTTP traffic stealer feature.
