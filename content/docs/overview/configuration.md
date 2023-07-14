@@ -89,7 +89,7 @@ configuration file containing all fields.
         "tcp": true,
         "udp": true,
         "filter": {
-          "local": ["tcp://1.1.1.0/24:1337", "1.1.5.0/24", "google.com", ":53"],
+          "local": ["tcp://1.1.1.0/24:1337", "1.1.5.0/24", "google.com", ":53"]
         },
         "ignore_localhost": false,
         "unix_streams": "bear.+"
@@ -100,7 +100,7 @@ configuration file containing all fields.
   "operator": true,
   "kubeconfig": "~/.kube/config",
   "sip_binaries": "bash",
-  "telemetry": true,
+  "telemetry": true
 }
 ```
 
@@ -415,7 +415,7 @@ have support for a shortened version, that you can see [here](#root-shortened).
         "tcp": true,
         "udp": true,
         "filter": {
-          "local": ["tcp://1.1.1.0/24:1337", "1.1.5.0/24", "google.com", ":53"],
+          "local": ["tcp://1.1.1.0/24:1337", "1.1.5.0/24", "google.com", ":53"]
         },
         "ignore_localhost": false,
         "unix_streams": "bear.+"
@@ -569,7 +569,7 @@ for more details.
         "tcp": true,
         "udp": true,
         "filter": {
-          "local": ["tcp://1.1.1.0/24:1337", "1.1.5.0/24", "google.com", ":53"],
+          "local": ["tcp://1.1.1.0/24:1337", "1.1.5.0/24", "google.com", ":53"]
         },
         "ignore_localhost": false,
         "unix_streams": "bear.+"
@@ -794,7 +794,7 @@ The `remote` and `local` config for this feature are **mutually** exclusive.
         "udp": true,
         "ignore_localhost": false,
         "filter": {
-          "local": ["tcp://1.1.1.0/24:1337", "1.1.5.0/24", "google.com", ":53"],
+          "local": ["tcp://1.1.1.0/24:1337", "1.1.5.0/24", "google.com", ":53"]
         },
         "unix_streams": "bear.+"
       }
