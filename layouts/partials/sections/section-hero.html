@@ -12,10 +12,10 @@
                 </div>
 
                 <div class="lg:hidden px-6 mb-4">
-                    {{- with resources.Get "images/hero_image.gif" }}
-                    <img src="{{ .RelPermalink }}" class="object-cover object-center" alt="{{  .Title }}"
-                        width="{{ .Width }}" height="{{ .Height }}">
-                    {{- end }}
+                    <video autoplay loop muted playsinline>
+                        <source src="hero_image.webm" type="video/webm" />
+                        <source src="hero_image.mp4" type="video/mp4"/>
+                      </video>
                 </div>
 
                 <div class="flex flex-col lg:flex-row items-center space-y-8 lg:space-y-0 lg:space-x-12 mb-8 lg:mb-16">
@@ -65,10 +65,10 @@
                 </div>
             </div>
             <div class="lg:flex-none lg:w-1/2 hidden lg:block">
-                {{- with resources.Get "images/hero_image.gif" }}
-                <img src="{{ .RelPermalink }}" class="object-cover object-center" alt="{{  .Title }}"
-                    width="{{ .Width }}" height="{{ .Height }}">
-                {{- end }}
+                <video autoplay loop muted playsinline>
+                    <source src="hero_image.webm" type="video/webm" />
+                    <source src="hero_image.mp4" type="video/mp4"/>
+                  </video>
                 <a href="#how-it-works" style="justify-content: center;" class="text-center flex justify-center">How does it work?</a>
             </div>
         </div>
