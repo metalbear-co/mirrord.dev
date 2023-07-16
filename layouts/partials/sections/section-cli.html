@@ -32,7 +32,7 @@
                         <pre class="leading-[0] overflow-x-hidden hover:overflow-x-auto pb-6 px-4 text-center">
                             <code class="language-bash font-code font-normal text-sm text-[#222222] block">brew install metalbear-co/mirrord/mirrord</code>
                         </pre>
-                        <button class="absolute w-16 top-1 right-1" @click="isCopy = true">
+                        <button class="absolute w-16 top-1 right-1" aria-label="Copy" @click="isCopy = true">
                             <div x-clipboard="brew" class="text-primary">
                                 <div x-show="isCopy === false">
                                 {{ partial (printf "svg/icon-%s.svg" "copy") (dict "class" "w-4 text-current ml-auto") }}
