@@ -52,6 +52,13 @@ There are currently two known cases where mirrord cannot load into the applicati
 
    Please let us know if you're having trouble with SIP by opening an issue on [GitHub](https://github.com/metalbear-co/mirrord) or talking to us on [Discord](https://discord.gg/metalbear).
 
+## My local process fails to resolve the domain name of a Kubernetes service in the same cluster, what could be the issue?
+
+If you've set `feature.fs.mode` to `local`, try changing it to `localwithoverrides`.
+
+When the `local` mode is set, all files will be opened locally. This might prevent your process from resolving cluster-internal domain names correctly, because it can no longer read Kubelet-generated configuration files like `/etc/resolv.conf`. With `localwithoverrides`, such files are read from the remote pod instead.
+
+
 ## Why not just use a remote debugger?
 
 When you use a remote debugger, you still have to deploy new code to the cluster. When you plug local code into the cloud with mirrord, you don't have to wait for cloud deployment. Using mirrord is also less disruptive to the cluster, since the stable version of the code is still running and handling requests.
