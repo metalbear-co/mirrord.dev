@@ -54,7 +54,7 @@ There are currently two known cases where mirrord cannot load into the applicati
 
 ## My local process fails to resolve the domain name of a Kubernetes service in the same cluster, what could be the issue?
 
-You probably need to change `feature.fs.mode` from `local` to `localwithoverrides`.
+If you've set `feature.fs.mode` to `local`, try changing it to `localwithoverrides`.
 
 In the `local` mode is on, all file will be opened locally. This might prevent your process from resolving cluster-internal domain names correctly, because it can no longer read Kubelet-generated configuration files like `/etc/resolv.conf`. With `localwithoverrides`, such files are read from the remote pod instead.
 
