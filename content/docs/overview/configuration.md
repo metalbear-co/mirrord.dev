@@ -319,6 +319,17 @@ Which network interface to use for mirroring.
 The default behavior is try to access the internet and use that interface. If that fails
 it uses `eth0`.
 
+### agent.tolerations {#agent-tolerations}
+
+Set pod tolerations. (not with ephemeral agents)
+Default is
+```yaml
+tolerations:
+- operator: Exists
+```
+
+Set to an empty array to have no tolerations at all
+
 ### agent.disabled_capabilities {#agent-disabled_capabilities}
 
 Disables specified Linux capabilities for the agent container.
