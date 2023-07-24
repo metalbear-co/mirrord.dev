@@ -63,7 +63,7 @@ configuration file containing all fields.
     "env": {
       "include": "DATABASE_USER;PUBLIC_ENV",
       "exclude": "DATABASE_PASSWORD;SECRET_ENV",
-      "overrides": {
+      "override": {
         "DATABASE_CONNECTION": "db://localhost:7777/my-db",
         "LOCAL_BEAR": "panda"
       }
@@ -389,7 +389,7 @@ have support for a shortened version, that you can see [here](#root-shortened).
     "env": {
       "include": "DATABASE_USER;PUBLIC_ENV",
       "exclude": "DATABASE_PASSWORD;SECRET_ENV",
-      "overrides": {
+      "override": {
         "DATABASE_CONNECTION": "db://localhost:7777/my-db",
         "LOCAL_BEAR": "panda"
       }
@@ -543,7 +543,7 @@ requires specifying them with `include`
 Allows setting or overriding environment variables (locally) with a custom value.
 
 For example, if the remote pod has an environment variable `REGION=1`, but this is an
-undesirable value, it's possible to use `overrides` to set `REGION=2` (locally) instead.
+undesirable value, it's possible to use `override` to set `REGION=2` (locally) instead.
 
 ## feature.network {#feature-network}
 Controls mirrord network operations.
