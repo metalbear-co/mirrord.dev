@@ -24,3 +24,55 @@ toc: true
     - `CAP_SYS_PTRACE` - for reading the target pod's environment variables
     - `CAP_SYS_ADMIN` - for joining the target pod's network namespace
 - Missing anything? Feel free to ask us on Discord or hi@metalbear.co
+
+## How do I configure Role Based Access Control for mirrord for Teams?
+
+mirrord for Teams includes a built-in ClusterRole called `mirrord-operator-user`, which controls access to the Operator API. To grant access to the Operator API, you can create a ClusterRoleBinding like this:
+
+```yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+subjects:
+- kind: User
+  name: jim
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: mirrord-operator-user
+  apiGroup: rbac.authorization.k8s.io`
+```
+
+You can do this with a RoleBinding as well, which will limit the user's calls to the Operator to only act on targets in the namespace where the RoleBinding is created.
+
+In addition, the Operator impersonates any user that calls its API, and thus only operates on pods or deployments for which the user has `get` permissions.
+
+Below is the ClusterRole's yaml. You can modify it to suit your needs, e.g. convert it to a Role, or add resourceNames to only allow using it on specific targets.  
+
+```yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: mirrord-operator-user
+rules:
+- apiGroups:
+  - operator.metalbear.co
+  resources:
+  - mirrordoperators
+  - targets
+  - targets/port-locks
+  verbs:
+  - get
+  - list
+- apiGroups:
+  - operator.metalbear.co
+  resources:
+  - mirrordoperators/certificate
+  verbs:
+  - create
+- apiGroups:
+  - operator.metalbear.co
+  resources:
+  - targets
+  verbs:
+  - proxy
+  ```
