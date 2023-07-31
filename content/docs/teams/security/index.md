@@ -29,7 +29,7 @@ toc: true
 
 mirrord for Teams works on top of Kubernetes' built-in RBAC with two main resources, `mirrordoperators` and `targets`,  and two sub-resources, `mirrordoperators/certificate` and `targets/port-locks` under the `operator.metalbear.co` apiGroup.
 
-By limiting the `targets` resource to specific namespaces you can limit the access the Operator has. The specific verbs for rules to our resources can be copied from the examples below.
+You can limit a user's ability to use mirrord on specific targets by limiting their access to the `target` resource. The specific verbs for rules to our resources can be copied from the examples below.
 
 For your convenience, mirrord for Teams includes a built-in ClusterRole called `mirrord-operator-user`, which controls access to the Operator API. To grant access to the Operator API, you can create a ClusterRoleBinding like this:
 
