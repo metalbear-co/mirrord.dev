@@ -90,7 +90,9 @@ rules:
     resources:
     - targets
     resourceNames:
-    - "my-deployment"
+    - "deployment.my-deployment"
+    - "pod.my-pod"
+    - "rollout.my-argo-rollout"
     verbs:
     - proxy
   ```
