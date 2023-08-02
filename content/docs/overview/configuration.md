@@ -2,7 +2,7 @@
 title: "Configuration"
 description: "Config"
 date: 2023-05-17T13:59:39+01:00
-lastmod: 2023-07-14T13:59:39+01:00
+lastmod: 2023-08-02T13:59:39+01:00
 draft: false
 images: []
 menu:
@@ -36,6 +36,8 @@ configuration file containing all fields.
 
 ### Complete `config.json` {#root-complete}
 
+ Don't use this example as a starting point, it's just here to show you all the available
+options.
 ```json
 {
   "accept_invalid_certificates": false,
@@ -100,7 +102,8 @@ configuration file containing all fields.
   "operator": true,
   "kubeconfig": "~/.kube/config",
   "sip_binaries": "bash",
-  "telemetry": true
+  "telemetry": true,
+  "kube_context": "my-cluster"
 }
 ```
 
@@ -127,6 +130,17 @@ the agent.
 
 Defaults to `false`.
 
+## skip_build_tools {#root-skip_build_tools}
+
+Allows mirrord to skip build tools. Useful when running command lines that build and run
+the application in a single command.
+
+Defaults to `true`.
+
+Build-Tools: `["as", "cc", "ld", "go", "air", "asm", "cc1", "cgo", "dlv", "gcc", "git",
+"link", "math", "cargo", "hpack", "rustc", "compile", "collect2", "cargo-watch",
+"debugserver"]`
+
 ## telemetry {#root-telemetry}
 Controls whether or not mirrord sends telemetry data to MetalBear cloud.
 Telemetry sent doesn't contain personal identifiers or any data that
@@ -140,6 +154,17 @@ IP:PORT to connect to instead of using k8s api, for testing purposes.
 ```json
 {
   "connect_tcp": "10.10.0.100:7777"
+}
+```
+
+## kube_context {#root-kube_context}
+
+Kube context to use from the kubeconfig file.
+Will use current context if not specified.
+
+```json
+{
+ "kube_context": "mycluster"
 }
 ```
 
@@ -319,6 +344,20 @@ Which network interface to use for mirroring.
 The default behavior is try to access the internet and use that interface. If that fails
 it uses `eth0`.
 
+### agent.tolerations {#agent-tolerations}
+
+Set pod tolerations. (not with ephemeral agents)
+Default is
+```json
+[
+  {
+    "operator": "Exists"
+  }
+]
+```
+
+Set to an empty array to have no tolerations at all
+
 ### agent.disabled_capabilities {#agent-disabled_capabilities}
 
 Disables specified Linux capabilities for the agent container.
@@ -365,6 +404,9 @@ Defaults to `"default"`.
 ### target.path {#target-path}
 
 Specifies the running pod (or deployment) to mirror.
+
+Note: Deployment level steal/mirroring is available only in mirrord for Teams
+If you use it without it, it will choose a random pod replica to work with.
 
 Supports:
 - `pod/{sample-pod}`;
@@ -470,10 +512,6 @@ For more information, check the file operations
   }
 }
 ```
-
-### feature.fs.local {#feature-fs-local}
-
-Specify file path patterns that if matched will be opened locally.
 
 ### feature.fs.read_only {#feature-fs-read_only}
 
