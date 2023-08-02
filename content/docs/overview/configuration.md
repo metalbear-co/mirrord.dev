@@ -513,6 +513,10 @@ For more information, check the file operations
 }
 ```
 
+### feature.fs.local {#feature-fs-local}
+
+Specify file path patterns that if matched will be opened locally.
+
 ### feature.fs.read_only {#feature-fs-read_only}
 
 Specify file path patterns that if matched will be read from the remote.
