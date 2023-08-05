@@ -6,4 +6,4 @@ This repository is [MIT Licensed](LICENSE).
 
 
 ### Running
-`yarn run dev`
+`yarn dev`

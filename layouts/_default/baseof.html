@@ -4,13 +4,12 @@
 <!-- <body x-data="{darkMode: $persist(true)}" class="font-body {{ if .IsHome }}bg-white {{ else }}bg-[#FBFBFD] dark:bg-[#202020]{{ end }}" :class="{ 'dark': darkMode }" :data-theme="darkMode ? 'dark' : 'light'"> -->
 
 
-  <body class="font-body {{ if .IsHome }}bg-white {{ else }}bg-[#FBFBFD] dark:bg-[#202020]{{ end }}"></body>
+  <body class="font-body {{ if .IsHome }}bg-white {{ else if eq .Section "stories" }}bg-white {{ else }}bg-[#FBFBFD] dark:bg-[#202020]{{ end }}"></body>
 
   {{- partial "header/header.html" . }}
   {{- block "main" . }}{{ end }}
 
   {{- partial "footer/footer.html" . }}
-
 
 </body>
 </html>
