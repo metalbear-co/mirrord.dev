@@ -3,7 +3,7 @@ title: "Tine Jozelj"
 description: "[With mirrord] the service is running locally (fast iterations) but still receives all the cluster access including databases, credentials, configuration."
 date: 2023-07-31T06:00:00+00:00
 lastmod: 2023-07-31T06:00:00+00:00
-position: "Principal Engineer | Birdbuddy"
+position: "Principal Engineer | Bird Buddy"
 avatar: "tine_jozelj.png"
 logo: "birdbuddy.png"
 featured: true
@@ -25,12 +25,12 @@ Telepresence v1.
 
 ## Why did you choose mirrord instead?
 
-Simplicity and performance. As it only consists of client side application and doesn't need any cluster components it makes it easy
+Simplicity and performance. As it only consists of a client side application and doesn't need any cluster components, it makes it easy
 for developers to setup and use.
 
 ## How do you and others in your organization use mirrord?
 
-We use it as part of our development workflow. Whenever a developer wants to run an backend service, they use mirrord to run it with,
-that way the service is running locally (fast iterations) but still receives all the cluster access including databases, credentials, configuration.
+We use it as part of our development workflow. Whenever a developer wants to run an backend service, they use mirrord to run it.
+That way the service is running locally (fast iterations) but still receives all the cluster access including databases, credentials, configuration.
 
 It makes our goal of having a consistent environment across the development, testing and production possible.

@@ -3,7 +3,7 @@ title: "Leonard Melo"
 description: "[mirrord] allowed me to test and debug local changes, in our cloud environment, in one go and without the hassles of a shared staging environment"
 date: 2023-07-31T06:00:00+00:00
 lastmod: 2023-07-31T06:00:00+00:00
-position: "Software Engineer | Rockspoon"
+position: "Software Engineer | RockSpoon"
 avatar: "leonard_melo.png"
 logo: "rockspoon.png"
 featured: true
@@ -23,13 +23,13 @@ RockSpoon is a startup developing an end-to-end restaurant management platform, 
 ## What did you use before?
 
 To run E2E tests for my local changes, I would deploy them to our shared staging environment, which could be quick or not, and could form a queue of people to deploy their changes to a certain service.
-To debug issues, I relied mostly on reproducing the request with unit tests (which requires mocking integration calls), deploying to out shared staging environment then going through logs in order to gather information on what exactly was happening.
+To debug issues, I relied mostly on reproducing the request with unit tests (which requires mocking integration calls), deploying to our shared staging environment then going through logs in order to gather information on what exactly was happening.
 
 ## Why did you choose mirrord instead?
 
-Pod impersonation and  VS Code debugger integration are the main reasons why I chose mirrord. Using both allowed me to test and debug local changes, in our cloud environment, in one go and without the hassles of a shared staging environment: just add breakpoints, impersonate the pod, make a request and debug it -- one breakpoint at a time. On top of that, Mirrord is widely configurable and easy to use.
+Pod impersonation and VS Code debugger integration are the main reasons why I chose mirrord. Using both allowed me to test and debug local changes, in our cloud environment, in one go and without the hassles of a shared staging environment: just add breakpoints, impersonate the pod, make a request and debug it -- one breakpoint at a time. On top of that, mirrord is widely configurable and easy to use.
 
 
 ## How do you and others in your organization use mirrord?
 
-Currently, we are using mirrord mostly in steal mode, with header filters, to intercept requests and debug issues and validate test local changes, in our shared staging environment, without impacting other developers. There are plenty more use-cases for Mirrord at our company and I'm looking forward to extending our use of mirrord 🙂
+Currently, we are using mirrord mostly in steal mode, with header filters, to intercept requests and debug issues and validate test local changes, in our shared staging environment, without impacting other developers. There are plenty more use-cases for mirrord at our company and I'm looking forward to extending our use of it 🙂
