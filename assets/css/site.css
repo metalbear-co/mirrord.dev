@@ -978,6 +978,14 @@ table td {
   height: 2.5rem;
 }
 
+.max-h-\[300px\] {
+  max-height: 300px;
+}
+
+.max-h-\[400px\] {
+  max-height: 400px;
+}
+
 .min-h-\[132px\] {
   min-height: 132px;
 }
@@ -1264,6 +1272,10 @@ table td {
 
 .overflow-hidden {
   overflow: hidden;
+}
+
+.overflow-y-auto {
+  overflow-y: auto;
 }
 
 .overflow-x-hidden {
