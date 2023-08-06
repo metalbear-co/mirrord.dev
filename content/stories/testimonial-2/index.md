@@ -1,11 +1,11 @@
 ---
-title: "Shani Sahar Kaneti"
-description: "debugging a service become much faster and easy"
+title: "Leonard Melo"
+description: "[mirrord] allowed me to test and debug local changes, in our cloud environment, in one go and without the hassles of a shared staging environment"
 date: 2023-07-31T06:00:00+00:00
 lastmod: 2023-07-31T06:00:00+00:00
-position: "Backend developer | vmware"
-avatar: "shani_sahar_kaneti.png"
-logo: "vmware.png"
+position: "Software Engineer | Rockspoon"
+avatar: "leonard_melo.png"
+logo: "rockspoon.png"
 featured: true
 draft: false
 weight: 20
@@ -13,34 +13,23 @@ weight: 20
 
 ## About yourself
 
-Shani Sahar Kaneti, Backend developer
+Leonardo Melo - Software Engineer
+I'm a Backend Software Developer, currently working on building and maintaining Golang microservices that provide or consume REST and/or Event-Driven APIs.
 
 ## About your company
 
-VMWARE Carbon Black
+RockSpoon is a startup developing an end-to-end restaurant management platform, from Point of Sale to payment processing, delivery and more.
 
 ## What did you use before?
 
-Telepresence
+To run E2E tests for my local changes, I would deploy them to our shared staging environment, which could be quick or not, and could form a queue of people to deploy their changes to a certain service.
+To debug issues, I relied mostly on reproducing the request with unit tests (which requires mocking integration calls), deploying to out shared staging environment then going through logs in order to gather information on what exactly was happening.
 
 ## Why did you choose mirrord instead?
 
-The telepresence solution was limited.
+Pod impersonation and  VS Code debugger integration are the main reasons why I chose mirrord. Using both allowed me to test and debug local changes, in our cloud environment, in one go and without the hassles of a shared staging environment: just add breakpoints, impersonate the pod, make a request and debug it -- one breakpoint at a time. On top of that, Mirrord is widely configurable and easy to use.
 
-In version 1, telepresence only allows to debug deployments, so I couldn’t debug my other services (such as daemon sets), and the technology did an ssh mount from the pod to my machine.
-
-The mount solution had limitations too - when debugging from you local machine, you don’t have access that is configured in your system. 
-
-For example, for accessing AWS resources, I had an AWS Role annotation on the pod, that I couldn’t use in my local machine (the aws role on my machine that has access to the cluster, doesn’t have access to the aws resource that the pod has).
-
-In addition, some packages that I used, searching hardcoded paths on the file system when used. With the Telepresence solution, I couldn’t debug services with such packages, since they tried to access files on my filesystem, instead of on the mounted folder. For example - a package I used, tried to access file under /etc, while I wanted it to access the /mounted_folder/etc file.
-
-In version 2, the solution requires exporting your code through Kubernetes Services, and intercepting them. That didn’t allow me to debug code that isn’t exposed by services - for example, a kafka consumer, or a cronjob that isn’t exporting a port.
-
-Also, setting up my environment for debugging wasn’t that simple, and required a preparation script.
-
-Mirrord allow me to debug all of the above, plus it has a plugin to my IDE (IntelliJ’s GoLand), so debugging a service become much faster and easy
 
 ## How do you and others in your organization use mirrord?
 
-We use it in our development lifecycle, when trying to debug and write code on a micro services system on top of kubernetes. 
+Currently, we are using mirrord mostly in steal mode, with header filters, to intercept requests and debug issues and validate test local changes, in our shared staging environment, without impacting other developers. There are plenty more use-cases for Mirrord at our company and I'm looking forward to extending our use of mirrord 🙂

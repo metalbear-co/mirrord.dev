@@ -1,11 +1,11 @@
 ---
-title: "Leonardo Melo"
-description: "On top of that, Mirrord is widely configurable and easy to use."
+title: "Shani Sahar Kaneti"
+description: "Debugging a service became much faster and easier."
 date: 2023-07-31T06:00:00+00:00
 lastmod: 2023-07-31T06:00:00+00:00
-position: "Software Engineer | RockSpoon"
-avatar: "leonardo_melo.png"
-logo: "rockspoon.png"
+position: "Backend Developer | VMware Carbon Black"
+avatar: "shani_sahar_kaneti.png"
+logo: "vmware.png"
 featured: true
 draft: false
 weight: 10
@@ -17,7 +17,7 @@ Shani Sahar Kaneti, Backend developer
 
 ## About your company
 
-VMWARE Carbon Black
+VMware Carbon Black
 
 ## What did you use before?
 
@@ -39,7 +39,7 @@ In version 2, the solution requires exporting your code through Kubernetes Servi
 
 Also, setting up my environment for debugging wasn’t that simple, and required a preparation script.
 
-Mirrord allow me to debug all of the above, plus it has a plugin to my IDE (IntelliJ’s GoLand), so debugging a service become much faster and easy
+Mirrord allow me to debug all of the above, plus it has a plugin to my IDE (IntelliJ’s GoLand), so debugging a service became much faster and easier
 
 ## How do you and others in your organization use mirrord?
 

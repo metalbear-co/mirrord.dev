@@ -1,11 +1,11 @@
 ---
-title: "Leonardo Melo 3"
-description: "On top of that, Mirrord is widely configurable and easy to use."
+title: "Tine Jozelj"
+description: "[With mirrord] the service is running locally (fast iterations) but still receives all the cluster access including databases, credentials, configuration."
 date: 2023-07-31T06:00:00+00:00
 lastmod: 2023-07-31T06:00:00+00:00
-position: "Software Engineer | RockSpoon"
-avatar: "leonardo_melo.png"
-logo: "rockspoon.png"
+position: "Principal Engineer | Birdbuddy"
+avatar: "tine_jozelj.png"
+logo: "birdbuddy.png"
 featured: true
 draft: false
 weight: 30
@@ -13,34 +13,24 @@ weight: 30
 
 ## About yourself
 
-Shani Sahar Kaneti, Backend developer
+I'm a principal engineer working at Bird Buddy.
 
 ## About your company
 
-VMWARE Carbon Black
+Bird Buddy is making an AI powered bird feeder that recognizes and notifies you about the birds that visit it.
 
 ## What did you use before?
 
-Telepresence
+Telepresence v1.
 
 ## Why did you choose mirrord instead?
 
-The telepresence solution was limited.
-
-In version 1, telepresence only allows to debug deployments, so I couldn’t debug my other services (such as daemon sets), and the technology did an ssh mount from the pod to my machine.
-
-The mount solution had limitations too - when debugging from you local machine, you don’t have access that is configured in your system. 
-
-For example, for accessing AWS resources, I had an AWS Role annotation on the pod, that I couldn’t use in my local machine (the aws role on my machine that has access to the cluster, doesn’t have access to the aws resource that the pod has).
-
-In addition, some packages that I used, searching hardcoded paths on the file system when used. With the Telepresence solution, I couldn’t debug services with such packages, since they tried to access files on my filesystem, instead of on the mounted folder. For example - a package I used, tried to access file under /etc, while I wanted it to access the /mounted_folder/etc file.
-
-In version 2, the solution requires exporting your code through Kubernetes Services, and intercepting them. That didn’t allow me to debug code that isn’t exposed by services - for example, a kafka consumer, or a cronjob that isn’t exporting a port.
-
-Also, setting up my environment for debugging wasn’t that simple, and required a preparation script.
-
-Mirrord allow me to debug all of the above, plus it has a plugin to my IDE (IntelliJ’s GoLand), so debugging a service become much faster and easy
+Simplicity and performance. As it only consists of client side application and doesn't need any cluster components it makes it easy
+for developers to setup and use.
 
 ## How do you and others in your organization use mirrord?
 
-We use it in our development lifecycle, when trying to debug and write code on a micro services system on top of kubernetes. 
+We use it as part of our development workflow. Whenever a developer wants to run an backend service, they use mirrord to run it with,
+that way the service is running locally (fast iterations) but still receives all the cluster access including databases, credentials, configuration.
+
+It makes our goal of having a consistent environment across the development, testing and production possible.
