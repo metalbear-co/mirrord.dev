@@ -3,6 +3,7 @@
         <div x-data="{ 
             init() {
               new Splide(this.$refs.stories, {
+                type   : 'loop',
                 perPage  : 2,
                 breakpoints: {
                     640: {
@@ -66,8 +67,8 @@
                                         <h3 class="text-2xl text-primary italic">“{{- .Params.description }}”</h3>
                                     </div>
                                 </div>
-                                <div class="text-center">
-                                    <a class="text-[#222222] inline-block leading-[32px] border-b border-solid border-[#222222] hover:border-white after:absolute after:content-[''] after:top-0 after:left-0 after:right-0 after:bottom-0 after:z-10"
+                                <div class="text-center h-8">
+                                    <a class="text-[#222222] hover:font-medium inline-block leading-[32px] border-b hover:border-b-2 border-solid border-[#222222] after:absolute after:content-[''] after:top-0 after:left-0 after:right-0 after:bottom-0 after:z-10"
                                         href="{{ .RelPermalink }}">Read User Story</a>
                                 </div>
                             </div>
