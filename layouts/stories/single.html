@@ -3,11 +3,11 @@
   <div class="container w-full max-w-screen-md mx-auto px-6">
     <article class="mb-8">
       <header class="flex flex-wrap justify-between border-b border-dashed border-[#9B9B9B] pb-8">
-        <div class="flex-none w-full lg:w-2/3">
-          <h3 class="text-3xl lg:text-4xl text-[#000000] mb-16">User Stories</h3>
+        <div class="flex-none w-full lg:w-2/3 mb-8 lg:mb-0">
+          <h3 class="text-3xl lg:text-4xl text-[#000000] mb-12 lg:mb-16">User Stories</h3>
           {{- $logo := .Resources.GetMatch .Params.logo }}
           {{- with $logo }}
-          {{- with .Resize (printf "%dx%d webp" .Width .Height) }}
+          {{ with .Resize (printf "%dx%d webp" .Width .Height) }}
           <div class="w-full lg:w-3/5">
             <img class="w-full h-auto object-cover object-center" src="{{ .RelPermalink }}" width="{{ .Width }}"
               height="{{ .Height }}">
@@ -18,12 +18,14 @@
         <div class="flex-none w-full lg:w-1/3 flex lg:block items-center">
           {{- $avatar := .Resources.GetMatch .Params.avatar }}
           {{- with $avatar }}
-          <div class="w-[90px] h-[90px] mx-auto lg:mb-4 flex lg:block items-center">
+          {{- with .Resize "90x webp" }}
+          <div class="flex-none w-[48px] h-[48px] md:w-[80px] md:h-[80px] lg:w-[90px] lg:h-[90px] lg:mb-4 flex items-center lg:block lg:mx-auto">
             <img class="w-full h-auto object-cover object-center" src="{{ .RelPermalink }}" width="{{ .Width }}"
               height="{{ .Height }}">
           </div>
           {{- end }}
-          <div class="text-center pl-4 lg:pl-0">
+          {{- end }}
+          <div class="text-center pl-4 lg:pl-0 flex-1">
             <p class="lg:text-sm italic text-[#000000] font-bold mb-0">"{{ .Params.description }}"</p>
           </div>
         </div>
@@ -33,23 +35,25 @@
       </div>
     </article>
     {{- if or .Prev .Next }}
-    <div class="grid grid-cols-12 border-b border-dashed border-[#9B9B9B] pb-12 mb-16">
+    <div class="grid grid-cols-12 gap-6 border-b border-dashed border-[#9B9B9B] pb-12 mb-16">
       {{- $pages := where site.RegularPages "Section" "stories" }}
       {{- with $pages.Next . }}
       <div class="col-span-6">
         <a href="{{ .RelPermalink }}">
-          <div>
+          <div class="mb-2">
             <span class="text-xs text-[#000000]">Previous</span>
           </div>
-          {{- $logo := .Resources.GetMatch .Params.logo }}
-          {{- with $logo }}
-          {{- with .Resize "162x webp" }}
-          <div class="pt-2 mb-2">
-            <img class="max-w-full h-auto object-cover object-center" src="{{ .RelPermalink }}" width="{{ .Width }}"
-              height="{{ .Height }}">
+          <div class="h-14 lg:h-16">
+            {{- $logo := .Resources.GetMatch .Params.logo }}
+            {{- with $logo }}
+            {{- with .Resize (printf "%dx%d webp" .Width .Height) }}
+            <div class="lg:w-2/3">
+              <img class="max-w-full h-auto" src="{{ .RelPermalink }}" width="{{ .Width }}"
+                height="{{ .Height }}">
+            </div>
+            {{- end }}
+            {{- end }}
           </div>
-          {{- end }}
-          {{- end }}
           <div>
             <span
               class="text-[#000000] hover:font-medium leading-loose border-b hover:border-b-2 border-solid border-[#222222]">
@@ -62,18 +66,20 @@
       {{- with $pages.Prev . }}
       <div class="col-span-6 col-start-7">
         <a class="text-right" href="{{ .RelPermalink }}">
-          <div class="text-right">
+          <div class="mb-2 text-right">
             <span class="text-xs text-[#000000]">Next</span>
           </div>
-          {{- $logo := .Resources.GetMatch .Params.logo }}
-          {{- with $logo }}
-          {{- with .Resize "162x webp" }}
-          <div class="pt-2 mb-2 flex justify-end">
-            <img class="max-w-full h-auto object-cover object-center" src="{{ .RelPermalink }}" width="{{ .Width }}"
-              height="{{ .Height }}">
+          <div class="h-14 lg:h-16">
+            {{- $logo := .Resources.GetMatch .Params.logo }}
+            {{- with $logo }}
+            {{- with .Resize (printf "%dx%d webp" .Width .Height) }}
+            <div class="lg:w-2/3 ml-auto">
+              <img class="max-w-full h-auto block ml-auto" src="{{ .RelPermalink }}" width="{{ .Width }}"
+                height="{{ .Height }}">
+            </div>
+            {{- end }}
+            {{- end }}
           </div>
-          {{- end }}
-          {{- end }}
           <div class="text-right">
             <span
               class="text-[#000000] hover:font-medium leading-loose border-b hover:border-b-2 border-solid border-[#222222]">
