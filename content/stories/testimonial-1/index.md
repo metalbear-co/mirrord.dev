@@ -25,9 +25,9 @@ Telepresence
 
 ## Why did you choose mirrord instead?
 
-The elepresence solution was limited.
+The Telepresence solution was limited.
 
-In version 1, telepresence only allows to debug deployments, so I couldn’t debug my other services (such as DaemonSets), and the technology did an ssh mount from the pod to my machine.
+In version 1, Telepresence only allows to debug deployments, so I couldn’t debug my other services (such as DaemonSets), and the technology did an ssh mount from the pod to my machine.
 
 The mount solution had limitations too - when debugging from you local machine, you don’t have access that is configured in your system. 
 
