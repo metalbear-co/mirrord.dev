@@ -834,6 +834,10 @@ table td {
   margin-bottom: 4rem;
 }
 
+.mb-1 {
+  margin-bottom: 0.25rem;
+}
+
 .ml-auto {
   margin-left: auto;
 }
@@ -860,10 +864,6 @@ table td {
 
 .mt-12 {
   margin-top: 3rem;
-}
-
-.mb-1 {
-  margin-bottom: 0.25rem;
 }
 
 .mr-6 {
@@ -948,6 +948,10 @@ table td {
 
 .h-14 {
   height: 3.5rem;
+}
+
+.h-16 {
+  height: 4rem;
 }
 
 .h-\[20px\] {
@@ -1459,6 +1463,11 @@ table td {
   stroke-width: 2;
 }
 
+.object-contain {
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
 .object-cover {
   -o-object-fit: cover;
      object-fit: cover;
@@ -1467,6 +1476,16 @@ table td {
 .object-center {
   -o-object-position: center;
      object-position: center;
+}
+
+.object-left-top {
+  -o-object-position: left top;
+     object-position: left top;
+}
+
+.object-right {
+  -o-object-position: right;
+     object-position: right;
 }
 
 .p-10 {
@@ -3089,6 +3108,19 @@ body {
 }
 
 @media (min-width: 768px) {
+  .md\:mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .md\:mb-0 {
+    margin-bottom: 0px;
+  }
+
+  .md\:mb-4 {
+    margin-bottom: 1rem;
+  }
+
   .md\:block {
     display: block;
   }
@@ -3099,6 +3131,14 @@ body {
 
   .md\:h-\[80px\] {
     height: 80px;
+  }
+
+  .md\:w-1\/2 {
+    width: 50%;
+  }
+
+  .md\:w-2\/3 {
+    width: 66.666667%;
   }
 
   .md\:w-\[80px\] {
@@ -3171,11 +3211,6 @@ body {
     margin: 0px;
   }
 
-  .lg\:mx-auto {
-    margin-left: auto;
-    margin-right: auto;
-  }
-
   .lg\:mx-0 {
     margin-left: 0px;
     margin-right: 0px;
@@ -3189,16 +3224,8 @@ body {
     margin-bottom: 1.5rem;
   }
 
-  .lg\:mb-0 {
-    margin-bottom: 0px;
-  }
-
   .lg\:mb-16 {
     margin-bottom: 4rem;
-  }
-
-  .lg\:mb-4 {
-    margin-bottom: 1rem;
   }
 
   .lg\:ml-0 {
