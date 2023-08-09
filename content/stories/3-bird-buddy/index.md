@@ -13,7 +13,7 @@ weight: 30
 
 ## About yourself
 
-I'm a principal engineer working at Bird Buddy.
+I'm Tine Jozelj, a principal engineer working at Bird Buddy.
 
 ## About your company
 
