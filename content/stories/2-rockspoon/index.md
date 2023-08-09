@@ -1,6 +1,6 @@
 ---
 title: "Leonard Melo"
-description: "[mirrord] allowed me to test and debug local changes, in our cloud environment, in one go and without the hassles of a shared staging environment"
+description: "We are using mirrord... to debug issues and test local changes, in our shared staging environment, without impacting other developers. "
 date: 2023-07-31T06:00:00+00:00
 lastmod: 2023-07-31T06:00:00+00:00
 position: "Software Engineer | RockSpoon"
@@ -32,4 +32,4 @@ Pod impersonation and VS Code debugger integration are the main reasons why I ch
 
 ## How do you and others in your organization use mirrord?
 
-Currently, we are using mirrord mostly in steal mode, with header filters, to intercept requests and debug issues and validate test local changes, in our shared staging environment, without impacting other developers. There are plenty more use-cases for mirrord at our company and I'm looking forward to extending our use of it 🙂
+Currently, we are using mirrord mostly in steal mode, with header filters, to intercept requests and debug issues and test local changes, in our shared staging environment, without impacting other developers. There are plenty more use-cases for mirrord at our company and I'm looking forward to extending our use of it 🙂
