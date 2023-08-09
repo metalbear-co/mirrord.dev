@@ -416,6 +416,35 @@ body {
     @apply bg-body-color;
 }
 
+/* Stories section */
+.stories__arrow--prev {
+    @apply hidden md:block md:left-6 lg:-left-[5%];
+}
 
+.stories__arrow--next {
+    @apply hidden md:block md:right-4 lg:-right-[5%];
+}
+
+.stories__page {
+    @apply bg-[#000000] w-[6px] h-[6px];
+}
+
+.stories__page.is-active {
+    @apply bg-[#756DF3];
+}
+
+.user-stories__page h2 {
+    @apply text-[#756DF3];
+}
+
+.stories__pagination {
+    @apply md:hidden bottom-0;
+}
+
+.user-stories__page h3,
+.user-stories__page p,
+.user-stories__page li {
+    @apply text-[#000000];
+}
 
 

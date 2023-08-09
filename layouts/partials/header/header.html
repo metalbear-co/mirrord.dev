@@ -1,5 +1,5 @@
 {{- $site := .Site }}
-<header x-data="{sideNav: false}" class="header bg-[#FBFBFD] py-8 {{ if (eq .Section "docs") }}lg:fixed lg:w-full lg:z-30 lg:rounded-bl-[200px]{{ end }}">
+<header x-data="{sideNav: false}" class="header {{ if (ne .Section "stories") }}bg-[#FBFBFD] {{ end }} py-8 {{ if (eq .Section "docs") }}lg:fixed lg:w-full lg:z-30 lg:rounded-bl-[200px]{{ end }}">
     <div class="header__container header__container-all">
         <div class="grid grid-cols-12 items-center">
             <div class="nav__brand col-span-11 lg:col-span-2">

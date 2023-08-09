@@ -1,9 +1,12 @@
 main:
 - name: Docs
   url: /docs/overview/introduction/
-  weight: 20
+  weight: 10
 - name: Quick Start
   url: /docs/overview/quick-start/
+  weight: 20
+- name: User Stories
+  url: /stories/
   weight: 30
 - identifier: blog
   name: blog
