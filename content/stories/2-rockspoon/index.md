@@ -14,6 +14,7 @@ weight: 20
 ## About yourself
 
 Leonardo Melo - Software Engineer
+
 I'm a Backend Software Developer, currently working on building and maintaining Golang microservices that provide or consume REST and/or Event-Driven APIs.
 
 ## About your company
