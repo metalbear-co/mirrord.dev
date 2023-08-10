@@ -1,9 +1,10 @@
 ---
 title: "VMWare User Story | Shani Sahar Kaneti"
+card_title: "Shani Sahar Kaneti"
 description: "Debugging a service became much faster and easier."
 date: 2023-07-31T06:00:00+00:00
 lastmod: 2023-07-31T06:00:00+00:00
-position: "Backend Developer | VMware Carbon Black"
+position: "Backend Developer | VMware"
 avatar: "shani_sahar_kaneti.png"
 logo: "vmware.png"
 featured: true

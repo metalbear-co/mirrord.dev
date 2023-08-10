@@ -1,5 +1,6 @@
 ---
 title: "Bird Buddy User Story | Tine Jozelj"
+card_title: "Tine Jozelj"
 description: "[With mirrord] the service is running locally (fast iterations) but still receives all the cluster access including databases, credentials, configuration."
 date: 2023-07-31T06:00:00+00:00
 lastmod: 2023-07-31T06:00:00+00:00
