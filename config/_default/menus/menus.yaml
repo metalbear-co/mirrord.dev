@@ -12,10 +12,14 @@ main:
   name: blog
   url: "https://metalbear.co/blog"
   weight: 40
+- identifier: FAQ
+  name: FAQ
+  url: "/docs/overview/faq"  
+  weight: 50
 - identifier: support
   name: Support
   url: "/#get-support"
-  weight: 50
+  weight: 60
 docs:
   - name: Overview
     weight: 10
