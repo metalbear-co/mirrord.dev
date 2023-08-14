@@ -8,10 +8,13 @@ main:
 - name: User Stories
   url: /stories/
   weight: 30
+- name: Pricing #TODO: Revert this
+  url: /pricing/
+  weight: 40
 - identifier: blog
   name: blog
   url: "https://metalbear.co/blog"
-  weight: 40
+  weight: 41
 - identifier: support
   name: Support
   url: "/#get-support"
