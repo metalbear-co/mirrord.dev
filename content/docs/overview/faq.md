@@ -41,10 +41,10 @@ If you have any restrictions for pulling external images inside your cluster, yo
 If an agent pod's status is `Running`, it means mirrord is probably still running locally as well. Once you
 terminate the local process, the agent pod's status should change to `Completed`.
 
-On clusters with Kubernetes version v1.23 or newer, agent pods are supposed to be
+On clusters with Kubernetes version v1.23 or newer, agent pods are
 [cleaned up automatically](https://kubernetes.io/docs/concepts/workloads/controllers/ttlafterfinished/) after a
 [configurable](/docs/overview/configuration/#agent-ttl) TTL from completion (one second by default).
-If on your cluster mirrord agent pods are lingering for
+If your cluster is v1.23 or higher and mirrord agent pods are not being cleaned up automatically
 longer than the configured TTL after completion,
 [please open an issue on GitHub](
 https://github.com/metalbear-co/mirrord/issues/new?assignees=&labels=bug&projects=&template=bug_report.yml&title=Agent%20pods%20lingering%20after%20completion
