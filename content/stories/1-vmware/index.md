@@ -40,7 +40,7 @@ In version 2, the solution requires exporting your code through Kubernetes Servi
 
 Also, setting up my environment for debugging wasn’t that simple, and required a preparation script.
 
-mirrord allow me to debug all of the above, plus it has a plugin to my IDE (IntelliJ’s GoLand), so debugging a service became much faster and easier
+mirrord allows me to debug all of the above, plus it has a plugin to my IDE (IntelliJ’s GoLand), so debugging a service became much faster and easier
 
 ## How do you and others in your organization use mirrord?
 
