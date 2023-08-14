@@ -43,7 +43,7 @@ terminate the local process, the agent pod's status should change to `Completed`
 
 On clusters with Kubernetes version v1.23 or newer, agent pods are supposed to be
 [cleaned up automatically](https://kubernetes.io/docs/concepts/workloads/controllers/ttlafterfinished/) after a
-[configurable](/docs/overview/configuration/#agent-ttl) TTL from completion.
+[configurable](/docs/overview/configuration/#agent-ttl) TTL from completion (one second by default).
 If on your cluster mirrord agent pods are lingering for
 longer than the configured TTL after completion,
 [please open an issue on GitHub](
