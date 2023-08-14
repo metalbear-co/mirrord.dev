@@ -35,6 +35,25 @@ mirrord also supports for [Go](https://metalbear.co/blog/hooking-go-from-rust-hi
 No, mirrord doesn't install anything on the cluster, nor does it have any persistent state. It does spawn a short-living pod/container to run the proxy, which is automatically removed when mirrord exits. mirrord works using the Kubernetes API, and so the only prerequisite to start using mirrord is to have kubectl configured for your cluster.
 
 If you have any restrictions for pulling external images inside your cluster, you have to allow pulling of ghcr.io/metalbear-co/mirrord image.
+
+## Old mirrord agent pods are not getting deleted after the mirrord run is completed, what can I do?
+
+If an agent pod's status is `Running`, it means mirrord is probably still running locally as well. Once you
+terminate the local process, the agent pod's status should change to `Completed`.
+
+On clusters with Kubernetes version v1.23 or newer, agent pods are supposed to be
+[cleaned up automatically](https://kubernetes.io/docs/concepts/workloads/controllers/ttlafterfinished/) after a
+[configurable](/docs/overview/configuration/#agent-ttl) TTL from completion.
+If on your cluster mirrord agent pods are lingering for
+longer than the configured TTL after completion,
+[please open an issue on GitHub](
+https://github.com/metalbear-co/mirrord/issues/new?assignees=&labels=bug&projects=&template=bug_report.yml&title=Agent%20pods%20lingering%20after%20completion
+).
+As a temporary solution for cleaning up completed agent pods manually, you can run:
+```shell
+kubectl delete jobs --selector=app=mirrord --field-selector=status.successful=1
+```
+
 ## Can I intercept traffic instead of duplicating it?
 
 Yes, you can use the `--steal` flag to intercept traffic instead of duplicating it.
