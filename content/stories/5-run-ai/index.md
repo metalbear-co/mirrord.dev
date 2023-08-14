@@ -9,7 +9,7 @@ avatar: "guy_shaibi.png"
 logo: "run_ai.png"
 featured: true
 draft: false
-weight: 30
+weight: 50
 ---
 
 ## About yourself

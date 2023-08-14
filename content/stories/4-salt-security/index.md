@@ -9,7 +9,7 @@ avatar: "nitzan_braham.png"
 logo: "salt_security.png"
 featured: true
 draft: false
-weight: 30
+weight: 40
 ---
 
 ## About yourself
