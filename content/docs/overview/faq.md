@@ -12,6 +12,15 @@ weight: 121
 toc: true
 ---
 
+## What does mirrord actually do?
+
+First and most important, mirrord *doesn't just mirror traffic*. It does that, but also a lot more.
+
+mirrord lets you connect a local process to your Kubernetes cluster. It does this by hooking all of the input and output points of the process - network traffic, file access, and environment variables - and proxying them to the cluster. 
+This means that although your code is running locally, it "thinks" it's running in the cloud, which lets you test it in cloud conditions:
+1. Without having to run your entire deployment locally
+2. Without going through CI and deployment
+3. Without deploying untested code to the cloud environment - the stable version of the code is still running in the cluster and handling requests 
 
 ## What frameworks/languages does mirrord support?
 
@@ -19,7 +28,7 @@ mirrord works by [hooking libc](https://metalbear.co/blog/mirrord-internals-hook
 
 This includes: Rust, Node, Python, Java, Kotlin, Ruby, and others (most languages use libc).
 
-mirrord also has specific support for the following languages that don't use libc: [Go](https://metalbear.co/blog/hooking-go-from-rust-hitchhikers-guide-to-the-go-laxy/)
+mirrord also supports for [Go](https://metalbear.co/blog/hooking-go-from-rust-hitchhikers-guide-to-the-go-laxy/), which doesn't use libc
 
 ## Does mirrord install anything on the cluster?
 
