@@ -18,7 +18,9 @@ Guy Shaibi, software developer at RunAI.
 
 ## About your company
 
-Run:ai develops AI workload orchestration on Kubernetes.
+
+
+<a href="https://www.run.ai/" target="_blank">Run:ai</a> develops AI workload orchestration on Kubernetes.
 
 ## What did you use before?
 

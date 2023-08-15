@@ -18,7 +18,7 @@ I’m Nitzan Braham, Software Engineer and part of the Platform team at Salt Sec
 
 ## About your company
 
-Salt Security is a cybersecurity company based in Palo Alto, California. Founded in 2016, the company provides an API protection platform designed to prevent attacks by leveraging machine learning and AI. Its patented solution uses machine learning and AI to automatically and continuously identify and provide protection, learns the granular behavior and requires no configuration or customization to pinpoint and block attackers. Salt Security’s platform is designed to protect the APIs that form the core of every modern application.
+<a href="https://salt.security/" target="_blank">Salt Security</a> is a cybersecurity company based in Palo Alto, California. Founded in 2016, the company provides an API protection platform designed to prevent attacks by leveraging machine learning and AI. Its patented solution uses machine learning and AI to automatically and continuously identify and provide protection, learns the granular behavior and requires no configuration or customization to pinpoint and block attackers. Salt Security’s platform is designed to protect the APIs that form the core of every modern application.
 
 ## What did you use before?
 

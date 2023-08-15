@@ -20,7 +20,7 @@ I'm a Backend Software Developer, currently working on building and maintaining 
 
 ## About your company
 
-RockSpoon is a startup developing an end-to-end restaurant management platform, from Point of Sale to payment processing, delivery and more.
+<a href="https://rockspoon.com/" target="_blank">RockSpoon</a> is a startup developing an end-to-end restaurant management platform, from Point of Sale to payment processing, delivery and more.
 
 ## What did you use before?
 

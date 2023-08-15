@@ -18,7 +18,7 @@ I'm Tine Jozelj, a principal engineer working at Bird Buddy.
 
 ## About your company
 
-Bird Buddy is making an AI powered bird feeder that recognizes and notifies you about the birds that visit it.
+<a href="https://mybirdbuddy.com/" target="_blank">Bird Buddy</a> is making an AI powered bird feeder that recognizes and notifies you about the birds that visit it.
 
 ## What did you use before?
 
