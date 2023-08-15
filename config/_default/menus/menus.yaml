@@ -16,10 +16,10 @@ main:
   name: FAQ
   url: "/docs/overview/faq"  
   weight: 50
-- identifier: pricing #TODO: hide
-  name: Pricing
-  url: "/pricing"
-  weight: 60
+# - identifier: pricing
+#   name: Pricing
+#   url: "/pricing"
+#   weight: 60
 - identifier: support
   name: Support
   url: "/#get-support"
