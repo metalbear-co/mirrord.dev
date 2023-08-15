@@ -16,10 +16,14 @@ main:
   name: FAQ
   url: "/docs/overview/faq"  
   weight: 50
+# - identifier: pricing
+#   name: Pricing
+#   url: "/pricing"
+#   weight: 60
 - identifier: support
   name: Support
   url: "/#get-support"
-  weight: 60
+  weight: 70
 docs:
   - name: Overview
     weight: 10
