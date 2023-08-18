@@ -134,7 +134,9 @@ kubectl delete jobs --selector=app=mirrord --field-selector=status.successful=1
 If your cluster is running on Bottlerocket or have SELinux enabled, please try enabling the `privileged` flag
 for the in the agent configuration:
 ```json
-"agent": {
-  "privileged": true
+{
+  "agent": {
+    "privileged": true
+  }
 }
 ```
