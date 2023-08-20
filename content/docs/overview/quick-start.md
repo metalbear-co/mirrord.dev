@@ -10,6 +10,7 @@ menu:
     parent: "overview"
 weight: 110
 toc: true
+shallowToc: true
 ---
 
 ## Requirements
