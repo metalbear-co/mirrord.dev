@@ -16,4 +16,7 @@ However, sometimes you want to test a brand new application that has never been 
 
 This is where targetless mode comes in. When running in targetless mode, mirrord doesn't impersonate a remote target. There's no incoming traffic functionality in this mode, since there's no remote target receiving traffic, but everything else works exactly the same.
 
-To run mirrord in targetless mode, just don't specify a target!
+To run mirrord in targetless mode, just don't specify a target! For example:
+```bash
+mirrord exec /bin/my-tool
+```
