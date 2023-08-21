@@ -1,16 +1,20 @@
 ---
-title: "Quick Start"
-description: "How to (very) quickly start using mirrord"
+title: "Guide: Target Pause"
+linktitle: "Target Pause"
+description: "How to steal traffic using mirrord"
 date: 2020-11-16T13:59:39+01:00
 lastmod: 2020-11-16T13:59:39+01:00
 draft: false
 images: []
 menu:
   docs:
-    parent: "overview"
-weight: 110
+    parent: "guides"
+weight: 90
 toc: true
+shallowToc: true
 ---
+
+
 
 ## Requirements
 
