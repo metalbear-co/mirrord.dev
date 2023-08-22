@@ -107,4 +107,9 @@ Note that, by default, the following features are also enabled:
 
 We find that this configuration works for a lot of use cases, but if you'd like to change it, please read about available options in the [configuration](/docs/overview/configuration/).
 
-
+## What's next?
+Now that you've tried out mirrord, it's time to get acquainted with its different configuration options and tailor it to your needs:
+1. If you'd like to intercept traffic rather than mirror it so that your local process is the one answering the remote requests, check out [this guide](/docs/guides/steal/). Note that you can even filter which traffic you intercept!
+2. If your local process reads from a queue, you might want to test out the [pause feature](/docs/guides/pause/), which temporarily pauses the remote target so it doesn't compete with your local process for queue messages.
+3. If you don't want to impersonate a remote target - for example, if you want to run a tool in the context of your cluster - check out our [guide on the targetless mode](/docs/guides/targetless/).
+4. If you just want to learn more about mirrord, why not checkout our [architecture](/docs/overview/architecture/) or [configuration](/docs/overview/configuration/) sections?
