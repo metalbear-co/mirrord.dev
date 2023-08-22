@@ -221,6 +221,7 @@ body {
 
 .docs__submenu-link {
     @apply py-3 hover:text-primary-text hover:no-underline;
+    text-wrap: wrap;
 }
 
 .docs__submenu-link-active {

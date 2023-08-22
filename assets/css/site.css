@@ -2483,6 +2483,10 @@ body {
           text-decoration-line: none;
 }
 
+.docs__submenu-link {
+  text-wrap: wrap;
+}
+
 .docs__submenu-link-active {
   --tw-text-opacity: 1;
   color: rgb(117 109 243 / var(--tw-text-opacity));
