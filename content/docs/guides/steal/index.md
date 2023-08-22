@@ -30,7 +30,7 @@ If you want all traffic arriving at the remote target to be redirected to your l
 Run your process with mirrord using the steal configuration, then send a request to the remote target. The response you receive will have been sent by the local process. If you're using one of our IDE extensions, set a breakpoint in the function handling the request - your request should hang when the breakpoint is hit and until you continue the process.
 
 ## Stealing only a subset of the remote target's traffic
-For incoming HTTP traffic, mirrord also supports stealing a subset of the remote target's traffic. You can do this by specifying a filter on either an HTTP header or path.
+For incoming HTTP traffic (including HTTP2 and gRPC), mirrord also supports stealing a subset of the remote target's traffic. You can do this by specifying a filter on either an HTTP header or path.
 To specify a filter on a header, use the `feature.network.incoming.http_filter.header_filter` configuration:
 
 ```json
@@ -71,7 +71,7 @@ To specify a filter on a path, use the `feature.network.incoming.http_filter.pat
 
 Note that both `header_filter` and `path_filter` take regex value, so for example `"header_filter": "X-Header-.+: header-value-.+"` would work.
 
-
-
-
-
+## What's next?
+1. If your local process reads from a queue, you might want to test out the [pause feature](/docs/guides/pause/), which temporarily pauses the remote target so it doesn't compete with your local process for queue messages.
+2. If you don't want to impersonate a remote target - for example, if you want to run a tool in the context of your cluster - check out our [guide on the targetless mode](/docs/guides/targetless/).
+3. If you just want to learn more about mirrord, why not checkout our [architecture](/docs/overview/architecture/) or [configuration](/docs/overview/configuration/) sections?
