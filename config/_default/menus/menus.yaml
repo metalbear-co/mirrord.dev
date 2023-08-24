@@ -33,6 +33,25 @@ docs:
     weight: 60
     identifier: help
     url: /docs/help/
+footer_menu:
+- name: Get Started
+  url: /docs/overview/quick-start/
+  weight: 10
+- name: Docs
+  url: /docs/overview/introduction/
+  weight: 20
+- name: User Stories
+  url: /stories/
+  weight: 30
+- name: Blog
+  url: "https://metalbear.co/blog"
+  weight: 40
+- name: vs Telepresence
+  url: "/comparing/"  
+  weight: 50
+- name: Support
+  url: "/#get-support"
+  weight: 60
 social:
 - name: Github
   pre: github
