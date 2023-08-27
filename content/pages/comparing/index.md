@@ -9,7 +9,7 @@ sliders:
         url: https://marketplace.visualstudio.com/items?itemName=MetalBear.mirrord&ssr=false#review-details
         icon: vscode
         text:
-          - I'm using it for around a month now. mirrord enabled me to <span class="text-primary">easily</span> connect my app into my k8s cluster and use the system as it in the k8s environment with ease. I could just forget running docker on my machine and use the dev k8s environment to run my code with minimal configuration and work.
+          - I'm using it for around a month now. mirrord enabled me to <span class="text-primary">easily connect my app into my k8s cluster</span> and use the system as it in the k8s environment with ease. I could just forget running docker on my machine and use the dev k8s environment to run my code with minimal configuration and work.
     - card:
         name: 0merxx
         url: https://twitter.com/0merxx
@@ -41,7 +41,7 @@ sliders:
         url: https://marketplace.visualstudio.com/items?itemName=MetalBear.mirrord&ssr=false#review-details
         icon: vscode
         text:
-          - After trying Telepresence, Gefyra and other, I can say with confidence this is by far, a <span class="text-primary">surprise tool</span>. It's like magic, an out-of-the-box experience like no other. Bootstrapping our development cycle, dropping the use of "local-dev", comes with fine-grained configuration. A real gem!
+          - After trying Telepresence, Gefyra and other, I can say with confidence this is by far, a surprise tool. <span class="text-primary">It's like magic</span>, an out-of-the-box experience like no other. Bootstrapping our development cycle, dropping the use of "local-dev", comes with fine-grained configuration. <span class="text-primary">A real gem</span>!
     - card:
         name: IAmBabau
         url: https://www.reddit.com/r/golang/comments/y8x403/comment/it2o7vr/?utm_source=share&utm_medium=web2x&context=3
@@ -59,7 +59,7 @@ sliders:
         url: https://www.reddit.com/r/kubernetes/comments/13brazp/comment/jjcklpy/?utm_source=share&utm_medium=web2x&context=3
         icon: reddit
         text:
-          - This… is really really <span class="text-primary">cool</span>.
+          - This… is <span class="text-primary">really really cool</span>.
     - card:
         name: 0merxx
         url: https://twitter.com/0merxx
@@ -96,6 +96,6 @@ sliders:
         url: https://plugins.jetbrains.com/plugin/19772-mirrord/reviews
         icon: jetbrains
         text:
-          - This is a <span class="text-primary">very very useful plugin</span> that will allow you to debug your code locally but in the context of your k8s cluster using real traffic from the cluster in a frictionless way. IMHO it's also superior (in terms of ease of use/value) to other solutions out there. 5/5
+          - This is a <span class="text-primary">very very useful plugin</span> that will allow you to debug your code locally but in the context of your k8s cluster using real traffic from the cluster in a frictionless way. IMHO it's also <span class="text-primary">superior (in terms of ease of use/value) to other solutions out there</span>. 5/5
 layout: comparing
 ---
