@@ -448,4 +448,6 @@ body {
     @apply text-[#000000];
 }
 
-
+.medium-zoom-image--opened {
+    z-index: 9999;
+  }
