@@ -4,7 +4,7 @@ Version:		1.0.0
 Last change: 	03/06/2022
 -------------------------------------------------------------------*/
 
-/*! tailwindcss v3.2.4 | MIT License | https://tailwindcss.com*/
+/*! tailwindcss v3.1.4 | MIT License | https://tailwindcss.com*/
 
 /*
 1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
@@ -34,7 +34,6 @@ Last change: 	03/06/2022
 2. Prevent adjustments of font size after orientation changes in iOS.
 3. Use a more readable tab size.
 4. Use the user's configured `sans` font-family by default.
-5. Use the user's configured `sans` font-feature-settings by default.
 */
 
 html {
@@ -49,8 +48,6 @@ html {
   /* 3 */
   font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   /* 4 */
-  font-feature-settings: normal;
-  /* 5 */
 }
 
 /*
@@ -415,12 +412,6 @@ img,
 video {
   max-width: 100%;
   height: auto;
-}
-
-/* Make elements with the HTML hidden attribute stay hidden by default */
-
-[hidden] {
-  display: none;
 }
 
 h1 {
@@ -1277,6 +1268,16 @@ table td {
 
 .translate-x-1 {
   --tw-translate-x: 0.25rem;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.-translate-x-\[11px\] {
+  --tw-translate-x: -11px;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.translate-y-\[7px\] {
+  --tw-translate-y: 7px;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
@@ -2473,15 +2474,15 @@ body {
   }
 }
 
-.docs__content p,
+.docs__content p, 
 .docs__content li {
   margin-bottom: 1rem;
   color: var(--primary-text);
 }
 
-.docs__content h1,
-.docs__content h2,
-.docs__content h3,
+.docs__content h1, 
+.docs__content h2, 
+.docs__content h3, 
 .docs__content h4 {
   font-family: var(--font-heading);
   font-weight: 700;
@@ -2515,11 +2516,11 @@ body {
   line-height: 1.75rem;
 }
 
-.docs__content h1:target,
-.docs__content h2:target,
-.docs__content h3:target,
-.docs__content h4:target,
-.docs__toc #TableOfContents ul > li > a:target,
+.docs__content h1:target, 
+.docs__content h2:target, 
+.docs__content h3:target, 
+.docs__content h4:target, 
+.docs__toc #TableOfContents ul > li > a:target, 
 .docs__toc #TableOfContents ul > li > ul > li > a:target {
   color: var(--primary);
 }
@@ -2538,7 +2539,7 @@ body {
   content: var(--tw-content);
 }
 
-.docs__content>h3[id]::before, 
+.docs__content>h3[id]::before,  
 .docs__content>h4[id]::before {
   margin-top: -10rem;
   display: block;
@@ -2697,42 +2698,42 @@ body {
 
 /* TOC */
 
-.docs__toc #TableOfContents ul,
-.docs__toc #TableOfContents ul > li > ul,
-.docs__toc .docs-nav__toc ul,
+.docs__toc #TableOfContents ul, 
+.docs__toc #TableOfContents ul > li > ul, 
+.docs__toc .docs-nav__toc ul, 
 .docs__toc .docs-nav__toc ul > li > ul {
   margin-bottom: 0px;
   list-style-type: none;
   padding-left: 0px;
 }
 
-.docs__toc #TableOfContents ul > li,
-.docs__toc #TableOfContents ul > li > ul > li,
-.docs__toc .docs-nav__toc ul > li,
+.docs__toc #TableOfContents ul > li, 
+.docs__toc #TableOfContents ul > li > ul > li, 
+.docs__toc .docs-nav__toc ul > li, 
 .docs__toc .docs-nav__toc ul > li > ul > li {
   margin-bottom: 0px;
 }
 
-.docs__toc #TableOfContents ul > li > a,
+.docs__toc #TableOfContents ul > li > a, 
 .docs__toc .docs-nav__toc ul > li > a {
   font-size: 0.875rem;
   line-height: 1.25rem;
   color: var(--primary-text);
 }
 
-.docs__toc #TableOfContents ul > li > a:hover,
+.docs__toc #TableOfContents ul > li > a:hover, 
 .docs__toc .docs-nav__toc ul > li > a:hover {
   font-weight: 700;
 }
 
-.docs__toc #TableOfContents ul > li > a.toc-active,
+.docs__toc #TableOfContents ul > li > a.toc-active, 
 .docs__toc .docs-nav__toc ul > li > a.toc-active {
   color: var(--primary);
 }
 
-.docs__toc #TableOfContents ul > li > a,
-.docs__toc #TableOfContents ul > li > ul > li > a,
-.docs__toc .docs-nav__toc ul > li > a,
+.docs__toc #TableOfContents ul > li > a, 
+.docs__toc #TableOfContents ul > li > ul > li > a, 
+.docs__toc .docs-nav__toc ul > li > a, 
 .docs__toc .docs-nav__toc ul > li > ul > li > a {
   display: block;
   line-height: 2rem;
@@ -2926,7 +2927,7 @@ body {
   }
 }
 
-.docs__sidebar--left .darkmode__button,
+.docs__sidebar--left .darkmode__button, 
 .docs__sidebar--right .darkmode__button {
   position: relative;
   width: 100%;
@@ -3199,8 +3200,8 @@ body {
   }
 }
 
-.user-stories__page h3,
-.user-stories__page p,
+.user-stories__page h3, 
+.user-stories__page p, 
 .user-stories__page li {
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity));
