@@ -3206,6 +3206,107 @@ body {
   color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 
+/* Review section */
+
+.review__arrow--prev {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  --tw-bg-opacity: 1;
+  background-color: rgb(117 109 243 / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+  opacity: 1;
+}
+
+@media (min-width: 768px) {
+  .review__arrow--prev {
+    left: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .review__arrow--prev {
+    left: -5%;
+    display: flex;
+  }
+}
+
+@media (min-width: 1280px) {
+  .review__arrow--prev {
+    left: -10%;
+  }
+}
+
+.review__arrow--prev svg {
+  height: 1rem;
+  width: 1rem;
+  fill: currentColor;
+}
+
+.review__arrow--next {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  --tw-bg-opacity: 1;
+  background-color: rgb(117 109 243 / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+  opacity: 1;
+}
+
+@media (min-width: 768px) {
+  .review__arrow--next {
+    right: 1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .review__arrow--next {
+    right: -5%;
+    display: flex;
+  }
+}
+
+@media (min-width: 1280px) {
+  .review__arrow--next {
+    right: -10%;
+  }
+}
+
+.review__arrow--next svg {
+  height: 1rem;
+  width: 1rem;
+  fill: currentColor;
+}
+
+.review__page {
+  height: 8px;
+  width: 8px;
+  --tw-bg-opacity: 1;
+  background-color: rgb(217 217 217 / var(--tw-bg-opacity));
+}
+
+.review__page.is-active {
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  --tw-bg-opacity: 1;
+  background-color: rgb(117 109 243 / var(--tw-bg-opacity));
+}
+
+.review__pagination {
+  bottom: -2.5rem;
+}
+
+@media (min-width: 1024px) {
+  .review__pagination {
+    bottom: 0px;
+  }
+}
+
 .placeholder\:font-light::-moz-placeholder {
   font-weight: 300;
 }
@@ -4195,5 +4296,4 @@ body {
     line-height: 2rem;
   }
 }
-
 

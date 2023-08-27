@@ -448,4 +448,32 @@ body {
     @apply text-[#000000];
 }
 
+/* Review section */
+.review__arrow--prev {
+    @apply text-white bg-[#756DF3] opacity-100 rounded-full md:left-6 lg:-left-[5%] xl:-left-[10%] hidden lg:flex justify-center items-center;
+}
+
+.review__arrow--prev svg {
+    @apply fill-current w-4 h-4;
+}
+
+.review__arrow--next {
+    @apply text-white bg-[#756DF3] opacity-100 rounded-full md:right-4 lg:-right-[5%] xl:-right-[10%] hidden lg:flex justify-center items-center;
+}
+
+.review__arrow--next svg {
+    @apply fill-current w-4 h-4;
+}
+
+.review__page {
+    @apply bg-[#D9D9D9] w-[8px] h-[8px];
+}
+
+.review__page.is-active {
+    @apply bg-[#756DF3] scale-100;
+}
+
+.review__pagination {
+    @apply -bottom-10 lg:bottom-0;
+}
 
