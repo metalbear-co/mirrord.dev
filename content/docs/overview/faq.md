@@ -106,6 +106,11 @@ mirrord works by creating an agent on a privileged pod in the remote cluster tha
 If you can't give your end users permissions to create privileged pods, we suggest trying out [mirrord for Teams]({{< ref "/docs/teams/introduction" >}} "mirrord for Teams"). It adds a Kubernetes operator that acts as a control plane for mirrord clients, and lets them work with mirrord without creating privileged pods themselves.
 If mirrord for Teams doesn't work for you either, [let us know](hello@metalbear.co) and we'll try to figure a solution that matches your security policies.
 
+## Can I use mirrord to run a local container in the context of the remote cluster?
+
+The only way to do this at the moment is to install the mirrord CLI within the container and change its entrypoint to run the original process using mirrord. Support for running containers directly with mirrord will be added in the future - please follow [this issue](https://github.com/metalbear-co/mirrord/issues/1658) for updates.
+
+
 ## Can I use mirrord with Openshift?
 
 Yes, mirrord works with OpenShift. However, OpenShift usually ships with a default security policy that doesn't let mirrord create pods.
