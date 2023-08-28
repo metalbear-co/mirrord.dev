@@ -477,3 +477,6 @@ body {
     @apply -bottom-10 lg:bottom-0;
 }
 
+.medium-zoom-image--opened {
+    z-index: 9999;
+  }
