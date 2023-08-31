@@ -1,6 +1,6 @@
 ---
-title: "Flexport User Story | Vergil"
-card_title: "Vergil"
+title: "Flexport User Story | Vergil Zhao"
+card_title: "Vergil Zhao"
 description: "[mirrord] has significantly improved our development experience, making the team happier and more efficient."
 date: 2023-08-30T06:00:00+00:00
 lastmod: 2023-07-30T06:00:00+00:00
@@ -14,7 +14,7 @@ weight: 11
 
 ## About yourself
 
-Vergil, Senior Software Engineer
+Vergil Zhao, Senior Software Engineer
 
 ## About your company
 
