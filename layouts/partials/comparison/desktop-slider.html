@@ -1,0 +1,64 @@
+<div class="pt-24 hidden lg:block bg-[#FAFAFD]">
+    <div class="container w-full max-w-screen-xl mx-auto lg:px-16 xl:px-24">
+        <div x-data="{ 
+            init() {
+              new Splide(this.$refs.review, {
+                type   : 'loop',
+                perPage  : 1,
+                breakpoints: {
+                    640: {
+                        perPage: 1,
+                    },
+                },
+                padding: { left: '1rem', right: '1rem' },
+                gap: '2rem',
+                arrows: true,
+                pagination: true,
+                classes: {
+                    arrows: 'splide__arrows',
+                    arrow : 'splide__arrow',
+                    prev  : 'splide__arrow--prev review__arrow--prev',
+                    next  : 'splide__arrow--next review__arrow--next',
+                    pagination: 'splide__pagination review__pagination',
+                    page      : 'splide__pagination__page review__page',
+                },
+                }).mount()
+              },
+          }">
+            <div class="splide" x-ref="review">
+                <div class="splide__track">
+                    <ul class="splide__list">
+                        {{- range $index, $slider := .Params.sliders }}
+                        <li class="splide__slide pb-8">
+                            <div class="flex flex-wrap">
+                                <div class="flex-none w-[38%] px-4 pt-4">
+                                    {{- range $i2, $card := .slider }}
+                                    {{- if or (eq $i2 0) (eq $i2 3) }}
+                                    {{- partial "review_card.html" (dict "Card" .card "Index2" $i2 ) }}
+                                    {{- end }}
+                                    {{- end }}
+                                </div>
+                                <div class="flex-none w-[29%] px-4">
+                                    {{- range $i2, $card := .slider }}
+                                    {{- if or (eq $i2 1) (eq $i2 4) }}
+                                    {{- partial "review_card.html" (dict "Card" .card "Index2" $i2 ) }}
+                                    {{- end }}
+                                    {{- end }}
+                                </div>
+                                <div class="flex-none w-[33%] px-4 pt-16">
+                                    {{- range $i2, $card := .slider }}
+                                    {{- if eq $i2 2 }}
+                                    {{- partial "review_card.html" (dict "Card" .card "Index2" $i2 ) }}
+                                    {{- end }}
+                                    {{- end }}
+                                </div>
+                            </div>
+                        </li>
+                        {{- end }}
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,42 @@
+<div class="pt-10 lg:hidden bg-[#FAFAFD]">
+    <div class="container w-full max-w-screen-xl mx-auto lg:px-16 xl:px-24">
+        <div x-data="{ 
+            init() {
+              new Splide(this.$refs.review2, {
+                type   : 'loop',
+                trimSpace: false,
+                focus    : 'center',
+                perPage  : 1,
+                padding: { left: '1.5rem', right: '3rem' },
+                gap: '2rem',
+                arrows: true,
+                pagination: true,
+                classes: {
+                    arrows: 'splide__arrows',
+                    arrow : 'splide__arrow',
+                    prev  : 'splide__arrow--prev review__arrow--prev',
+                    next  : 'splide__arrow--next review__arrow--next',
+                    pagination: 'splide__pagination review__pagination',
+                    page      : 'splide__pagination__page review__page',
+                },
+                }).mount()
+              },
+          }">
+            <div class="splide" x-ref="review2">
+                <div class="splide__track">
+                    <ul class="splide__list">
+                        {{- range $index, $slider := .Params.sliders }}
+                        {{- range $i2, $card := .slider }}
+                        <li class="splide__slide pb-8">
+                            <div class="flex items-center h-full">
+                                {{- partial "review_card_mobile.html" (dict "Card" .card "Index2" $i2 ) }}
+                            </div>
+                        </li>
+                        {{- end }}
+                        {{- end }}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
