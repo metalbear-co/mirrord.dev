@@ -1,7 +1,7 @@
 ---
 title: mirrord vs. Telepresence
 description: A comparison between mirrord and Telepresence
-url: /comparison/telepresence
+url: /compare/telepresence
 sliders:
   - slider:
     - card:
@@ -97,5 +97,5 @@ sliders:
         icon: jetbrains
         text:
           - This is a <span class="text-primary">very very useful plugin</span> that will allow you to debug your code locally but in the context of your k8s cluster using real traffic from the cluster in a frictionless way. IMHO it's also <span class="text-primary">superior (in terms of ease of use/value) to other solutions out there</span>. 5/5
-layout: comparison
+layout: compare
 ---
