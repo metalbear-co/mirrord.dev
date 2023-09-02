@@ -7,7 +7,7 @@
   {{- $page_url := $currentPage.RelPermalink | relLangURL }}
   <body class="font-body {{ if .IsHome }}bg-white {{ else if eq .Section "stories" }}bg-white {{ else if eq $page_url "/pricing/" }}bg-white {{ else }}bg-[#FBFBFD] dark:bg-[#202020]{{ end }}"></body>
 
-  {{- if eq $page_url "/comparison/" }}
+  {{- if eq $page_url "/compare/telepresence/" }}
   {{- partial "header/header-landing.html" . }}
   {{- else }}
   {{- partial "header/header.html" . }}
