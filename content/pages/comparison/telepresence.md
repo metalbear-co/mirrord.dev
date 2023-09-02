@@ -1,7 +1,7 @@
 ---
 title: mirrord vs. Telepresence
 description: A comparison between mirrord and Telepresence
-slug: comparison
+url: /comparison/telepresence
 sliders:
   - slider:
     - card:

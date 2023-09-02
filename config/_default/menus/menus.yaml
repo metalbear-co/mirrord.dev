@@ -47,7 +47,7 @@ footer_menu:
   url: "https://metalbear.co/blog"
   weight: 40
 - name: vs Telepresence
-  url: "/comparison/"  
+  url: "/comparison/telepresence/"  
   weight: 50
 - name: Support
   url: "/#get-support"
