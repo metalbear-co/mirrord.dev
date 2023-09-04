@@ -12,6 +12,15 @@ weight: 121
 toc: true
 ---
 
+## What does mirrord actually do?
+
+First and most important, mirrord *doesn't just mirror traffic*. It does that, but also a lot more.
+
+mirrord lets you connect a local process to your Kubernetes cluster. It does this by hooking all of the input and output points of the process - network traffic, file access, and environment variables - and proxying them to the cluster.
+This means that although your code is running locally, it "thinks" it's running in the cloud, which lets you test it in cloud conditions:
+1. Without having to run your entire deployment locally
+2. Without going through CI and deployment
+3. Without deploying untested code to the cloud environment - the stable version of the code is still running in the cluster and handling requests
 
 ## What frameworks/languages does mirrord support?
 
@@ -19,13 +28,14 @@ mirrord works by [hooking libc](https://metalbear.co/blog/mirrord-internals-hook
 
 This includes: Rust, Node, Python, Java, Kotlin, Ruby, and others (most languages use libc).
 
-mirrord also has specific support for the following languages that don't use libc: [Go](https://metalbear.co/blog/hooking-go-from-rust-hitchhikers-guide-to-the-go-laxy/)
+mirrord also supports for [Go](https://metalbear.co/blog/hooking-go-from-rust-hitchhikers-guide-to-the-go-laxy/), which doesn't use libc
 
 ## Does mirrord install anything on the cluster?
 
 No, mirrord doesn't install anything on the cluster, nor does it have any persistent state. It does spawn a short-living pod/container to run the proxy, which is automatically removed when mirrord exits. mirrord works using the Kubernetes API, and so the only prerequisite to start using mirrord is to have kubectl configured for your cluster.
 
 If you have any restrictions for pulling external images inside your cluster, you have to allow pulling of ghcr.io/metalbear-co/mirrord image.
+
 ## Can I intercept traffic instead of duplicating it?
 
 Yes, you can use the `--steal` flag to intercept traffic instead of duplicating it.
@@ -96,8 +106,42 @@ mirrord works by creating an agent on a privileged pod in the remote cluster tha
 If you can't give your end users permissions to create privileged pods, we suggest trying out [mirrord for Teams]({{< ref "/docs/teams/introduction" >}} "mirrord for Teams"). It adds a Kubernetes operator that acts as a control plane for mirrord clients, and lets them work with mirrord without creating privileged pods themselves.
 If mirrord for Teams doesn't work for you either, [let us know](hello@metalbear.co) and we'll try to figure a solution that matches your security policies.
 
+## Can I use mirrord to run a local container in the context of the remote cluster?
+
+The only way to do this at the moment is to install the mirrord CLI within the container and change its entrypoint to run the original process using mirrord. Support for running containers directly with mirrord will be added in the future - please follow [this issue](https://github.com/metalbear-co/mirrord/issues/1658) for updates.
+
+
 ## Can I use mirrord with Openshift?
 
 Yes, mirrord works with OpenShift. However, OpenShift usually ships with a default security policy that doesn't let mirrord create pods.
 To fix this, you would need to tweak your `scc` settings - more information [here](https://docs.openshift.com/container-platform/3.11/admin_guide/manage_scc.html).
 If you'd rather keep the default security policies, we recommend trying out [mirrord for Teams]({{< ref "/docs/teams/introduction" >}} "mirrord for Teams"). See [this question](#i-cant-create-privileged-container-in-my-cluster) for more info.
+
+## Old mirrord agent pods are not getting deleted after the mirrord run is completed, what can I do?
+
+If an agent pod's status is `Running`, it means mirrord is probably still running locally as well. Once you
+terminate the local process, the agent pod's status should change to `Completed`.
+
+On clusters with Kubernetes version v1.23 or higher, agent pods are
+[automatically cleaned up](https://kubernetes.io/docs/concepts/workloads/controllers/ttlafterfinished/)
+immediately (or after a [configurable TTL](/docs/overview/configuration/#agent-ttl)).
+If your cluster is v1.23 or higher and mirrord agent pods are not being cleaned up automatically,
+[please open an issue on GitHub](
+https://github.com/metalbear-co/mirrord/issues/new?assignees=&labels=bug&projects=&template=bug_report.yml&title=Agent%20pods%20lingering%20after%20completion
+).
+As a temporary solution for cleaning up completed agent pods manually, you can run:
+```shell
+kubectl delete jobs --selector=app=mirrord --field-selector=status.successful=1
+```
+
+## My local process gets permission (EACCESS) error on file access
+
+If your cluster is running on Bottlerocket or has SELinux enabled, please try enabling the `privileged` flag
+in the agent configuration:
+```json
+{
+  "agent": {
+    "privileged": true
+  }
+}
+```

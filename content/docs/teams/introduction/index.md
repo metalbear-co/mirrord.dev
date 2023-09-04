@@ -6,9 +6,6 @@ lastmod: 2022-05-26T08:48:57+00:00
 draft: false
 images: []
 linktitle: "Introduction"
-menu:
-  docs:
-    teams:
 weight: 100
 toc: true
 ---

@@ -1,18 +1,29 @@
 main:
 - name: Docs
   url: /docs/overview/introduction/
-  weight: 20
+  weight: 10
 - name: Quick Start
   url: /docs/overview/quick-start/
+  weight: 20
+- name: User Stories
+  url: /stories/
   weight: 30
 - identifier: blog
   name: blog
   url: "https://metalbear.co/blog"
   weight: 40
+- identifier: FAQ
+  name: FAQ
+  url: "/docs/overview/faq"  
+  weight: 50
+# - identifier: pricing
+#   name: Pricing
+#   url: "/pricing"
+#   weight: 60
 - identifier: support
   name: Support
   url: "/#get-support"
-  weight: 50
+  weight: 70
 docs:
   - name: Overview
     weight: 10
@@ -22,6 +33,25 @@ docs:
     weight: 60
     identifier: help
     url: /docs/help/
+footer_menu:
+- name: Get Started
+  url: /docs/overview/quick-start/
+  weight: 10
+- name: Docs
+  url: /docs/overview/introduction/
+  weight: 20
+- name: User Stories
+  url: /stories/
+  weight: 30
+- name: Blog
+  url: "https://metalbear.co/blog"
+  weight: 40
+- name: vs Telepresence
+  url: "/compare/telepresence/"  
+  weight: 50
+- name: Support
+  url: "/#get-support"
+  weight: 60
 social:
 - name: Github
   pre: github
