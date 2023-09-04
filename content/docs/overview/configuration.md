@@ -256,6 +256,14 @@ Can be useful for collecting logs.
 
 Defaults to `1`.
 
+### agent.check_out_of_pods {#agent-check_out_of_pods}
+
+Determine if to check whether there is room for agent job in target node. (Not applicable
+when using ephemeral containers feature)
+
+Can be disabled if the check takes too long and you are sure there is enough resources on
+each node
+
 ### agent.ephemeral {#agent-ephemeral}
 
 Runs the agent as an
@@ -269,6 +277,13 @@ Flushes existing connections when starting to steal, might fix issues where conn
 aren't stolen (due to being already established)
 
 Defaults to `true`.
+
+### agent.privileged {#agent-privileged}
+
+Run the mirror agent as privileged container.
+Defaults to `false`.
+
+Might be needed in strict environments such as Bottlerocket.
 
 ### agent.image {#agent-image}
 
@@ -334,7 +349,7 @@ with `RUST_LOG`.
 ### agent.namespace {#agent-namespace}
 
 Namespace where the agent shall live.
-
+Note: Doesn't work with ephemeral containers.
 Defaults to the current kubernetes namespace.
 
 ### agent.network_interface {#agent-network_interface}
@@ -482,6 +497,8 @@ Case insensitive.
 1. `"read_write"` - List of patterns that should be read/write remotely.
 2. `"read_only"` - List of patterns that should be read only remotely.
 3. `"local"` - List of patterns that should be read locally.
+4. `"not_found"` - List of patters that should never be read nor written. These files should be
+treated as non-existent.
 
 The logic for choosing the behavior is as follows:
 
@@ -507,7 +524,8 @@ For more information, check the file operations
       "mode": "write",
       "read_write": ".+\.json" ,
       "read_only": [ ".+\.yaml", ".+important-file\.txt" ],
-      "local": [ ".+\.js", ".+\.mjs" ]
+      "local": [ ".+\.js", ".+\.mjs" ],
+      "not_found": [ "\.config/gcloud" ]
     }
   }
 }
@@ -516,6 +534,10 @@ For more information, check the file operations
 ### feature.fs.local {#feature-fs-local}
 
 Specify file path patterns that if matched will be opened locally.
+
+### feature.fs.not_found {#feature-fs-not_found}
+
+Specify file path patterns that if matched will be treated as non-existent.
 
 ### feature.fs.read_only {#feature-fs-read_only}
 
@@ -634,7 +656,7 @@ Controls the incoming TCP traffic feature.
 See the incoming [reference](https://mirrord.dev/docs/reference/traffic/#incoming) for more
 details.
 
-Incoming traffic supports 2 modes of operation:
+Incoming traffic supports 3 modes of operation:
 
 1. Mirror (**default**): Sniffs the TCP data from a port, and forwards a copy to the interested
 listeners;
@@ -642,6 +664,7 @@ listeners;
 2. Steal: Captures the TCP data from a port, and forwards it to the local process, see
 [`"mode": "steal"`](#feature-network-incoming-mode);
 
+3. Off: Disables the incoming network feature.
 Steals all the incoming traffic:
 
 ```json
@@ -669,7 +692,7 @@ Steals only traffic that matches the
         },
         "port_mapping": [[ 7777, 8888 ]],
         "ignore_localhost": false,
-        "ignore_ports": [9999, 10000]
+        "ignore_ports": [9999, 10000],
         "listen_ports": [[80, 8111]]
       }
     }
@@ -714,9 +737,10 @@ on port `80`. You'd use `[[9333, 80]]`
 #### feature.network.incoming.mode {#feature-network-incoming-mode}
 Allows selecting between mirrorring or stealing traffic.
 
-Can be set to either `"mirror"` (default) or `"steal"`.
+Can be set to either `"mirror"` (default), `"steal"` or `"off"`.
 
 - `"mirror"`: Sniffs on TCP port, and send a copy of the data to listeners.
+- `"off"`: Disables the incoming network feature.
 - `"steal"`: Supports 2 modes of operation:
 
 1. Port traffic stealing: Steals all TCP data from a
@@ -916,4 +940,50 @@ will go through the remote pod.
 ```
 
 Valid values follow this pattern: `[protocol]://[name|address|subnet/mask]:[port]`.
+
+# internal_proxy {#root-internal_proxy}
+Configuration for the internal proxy mirrord spawns for each local mirrord session
+that local layers use to connect to the remote agent
+
+This is seldom used, but if you get `ConnectionRefused` errors, you might
+want to increase the timeouts a bit.
+
+```json
+{
+  "internal_proxy": {
+    "start_idle_timeout": 30,
+    "idle_timeout": 5,
+  }
+}
+```
+
+### internal_proxy.idle_timeout {#agent-idle_timeout}
+
+How much time to wait while we don't have any active connections before exiting.
+
+Common cases would be running a chain of processes that skip using the layer
+and don't connect to the proxy.
+
+```json
+{
+  "internal_proxy": {
+    "idle_timeout": 30
+  }
+}
+```
+
+### internal_proxy.start_idle_timeout {#agent-start_idle_timeout}
+
+How much time to wait for the first connection to the proxy in seconds.
+
+Common cases would be running with dlv or any other debugger, which sets a breakpoint
+on process execution, delaying the layer startup and connection to proxy.
+
+```json
+{
+  "internal_proxy": {
+    "start_idle_timeout": 60
+  }
+}
+```
 
