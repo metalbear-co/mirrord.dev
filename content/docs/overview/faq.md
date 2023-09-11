@@ -109,7 +109,7 @@ There are currently two known cases where mirrord cannot load into the applicati
    binaries is planned for the long term, but for now you would have to make sure your binaries are dynamically
    linked in order to run them with mirrord.
    With Go programs, for example, it is as simple as adding `import "C"` to your program code.
-   If you don't want to add an import to your Go program, you can alternatively build a dynamically linked binary using `go build -ldflags='-linkmode external'`.
+   If you don't want to add an import to your Go program, you can alternatively build a dynamically linked binary using `go build -ldflags='-linkmode external'`. In VSCode, this can be done by adding `"buildFlags": "-ldflags='-linkmode external'"` to your `launch.json`.
    On Linux, using `go run` is not possible at the moment - please follow [this issue](https://github.com/metalbear-co/mirrord/issues/1922) for updates.   
 2. If you are running mirrord on MacOS and the executable you are running is protected by
    [SIP](https://en.wikipedia.org/wiki/System_Integrity_Protection) (the application you are developing wouldn't be,
