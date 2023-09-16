@@ -19,11 +19,18 @@ shallowToc: true
 
 First and most important, mirrord *doesn't just mirror traffic*. It does that, but also a lot more.
 
-mirrord lets you connect a local process to your Kubernetes cluster. It does this by hooking all of the input and output points of the process - network traffic, file access, and environment variables - and proxying them to the cluster.
-This means that although your code is running locally, it "thinks" it's running in the cloud, which lets you test it in cloud conditions:
-1. Without having to run your entire deployment locally
-2. Without going through CI and deployment
-3. Without deploying untested code to the cloud environment - the stable version of the code is still running in the cluster and handling requests
+mirrord lets you connect a process on your development machine to your Kubernetes cluster. It does this by injecting itself into the local process (no code changes needed!), intercepting all of the input and output points of the process - network traffic, file access, and environment variables - and proxying them to the cluster. This mechanism is discussed in more detail [here](../architecture/#mirrord-layer).
+
+When you run mirrord, you select a Target - this is the Kubernetes Pod or Deployment whose context you want your local code to run in. For example, if you have a staging cluster running the latest stable version of all of your microservices, and you're now coding the next version of one of these microservices, you'd select as your Target the Pod or Deployment running the stable version of that microservice in staging. The following things will then happen:
+- The Target's environment variables will be made available to the local process.
+- When the local process tries to read a file, it will be read from the Target's filesystem instead.
+- Traffic reaching the remote Target will reach your locally running process (this incoming traffic can either be mirrored, intercepted entirely, or intercepted based on a filter you define).
+- Traffic sent out from your local process will be sent out from the Target instead, letting it reach any endpoint that's accessible to the Target, and the response will be sent back to your local process.
+
+By proxying all of your local process' input and output points in this way, mirrord makes it "think" it's running in the cloud, which lets you test it in cloud conditions:
+1. Without having to run your entire architecture locally
+2. Without going through lengthy CI and deployment processes
+3. Without deploying untested code to the cloud environment - the stable version of the code is still running in the cluster and handling requests - letting multiple users test on the same cluster without queueing to use it or breaking the cluster for everyone else.
 
 ### Is mirrord free?
 
