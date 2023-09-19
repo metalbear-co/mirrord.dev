@@ -14,7 +14,7 @@ weight: 61
 
 ## About yourself
 
-Roman Yarinovsky, Senior Software engineer
+Roman Yarinovsky, Senior Software Engineer
 
 ## About your company
 
