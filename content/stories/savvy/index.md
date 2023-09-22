@@ -23,15 +23,15 @@ Savvy enables CISOs and security pros to support the safe adoption and use of bu
 
 ## What did you use before?
 
-We explored a wide range of options, including Telepresence, Gefyra, kubefwd and other.
+We explored a wide range of options, including Telepresence, Gefyra, kubefwd and others.
 
 ## Why did you choose mirrord instead?
 
 IT JUST WORKS! Out-of-the-box integration experience with our development containers setup directly from VSCode, all with a push of a button.
 With straight-forward configuration we successfully eliminated the need for “local-dev” setup, transitioning our entire development workflow to a collaborative “remote-dev” environments.
-The ability to intercept real traffic and emulate a remote service locally with-in the IDE while adding breakpoints and reading/writing data in both directions is an absolute game changer for our developers.
-Above all, mirrord is backed by an outstanding group of people @ MetalBear which are incredibly responsive and always ready to engage.
+The ability to intercept real traffic and emulate a remote service locally within the IDE while adding breakpoints and reading/writing data in both directions is an absolute game changer for our developers.
+Above all, mirrord is backed by an outstanding group of people @ MetalBear who are incredibly responsive and always ready to engage.
 
 ## How do you and others in your organization use mirrord?
 
-We use homegrown solution that enables developers construct complete replicated environments for testing their code throughout the development process, mirrord utilized daily to troubleshoot end-to-end flows and is the puzzle piece we’ve been missing.
+We use a homegrown solution that enables developers construct complete replicated environments for testing their code throughout the development process, mirrord utilized daily to troubleshoot end-to-end flows and is the puzzle piece we’ve been missing.
