@@ -76,7 +76,7 @@ mirrord also supports for [Go](https://metalbear.co/blog/hooking-go-from-rust-hi
 
 ### Does mirrord support clusters with a service mesh like Istio or Linkerd?
 
-Yes. However, traffic mirroring isn't currently supported - you can use the `--steal` flag to steal traffic instead.
+Yes!
 
 ### Does mirrord support OpenShift?
 
@@ -130,9 +130,7 @@ There are currently two known cases where mirrord cannot load into the applicati
 
 ### Incoming traffic to the remote target doesn't reach my local process
 
-This could happen for several reasons:
-1. The local process is listening on a different port than the remote target. You can either change the local process to listen on the same port as the remote target (don't worry about the port being used locally by other processes), or use the []`port_mapping`  configuration](/docs/overview/configuration/#feature-network-incoming-port_mapping) to map the remote port to a local port.
-2. You're running with `network.incoming.mode` set to `mirror` on a cluster with a service mesh like Istio or Linkerd, which isn't currently supported. In this case, you should use the `--steal` flag instead.
+This commonly happens becauase the local process is listening on a different port than the remote target. You can either change the local process to listen on the same port as the remote target (don't worry about the port being used locally by other processes), or use the []`port_mapping`  configuration](/docs/overview/configuration/#feature-network-incoming-port_mapping) to map the remote port to a local port.
 
 
 ### My local process fails to resolve the domain name of a Kubernetes service in the same cluster
