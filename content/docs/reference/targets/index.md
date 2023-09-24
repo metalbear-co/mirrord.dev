@@ -103,7 +103,15 @@ expose any ports. This means that if your application binds a port and listens o
 on your machine. So if you're using a management program that exposes a web interface, you can have it listen for
 connections on `localhost`, and connect to remote services in the cluster.
 
-In order to run targetless, you need to not specify a target in the configuration file, in case you are using one.
+In order to run targetless, you can either specify explicitly in the configuration file, or just don't set it in it.
+If you want to specify it explicitly (might be useful in Java/Kotlin where the target selection dialog doesn't work):
+
+```json
+{
+  "target": "targetless"
+}
+```
+
 In your IDE you can pick the `No Target ("targetless")` option in the target selection dialog (or just not make a
 selection).
 Moreover, you should make sure [the environment variable used to specify a target](#using-an-environment-variable)
