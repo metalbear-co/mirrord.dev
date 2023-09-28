@@ -24,5 +24,5 @@ List of third-party guides and videos about mirrord:
 | [CodeStory: Aviram Hassan, MetalBear & mirrord](https://codestory.co/podcast/bonus-aviram-hassan-metalbear-mirrord/)| Podcast | Interview with [Aviram](https://github.com/aviramha) about how MetalBear and mirrord started |
 | [The Most Magical Kubernetes Development Loop I've Ever Seen](https://www.youtube.com/watch?v=a8vskXGRQxo) | Video | Short overview and demo of mirrord |
 | [Rethinking Cloud Development](youtube.com/watch?v=6ejod1da0KY&list=PL0lo9MOBetEFmtstItnKlhJJVmMghxc0P&index=35) | Video | Overview and demo of mirrord |
-
+| [Advanced Kubernetes Debugging Techniques](https://github.com/konih/kubernetes-network-debugging/blob/main/advanced-debugging.md) | Slides | Slides about mirrord and other debugging tools |
 
