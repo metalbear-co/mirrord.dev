@@ -14,7 +14,7 @@ main:
   weight: 40
 - identifier: FAQ
   name: FAQ
-  url: "/docs/overview/faq"  
+  url: "/docs/overview/faq"
   weight: 50
 # - identifier: pricing
 #   name: Pricing
@@ -24,6 +24,10 @@ main:
   name: Support
   url: "/#get-support"
   weight: 70
+- identifier: contact
+  name: Contact Us
+  url: "/contact"
+  weight: 80
 docs:
   - name: Overview
     weight: 10
@@ -47,7 +51,7 @@ footer_menu:
   url: "https://metalbear.co/blog"
   weight: 40
 - name: vs Telepresence
-  url: "/compare/telepresence/"  
+  url: "/compare/telepresence/"
   weight: 50
 - name: Support
   url: "/#get-support"
