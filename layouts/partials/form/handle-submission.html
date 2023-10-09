@@ -1,0 +1,30 @@
+<script type="text/javascript">
+  function handleFormSubmit(event) {
+    event.preventDefault();
+
+    const prefix = "{{ .prefix }}";
+
+    const url = `https:\/\/${prefix}.metalbear.co\/v1\/${prefix}`;
+    const form = document.getElementById(`${prefix}-form`);
+
+    return new Promise(function(resolve) {
+      const XHR = new XMLHttpRequest();
+      const FD = new FormData(form);
+
+      XHR.addEventListener("load", function(event) {
+        if (event.target.status === 200) {
+          resolve({ text: "{{ .successMessage }}", success: true });
+        } else {
+          resolve({ text: "{{ .failureMessage }}", success: false});
+        }
+      });
+
+      XHR.addEventListener("error", function(event) {
+        resolve({ text: "{{ .failureMessage }}", success: false });
+      });
+
+      XHR.open("POST", url);
+      XHR.send(FD);
+    });
+  }
+</script>
