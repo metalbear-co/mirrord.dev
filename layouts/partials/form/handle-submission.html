@@ -13,16 +13,14 @@
 
       XHR.addEventListener("load", function(event) {
         if (event.target.status === 200) {
-          resolve({ text: "{{ .successMessage }}", success:
-          true });
+          resolve({ text: "{{ .successMessage }}", success: true });
         } else {
-          resolve({ text: "{{ .failureMessage }}", success: false
-          });
+          resolve({ text: "{{ .failureMessage }}", success: false});
         }
       });
 
       XHR.addEventListener("error", function(event) {
-        resolve({ text: "Failed to send your message. Please contact us at support@metalbear.co.", success: false });
+        resolve({ text: "{{ .failureMessage }}", success: false });
       });
 
       XHR.open("POST", url);
