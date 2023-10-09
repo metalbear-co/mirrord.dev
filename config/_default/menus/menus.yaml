@@ -56,6 +56,10 @@ footer_menu:
 - name: Support
   url: "/#get-support"
   weight: 60
+- identifier: contact
+  name: Contact Us
+  url: "/contact"
+  weight: 70
 social:
 - name: Github
   pre: github
