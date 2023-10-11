@@ -3,12 +3,13 @@
         <div class="lg:flex py-8 lg:py-16">
             <div class="lg:flex-none lg:w-1/2">
                 <h1 class="text-[#222222] text-4xl lg:text-6xl text-center lg:text-left font-code font-bold leading-snug lg:leading-normal mb-6">
-                    Develop <span class="text-primary">Locally</span> with Your Kubernetes Environment
+                    Connect your <span class="text-primary">local</span> process to your <span class="text-primary">k8s</span> cluster
                 </h1>
                 <div class="w-11/12 lg:pr-12 mb-6 lg:mb-12">
-                    <p class="text-center lg:text-left text-sm lg:text-lg text-[#222222]">Run your local code in the real-time context of your cloud environment, with access to other microservices,
-                        databases, queues, and managed services, all without leaving the local setup you know and love.
+                    <p class="text-center lg:text-left text-sm lg:text-lg text-[#222222]">Simple, right? <b>Not really</b>.
                     </p>
+                    <p class="text-center lg:text-left text-sm lg:text-lg text-[#222222]">mirrord injects itself into your process and hooks all of its I/O functions, proxying them to the cloud. So your process thinks it's in the cluster, even though it's still running right there on your machine.
+                    </p>                    
                 </div>
 
                 <div class="lg:hidden px-6 mb-4">
@@ -23,6 +24,10 @@
                         href="/#installation">Try It Now</a>
                     <a class="text-[#222222] hover:font-medium leading-loose border-b hover:border-b-2 border-solid border-[#222222]" href="/docs/overview/introduction/">Read the Docs</a>
                 </div>
+                <div class="w-11/12 lg:pr-12 mb-6 lg:mb-12">
+                    <p class="text-center lg:text-left text-sm lg:text-lg text-[#222222]"><b>Why?</b> Because with mirrord, to run your code in cloud conditions:
+                    </p>                    
+                </div>
                 <div class="lg:w-3/4">
                     <ul class="list-none text-[#222222] pl-0">
                         <li class="flex flex-col lg:flex-row items-center lg:items-start space-y-2 lg:space-y-0 lg:space-x-4 mb-4">
@@ -30,8 +35,17 @@
                                 {{ partial (printf "svg/icon-%s.svg" "check") (dict "class" "w-4 h-4 text-current") }}
                             </div>
                             <div class="text-sm text-center lg:text-left leading-normal">
-                                <span class="font-bold">Speed up your feedback loop: </span>
-                                <span class="block lg:inline-block">Test your service in the cloud from your local machine, without CI or deployment</span>
+                                <span class="block lg:inline-block">You don't have to run all of your dependencies locally
+                                </span>
+                            </div>
+                        </li>
+                        <li class="flex flex-col lg:flex-row items-center lg:items-start space-y-2 lg:space-y-0 lg:space-x-4 mb-4">
+                            <div class="text-tertiary pt-1">
+                                {{ partial (printf "svg/icon-%s.svg" "check") (dict "class" "w-4 h-4 text-current") }}
+                            </div>
+                            <div class="text-sm text-center lg:text-left leading-normal">                                
+                                <span class="block lg:inline-block">You don't have to wait for Dockerization, CI or deployment
+                                </span>
                             </div>
                         </li>
                         <li class="flex flex-col lg:flex-row items-center lg:items-start space-y-2 lg:space-y-0 lg:space-x-4 mb-4">
@@ -39,26 +53,7 @@
                                 {{ partial (printf "svg/icon-%s.svg" "check") (dict "class" "w-4 h-4 text-current") }}
                             </div>
                             <div class="text-sm text-center lg:text-left leading-normal">
-                                <span class="font-bold">Lightweight: </span>
-                                <span class="block lg:inline-block">Get up and running in seconds</span>
-                            </div>
-                        </li>
-                        <li class="flex flex-col lg:flex-row items-center lg:items-start space-y-2 lg:space-y-0 lg:space-x-4 mb-4">
-                            <div class="text-tertiary pt-1">
-                                {{ partial (printf "svg/icon-%s.svg" "check") (dict "class" "w-4 h-4 text-current") }}
-                            </div>
-                            <div class="text-sm text-center lg:text-left leading-normal">
-                                <span class="font-bold">Safe: </span>
-                                <span class="block lg:inline-block">Concurrently test on the same cloud environment</span>
-                            </div>
-                        </li>
-                        <li class="flex flex-col lg:flex-row items-center lg:items-start space-y-2 lg:space-y-0 lg:space-x-4 mb-4">
-                            <div class="text-tertiary pt-1">
-                                {{ partial (printf "svg/icon-%s.svg" "check") (dict "class" "w-4 h-4 text-current") }}
-                            </div>
-                            <div class="text-sm text-center lg:text-left leading-normal">
-                                <span class="font-bold">Free and open-source (MIT): </span>
-                                <span class="block lg:inline-block">No strings attached</span>
+                                <span class="block lg:inline-block">You don't have to take turns working on a shared environment - the stable version of your service is still there, handling requests</span>
                             </div>
                         </li>
                     </ul>
