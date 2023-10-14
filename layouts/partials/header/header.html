@@ -71,7 +71,7 @@
                                     <a class="submenu__item-link text-xl lg:text-sm text-current hover:font-semibold uppercase lg:capitalize {{ if $active }}active{{ end }}"
                                         href="{{ .URL | relLangURL }}" {{ if $active }} aria-current="true"{{ end }} {{ if $.IsHome }} data-target="{{ .URL }}" {{ end }}>
                                         {{- .Pre -}}
-                                        <span>{{ .Name | humanize | safeHTML }}</span>
+                                        <span>{{ .Name | safeHTML }}</span>
                                         {{- .Post -}}
                                     </a>
                                 </li>

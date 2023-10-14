@@ -1,6 +1,11 @@
 main:
+- name: Resources
+  identifier: resources
+  url: /resources/
+  weight: 25
 - name: Docs
   url: /docs/overview/introduction/
+  parent: resources
   weight: 10
 - name: Quick Start
   url: /docs/overview/quick-start/
@@ -10,11 +15,12 @@ main:
   weight: 30
 - identifier: blog
   name: blog
+  parent: resources
   url: "https://metalbear.co/blog"
   weight: 40
-- identifier: FAQ
-  name: FAQ
-  url: "/docs/overview/faq"
+- name: FAQ
+  url: "/docs/overview/FAQ"
+  parent: resources
   weight: 50
 # - identifier: pricing
 #   name: Pricing
