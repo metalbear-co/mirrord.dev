@@ -39,9 +39,6 @@
                             </div>
                         </div>
                         <div>
-                            <header class="text-center h-[80px] lg:h-[100px] xl:h-[80px]">
-                                <h3 class="text-[#222222] text-lg font-bold">For individual use</h3>
-                            </header>
                             <div class="h-[280px] lg:h-[350px] xl:h-[280px] border-b border-dashed border-[#D9D9D9]">
                                 <ul class="pl-0">
                                     <li class="flex mb-2">
@@ -93,119 +90,168 @@
                                     href="/docs/overview/introduction/">docs</a></strong></p>
                     </div>
 
-                    <div class="grid grid-cols-2 gap-6">
+                    <div x-data="{ isMontly: $persist(true) }" class="grid grid-cols-2 gap-6">
                         <div
-                            class="col-span-2 lg:col-span-1 rounded-md bg-[#756DF3] border border-[#000000] hover:shadow-[-7px_6px_0px_#000000] lg:hover:shadow-[-9px_8px_0px_#000000] transition-all duration-200 ease-[ease] pt-6 px-6">
-                            <div class="flex flex-col items-center h-[100px]">
-                                <div class="w-[50px] mb-2">
-                                    <svg width="50" height="50" viewBox="0 0 60 60" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M40.4317 35.4471C38.4612 33.5248 35.9098 32.463 33.2662 32.4651H26.7338C24.0883 32.4619 21.5355 33.528 19.5683 35.4576L19.5453 35.4816L19.5242 35.5047C18.4135 36.6003 17.5259 37.9379 16.9189 39.4312C16.3118 40.9244 15.9988 42.54 16 44.1735V50.9536C16 51.2311 16.1011 51.4973 16.281 51.6935C16.4608 51.8897 16.7048 52 16.9592 52H43.0408C43.2952 52 43.5391 51.8897 43.719 51.6935C43.8989 51.4973 44 51.2311 44 50.9536V44.1735C44.002 42.5269 43.6852 40.8984 43.0703 39.3946C42.4554 37.8908 41.5562 36.5456 40.4317 35.4471Z"
-                                            fill="white" />
-                                        <path
-                                            d="M18.5619 34.0899C19.3017 33.338 20.1205 32.6911 21 32.1637C20.4988 30.3659 19.5024 28.7948 18.1553 27.6781C16.8082 26.5615 15.1805 25.9573 13.5082 25.9534H8.86548C6.78041 25.957 4.78166 26.8919 3.30729 28.5532C1.83293 30.2146 1.00321 32.4668 1 34.8162V39.7845C1 40.0637 1.09842 40.3314 1.2736 40.5288C1.44879 40.7262 1.68639 40.8371 1.93414 40.8371H14.8907C15.0808 40.0029 15.3436 39.192 15.6754 38.4161C16.3734 36.7726 17.3546 35.302 18.5619 34.0899Z"
-                                            fill="white" />
-                                        <path
-                                            d="M51.1402 25.9534H46.4953C44.8222 25.9573 43.1937 26.5615 41.846 27.6781C40.4983 28.7948 39.5014 30.3659 39 32.1637C39.8763 32.6936 40.6948 33.3365 41.4393 34.0794C42.6444 35.2943 43.6256 36.7643 44.3271 38.4056C44.6591 39.1851 44.922 39.9995 45.1121 40.8371H58.0654C58.3133 40.8371 58.551 40.7262 58.7263 40.5288C58.9015 40.3314 59 40.0637 59 39.7845V34.8162C58.9988 32.4679 58.1706 30.216 56.6971 28.5545C55.2237 26.893 53.2252 25.9575 51.1402 25.9534Z"
-                                            fill="white" />
-                                        <path
-                                            d="M11.0047 25.0233C12.1914 25.0222 13.3512 24.6394 14.3373 23.923C15.3235 23.2067 16.0918 22.189 16.5451 20.9988C16.9983 19.8086 17.1162 18.4992 16.8838 17.2363C16.6514 15.9733 16.0791 14.8136 15.2393 13.9036C14.3995 12.9937 13.33 12.3744 12.1659 12.1241C11.0019 11.8739 9.79555 12.0038 8.69955 12.4976C7.60355 12.9914 6.66708 13.8268 6.00857 14.8982C5.35006 15.9696 4.99907 17.2289 5 18.5167C5.0025 20.2433 5.63623 21.8982 6.76206 23.1182C7.88789 24.3381 9.41379 25.0233 11.0047 25.0233Z"
-                                            fill="white" />
-                                        <path
-                                            d="M48.9953 25.0233C50.1824 25.0243 51.3431 24.6431 52.3305 23.928C53.3179 23.2129 54.0877 22.1959 54.5424 21.0059C54.9971 19.8158 55.1163 18.5061 54.8849 17.2425C54.6536 15.9789 54.082 14.8182 53.2426 13.9072C52.4032 12.9962 51.3337 12.376 50.1694 12.1249C49.0051 11.8738 47.7983 12.0032 46.7017 12.4966C45.6052 12.9901 44.6682 13.8255 44.0092 14.8971C43.3503 15.9688 42.9991 17.2284 43 18.5167C43.003 20.2414 43.6356 21.8945 44.7593 23.114C45.883 24.3335 47.4062 25.02 48.9953 25.0233Z"
-                                            fill="white" />
-                                        <path
-                                            d="M29.9952 30.6046C31.5779 30.6056 33.1253 30.0881 34.4416 29.1175C35.7579 28.1468 36.784 26.7667 37.3901 25.1517C37.9962 23.5367 38.155 21.7594 37.8465 20.0446C37.538 18.3299 36.776 16.7548 35.6569 15.5185C34.5377 14.2823 33.1118 13.4405 31.5596 13.0997C30.0073 12.7589 28.3983 12.9344 26.9363 13.6039C25.4743 14.2734 24.2249 15.4069 23.3463 16.861C22.4676 18.3151 21.9991 20.0244 22 21.7727C22.0033 24.1139 22.8467 26.3583 24.3454 28.0138C25.8441 29.6693 27.8758 30.601 29.9952 30.6046Z"
-                                            fill="white" />
-                                    </svg>
+                            class="col-span-2 lg:col-span-1 rounded-md bg-[#756DF3] border border-[#000000] hover:shadow-[-7px_6px_0px_#000000] lg:hover:shadow-[-9px_8px_0px_#000000] transition-all duration-200 ease-[ease]">
+                            <div class="pt-6 px-6">
+                                <div class="flex flex-col items-center h-[100px]">
+                                    <div class="w-[50px] mb-2">
+                                        <svg width="50" height="50" viewBox="0 0 60 60" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M40.4317 35.4471C38.4612 33.5248 35.9098 32.463 33.2662 32.4651H26.7338C24.0883 32.4619 21.5355 33.528 19.5683 35.4576L19.5453 35.4816L19.5242 35.5047C18.4135 36.6003 17.5259 37.9379 16.9189 39.4312C16.3118 40.9244 15.9988 42.54 16 44.1735V50.9536C16 51.2311 16.1011 51.4973 16.281 51.6935C16.4608 51.8897 16.7048 52 16.9592 52H43.0408C43.2952 52 43.5391 51.8897 43.719 51.6935C43.8989 51.4973 44 51.2311 44 50.9536V44.1735C44.002 42.5269 43.6852 40.8984 43.0703 39.3946C42.4554 37.8908 41.5562 36.5456 40.4317 35.4471Z"
+                                                fill="white" />
+                                            <path
+                                                d="M18.5619 34.0899C19.3017 33.338 20.1205 32.6911 21 32.1637C20.4988 30.3659 19.5024 28.7948 18.1553 27.6781C16.8082 26.5615 15.1805 25.9573 13.5082 25.9534H8.86548C6.78041 25.957 4.78166 26.8919 3.30729 28.5532C1.83293 30.2146 1.00321 32.4668 1 34.8162V39.7845C1 40.0637 1.09842 40.3314 1.2736 40.5288C1.44879 40.7262 1.68639 40.8371 1.93414 40.8371H14.8907C15.0808 40.0029 15.3436 39.192 15.6754 38.4161C16.3734 36.7726 17.3546 35.302 18.5619 34.0899Z"
+                                                fill="white" />
+                                            <path
+                                                d="M51.1402 25.9534H46.4953C44.8222 25.9573 43.1937 26.5615 41.846 27.6781C40.4983 28.7948 39.5014 30.3659 39 32.1637C39.8763 32.6936 40.6948 33.3365 41.4393 34.0794C42.6444 35.2943 43.6256 36.7643 44.3271 38.4056C44.6591 39.1851 44.922 39.9995 45.1121 40.8371H58.0654C58.3133 40.8371 58.551 40.7262 58.7263 40.5288C58.9015 40.3314 59 40.0637 59 39.7845V34.8162C58.9988 32.4679 58.1706 30.216 56.6971 28.5545C55.2237 26.893 53.2252 25.9575 51.1402 25.9534Z"
+                                                fill="white" />
+                                            <path
+                                                d="M11.0047 25.0233C12.1914 25.0222 13.3512 24.6394 14.3373 23.923C15.3235 23.2067 16.0918 22.189 16.5451 20.9988C16.9983 19.8086 17.1162 18.4992 16.8838 17.2363C16.6514 15.9733 16.0791 14.8136 15.2393 13.9036C14.3995 12.9937 13.33 12.3744 12.1659 12.1241C11.0019 11.8739 9.79555 12.0038 8.69955 12.4976C7.60355 12.9914 6.66708 13.8268 6.00857 14.8982C5.35006 15.9696 4.99907 17.2289 5 18.5167C5.0025 20.2433 5.63623 21.8982 6.76206 23.1182C7.88789 24.3381 9.41379 25.0233 11.0047 25.0233Z"
+                                                fill="white" />
+                                            <path
+                                                d="M48.9953 25.0233C50.1824 25.0243 51.3431 24.6431 52.3305 23.928C53.3179 23.2129 54.0877 22.1959 54.5424 21.0059C54.9971 19.8158 55.1163 18.5061 54.8849 17.2425C54.6536 15.9789 54.082 14.8182 53.2426 13.9072C52.4032 12.9962 51.3337 12.376 50.1694 12.1249C49.0051 11.8738 47.7983 12.0032 46.7017 12.4966C45.6052 12.9901 44.6682 13.8255 44.0092 14.8971C43.3503 15.9688 42.9991 17.2284 43 18.5167C43.003 20.2414 43.6356 21.8945 44.7593 23.114C45.883 24.3335 47.4062 25.02 48.9953 25.0233Z"
+                                                fill="white" />
+                                            <path
+                                                d="M29.9952 30.6046C31.5779 30.6056 33.1253 30.0881 34.4416 29.1175C35.7579 28.1468 36.784 26.7667 37.3901 25.1517C37.9962 23.5367 38.155 21.7594 37.8465 20.0446C37.538 18.3299 36.776 16.7548 35.6569 15.5185C34.5377 14.2823 33.1118 13.4405 31.5596 13.0997C30.0073 12.7589 28.3983 12.9344 26.9363 13.6039C25.4743 14.2734 24.2249 15.4069 23.3463 16.861C22.4676 18.3151 21.9991 20.0244 22 21.7727C22.0033 24.1139 22.8467 26.3583 24.3454 28.0138C25.8441 29.6693 27.8758 30.601 29.9952 30.6046Z"
+                                                fill="white" />
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <p class="text-white mb-0">Team</p>
+                                    </div>
                                 </div>
                                 <div>
-                                    <p class="text-white mb-0">Team</p>
-                                </div>
-                            </div>
-                            <div>
-                                <header class="text-center h-[80px] lg:h-[100px] xl:h-[80px]">
-                                    <h3 class="text-white text-lg font-bold">For small-to-medium teams with
-                                        small-to-medium deployments</h3>
-                                </header>
-                                <div
-                                    class="h-[280px] lg:h-[350px] xl:h-[280px] border-b border-dashed border-[#D9D9D9]">
-                                    <ul class="pl-0">
-                                        <li class="flex mb-2">
-                                            <div class="flex-none w-[20px]">
-                                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M6 12.0001L10.243 16.2431L18.727 7.75708" stroke="#444083"
-                                                        stroke-width="3" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                </svg>
-                                            </div>
-                                            <p class="text-white text-sm mb-0 ml-2">Concurrent work on the same pod</p>
-                                        </li>
-                                        <li class="flex mb-2">
-                                            <div class="flex-none w-[20px]">
-                                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M6 12.0001L10.243 16.2431L18.727 7.75708" stroke="#444083"
-                                                        stroke-width="3" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                </svg>
-                                            </div>
-                                            <p class="text-white text-sm mb-0 ml-2">Targeting whole deployments</p>
-                                        </li>
-                                        <li class="flex mb-2">
-                                            <div class="flex-none w-[20px]">
-                                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M6 12.0001L10.243 16.2431L18.727 7.75708" stroke="#444083"
-                                                        stroke-width="3" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                </svg>
-                                            </div>
-                                            <p class="text-white text-sm mb-0 ml-2">RBAC</p>
-                                        </li>
-                                        <li class="flex mb-2">
-                                            <div class="flex-none w-[20px]">
-                                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M6 12.0001L10.243 16.2431L18.727 7.75708" stroke="#444083"
-                                                        stroke-width="3" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                </svg>
-                                            </div>
-                                            <p class="text-white text-sm mb-0 ml-2">End-users don't need permissions to
-                                                create pods</p>
-                                        </li>
-                                        <li class="flex mb-2">
-                                            <div class="flex-none w-[20px]">
-                                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M6 12.0001L10.243 16.2431L18.727 7.75708" stroke="#444083"
-                                                        stroke-width="3" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                </svg>
-                                            </div>
-                                            <p class="text-white text-sm mb-0 ml-2">SLA: 48 hour response time on
-                                                support tickets.</p>
-                                        </li>
-                                        <li class="flex mb-2">
-                                            <div class="flex-none w-[20px]">
-                                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M6 12.0001L10.243 16.2431L18.727 7.75708" stroke="#444083"
-                                                        stroke-width="3" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                </svg>
-                                            </div>
-                                            <p class="text-white text-sm mb-0 ml-2">Communication: Discord/Email</p>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
+                                    <div
+                                        class="h-[280px] lg:h-[350px] xl:h-[280px] border-b border-dashed border-[#D9D9D9] flex flex-col justify-between items-center">
+                                        <ul class="pl-0">
+                                            <li class="flex mb-2">
+                                                <div class="flex-none w-[20px]">
+                                                    <svg viewBox="0 0 24 24" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M6 12.0001L10.243 16.2431L18.727 7.75708"
+                                                            stroke="#444083" stroke-width="3" stroke-linecap="round"
+                                                            stroke-linejoin="round" />
+                                                    </svg>
+                                                </div>
+                                                <p class="text-white text-sm mb-0 ml-2">Concurrent work on the same pod
+                                                </p>
+                                            </li>
+                                            <li class="flex mb-2">
+                                                <div class="flex-none w-[20px]">
+                                                    <svg viewBox="0 0 24 24" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M6 12.0001L10.243 16.2431L18.727 7.75708"
+                                                            stroke="#444083" stroke-width="3" stroke-linecap="round"
+                                                            stroke-linejoin="round" />
+                                                    </svg>
+                                                </div>
+                                                <p class="text-white text-sm mb-0 ml-2">Targeting whole deployments</p>
+                                            </li>
+                                            <li class="flex mb-2">
+                                                <div class="flex-none w-[20px]">
+                                                    <svg viewBox="0 0 24 24" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M6 12.0001L10.243 16.2431L18.727 7.75708"
+                                                            stroke="#444083" stroke-width="3" stroke-linecap="round"
+                                                            stroke-linejoin="round" />
+                                                    </svg>
+                                                </div>
+                                                <p class="text-white text-sm mb-0 ml-2">RBAC</p>
+                                            </li>
+                                            <li class="flex mb-2">
+                                                <div class="flex-none w-[20px]">
+                                                    <svg viewBox="0 0 24 24" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M6 12.0001L10.243 16.2431L18.727 7.75708"
+                                                            stroke="#444083" stroke-width="3" stroke-linecap="round"
+                                                            stroke-linejoin="round" />
+                                                    </svg>
+                                                </div>
+                                                <p class="text-white text-sm mb-0 ml-2">End-users don't need permissions
+                                                    to
+                                                    create pods</p>
+                                            </li>
+                                            <li class="flex mb-2">
+                                                <div class="flex-none w-[20px]">
+                                                    <svg viewBox="0 0 24 24" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M6 12.0001L10.243 16.2431L18.727 7.75708"
+                                                            stroke="#444083" stroke-width="3" stroke-linecap="round"
+                                                            stroke-linejoin="round" />
+                                                    </svg>
+                                                </div>
+                                                <p class="text-white text-sm mb-0 ml-2">SLA: 48 hour response time on
+                                                    support tickets.</p>
+                                            </li>
+                                            <li class="flex mb-2">
+                                                <div class="flex-none w-[20px]">
+                                                    <svg viewBox="0 0 24 24" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M6 12.0001L10.243 16.2431L18.727 7.75708"
+                                                            stroke="#444083" stroke-width="3" stroke-linecap="round"
+                                                            stroke-linejoin="round" />
+                                                    </svg>
+                                                </div>
+                                                <p class="text-white text-sm mb-0 ml-2">Communication: Discord/Email</p>
+                                            </li>
+                                        </ul>
 
-                            <div>
-                                <div class="h-[125px] lg:h-[140px] xl:h-[125px] text-center pt-6">
-                                    <h2 class="text-white text-3xl lg:text-4xl font-medium mb-2">$40</h2>
-                                    <h3 class="text-white font-medium mb-0">Seat/Month</h3>
+                                        <div class="flex justify-center space-x-3 mb-2">
+                                            <p class="text-white text-sm leading-[26px] mb-0">Monthly</p>
+                                            <div
+                                                class="w-[54px] h-[26px] relative bg-white rounded-full flex items-center p-[1px]">
+                                                <button @click="isMontly = !isMontly" class="w-full">
+                                                    <span
+                                                        class="w-6 h-6 flex items-center justify-center bg-[#444083] rounded-full transition-all duration-300 ease-[ease]"
+                                                        :class="{ 'translate-x-0': isMontly, 'translate-x-7': !isMontly }">
+                                                    </span>
+                                                </button>
+                                            </div>
+                                            <p class="text-white text-sm leading-[26px] mb-0">Annually</p>
+                                        </div>
+
+                                    </div>
                                 </div>
-                                <div class="flex justify-center px-4 mb-6">
-                                    <a class="w-full h-[46px] lg:h-[52px] flex items-center justify-center text-primary bg-white border border-solid border-[#222222] rounded-[6px] lg:rounded-[10px] shadow-[-7px_6px_0px_#000000] lg:shadow-[-9px_8px_0px_#000000] transition-colors duration-200 ease-[ease]"
-                                        href="https://app.metalbear.co/">Start a free trial</a>
+                                <div>
+                                    <div class="h-[125px] lg:h-[140px] xl:h-[125px] text-center pt-6">
+                                        <h2 class="text-white text-3xl lg:text-4xl font-medium mb-2"
+                                            x-text="isMontly ? '$50' : '$40'">$50</h2>
+                                        <div
+                                            class="text-white font-medium mb-0 relative flex justify-center items-center space-x-1">
+                                            <span>Seat</span>
+                                            <div class="w-[14px] h-[14px] cursor-pointer group">
+                                                <div
+                                                    class="relative hidden group-hover:block transition-all duration-200 ease-[ease] before:empty-content before:absolute before:w-4 before:h-4 before:-left-[2px] before:bottom-[5px] before:border before:border-solid before:border-[#222222] before:transform before:rotate-45 before:z-30 after:empty-content after:absolute after:w-4 after:h-4 after:bg-white after:-left-[2px] after:bottom-[6px] after:transform after:rotate-45 after:z-40">
+                                                </div>
+                                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M6.9959 5.43761C7.5208 5.43761 7.94728 5.86409 7.94728 6.38899V10.3011C7.94728 10.8178 7.5208 11.2443 6.9959 11.2443C6.4792 11.2443 6.05272 10.8178 6.05272 10.3011V6.38899C6.05272 5.86409 6.4792 5.43761 6.9959 5.43761ZM1.16462 6.9959C1.16462 5.3884 1.81254 3.92853 2.87053 2.87053C3.92853 1.81254 5.3884 1.16462 6.9959 1.16462C8.6116 1.16462 10.0715 1.81254 11.1213 2.87053C12.1793 3.92853 12.8354 5.3884 12.8354 6.9959C12.8354 8.6116 12.1793 10.0715 11.1213 11.1213C10.0715 12.1793 8.6116 12.8354 6.9959 12.8354C5.3884 12.8354 3.92853 12.1793 2.87053 11.1213C1.81254 10.0715 1.16462 8.6116 1.16462 6.9959ZM11.9496 2.05038C10.6784 0.787346 8.93146 0 6.9959 0C5.06854 0 3.31342 0.787346 2.05038 2.05038C0.787346 3.31342 0 5.06854 0 6.9959C0 8.93146 0.787346 10.6784 2.05038 11.9496C3.31342 13.2127 5.06854 14 6.9959 14C8.93146 14 10.6784 13.2127 11.9496 11.9496C13.2127 10.6784 14 8.93146 14 6.9959C14 5.06854 13.2127 3.31342 11.9496 2.05038ZM6.9959 2.75571C7.5208 2.75571 7.94728 3.18219 7.94728 3.70709C7.94728 3.96954 7.84066 4.20738 7.66842 4.37961C7.49619 4.55185 7.25835 4.65026 6.9959 4.65026C6.73345 4.65026 6.49561 4.55185 6.32337 4.37961C6.15114 4.20738 6.04452 3.96954 6.04452 3.70709C6.04452 3.18219 6.471 2.75571 6.9959 2.75571Z"
+                                                        fill="white" />
+                                                </svg>
+
+                                                <div
+                                                    class="absolute hidden group-hover:block left-0 bottom-8 w-full text-left bg-white rounded-[4px] border border-solid border-[#222222] py-3 px-3">
+                                                    <p class="text-[#222222] text-xs mb-2">Seats are calculated by
+                                                        monthly activity. Any user that used mirrord in a calendar month
+                                                        is counted towards your seat count.</p>
+                                                    <p class="text-[#222222] text-xs mb-0">mirrord identifies users with
+                                                        a unique file it creates on the machine it runs on. If this does
+                                                        not represent distinct users in your organization, or if you use
+                                                        mirrord on cloud workers (e.g. for CI, or cloud development
+                                                        environments), please <a class="underline text-[#222222]"
+                                                            href="/contact/">contact us</a> </p>
+                                                </div>
+                                            </div>
+                                            <span>/Month</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-center px-4 mb-6">
+                                        <a class="w-full h-[46px] lg:h-[52px] flex items-center justify-center text-primary bg-white border border-solid border-[#222222] rounded-[6px] lg:rounded-[10px] shadow-[-7px_6px_0px_#000000] lg:shadow-[-9px_8px_0px_#000000] transition-colors duration-200 ease-[ease]"
+                                            href="https://app.metalbear.co/">Start a 7-day Free Trial</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -227,10 +273,6 @@
                                 </div>
                             </div>
                             <div>
-                                <header class="text-center h-[80px] lg:h-[100px] xl:h-[80px]">
-                                    <h3 class="text-white text-lg font-bold">For large teams with complex
-                                        deployments</h3>
-                                </header>
                                 <div
                                     class="h-[280px] lg:h-[350px] xl:h-[280px] border-b border-dashed border-[#D9D9D9]">
                                     <ul class="pl-0">
@@ -242,50 +284,8 @@
                                                         stroke-linejoin="round" />
                                                 </svg>
                                             </div>
-                                            <p class="text-white text-sm mb-0 ml-2">Concurrent work on the same pod
+                                            <p class="text-white text-sm mb-0 ml-2">Everything in the Team plan
                                             </p>
-                                        </li>
-                                        <li class="flex mb-2">
-                                            <div class="flex-none w-[20px]">
-                                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M6 12.0001L10.243 16.2431L18.727 7.75708" stroke="#756DF3"
-                                                        stroke-width="3" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                </svg>
-                                            </div>
-                                            <p class="text-white text-sm mb-0 ml-2">Targeting whole deployments</p>
-                                        </li>
-                                        <li class="flex mb-2">
-                                            <div class="flex-none w-[20px]">
-                                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M6 12.0001L10.243 16.2431L18.727 7.75708" stroke="#756DF3"
-                                                        stroke-width="3" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                </svg>
-                                            </div>
-                                            <p class="text-white text-sm mb-0 ml-2">RBAC</p>
-                                        </li>
-                                        <li class="flex mb-2">
-                                            <div class="flex-none w-[20px]">
-                                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M6 12.0001L10.243 16.2431L18.727 7.75708" stroke="#756DF3"
-                                                        stroke-width="3" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                </svg>
-                                            </div>
-                                            <p class="text-white text-sm mb-0 ml-2">End-users don't need permissions
-                                                to create pods</p>
-                                        </li>
-                                        <li class="flex mb-2">
-                                            <div class="flex-none w-[20px]">
-                                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M6 12.0001L10.243 16.2431L18.727 7.75708" stroke="#756DF3"
-                                                        stroke-width="3" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                </svg>
-                                            </div>
-                                            <p class="text-white text-sm mb-0 ml-2">SLA: 48 hour response time on
-                                                support tickets.</p>
                                         </li>
                                         <li class="flex mb-2">
                                             <div class="flex-none w-[20px]">
@@ -327,7 +327,8 @@
                                     </div>
                                     <div class="flex justify-center px-4 mb-6">
                                         <a class="w-full h-[46px] lg:h-[52px] flex items-center justify-center text-primary bg-white border border-solid border-[#222222] rounded-[6px] lg:rounded-[10px] shadow-[-7px_6px_0px_#000000] lg:shadow-[-9px_8px_0px_#000000] transition-colors duration-200 ease-[ease]"
-                                            href="https://calendly.com/eyal-metalbear/mirrord-session">Schedule A Demo</a>
+                                            href="https://calendly.com/eyal-metalbear/mirrord-session">Schedule A
+                                            Demo</a>
                                     </div>
                                 </div>
                             </div>
