@@ -108,7 +108,7 @@ More details can be found in this [GitHub discussion.](https://github.com/metalb
 
 ## Common Issues
 
-### My application is trying to read a file locally even though `fs` is set to `remote` (or vice versa)
+### My application is trying to read a file locally even though `fs` is set to `remote`
 
 mirrord has a list of path patterns that are read locally by default regardless of the configured fs mode. You can
 override this behavior in the configuration.
