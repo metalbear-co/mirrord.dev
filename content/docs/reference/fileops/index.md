@@ -14,8 +14,11 @@ toc: true
 
 ## Overview
 
-mirrord will relay all file access to the target pod by default. (this functionality can be disabled using `--fs-mode local`
-flag on the command line or by setting `mode` in the configuration file in the IDE plugin.)
+mirrord will relay file access (except for [some exceptions](
+https://github.com/metalbear-co/mirrord/tree/latest/mirrord/layer/src/file/filter/read_local_by_default.rs)) to the
+target pod by default. (this functionality can be disabled using `--fs-mode local` flag on the command line or by
+setting `mode` in the configuration file in the IDE plugin.)
+
 
 For example, the following python script calls the built-in `open` function which translate to something like
 `openat(AT_FDCWD, "/tmp/test", O_RDWR|O_CLOEXEC)` at a lower level:
