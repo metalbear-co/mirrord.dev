@@ -117,7 +117,7 @@ There are currently two known cases where mirrord cannot load into the applicati
    linked in order to run them with mirrord.
    With Go programs, for example, it is as simple as adding `import "C"` to your program code.
    If you don't want to add an import to your Go program, you can alternatively build a dynamically linked binary using `go build -ldflags='-linkmode external'`. In VSCode, this can be done by adding `"buildFlags": "-ldflags='-linkmode external'"` to your `launch.json`.
-   On Linux, using `go run` is not possible at the moment - please follow [this issue](https://github.com/metalbear-co/mirrord/issues/1922) for updates.   
+   On Linux, using `go run` is not possible at the moment - please follow [this issue](https://github.com/metalbear-co/mirrord/issues/1922) for updates.
 2. If you are running mirrord on MacOS and the executable you are running is protected by
    [SIP](https://en.wikipedia.org/wiki/System_Integrity_Protection) (the application you are developing wouldn't be,
    but the binary that is used to execute it, e.g. `bash` for a bash script, might be protected), mirrord might have trouble loading into it (mirrord can generally bypass SIP, but there are still some unhandled edge cases). If that is the case, you could try copying the binary you're trying to run to an unprotected directory (e.g. anywhere in your home directory), changing the IDE run configuration or the CLI
@@ -134,6 +134,29 @@ This could happen for several reasons:
 1. The local process is listening on a different port than the remote target. You can either change the local process to listen on the same port as the remote target (don't worry about the port being used locally by other processes), or use the []`port_mapping`  configuration](/docs/overview/configuration/#feature-network-incoming-port_mapping) to map the remote port to a local port.
 2. You're running with `network.incoming.mode` set to `mirror` on a cluster with a service mesh like Istio or Linkerd, which isn't currently supported. In this case, you should use the `--steal` flag instead.
 
+### My application is trying to read a file locally instead of from the cluster
+
+mirrord has a list of path patterns that are read locally by default regardless of the configured fs mode. You can
+override this behavior in the configuration.
+
+Here you can find all the pre-defined exceptions:
+1. Paths that match
+   [the patterns defined here](https://github.com/metalbear-co/mirrord/tree/latest/mirrord/layer/src/file/filter/read_local_by_default.rs)
+   are read locally by default.
+2. Paths that match
+   [the patterns defined here](https://github.com/metalbear-co/mirrord/tree/latest/mirrord/layer/src/file/filter/read_remote_by_default.rs)
+   are read remotely by default when the mode is `localwithoverrides`.
+3. Paths that match
+   [the patterns defined here](https://github.com/metalbear-co/mirrord/tree/latest/mirrord/layer/src/file/filter/not_found_by_default.rs)
+   under the running user's home directory will be failed to be found by default when the mode
+   is not `local`.
+
+In order to override that settings for a path or a pattern, add it to the appropriate set:
+1. `feature.fs.read_only` if you want read operations to that path to happen remotely, but write operations to
+   happen locally.
+2. `feature.fs.read_write` if you want read and write operations to that path to happen remotely.
+3. `feature.fs.local` if you want read and write operations to that path to happen locally.
+4. `feature.fs.not_found` if you want the application to "think" that file does not exist.
 
 ### My local process fails to resolve the domain name of a Kubernetes service in the same cluster
 
