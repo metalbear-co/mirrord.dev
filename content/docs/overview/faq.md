@@ -108,7 +108,7 @@ More details can be found in this [GitHub discussion.](https://github.com/metalb
 
 ## Common Issues
 
-### A local file is read instead of a remote one, or my application cannot find a file that is only present in the cluster
+### My application is trying to read a file locally even though `fs` is set to `remote` (or vice versa)
 
 There are pre-defined exceptions to the set FS mode. That means that some files are read locally by default
 regardless of the mode set in the configuration. It is possible that the path your application is trying to read is
