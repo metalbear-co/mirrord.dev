@@ -110,18 +110,8 @@ More details can be found in this [GitHub discussion.](https://github.com/metalb
 
 ### My application is trying to read a file locally even though `fs` is set to `remote` (or vice versa)
 
-There are pre-defined exceptions to the set FS mode. That means that some files are read locally by default
-regardless of the mode set in the configuration. It is possible that the path your application is trying to read is
-covered by one of those pre-defined exceptions, and therefore it is being read locally, and not remotely. This would
-result in the application receiving the contents of the local file, if that path exists locally, or in an error
-being reported about a file that was not found.
-
-In order to have mirrord read a file that is covered by such an exception in the cluster instead of locally, you can
-add a pattern that matches the paths you want to cover to `feature.fs.read_only`.
-
-Example: you are trying to run an application that reads the file `/etc/my-file`, and getting a file not found error.
-This is because paths under `/etc/` are read locally by default. In order to read the file remotely, you can set
-[`feature.fs.read_only`](https://mirrord.dev/docs/overview/configuration/#feature-fs-read_only) to `["^/etc/my-file$"]`.
+mirrord has a list of path patterns that are read locally by default regardless of the configured fs mode. You can
+override this behavior in the configuration.
 
 Here you can find all the pre-defined exceptions:
  1. Paths that match
