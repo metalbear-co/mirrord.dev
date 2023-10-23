@@ -108,31 +108,6 @@ More details can be found in this [GitHub discussion.](https://github.com/metalb
 
 ## Common Issues
 
-### My application is trying to read a file locally even though `fs` is set to `remote`
-
-mirrord has a list of path patterns that are read locally by default regardless of the configured fs mode. You can
-override this behavior in the configuration.
-
-Here you can find all the pre-defined exceptions:
- 1. Paths that match
-    [the patterns defined here](https://github.com/metalbear-co/mirrord/tree/latest/mirrord/layer/src/file/filter/read_local_by_default.rs)
-    are read locally by default.
- 2. Paths that match
-    [the patterns defined here](https://github.com/metalbear-co/mirrord/tree/latest/mirrord/layer/src/file/filter/read_remote_by_default.rs)
-    are read remotely by default when the mode is `localwithoverrides`.
- 3. Paths that match
-    [the patterns defined here](https://github.com/metalbear-co/mirrord/tree/latest/mirrord/layer/src/file/filter/not_found_by_default.rs)
-    under the running user's home directory will be failed to be found by default when the mode
-    is not `local`.
-
-In order to override that settings for a path or a pattern, add it to the appropriate set:
-1. `feature.fs.read_only` if you want read operations to that path to happen remotely, but write operations to
-   happen locally.
-2. `feature.fs.read_write` if you want read and write operations to that path to happen remotely.
-3. `feature.fs.local` if you want read and write operations to that path to happen locally.
-4. `feature.fs.not_found` if you want the application to "think" that file does not exist.
-
-
 ### I've run my program with mirrord, but it seems to have no effect
 
 There are currently two known cases where mirrord cannot load into the application's process:
@@ -159,6 +134,29 @@ This could happen for several reasons:
 1. The local process is listening on a different port than the remote target. You can either change the local process to listen on the same port as the remote target (don't worry about the port being used locally by other processes), or use the []`port_mapping`  configuration](/docs/overview/configuration/#feature-network-incoming-port_mapping) to map the remote port to a local port.
 2. You're running with `network.incoming.mode` set to `mirror` on a cluster with a service mesh like Istio or Linkerd, which isn't currently supported. In this case, you should use the `--steal` flag instead.
 
+### My application is trying to read a file locally even though `fs` is set to `remote`
+
+mirrord has a list of path patterns that are read locally by default regardless of the configured fs mode. You can
+override this behavior in the configuration.
+
+Here you can find all the pre-defined exceptions:
+1. Paths that match
+   [the patterns defined here](https://github.com/metalbear-co/mirrord/tree/latest/mirrord/layer/src/file/filter/read_local_by_default.rs)
+   are read locally by default.
+2. Paths that match
+   [the patterns defined here](https://github.com/metalbear-co/mirrord/tree/latest/mirrord/layer/src/file/filter/read_remote_by_default.rs)
+   are read remotely by default when the mode is `localwithoverrides`.
+3. Paths that match
+   [the patterns defined here](https://github.com/metalbear-co/mirrord/tree/latest/mirrord/layer/src/file/filter/not_found_by_default.rs)
+   under the running user's home directory will be failed to be found by default when the mode
+   is not `local`.
+
+In order to override that settings for a path or a pattern, add it to the appropriate set:
+1. `feature.fs.read_only` if you want read operations to that path to happen remotely, but write operations to
+   happen locally.
+2. `feature.fs.read_write` if you want read and write operations to that path to happen remotely.
+3. `feature.fs.local` if you want read and write operations to that path to happen locally.
+4. `feature.fs.not_found` if you want the application to "think" that file does not exist.
 
 ### My local process fails to resolve the domain name of a Kubernetes service in the same cluster
 
