@@ -18,6 +18,10 @@ enable, and how they should function.
 All of the configuration fields have a default value, so a minimal configuration would be no
 configuration at all.
 
+The configuration supports templating using the [Tera](https://keats.github.io/tera/docs/) template engine.
+Currently we don't provide additional values to the context, if you have anything you want us to
+provide please let us know.
+
 To help you get started, here are examples of a basic configuration file, and a complete
 configuration file containing all fields.
 
@@ -34,10 +38,23 @@ configuration file containing all fields.
 }
 ```
 
+### Basic `config.json` with templating {#root-basic-templating}
+
+```json
+{
+  "target": "{{ get_env(name="TARGET", default="pod/fallback") }}",
+  "feature": {
+    "env": true,
+    "fs": "read",
+    "network": true
+  }
+}
+```
+
 ### Complete `config.json` {#root-complete}
 
  Don't use this example as a starting point, it's just here to show you all the available
-options.
+ options.
 ```json
 {
   "accept_invalid_certificates": false,
@@ -128,7 +145,9 @@ Controls target pause feature. Unstable.
 With this feature enabled, the remote container is paused while this layer is connected to
 the agent.
 
-Defaults to `false`.
+Note: It requires agent configuration to be set to privileged when running with the
+ephemeral agent option. Defaults to `false`.
+Note2: Pause + ephemeral might not work on Docker runtimes.
 
 ## skip_build_tools {#root-skip_build_tools}
 
@@ -379,6 +398,25 @@ Disables specified Linux capabilities for the agent container.
 If nothing is disabled here, agent uses `NET_ADMIN`, `NET_RAW`, `SYS_PTRACE` and
 `SYS_ADMIN`.
 
+### agent.resources {#agent-resources}
+
+Set pod resource reqirements. (not with ephemeral agents)
+Default is
+```json
+{
+  "requests":
+  {
+    "cpu": "1m",
+    "memory": "1Mi"
+  },
+  "limits":
+  {
+    "cpu": "100m",
+      "memory": "100Mi"
+  }
+}
+```
+
 ## target {#root-target}
 Specifies the target and namespace to mirror, see [`path`](#target-path) for a list of
 accepted values for the `target` option.
@@ -489,7 +527,11 @@ Allows the user to specify the default behavior for file operations:
 1. `"read"` - Read from the remote file system (default)
 2. `"write"` - Read/Write from the remote file system.
 3. `"local"` - Read from the local file system.
-5. `"disable"` - Disable file operations.
+4. `"localwithoverrides"` - perform fs operation locally, unless the path matches a pre-defined
+   or user-specified exception.
+
+> Note: by default, some paths are read locally or remotely, regardless of the selected FS mode.
+> This is described in further detail below.
 
 Besides the default behavior, the user can specify behavior for specific regex patterns.
 Case insensitive.
@@ -509,8 +551,22 @@ do not guarantee what is first).
 **Warning**: Specifying the same path in two lists is unsupported and can lead to undefined
 behaviour.
 
-2. Check our "special list" - we have an internal at compile time list
-for different behavior based on patterns to provide better UX.
+2. There are pre-defined exceptions to the set FS mode.
+  a. Paths that match
+     [the patterns defined here](https://github.com/metalbear-co/mirrord/tree/latest/mirrord/layer/src/file/filter/read_local_by_default.rs)
+     are read locally by default.
+  b. Paths that match
+     [the patterns defined here](https://github.com/metalbear-co/mirrord/tree/latest/mirrord/layer/src/file/filter/read_remote_by_default.rs)
+     are read remotely by default when the mode is `localwithoverrides`.
+  c. Paths that match
+     [the patterns defined here](https://github.com/metalbear-co/mirrord/tree/latest/mirrord/layer/src/file/filter/not_found_by_default.rs)
+     under the running user's home directory will not be found by the application when the mode
+     is not `local`.
+In order to override that default setting for a path, or a pattern, include it the appropriate
+pattern set from above. E.g. in order to read files under `/etc/` remotely even though it is
+covered by
+[the set of patterns that are read locally by default](https://github.com/metalbear-co/mirrord/tree/latest/mirrord/layer/src/file/filter/read_local_by_default.rs),
+add `"^/etc/."` to the `read_only` set.
 
 3. If none of the above match, use the default behavior (mode).
 
