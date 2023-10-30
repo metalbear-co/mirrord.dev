@@ -2,9 +2,9 @@ main:
 - name: Docs
   url: /docs/overview/introduction/
   weight: 10
-- name: Quick Start
-  url: /docs/overview/quick-start/
-  weight: 20
+# - name: Quick Start
+#   url: /docs/overview/quick-start/
+#   weight: 20
 - name: User Stories
   url: /stories/
   weight: 30
@@ -24,10 +24,10 @@ main:
   name: Support
   url: "/#get-support"
   weight: 70
-- identifier: contact
-  name: Contact Us
-  url: "/contact"
-  weight: 80
+# - identifier: contact
+#   name: Contact Us
+#   url: "/contact"
+#   weight: 80
 docs:
   - name: Overview
     weight: 10
@@ -61,18 +61,18 @@ footer_menu:
   url: "/contact"
   weight: 70
 social:
-- name: Github
-  pre: github
-  url: https://github.com/metalbear-co/mirrord
-  weight: 10
 - name: Discord
   pre: discord
   url: https://discord.gg/metalbear
+  weight: 10
+- name: Github
+  pre: github
+  url: https://github.com/metalbear-co/mirrord
   weight: 20
-- name: Twitter
-  pre: twitter
-  url: https://twitter.com/metalbearco
-  weight: 30
+# - name: Twitter
+#   pre: twitter
+#   url: https://twitter.com/metalbearco
+#   weight: 30
 - name: Linkedin
   pre: linkedin
   url: https://linkedin.com/metalbearco

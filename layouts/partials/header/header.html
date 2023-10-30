@@ -88,11 +88,34 @@
                     </ul>
 
                     <div class="col-span-2">
-                        {{- partial "header/social.html" . }}
+                        <!-- {{- partial "header/social.html" . }} -->
+
+                        <div class="flex justify-center lg:justify-end items-center space-x-6 pt-6 lg:pt-0">
+                            <a class="text-lg lg:text-sm leading-[1.1] py-2 px-8 flex items-center justify-center text-white hover:text-[#222222] bg-primary hover:bg-white border border-solid border-[#222222] rounded-[6px] shadow-[-3px_3px_0px_#000000] lg:shadow-[-5px_5px_0px_#000000] transition-colors duration-200 ease-[ease]" href="/docs/overview/quick-start/">Get Started</a>
+                            <a class="text-[#222222] text-lg lg:text-sm border-b border-solid border-[#222222] px-1 py-1" href="/contact">Contact Us</a>
+                        </div>
                         {{- partial "header/social-mobile.html" . }}
+
                     </div>
                 </nav>
             </div>
         </div>
     </div>
 </header>
+
+<div class="fixed top-0 left-0 h-full hidden lg:flex pt-[45vh] z-50">
+    <div>
+        {{- $currentPage := . }}
+        {{- $page_url := $currentPage.RelPermalink | relLangURL }}
+        <div class="flex flex-col items-center justify-end space-y-4 pl-3 pr-2 py-6 bg-[#EAE9FA] border border-solid border-[#222222] rounded-tr-[10px] rounded-br-[10px] lg:rounded-tr-[16px] lg:rounded-br-[16px] shadow-[-5px_5px_0px_#000000] lg:shadow-[-9px_8px_0px_#000000]">
+        {{- range .Site.Menus.social }}
+        <a class="text-[#222222] hover:no-underline last:hidden" href="{{ .URL | relURL }}" title="{{ .Name }}" target="_blank"
+        rel="noopener">
+        {{ with .Pre }}
+        {{ partial (printf "svg/icon-%s.svg" .) (dict "class" "w-[32px] h-[32px] text-current") }}
+        {{ end }}
+        </a>
+        {{- end }}
+        </div>
+    </div>
+</div>
