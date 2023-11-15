@@ -107,6 +107,7 @@
     <div>
         {{- $currentPage := . }}
         {{- $page_url := $currentPage.RelPermalink | relLangURL }}
+        {{- if not (eq .Section "docs") }}
         <div class="flex flex-col items-center justify-end space-y-4 pl-3 pr-2 py-6 bg-[#EAE9FA] border border-solid border-[#222222] rounded-tr-[10px] rounded-br-[10px] lg:rounded-tr-[16px] lg:rounded-br-[16px] shadow-[-5px_5px_0px_#000000] lg:shadow-[-9px_8px_0px_#000000]">
         {{- range .Site.Menus.social }}
         <a class="text-[#222222] hover:no-underline last:hidden" href="{{ .URL | relURL }}" title="{{ .Name }}" target="_blank"
@@ -117,5 +118,6 @@
         </a>
         {{- end }}
         </div>
+        {{- end }}
     </div>
 </div>
