@@ -25,6 +25,10 @@ toc: true
     - `CAP_SYS_ADMIN` - for joining the target pod's network namespace
 - Missing anything? Feel free to ask us on Discord or hi@metalbear.co
 
+## Are you SOC2/GDPR compliant?
+
+mirrord for Teams is completely on-prem and doesn't process your customer data, so SOC2 and GDPR don't apply to it.
+
 ## How do I configure Role Based Access Control for mirrord for Teams?
 
 mirrord for Teams works on top of Kubernetes' built-in RBAC with the following resources, `mirrordoperators`, `mirrordoperators/certificate`, `targets`, and `targets/port-locks` under the `operator.metalbear.co` apiGroup. The first two resources are required at a cluster level, and the last two can be allowed at a namespace level.
@@ -34,6 +38,7 @@ You can limit a user's ability to use mirrord on specific targets by limiting th
 For your convenience, mirrord for Teams includes a built-in ClusterRole called `mirrord-operator-user`, which controls access to the Operator API. To grant access to the Operator API, you can create a ClusterRoleBinding like this:
 
 ```yaml
+
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 subjects:
@@ -43,7 +48,7 @@ subjects:
 roleRef:
   kind: ClusterRole
   name: mirrord-operator-user
-  apiGroup: rbac.authorization.k8s.io`
+  apiGroup: rbac.authorization.k8s.io
 ```
 
 In addition, the Operator impersonates any user that calls its API, and thus only operates on pods or deployments for which the user has `get` permissions.
