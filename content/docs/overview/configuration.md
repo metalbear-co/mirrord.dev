@@ -2,7 +2,7 @@
 title: "Configuration"
 description: "Config"
 date: 2023-05-17T13:59:39+01:00
-lastmod: 2023-10-25T18:00:39+01:00
+lastmod: 2023-11-26T10:00:39+01:00
 draft: false
 images: []
 menu:
@@ -113,7 +113,10 @@ configuration file containing all fields.
         "ignore_localhost": false,
         "unix_streams": "bear.+"
       },
-      "dns": false
+      "dns": false,
+      "copy_target": {
+        "scale_down": false
+      }
     },
   },
   "operator": true,
@@ -165,6 +168,14 @@ Controls whether or not mirrord sends telemetry data to MetalBear cloud.
 Telemetry sent doesn't contain personal identifiers or any data that
 should be considered sensitive. It is used to improve the product.
 [For more information](https://github.com/metalbear-co/mirrord/blob/main/TELEMETRY.md)
+
+## use_proxy {#root-use_proxy}
+
+When disabled, mirrord will remove `HTTP[S]_PROXY` env variables before
+doing any network requests. This is useful when the system sets a proxy
+but you don't want mirrord to use it.
+This also applies to the mirrord process (as it just removes the env).
+If the remote pod sets this env, the mirrord process will still use it.
 
 ## connect_tcp {#root-connect_tpc}
 
@@ -517,6 +528,7 @@ have support for a shortened version, that you can see [here](#root-shortened).
       },
       "dns": false
     },
+    "copy_target": false
   }
 }
 ```
@@ -625,7 +637,7 @@ See the environment variables [reference](https://mirrord.dev/docs/reference/env
 {
   "feature": {
     "env": {
-      "include": "DATABASE_USER;PUBLIC_ENV",
+      "include": "DATABASE_USER;PUBLIC_ENV;MY_APP_*",
       "exclude": "DATABASE_PASSWORD;SECRET_ENV",
       "override": {
         "DATABASE_CONNECTION": "db://localhost:7777/my-db",
@@ -640,17 +652,21 @@ See the environment variables [reference](https://mirrord.dev/docs/reference/env
 
 Include the remote environment variables in the local process that are **NOT** specified by
 this option.
+Variable names can be matched using `*` and `?` where `?` matches exactly one occurrence of
+any character and `*` matches arbitrary many (including zero) occurrences of any character.
 
 Some of the variables that are excluded by default:
 `PATH`, `HOME`, `HOMEPATH`, `CLASSPATH`, `JAVA_EXE`, `JAVA_HOME`, `PYTHONPATH`.
 
-Value is a list separated by ";".
+Can be passed as a list or as a semicolon-delimited string (e.g. `"VAR;OTHER_VAR"`).
 
 ### feature.env.include {#feature-env-include}
 
 Include only these remote environment variables in the local process.
+Variable names can be matched using `*` and `?` where `?` matches exactly one occurrence of
+any character and `*` matches arbitrary many (including zero) occurrences of any character.
 
-Value is a list separated by ";".
+Can be passed as a list or as a semicolon-delimited string (e.g. `"VAR;OTHER_VAR"`).
 
 Some environment variables are excluded by default (`PATH` for example), including these
 requires specifying them with `include`
@@ -993,6 +1009,11 @@ will go through the remote pod.
 ```
 
 Valid values follow this pattern: `[protocol]://[name|address|subnet/mask]:[port]`.
+
+## feature.copy_target {#feature-copy_target}
+
+Creates a new copy of the target. mirrord will use this copy instead of the original target
+(e.g. intercept network traffic). This feature requires a [mirrord operator](https://mirrord.dev/docs/teams/introduction/).
 
 # internal_proxy {#root-internal_proxy}
 Configuration for the internal proxy mirrord spawns for each local mirrord session
