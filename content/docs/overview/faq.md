@@ -133,7 +133,11 @@ Another reason that mirrord might seem not to work is if your remote pod has mor
 ### Incoming traffic to the remote target doesn't reach my local process
 
 This could happen for several reasons:
-1. The local process is listening on a different port than the remote target. You can either change the local process to listen on the same port as the remote target (don't worry about the port being used locally by other processes), or use the [`port_mapping`  configuration](/docs/overview/configuration/#feature-network-incoming-port_mapping) to map the remote port to a local port.
+1. The local process is listening on a different port than the remote target. You can either change
+ the local process to listen on the same port as the remote target (don't worry about the port
+ being used locally by other processes), or use the [`port_mapping`  configuration
+ ](/docs/overview/configuration/#feature-network-incoming-port_mapping) to map the local port to a
+ remote port.
 2. You're running with `network.incoming.mode` set to `mirror` on a cluster with a service mesh like Istio or Linkerd, which isn't currently supported. In this case, you should use the `--steal` flag instead.
 
 ### My application is trying to read a file locally instead of from the cluster
