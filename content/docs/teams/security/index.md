@@ -56,6 +56,7 @@ In addition, the Operator impersonates any user that calls its API, and thus onl
 Below is the ClusterRole's yaml, which you can modify to suit your needs:
 
 ```yaml
+
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
@@ -84,20 +85,67 @@ rules:
   - proxy
   ```
 
-  ### How do I limit user access to a specific namespace?
-  Create a ClusterRoleBinding between the user and the `mirrord-operator-user` role, but only grant the user access to `get` pods or deployments on the allowed namespace. The Operator will impersonate the user and so only have access to their allowed targets.
+### How do I limit user access to a specific namespace?
 
-  ### How do I limit user access to a specific target?
-  If the user doesn't have `get` access to the targets, then they won't be able to use target them with mirrord. However, if you want to allow `get` access to targets but disallow using mirrord on them, we recommend creating a new role based on the `mirrord-operator-user` role above, and adding a `resourceNames` field to the `targets` resource. This will limit the user to only using the Operator on the specified targets. For example:
-  ```yaml
-  - apiGroups:
-    - operator.metalbear.co
-    resources:
-    - targets
-    resourceNames:
-    - "deployment.my-deployment"
-    - "pod.my-pod"
-    - "rollout.my-argo-rollout"
-    verbs:
-    - proxy
-  ```
+Create a ClusterRoleBinding between the user and the `mirrord-operator-user` role, but only grant the user access to `get` pods or deployments on the allowed namespace. The Operator will impersonate the user and so only have access to their allowed targets.
+```yaml
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: mirrord-operator-user-cr
+rules:
+- apiGroups:
+  - operator.metalbear.co
+  resources:
+  - mirrordoperators
+  verbs:
+  - get
+  - list
+- apiGroups:
+  - operator.metalbear.co
+  resources:
+  - mirrordoperators/certificate
+  verbs:
+  - create
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: mirrord-operator-user
+  namespace: <namespace>
+rules:
+- apiGroups:
+  - operator.metalbear.co
+  resources:
+  - targets
+  - targets/port-locks
+  verbs:
+  - get
+  - list
+  - proxy
+
+```
+
+## I want to explicitly grant mirrord permissions for each namespace
+
+You can split the mirrord role into a cluster-wide one which is required for operator discovery and authentication, and a namespaced one for actual mirrord usage.
+
+### How do I limit user access to a specific target?
+
+If the user doesn't have `get` access to the targets, then they won't be able to use target them with mirrord. However, if you want to allow `get` access to targets but disallow using mirrord on them, we recommend creating a new role based on the `mirrord-operator-user` namespaced role above, and adding a `resourceNames` field to the `targets` resource. This will limit the user to only using the Operator on the specified targets. For example:
+
+```yaml
+- apiGroups:
+  - operator.metalbear.co
+  resources:
+  - targets
+  resourceNames:
+  - "deployment.my-deployment"
+  - "pod.my-pod"
+  - "rollout.my-argo-rollout"
+  verbs:
+  - proxy
+```
