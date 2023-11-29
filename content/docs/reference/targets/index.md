@@ -103,7 +103,15 @@ expose any ports. This means that if your application binds a port and listens o
 on your machine. So if you're using a management program that exposes a web interface, you can have it listen for
 connections on `localhost`, and connect to remote services in the cluster.
 
-In order to run targetless, you need to not specify a target in the configuration file, in case you are using one.
+If you're using a mirrord configuration file and want to run targetless, you can either leave the `target` key out completely or specify it explicitly.
+Note that if you want to skip the target dialog in the IDE plugins, you have to specify it explicitly. You can do it with the following configuration:
+
+```json
+{
+  "target": "targetless"
+}
+```
+
 In your IDE you can pick the `No Target ("targetless")` option in the target selection dialog (or just not make a
 selection).
 Moreover, you should make sure [the environment variable used to specify a target](#using-an-environment-variable)
