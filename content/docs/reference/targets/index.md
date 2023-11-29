@@ -103,8 +103,8 @@ expose any ports. This means that if your application binds a port and listens o
 on your machine. So if you're using a management program that exposes a web interface, you can have it listen for
 connections on `localhost`, and connect to remote services in the cluster.
 
-In order to run targetless, you can either specify explicitly in the configuration file, or just don't set it in it.
-If you want to specify it explicitly (might be useful in Java/Kotlin where the target selection dialog doesn't work):
+In order to run targetless and are using a mirrord configuration file, you can either specify it explicitly or just leave the `target` key out completely.
+If you want to specify it explicitly (which might be useful when running Java/Kotlin projects in IntelliJ IDEs, in which case the target selection dialog doesn't work):
 
 ```json
 {

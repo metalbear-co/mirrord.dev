@@ -23,14 +23,14 @@ mirrord exec /bin/my-tool
 
 ### IDE
 
-If you want to run targetless on IntelliJ or VSCode via mirrord config file, you can add
+If you want to run in targetless mode on IntelliJ or VSCode, you can add
 ```json
 {
   "target": "targetless"
 }
 ```
 
-to your configuration file.
+to your mirrord configuration file.
 
 ## What's next?
 1. If you'd like to intercept traffic rather than mirror it so that your local process is the one answering the remote requests, check out [this guide](/docs/guides/steal/). Note that you can even filter which traffic you intercept!
