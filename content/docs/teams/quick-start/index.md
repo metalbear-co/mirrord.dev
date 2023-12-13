@@ -37,3 +37,25 @@ So the final command should look like
 `mirrord operator setup --accept-tos --license-key <license-key> | kubectl apply -f -`
 
 You should now be able to see the `mirrord-operator` deployment when running `kubectl get deployments -n mirrord`. Also, when you run mirrord, you'll see the `connected to operator` step in its progress reports.
+
+## OpenShift
+
+In order to make the operator work with OpenShift, you need to apply the following scc:
+
+```yaml
+kind: SecurityContextConstraints
+apiVersion: security.openshift.io/v1
+metadata:
+  name: scc-mirrord
+allowHostPID: true
+allowPrivilegedContainer: false
+allowHostDirVolumePlugin: true
+allowedCapabilities: ["SYS_ADMIN", "SYS_PTRACE", "NET_RAW", "NET_ADMIN"]
+runAsUser:
+  type: MustRunAsNonRoot
+seLinuxContext:
+  type: MustRunAs
+users:
+- system:serviceaccount:mirrord:mirrord-operator
+- system:serviceaccount:mirrord:default
+```
