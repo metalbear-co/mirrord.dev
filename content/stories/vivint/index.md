@@ -1,6 +1,6 @@
 ---
 title: "Vivint User Story | Brooke Weaver"
-card_title: "brooke Weaver"
+card_title: "Brooke Weaver"
 description: "Then I tried mirrord and it was flawless. It does everything I liked about Telepresence but better."
 date: 2023-12-15T06:00:00+00:00
 lastmod: 2023-12-15T06:00:00+00:00
