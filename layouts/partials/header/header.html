@@ -78,7 +78,7 @@
                                 {{- end }}
                             </ul>
                             {{- else }}
-                            <a class='menu__item-link block lg:inline-block text-xl lg:text-sm text-current hover:font-semibold uppercase lg:capitalize lg:relative {{ if $active }} active-link {{ end }} {{ if eq $current.Title "Quick Start" }} {{ if eq .Name "Docs" }} none-line {{ end }} {{ end }}'
+                            <a class='menu__item-link block lg:inline-block text-xl lg:text-sm text-current hover:font-semibold lg:relative {{ if $active }} active-link {{ end }} {{ if eq $current.Title "Quick Start" }} {{ if eq .Name "Docs" }} none-line {{ end }} {{ end }}'
                                 href="{{.URL | relLangURL}}">
                                 <span class="text-[#222222]">{{ if eq .Name "Quick Start" }}{{ replace .Name .Name "Get Started" }}{{ else }}{{ .Name | safeHTML }}{{ end }}</span>{{- .Post -}}  
                             </a>
