@@ -9,7 +9,7 @@ main:
   url: /stories/
   weight: 30
 - identifier: blog
-  name: blog
+  name: Blog
   url: "https://metalbear.co/blog"
   weight: 40
 - identifier: FAQ
@@ -24,6 +24,11 @@ main:
   name: Support
   url: "/#get-support"
   weight: 70
+
+- identifier: self-serve
+  name: mirrord for Teams
+  url: "https://app.metalbear.co/"
+  weight: 80
 # - identifier: contact
 #   name: Contact Us
 #   url: "/contact"
