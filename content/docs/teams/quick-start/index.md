@@ -10,7 +10,7 @@ weight: 110
 toc: true
 ---
 
-> mirrord for Teams is currently in closed beta. Go [here](https://metalbear.co/#waitlist-form) to join the waitlist.
+You can register and start using mirrord for Teams [here](https://app.metalbear.co/).
 
 mirrord for Teams adds a new component to the mirrord architecture: the mirrord Operator. The mirrord Operator is a Kubernetes Operator that runs on your cluster and manages mirrord clients running against the cluster. To start using mirrord for Teams on a Kubernetes cluster, all you need to do is install the Operator - once it's installed, all mirrord clients will use it automatically when impersonating targets on the cluster.
 

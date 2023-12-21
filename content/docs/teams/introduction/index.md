@@ -10,7 +10,7 @@ weight: 100
 toc: true
 ---
 
-> mirrord for Teams is currently in closed beta. Go [here](https://metalbear.co/#waitlist-form) to join the waitlist.
+> Ready to start using mirrord for Teams? Register [here](https://app.metalbear.co) to get started.
 
 ## Why mirrord for Teams?
 
