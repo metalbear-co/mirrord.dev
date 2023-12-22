@@ -1,9 +1,4 @@
 <head>
-    
-    {{ if .Site.Params.alert -}}
-        {{ partial "header/alert.html" . }}
-    {{ end -}}
-
     <meta charset="utf-8">
     {{- hugo.Generator }}
     <title>{{ if .Title }}{{ .Title }} | {{ end }}{{ site.Title }}</title>

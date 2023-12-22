@@ -1,5 +1,5 @@
 {{ if .Site.Params.alertDismissable -}}
-  <div id="announcement" data-id="global-alert-{{ md5 .Site.Params.alertText }}" class="fade show text-center text-lg-center custom-alert" role="alert">
+  <div id="announcement" data-id="global-alert-{{ md5 .Site.Params.alertText }}" class="fade show text-center text-lg-center alert" role="alert">
     {{ .Site.Params.alertText | safeHTML }}
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" onclick="dismissAlert()"></button>
   </div>
@@ -9,52 +9,28 @@
       var isAlertDismissed = localStorage.getItem('alertDismissed');
       if (isAlertDismissed) {
         document.getElementById('announcement').style.display = 'none';
-      }            
-
-      var sectionIsDocs = "{{ .Section }}" === "docs";
-      var isDarkMode = window.getComputedStyle(document.body).color === 'rgb(255, 255, 255)'          
-      if (isDarkMode && sectionIsDocs) {        
-        document.getElementById('announcement').classList.remove('custom-alert');
-        document.getElementById('announcement').classList.add('custom-alert-dark');        
-      } else {
-        document.getElementById('announcement').classList.remove('custom-alert-dark');
-        document.getElementById('announcement').classList.add('custom-alert');
-      }
-
-      var themeToggleSlider=document.getElementById("theme-toggle-slider")
-      var themeToggleSliderMobile = document.getElementById("theme-toggle-slider-mobile");
-      
-      if (themeToggleSlider !== null || themeToggleSliderMobile !== null) {                    
-        themeToggleSlider.addEventListener("click", function() {             
-          var isLightMode = window.getComputedStyle(document.body).color === 'rgb(255, 255, 255)'  
-          console.log(isLightMode)     
-        if (!isLightMode && sectionIsDocs) {          
-          document.getElementById('announcement').classList.add('custom-alert-dark');
-          document.getElementById('announcement').classList.remove('custom-alert');
-        } else {      
-          document.getElementById('announcement').classList.remove('custom-alert-dark');
-          document.getElementById('announcement').classList.add('custom-alert');
-        }      
-      }); 
-
-      themeToggleSliderMobile.addEventListener("click", function() {             
-          var isLightMode = window.getComputedStyle(document.body).color === 'rgb(255, 255, 255)'          
-        if (!isLightMode && sectionIsDocs) {          
-          document.getElementById('announcement').classList.add('custom-alert-dark');
-          document.getElementById('announcement').classList.remove('custom-alert');
-        } else {          
-          document.getElementById('announcement').classList.remove('custom-alert-dark');
-          document.getElementById('announcement').classList.add('custom-alert');
-        }      
-      }); 
-      }       
+      }                                 
     });
+
+    // nice hack to hide the alert on scroll: https://www.w3schools.com/howto/howto_js_navbar_hide_scroll.asp
+    var prevScrollpos = window.pageYOffset;
+    window.onscroll = function() {
+      var currentScrollPos = window.pageYOffset;
+      if (prevScrollpos > currentScrollPos) {
+        document.getElementById("announcement").style.top = "0";
+      } else {
+        document.getElementById("announcement").style.top = "-50px";
+      }
+      prevScrollpos = currentScrollPos;
+    }
 
     function dismissAlert() {      
       document.getElementById('announcement').style.display = 'none';
       
       localStorage.setItem('alertDismissed', 'true');
     }
+
+    
   </script>
 
 {{ else -}}
