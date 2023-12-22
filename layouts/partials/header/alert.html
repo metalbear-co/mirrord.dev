@@ -5,22 +5,50 @@
   </div>
 
   <script>
-    document.addEventListener('DOMContentLoaded', function () {      
+    document.addEventListener('DOMContentLoaded', function () {    
       var isAlertDismissed = localStorage.getItem('alertDismissed');
-      console.log(isAlertDismissed);
       if (isAlertDismissed) {
         document.getElementById('announcement').style.display = 'none';
+      }            
+
+      var sectionIsDocs = "{{ .Section }}" === "docs";
+      var isDarkMode = window.getComputedStyle(document.body).color === 'rgb(255, 255, 255)'          
+      if (isDarkMode && sectionIsDocs) {        
+        document.getElementById('announcement').classList.remove('custom-alert');
+        document.getElementById('announcement').classList.add('custom-alert-dark');        
+      } else {
+        document.getElementById('announcement').classList.remove('custom-alert-dark');
+        document.getElementById('announcement').classList.add('custom-alert');
+      }
+
+      var themeToggleSlider=document.getElementById("theme-toggle-slider")
+      var themeToggleSliderMobile = document.getElementById("theme-toggle-slider-mobile");
+
+      var toggleAlerts = function () {
+        var isLightMode = window.getComputedStyle(document.body).color === 'rgb(255, 255, 255)';
+        if (!isLightMode && sectionIsDocs) {          
+          document.getElementById('announcement').classList.add('custom-alert-dark');
+          document.getElementById('announcement').classList.remove('custom-alert');
+        } else {      
+          document.getElementById('announcement').classList.remove('custom-alert-dark');
+          document.getElementById('announcement').classList.add('custom-alert');
+        }
+      };
+      
+      if (themeToggleSlider !== null || themeToggleSliderMobile !== null) {                    
+        themeToggleSlider.addEventListener("click", toggleAlerts); 
+        themeToggleSliderMobile.addEventListener("click", toggleAlerts);        
       }
     });
 
     function dismissAlert() {      
-      document.getElementById('announcement').style.display = 'none';      
+      document.getElementById('announcement').style.display = 'none';  
       localStorage.setItem('alertDismissed', 'true');
     }
   </script>
 
 {{ else -}}
-  <div class="alert alert-primary text-center" role="alert" style="padding: 15px; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); color: #000;">
+  <div class="alert alert-primary text-center {{ if .Site.Params.darkMode }}custom-alert-dark{{ end }}" role="alert" style="padding: 15px; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); color: #000;">
     {{ .Site.Params.alertText | safeHTML }}
   </div>
 {{ end -}}
