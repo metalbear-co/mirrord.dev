@@ -10,7 +10,6 @@
 {{- $alpineClipboard := resources.Get "js/alpine-clipboard.js" }}
 {{- $copy := resources.Get "js/copy.js" }}
 {{- $darkmode := resources.Get "js/darkmode.js" }}
-{{- $alert := resources.Get "js/alert.js" }}
 {{- $indexTemplate := resources.Get "js/search.js" -}}
 {{- $search := $indexTemplate | resources.ExecuteAsTemplate "index.js" . -}}
 {{- $instantPage := resources.Get "js/instant.page.js" -}}
@@ -20,7 +19,6 @@
 {{- $js_min := $js | resources.Minify }}
 
 <script src="{{ $js_min.RelPermalink }}" defer></script>
-<script src="{{ $alert.RelPermalink }}" defer></script>
 {{- if (eq .Section "docs") }}
 <script src="{{ $search.RelPermalink }}" defer></script>
 <script src="{{ $clipboard.RelPermalink }}" defer></script>
