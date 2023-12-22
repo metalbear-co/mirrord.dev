@@ -1,4 +1,14 @@
 <head>
+
+    {{- if and (.Site.Params.alert) (.Site.Params.alertDismissable) -}}
+        {{ $alertInit := resources.Get "js/alert-init.js" | js.Build | minify -}}
+        <script>{{ $alertInit.Content | safeJS }}</script>
+    {{- end -}}
+    
+    {{ if .Site.Params.alert -}}
+        {{ partial "header/alert.html" . }}
+    {{ end -}}
+
     <meta charset="utf-8">
     {{- hugo.Generator }}
     <title>{{ if .Title }}{{ .Title }} | {{ end }}{{ site.Title }}</title>
