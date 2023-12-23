@@ -10,27 +10,12 @@
       if (isAlertDismissed) {
         document.getElementById('announcement').style.display = 'none';
       }                                 
-    });
-
-    // nice hack to hide the alert on scroll: https://www.w3schools.com/howto/howto_js_navbar_hide_scroll.asp
-    var prevScrollpos = window.pageYOffset;
-    window.onscroll = function() {
-      var currentScrollPos = window.pageYOffset;
-      if (prevScrollpos > currentScrollPos) {
-        document.getElementById("announcement").style.top = "0";
-      } else {
-        document.getElementById("announcement").style.top = "-50px";
-      }
-      prevScrollpos = currentScrollPos;
-    }
+    });    
 
     function dismissAlert() {      
-      document.getElementById('announcement').style.display = 'none';
-      
+      document.getElementById('announcement').style.display = 'none';      
       localStorage.setItem('alertDismissed', 'true');
-    }
-
-    
+    }    
   </script>
 
 {{ else -}}
