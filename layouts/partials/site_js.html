@@ -10,12 +10,13 @@
 {{- $alpineClipboard := resources.Get "js/alpine-clipboard.js" }}
 {{- $copy := resources.Get "js/copy.js" }}
 {{- $darkmode := resources.Get "js/darkmode.js" }}
+{{- $alert := resources.Get "js/alert.js" }}
 {{- $indexTemplate := resources.Get "js/search.js" -}}
 {{- $search := $indexTemplate | resources.ExecuteAsTemplate "index.js" . -}}
 {{- $instantPage := resources.Get "js/instant.page.js" -}}
 {{- $instantPage := $instantPage | js.Build -}}
 
-{{- $js := slice $splide $alpineClipboard $flexsearch $typed $persist $alpine $instantPage | resources.Concat "js/main.js" }}
+{{- $js := slice $splide $alert $alpineClipboard $flexsearch $typed $persist $alpine $instantPage | resources.Concat "js/main.js" }}
 {{- $js_min := $js | resources.Minify }}
 
 <script src="{{ $js_min.RelPermalink }}" defer></script>
