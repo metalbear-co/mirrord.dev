@@ -36,4 +36,4 @@ schemaSection: blog
 
 alert: true
 alertDismissable: true
-alertText: "🪞 mirrord 3.0 is out! Read the blog post about it <a class=\"alert-link stretched-link\" href=\"/blog/mirrord-3.0-is-out/\" rel=\"noopener\">here</a>."
+alertText: "🪞 mirrord for Teams is out now! Get started <a class=\"alert-link stretched-link\" href=\"/docs/teams/introduction\" rel=\"noopener\">here</a>."
