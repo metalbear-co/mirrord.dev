@@ -1,6 +1,9 @@
-<head>
+<head>    
     <meta charset="utf-8">
     {{- hugo.Generator }}
+    {{ if and (.Site.Params.alert) (ne .Section "docs") }}
+        {{ partial "header/alert.html" . }}
+    {{ end -}}
     <title>{{ if .Title }}{{ .Title }} | {{ end }}{{ site.Title }}</title>
     <meta name="author" content="{{ site.Params.author }}">
     <meta name="description" content="{{ with .Params.description }} {{.}} {{else}} {{ with site.Params.description }} {{.}} {{end}} {{end}}">
