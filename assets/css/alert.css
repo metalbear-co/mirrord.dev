@@ -1,10 +1,15 @@
 .alert {
-  padding: 15px;
-  border-radius: 8px;
+  padding: 15px;  
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  color: #000;
+  color: #fff;
   position: relative;     
 }
+
+.alert a {
+  color: white;
+  text-decoration: underline;
+}
+
 
 .alert button.btn-close {
   font-size: 1.5rem;
