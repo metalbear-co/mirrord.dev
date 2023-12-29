@@ -33,3 +33,7 @@ schemaTwitter: 'https://twitter.com/metalbearco'
 schemaLinkedIn: 'https://www.linkedin.com/company/metalbearco/'
 schemaGitHub: 'https://github.com/metalbear-co/mirrord'
 schemaSection: blog
+
+alert: true
+alertDismissable: true
+alertText: "🪞 mirrord for Teams is out now! Get started <a class=\"alert-link stretched-link\" href=\"/docs/teams/introduction\" rel=\"noopener\">here</a>."
