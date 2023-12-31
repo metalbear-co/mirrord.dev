@@ -8,7 +8,7 @@ weight: 130
 toc: true
 ---
 
-## General
+## Common Issues
 
 ### `mirrord operator status` fails with `503 Service Unavailable` on GKE
 
