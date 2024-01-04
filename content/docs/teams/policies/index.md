@@ -28,7 +28,7 @@ https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#resour
 in order to limit the targets for which a policy applies.
 
 The target path pattern can contain `?` which will match a single character and `*` arbitrarily many characters.
-For example, `"deployment/*"` will make a policy apply for any run with a deployment target. `"*boats*"` will make a
+For example, `"deploy/*"` will make a policy apply for any run with a deployment target. `"*boats*"` will make a
 policy apply to any target with `boats` in its name, e.g. `pod/boats-2kljw9`,
 `pod/whatever-23oije2/container/boats-container`, etc.
 
@@ -43,7 +43,7 @@ metadata:
   name: block-stealing-from-boats-deployment
   namespace: default
 spec:
-  targetPath: "deployment/boats"
+  targetPath: "deploy/boats"
   block:
     - steal
 ```
