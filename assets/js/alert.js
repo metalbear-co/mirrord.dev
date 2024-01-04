@@ -1,9 +1,15 @@
+function closeAlert() {
+  let announcement = document.getElementById('announcement');
+  if (announcement) {
+    announcement.style.display = 'none';
+  }
+}
 var isAlertDismissed = localStorage.getItem('alertDismissed');
 if (isAlertDismissed) {
-  document.getElementById('announcement').style.display = 'none';
+  closeAlert();
 }
 
 function dismissAlert() {
-  document.getElementById('announcement').style.display = 'none';
+  closeAlert();
   localStorage.setItem('alertDismissed', 'true');
 }
