@@ -56,7 +56,7 @@ metadata:
   name: block-stealing-from-boats-deployment
   namespace: default
 spec:
-  targetPath: "deploy/boats"
+  targetPath: "deploy/boats*"
   block:
     - steal
 ```
