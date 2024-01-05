@@ -27,7 +27,15 @@ You can optionally set a target path pattern and/or a [label selector](
 https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#resources-that-support-set-based-requirements)
 in order to limit the targets for which a policy applies.
 
-The target path of a mirrord run has the form `(deploy|pod)/<NAME>[/container/<CONTAINER_NAME>]`.
+The target path of a mirrord run is either `targetless` or has the form `<TARGET_TYPE>/<NAME>` followed by an optional
+`/container/<CONTAINER_NAME>`, where `<TARGET_TYPE>` is one of `deploy`, `pod` and `rollout`.
+
+Examples for possible target paths:
+- `deploy/boats`
+- `pod/boats-5fffb9767c-w92qh`
+- `pod/boats-5fffb9767c-w92qh/container/appcontainer`
+- `targetless`
+
 By specifying a `targetPath` pattern in the policy, you limit the policy to only apply to runs that have
 a target path that matches the specified pattern.
 The target path pattern can contain `?` which will match a single character and `*` which will match arbitrarily many
@@ -49,9 +57,6 @@ metadata:
   namespace: default
 spec:
   targetPath: "deploy/boats"
-  selector:
-    matchLabels:
-      app: boats
   block:
     - steal
 ```
@@ -62,3 +67,20 @@ the `targetPath` pattern or the label selector needs to be changed to match the 
 
 If a deployment is used as a target, the deployment's labels will be used to match against policies' `selector`, if
 set. If a pod is used as a target, the pod's labels will be used.
+
+Another example of a policy:
+
+```yaml
+apiVersion: policies.mirrord.metalbear.co/v1alpha
+kind: MirrordPolicy
+metadata:
+  name: block-unfiltered-stealing-from-webserver-deployments
+  namespace: books
+spec:
+  targetPath: "deploy/*"
+  selector:
+    matchLabels:
+      component: webserver
+  block:
+    - steal-without-filter
+```
