@@ -44,6 +44,12 @@ For example, `"deploy/*"` will make a policy apply for any run with a deployment
 policy apply to any target with `boats` in its name, e.g. `pod/boats-2kljw9`,
 `pod/whatever-23oije2/container/boats-container`, etc.
 
+> __Note__: when a container is specified for the mirrord run, the target path ends with `/container/<CONTAINER_NAME>`.
+>
+> This means the pattern `deploy/my-deployment` will not match when a container is specified. That pattern can be
+> changed to `deploy/my-deployment*` to also match on runs with a specified container (but will then also match
+> `deploy/my-deployment-1` etc.)
+
 
 Please note that the policy is applied according to the target given to mirrord. It is possible for a policy to apply
 to a deployment target, but not to apply to the deployment's pods when targeted directly. For example, the following
