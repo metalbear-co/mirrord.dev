@@ -13,8 +13,6 @@ weight: 500
 toc: true
 ---
 
-The `copy_target` feature is an advanced mirrord feature, and it also requires [mirrord for Teams](/docs/teams/introduction/).
-
 When you set the [`copy_target`](/docs/overview/configuration/#feature-copy_target) configuration field, instead of
 using the [target](/docs/reference/targets/) of the run directly, mirrord will create a new pod
 using the pod spec of the original target, and use that new pod as a target.
