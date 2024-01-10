@@ -1,11 +1,11 @@
 ---
-title: "Copy Targets"
+title: "Copy Target"
 description: "Making mirrord copy a target and use the copy instead of the original"
 date: 2024-01-10T13:37:00+00:00
 lastmod: 2024-01-10T13:37:00+00:00
 draft: false
 images: []
-linktitle: "Copy Targets"
+linktitle: "Copy Target"
 menu:
 docs:
 teams:
@@ -20,7 +20,7 @@ using the [target](/docs/reference/targets/) of the run directly, mirrord will c
 using the pod spec of the original target, and use that new pod as a target.
 
 This can be useful when you want to run your application with access to the resources and I/O of a target that isn't
-reliable. For example because the target pod keeps crashing, or because it is managed by a
+reliable, for example because the target pod keeps crashing, or because it is managed by a
 [Job](https://kubernetes.io/docs/concepts/workloads/controllers/job/) and might terminate before you are done debugging
 your application with mirrord.
 
@@ -37,10 +37,10 @@ target pod to restart.
 ## Replacing a Whole Deployment Using `scale_down`
 
 When the [`scale_down`](/docs/overview/configuration/#feature-copy_target-scale_down) option is set (only valid
-together with a deployment target), mirrord will
+when the target is a deployment), mirrord will
 [scale](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#scaling-a-deployment) the target
 deployment down to zero, effectively replacing all existing pods of that deployment by the one new copied pod, that
-is then used as an effective target for the mirrord run.
+is then used as the target for the mirrord run.
 
 This can be useful e.g. when a deployment reads from a queue. By scaling it down to zero, the application you run
 with mirrord does not have to compete with the deployment for queue items.
@@ -62,7 +62,7 @@ Active Copy Targets:
 +-------------------------------+-----------+------------------------------+-------------+
 ```
 
-With an astrix marking copy targets that are also scaling down their original target.
+With an asterisk marking copy targets that are also scaling down their original target.
 
 Please note however that you don't necessarily have to check if a target is already being scaled down, as trying to
 scale it down again will not interrupt the ongoing session, it will just result in your new run exiting with an error.
