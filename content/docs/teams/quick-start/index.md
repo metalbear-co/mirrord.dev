@@ -17,6 +17,7 @@ mirrord for Teams adds a new component to the mirrord architecture: the mirrord 
 ## Installing the mirrord Operator
 NOTE: This has to be performed by a user with elevated permissions to the cluster.
 
+### mirrord CLI
 1. Install the [mirrord CLI](/docs/overview/quick-start/#cli-tool).
 2. Run the `mirrord operator setup` command. The base of the command is:
 ​
@@ -37,6 +38,26 @@ So the final command should look like
 `mirrord operator setup --accept-tos --license-key <license-key> | kubectl apply -f -`
 
 You should now be able to see the `mirrord-operator` deployment when running `kubectl get deployments -n mirrord`. Also, when you run mirrord, you'll see the `connected to operator` step in its progress reports.
+
+### Helm
+
+To install the mirrord Operator with Helm, first add the MetalBear Helm repository:
+
+```bash
+helm repo add metalbear https://metalbear-co.github.io/charts
+```
+
+Then download the accompanying `values.yaml`:
+```bash
+curl https://raw.githubusercontent.com/metalbear-co/charts/main/mirrord-operator/values.yaml --output values.yaml
+```
+
+Set \`license.key\` to your key.
+
+Finally, install the chart:
+```bash
+helm install -f values.yaml mirrord-operator metalbear/mirrord-operator 
+```
 
 ## OpenShift
 
