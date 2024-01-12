@@ -5,6 +5,10 @@ date: 2022-05-26T08:48:57+00:00
 lastmod: 2022-05-26T08:48:57+00:00
 draft: false
 images: []
+tags:
+  - open source
+  - teams
+  - enterprise
 linktitle: "Introduction"
 weight: 100
 toc: true

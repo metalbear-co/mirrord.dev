@@ -5,6 +5,10 @@ date: 2024-01-03T13:37:00+00:00
 lastmod: 2024-01-03T13:37:00+00:00
 draft: false
 images: []
+tags:
+  - open source
+  - teams
+  - enterprise
 linktitle: "Policies"
 menu:
 docs:
@@ -12,6 +16,8 @@ teams:
 weight: 500
 toc: true
 ---
+
+# Mirrord Policies
 
 The installation of the mirrord operator defines a [custom resource](
 https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/)

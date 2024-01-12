@@ -8,7 +8,7 @@
 				{{ partial "sidebar/dark-light-mobile.html" . }}
 				
 				<div class="docs__sidebar-search">
-					<div class="flex-none w-4/5 lg:w-2/3">
+					<div class="flex-none w-4/5 lg:w-3/4">
 					{{ partial "sidebar/docs-search.html" . }}
 					</div>
 					<button  @click="docsNav = !docsNav" class="flex-none w-1/5 flex lg:hidden items-center justify-center text-primary-text cursor-pointer border-none outline-none focus:outline-none transition-all duration-300 ease-[ease]">
@@ -22,15 +22,38 @@
 				{{ partial "sidebar/docs-menu.html" . }}
 				</div>
 
-				<div class="toc__mobile lg:hidden">
+				<div class="toc__mobile lg:hidden px-4">
 					{{ partial "sidebar/docs-toc.html" . }}
 				</div>
 			</aside>
-			<div class="lg:col-span-6 lg:col-start-4 lg:pb-[700px]">
+			<div class="lg:col-span-6 lg:col-start-4 lg:pb-[700px] px-4">
 				<article class="docs__article">
-					<header class="mb-6">
+					<header class="mb-4">
 						<h1 class="text-2xl lg:text-4xl text-primary-text font-heading font-bold mb-0">{{ .Title }}</h1>
 					</header>
+
+					<div class="content__tags border-t border-b border-solid border-[#EBEBEB] md:inline-flex items-center py-3 mb-4 lg:mb-8">
+						<div class="font-medium mr-10 md:flex-none md:w-[140px] lg:w-[110px]">
+							<p class="mb-2 lg:mb-0">Available for:</p>
+						</div>
+						<div class="flex w-full justify-between md:space-x-8 lg:space-x-4 xl:space-x-10">
+						{{- if .Params.tags }}
+						{{- range (.GetTerms "tags") }}
+						<a class="text-primary-text hover:text-primary-text text-sm xl:text-base" href="{{ .RelPermalink }}">
+							{{- if eq .LinkTitle "open source" }}
+							{{ partial (printf "svg/icon-%s.svg" "open-source") (dict "class" "inline-block text-current mr-1 xl:mr-2 w-[14px] h-[14px] xl:w-[23px] xl:h-[23px]") }}
+							{{- else if eq .LinkTitle "teams" }}
+							{{ partial (printf "svg/icon-%s.svg" "teams") (dict "class" "inline-block text-current mr-1 xl:mr-2 w-[17px] h-[13px] xl:w-[27px] xl:h-[23px]") }}
+							{{- else }}
+							{{ partial (printf "svg/icon-%s.svg" "enterprise") (dict "class" "inline-block text-current mr-1 xl:mr-2 w-[13px] h-[13px] xl:w-[21px] xl:h-[21px]") }}
+							{{- end }}
+
+						{{ .LinkTitle | humanize }}</a>
+						{{- end }}
+						{{- end }}
+						</div>
+					</div>
+
 					<div class="docs__content transition-all duration-300 ease-[ease]">
 						{{- .Content }}
 					</div>

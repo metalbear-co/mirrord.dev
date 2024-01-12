@@ -1,13 +1,12 @@
-<head>
+<head>    
     <meta charset="utf-8">
     {{- hugo.Generator }}
     {{ if and (.Site.Params.alert) (ne .Section "docs") }}
-    {{ partial "header/alert.html" . }}
+        {{ partial "header/alert.html" . }}
     {{ end -}}
     <title>{{ if .Title }}{{ .Title }} | {{ end }}{{ site.Title }}</title>
     <meta name="author" content="{{ site.Params.author }}">
-    <meta name="description"
-        content="{{ with .Params.description }} {{.}} {{else}} {{ with site.Params.description }} {{.}} {{end}} {{end}}">
+    <meta name="description" content="{{ with .Params.description }} {{.}} {{else}} {{ with site.Params.description }} {{.}} {{end}} {{end}}">
     {{- "<!-- mobile responsive meta -->" | safeHTML}}
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
     <!-- favicon -->
@@ -33,6 +32,5 @@
             document.documentElement.removeAttribute("data-theme")
         }
     </script>
-    <script>window.pipedriveLeadboosterConfig = { base: 'leadbooster-chat.pipedrive.com', companyId: 10863096, playbookUuid: '175f043d-2e0d-49a7-b4b5-348893963bdc', version: 2 }; (function () { var w = window; if (w.LeadBooster) { console.warn('LeadBooster already exists'); } else { w.LeadBooster = { q: [], on: function (n, h) { this.q.push({ t: 'o', n: n, h: h }); }, trigger: function (n) { this.q.push({ t: 't', n: n }); }, }; } })();</script>
-    <script src="https://leadbooster-chat.pipedrive.com/assets/loader.js" async></script>
+
 </head>

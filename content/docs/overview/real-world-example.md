@@ -5,6 +5,10 @@ date: 2021-09-13T10:50:00+01:00
 lastmod: 2021-09-13T10:50:00+01:00
 draft: true
 images: []
+tags:
+  - open source
+  - teams
+  - enterprise
 menu:
   docs:
     parent: "overview"

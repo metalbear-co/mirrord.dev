@@ -4,6 +4,8 @@ description: "How to run mirrord without a remote target"
 date: 2020-11-16T13:59:39+01:00
 lastmod: 2020-11-16T13:59:39+01:00
 draft: false
+tags:
+  - enterprise
 menu:
   docs:
     parent: "guides"

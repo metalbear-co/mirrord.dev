@@ -4,6 +4,9 @@ description: "How to steal traffic using mirrord"
 date: 2020-11-16T13:59:39+01:00
 lastmod: 2020-11-16T13:59:39+01:00
 draft: false
+tags:
+  - teams
+  - enterprise
 menu:
   docs:
     parent: "guides"
