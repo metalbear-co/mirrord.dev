@@ -3,12 +3,12 @@
 	<div x-data="{docsNav: false}" class="docs__container">
 		<div class="docs__wrapper docs">
 			<aside
-				class="docs__sidebar--left lg:col-span-3 lg:sticky lg:left-0 top-full lg:top-[220px] lg:bottom-0 lg:w-full lg:h-screen z-10 transition-all duration-300 ease-[ease]">
+				class="docs__sidebar--left lg:col-span-2 lg:sticky lg:left-0 top-full lg:top-[220px] lg:bottom-0 lg:w-full lg:h-screen z-10 transition-all duration-300 ease-[ease]">
 				
 				{{ partial "sidebar/dark-light-mobile.html" . }}
 				
 				<div class="docs__sidebar-search">
-					<div class="flex-none w-4/5 lg:w-3/4">
+					<div class="flex-none w-4/5 lg:w-full">
 					{{ partial "sidebar/docs-search.html" . }}
 					</div>
 					<button  @click="docsNav = !docsNav" class="flex-none w-1/5 flex lg:hidden items-center justify-center text-primary-text cursor-pointer border-none outline-none focus:outline-none transition-all duration-300 ease-[ease]">
@@ -26,18 +26,17 @@
 					{{ partial "sidebar/docs-toc.html" . }}
 				</div>
 			</aside>
-			<div class="lg:col-span-6 lg:col-start-4 lg:pb-[700px] px-4">
+			<div class="lg:col-span-7 lg:col-start-3 lg:pb-[800px] pl-4 pr-4 xl:pl-20 xl:pr-16">
 				<article class="docs__article">
 					<header class="mb-4">
 						<h1 class="text-2xl lg:text-4xl text-primary-text font-heading font-bold mb-0">{{ .Title }}</h1>
 					</header>
-
+					{{- if .Params.tags }}
 					<div class="content__tags border-t border-b border-solid border-[#EBEBEB] md:inline-flex items-center py-3 mb-4 lg:mb-8">
 						<div class="font-medium mr-10 md:flex-none md:w-[140px] lg:w-[110px]">
 							<p class="mb-2 lg:mb-0">Available for:</p>
 						</div>
 						<div class="flex w-full justify-between md:space-x-8 lg:space-x-4 xl:space-x-10">
-						{{- if .Params.tags }}
 						{{- range (.GetTerms "tags") }}
 						<a class="text-primary-text hover:text-primary-text text-sm xl:text-base" href="{{ .RelPermalink }}">
 							{{- if eq .LinkTitle "open source" }}
@@ -50,9 +49,9 @@
 
 						{{ .LinkTitle | humanize }}</a>
 						{{- end }}
-						{{- end }}
 						</div>
 					</div>
+					{{- end }}
 
 					<div class="docs__content transition-all duration-300 ease-[ease]">
 						{{- .Content }}
@@ -64,7 +63,7 @@
 				{{ partial "main/docs-navigation.html" . }}
 			</div>
 			<aside
-				class="docs__sidebar--right lg:col-span-2 lg:col-start-11 hidden lg:block lg:sticky left-0 top-0 lg:top-[220px] bottom-0 w-full h-screen z-10 transition-all duration-300 ease-[ease]">
+				class="docs__sidebar--right xl:pl-16 lg:col-span-2 lg:col-start-11 hidden lg:block lg:sticky left-0 top-0 lg:top-[220px] bottom-0 w-full h-screen z-10 transition-all duration-300 ease-[ease]">
 
 				<!-- <div class="flex h-6 items-center space-x-3 lg:pl-6 lg:mb-10">
 					<div>

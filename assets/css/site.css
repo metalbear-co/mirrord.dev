@@ -677,26 +677,6 @@ table td {
   }
 }
 
-.aspect-w-1 {
-  position: relative;
-  padding-bottom: calc(var(--tw-aspect-h) / var(--tw-aspect-w) * 100%);
-  --tw-aspect-w: 1;
-}
-
-.aspect-w-1 > * {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-}
-
-.aspect-h-1 {
-  --tw-aspect-h: 1;
-}
-
 .visible {
   visibility: visible;
 }
@@ -747,14 +727,6 @@ table td {
 
 .right-0 {
   right: 0px;
-}
-
-.top-1\/4 {
-  top: 25%;
-}
-
-.left-8 {
-  left: 2rem;
 }
 
 .-top-\[6\%\] {
@@ -834,14 +806,14 @@ table td {
   margin-right: auto;
 }
 
-.my-3 {
-  margin-top: 0.75rem;
-  margin-bottom: 0.75rem;
-}
-
 .mx-2 {
   margin-left: 0.5rem;
   margin-right: 0.5rem;
+}
+
+.my-3 {
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
 }
 
 .mb-8 {
@@ -904,6 +876,18 @@ table td {
   margin-left: auto;
 }
 
+.mb-20 {
+  margin-bottom: 5rem;
+}
+
+.mb-5 {
+  margin-bottom: 1.25rem;
+}
+
+.mt-0 {
+  margin-top: 0px;
+}
+
 .mb-6 {
   margin-bottom: 1.5rem;
 }
@@ -918,10 +902,6 @@ table td {
 
 .ml-2 {
   margin-left: 0.5rem;
-}
-
-.mr-3 {
-  margin-right: 0.75rem;
 }
 
 .mb-32 {
@@ -952,20 +932,12 @@ table td {
   margin-right: 1.5rem;
 }
 
+.mr-3 {
+  margin-right: 0.75rem;
+}
+
 .mr-4 {
   margin-right: 1rem;
-}
-
-.mb-5 {
-  margin-bottom: 1.25rem;
-}
-
-.mt-0 {
-  margin-top: 0px;
-}
-
-.mb-20 {
-  margin-bottom: 5rem;
 }
 
 .block {
@@ -1080,10 +1052,6 @@ table td {
   height: 26px;
 }
 
-.h-96 {
-  height: 24rem;
-}
-
 .h-full {
   height: 100%;
 }
@@ -1128,16 +1096,8 @@ table td {
   height: 2.5rem;
 }
 
-.max-h-\[90vh\] {
-  max-height: 90vh;
-}
-
 .max-h-\[400px\] {
   max-height: 400px;
-}
-
-.max-h-\[500px\] {
-  max-height: 500px;
 }
 
 .min-h-\[132px\] {
@@ -1226,14 +1186,6 @@ table td {
 
 .w-\[54px\] {
   width: 54px;
-}
-
-.w-2\/5 {
-  width: 40%;
-}
-
-.w-96 {
-  width: 24rem;
 }
 
 .w-\[38\%\] {
@@ -1368,16 +1320,6 @@ table td {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
-.translate-x-80 {
-  --tw-translate-x: 20rem;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.-translate-y-64 {
-  --tw-translate-y: -16rem;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
 .-translate-y-\[2px\] {
   --tw-translate-y: -2px;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -1430,12 +1372,6 @@ table td {
 
 .-rotate-90 {
   --tw-rotate: -90deg;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.scale-\[1\.5\] {
-  --tw-scale-x: 1.5;
-  --tw-scale-y: 1.5;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
@@ -1588,10 +1524,6 @@ table td {
 
 .overflow-x-hidden {
   overflow-x: hidden;
-}
-
-.overflow-x-visible {
-  overflow-x: visible;
 }
 
 .whitespace-nowrap {
@@ -1782,11 +1714,6 @@ table td {
   background-color: rgb(68 64 131 / var(--tw-bg-opacity));
 }
 
-.bg-gray-100 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
-}
-
 .bg-\[\#FAFAFD\] {
   --tw-bg-opacity: 1;
   background-color: rgb(250 250 253 / var(--tw-bg-opacity));
@@ -1930,6 +1857,11 @@ table td {
   padding-bottom: 1.25rem;
 }
 
+.px-3 {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+
 .px-8 {
   padding-left: 2rem;
   padding-right: 2rem;
@@ -1943,11 +1875,6 @@ table td {
 .py-4 {
   padding-top: 1rem;
   padding-bottom: 1rem;
-}
-
-.px-3 {
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
 }
 
 .py-8 {
@@ -2038,14 +1965,6 @@ table td {
   padding-left: 0px;
 }
 
-.pt-32 {
-  padding-top: 8rem;
-}
-
-.pb-24 {
-  padding-bottom: 6rem;
-}
-
 .pt-24 {
   padding-top: 6rem;
 }
@@ -2056,6 +1975,10 @@ table td {
 
 .pb-20 {
   padding-bottom: 5rem;
+}
+
+.pt-32 {
+  padding-top: 8rem;
 }
 
 .pt-\[230px\] {
@@ -2291,20 +2214,12 @@ table td {
           text-decoration-line: underline;
 }
 
-.opacity-30 {
-  opacity: 0.3;
-}
-
 .opacity-0 {
   opacity: 0;
 }
 
 .opacity-100 {
   opacity: 1;
-}
-
-.mix-blend-multiply {
-  mix-blend-mode: multiply;
 }
 
 .shadow-\[-7px_6px_0px_\#000000\] {
@@ -2340,11 +2255,6 @@ table td {
 .outline-none {
   outline: 2px solid transparent;
   outline-offset: 2px;
-}
-
-.blur-3xl {
-  --tw-blur: blur(64px);
-  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 
 .filter {
@@ -3086,7 +2996,7 @@ body {
 .docs__container {
   margin-left: auto;
   margin-right: auto;
-  max-width: 1400px;
+  max-width: 1500px;
   padding-top: 1.5rem;
   padding-bottom: 2rem;
 }
@@ -3902,11 +3812,6 @@ body {
   background-color: rgb(32 32 32 / var(--tw-bg-opacity));
 }
 
-.dark .dark\:bg-slate-900 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(15 23 42 / var(--tw-bg-opacity));
-}
-
 .dark .dark\:bg-body-color {
   background-color: var(--body-color);
 }
@@ -4101,6 +4006,10 @@ body {
     bottom: 0px;
   }
 
+  .lg\:top-\[20px\] {
+    top: 20px;
+  }
+
   .lg\:z-30 {
     z-index: 30;
   }
@@ -4113,8 +4022,8 @@ body {
     grid-column: span 3 / span 3;
   }
 
-  .lg\:col-span-6 {
-    grid-column: span 6 / span 6;
+  .lg\:col-span-7 {
+    grid-column: span 7 / span 7;
   }
 
   .lg\:col-span-2 {
@@ -4129,12 +4038,24 @@ body {
     grid-column: span 8 / span 8;
   }
 
+  .lg\:col-span-6 {
+    grid-column: span 6 / span 6;
+  }
+
   .lg\:col-start-4 {
     grid-column-start: 4;
   }
 
+  .lg\:col-start-12 {
+    grid-column-start: 12;
+  }
+
   .lg\:col-start-11 {
     grid-column-start: 11;
+  }
+
+  .lg\:col-start-3 {
+    grid-column-start: 3;
   }
 
   .lg\:m-0 {
@@ -4322,6 +4243,22 @@ body {
     width: 30%;
   }
 
+  .lg\:w-\[\] {
+    width: ;
+  }
+
+  .lg\:w-\[9\] {
+    width: 9;
+  }
+
+  .lg\:w-\[95\] {
+    width: 95;
+  }
+
+  .lg\:w-\[95\%\] {
+    width: 95%;
+  }
+
   .lg\:flex-none {
     flex: none;
   }
@@ -4455,11 +4392,6 @@ body {
     padding-bottom: 1rem;
   }
 
-  .lg\:px-0 {
-    padding-left: 0px;
-    padding-right: 0px;
-  }
-
   .lg\:px-16 {
     padding-left: 4rem;
     padding-right: 4rem;
@@ -4478,6 +4410,11 @@ body {
   .lg\:py-16 {
     padding-top: 4rem;
     padding-bottom: 4rem;
+  }
+
+  .lg\:px-0 {
+    padding-left: 0px;
+    padding-right: 0px;
   }
 
   .lg\:py-0 {
@@ -4561,6 +4498,30 @@ body {
     padding-top: 5rem;
   }
 
+  .lg\:pl-8 {
+    padding-left: 2rem;
+  }
+
+  .lg\:pb-\[500px\] {
+    padding-bottom: 500px;
+  }
+
+  .lg\:pb-\[00px\] {
+    padding-bottom: 00px;
+  }
+
+  .lg\:pb-\[800px\] {
+    padding-bottom: 800px;
+  }
+
+  .lg\:pb-\[1000px\] {
+    padding-bottom: 1000px;
+  }
+
+  .lg\:pb-\[2000px\] {
+    padding-bottom: 2000px;
+  }
+
   .lg\:text-left {
     text-align: left;
   }
@@ -4589,16 +4550,6 @@ body {
     line-height: 1.75rem;
   }
 
-  .lg\:text-6xl {
-    font-size: 3.75rem;
-    line-height: 1;
-  }
-
-  .lg\:text-2xl {
-    font-size: 1.5rem;
-    line-height: 2rem;
-  }
-
   .lg\:text-3xl {
     font-size: 1.875rem;
     line-height: 2.25rem;
@@ -4612,6 +4563,11 @@ body {
   .lg\:text-xs {
     font-size: 0.75rem;
     line-height: 1rem;
+  }
+
+  .lg\:text-6xl {
+    font-size: 3.75rem;
+    line-height: 1;
   }
 
   .lg\:text-5xl {
@@ -4737,19 +4693,43 @@ body {
     margin-left: calc(2.5rem * calc(1 - var(--tw-space-x-reverse)));
   }
 
-  .xl\:px-0 {
-    padding-left: 0px;
-    padding-right: 0px;
-  }
-
   .xl\:px-24 {
     padding-left: 6rem;
     padding-right: 6rem;
   }
 
+  .xl\:px-0 {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
   .xl\:px-6 {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
+  }
+
+  .xl\:pl-8 {
+    padding-left: 2rem;
+  }
+
+  .xl\:pl-10 {
+    padding-left: 2.5rem;
+  }
+
+  .xl\:pl-20 {
+    padding-left: 5rem;
+  }
+
+  .xl\:pl-1 {
+    padding-left: 0.25rem;
+  }
+
+  .xl\:pl-16 {
+    padding-left: 4rem;
+  }
+
+  .xl\:pr-16 {
+    padding-right: 4rem;
   }
 
   .xl\:text-base {

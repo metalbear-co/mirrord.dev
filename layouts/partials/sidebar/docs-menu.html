@@ -1,4 +1,4 @@
-<ul class="docs__menu list-none lg:w-3/4 lg:h-full lg:border-r lg:border-solid lg:border-[#C9C9C9] max-h-[400px] overflow-y-auto overflow-x-visible">
+<ul class="docs__menu list-none lg:h-full lg:border-r lg:border-solid lg:border-[#C9C9C9]">
   {{- $currentPage := . -}}
   {{- $section := $currentPage.Section -}}
   {{- range (where .Site.Sections "Section" "in" $section) }}

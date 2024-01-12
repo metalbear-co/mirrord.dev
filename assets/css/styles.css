@@ -289,7 +289,7 @@ body {
 }
 
 .docs__container {
-    @apply container max-w-[1400px] mx-auto pt-6 pb-8;
+    @apply container max-w-[1500px] mx-auto pt-6 pb-8;
 }
 
 .docs__wrapper {
