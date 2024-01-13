@@ -53,6 +53,6 @@
         "typed.js": "^2.0.12"
     },
     "otherDependencies": {
-        "hugo": "0.109.0"
+        "hugo": "0.121.2"
     }
 }

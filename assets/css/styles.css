@@ -183,6 +183,11 @@ body {
     @apply text-slate-100 bg-slate-800 overflow-x-auto py-4 px-4 mb-6;
 }
 
+.docs__content {
+    @apply overflow-x-hidden;
+}
+
+
 .docs__content > pre > code {
     @apply text-slate-100 bg-slate-800 dark:bg-slate-800;
 }
@@ -234,6 +239,10 @@ body {
 .docs__toc .docs-nav__toc ul,
 .docs__toc .docs-nav__toc ul > li > ul {
     @apply list-none pl-0 mb-0;
+}
+
+.docs__toc .docs-nav__toc .subheading {
+    @apply pl-3;
 }
 
 .docs__toc #TableOfContents ul > li,
@@ -305,7 +314,7 @@ body {
 }
 
 .docs__sidebar-search {
-    @apply flex items-center justify-between mb-6 lg:mb-0 px-4;
+    @apply flex items-center justify-between mb-6 lg:mb-0 pl-4 pr-4 lg:pr-0 xl:pr-4;
 }
 
 .docs__sidebar-wrapper {
