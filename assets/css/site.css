@@ -4743,6 +4743,10 @@ body {
     padding-left: 20%;
   }
 
+  .xl\:pr-0 {
+    padding-right: 0px;
+  }
+
   .xl\:text-base {
     font-size: 1rem;
     line-height: 1.5rem;
@@ -4758,11 +4762,39 @@ body {
   .\32xl\:pr-0 {
     padding-right: 0px;
   }
+
+  .\32xl\:pr-\[\] {
+    padding-right: ;
+  }
+
+  .\32xl\:pr-\[10\%\] {
+    padding-right: 10%;
+  }
+
+  .\32xl\:pr-\[4\%\] {
+    padding-right: 4%;
+  }
+
+  .\32xl\:pr-\[2\%\] {
+    padding-right: 2%;
+  }
 }
 
 @media (min-width: 1800px) {
   .\33xl\:pl-\[25\%\] {
     padding-left: 25%;
+  }
+
+  .\33xl\:pr-\[4\%\] {
+    padding-right: 4%;
+  }
+
+  .\33xl\:pr-\[5\%\] {
+    padding-right: 5%;
+  }
+
+  .\33xl\:pr-\[10\%\] {
+    padding-right: 10%;
   }
 }
 
@@ -4770,10 +4802,26 @@ body {
   .\34xl\:pl-\[30\%\] {
     padding-left: 30%;
   }
+
+  .\34xl\:pr-\[10\%\] {
+    padding-right: 10%;
+  }
+
+  .\34xl\:pr-\[15\%\] {
+    padding-right: 15%;
+  }
 }
 
 @media (min-width: 2300px) {
   .\35xl\:pl-\[35\%\] {
     padding-left: 35%;
+  }
+
+  .\35xl\:pr-\[15\%\] {
+    padding-right: 15%;
+  }
+
+  .\35xl\:pr-\[20\%\] {
+    padding-right: 20%;
   }
 }
