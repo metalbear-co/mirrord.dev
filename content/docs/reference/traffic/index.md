@@ -5,10 +5,6 @@ date: 2022-08-08T08:48:45+00:00
 lastmod: 2022-08-08T08:48:45+00:00
 draft: false
 images: []
-tags:
-  - open source
-  - teams
-  - enterprise
 menu:
   docs:
     parent: "reference"

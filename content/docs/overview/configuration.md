@@ -5,9 +5,6 @@ date: 2023-05-17T13:59:39+01:00
 lastmod: 2023-11-26T10:00:39+01:00
 draft: false
 images: []
-tags:
-  - teams
-  - enterprise
 menu:
   docs:
     parent: "overview"

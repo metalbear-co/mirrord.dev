@@ -4,9 +4,6 @@ description: "How to pause the remote target when running mirrord"
 date: 2020-11-16T13:59:39+01:00
 lastmod: 2020-11-16T13:59:39+01:00
 draft: false
-tags:
-  - open source
-  - enterprise
 menu:
   docs:
     parent: "guides"

@@ -5,10 +5,6 @@ date: 2022-07-10T08:48:57+00:00
 lastmod: 2022-07-10T08:48:57+00:00
 draft: false
 images: []
-tags:
-  - open source
-  - teams
-  - enterprise
 linktitle: "Security"
 menu:
   docs:

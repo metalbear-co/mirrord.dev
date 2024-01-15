@@ -3,10 +3,6 @@ title: "FAQ"
 description: "FAQ for mirrord for Teams"
 draft: false
 images: []
-tags:
-  - open source
-  - teams
-  - enterprise
 linktitle: "FAQ"
 weight: 130
 toc: true
