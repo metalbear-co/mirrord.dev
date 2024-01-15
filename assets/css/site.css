@@ -4716,16 +4716,6 @@ body {
     margin-left: calc(2.5rem * calc(1 - var(--tw-space-x-reverse)));
   }
 
-  .xl\:bg-red-200 {
-    --tw-bg-opacity: 1;
-    background-color: rgb(254 202 202 / var(--tw-bg-opacity));
-  }
-
-  .xl\:bg-red-400 {
-    --tw-bg-opacity: 1;
-    background-color: rgb(248 113 113 / var(--tw-bg-opacity));
-  }
-
   .xl\:px-24 {
     padding-left: 6rem;
     padding-right: 6rem;
@@ -4745,24 +4735,12 @@ body {
     padding-left: 5rem;
   }
 
-  .xl\:pr-16 {
-    padding-right: 4rem;
-  }
-
-  .xl\:pl-\[\] {
-    padding-left: ;
-  }
-
-  .xl\:pl-\[20\] {
-    padding-left: 20;
+  .xl\:pr-12 {
+    padding-right: 3rem;
   }
 
   .xl\:pl-\[20\%\] {
     padding-left: 20%;
-  }
-
-  .xl\:pr-12 {
-    padding-right: 3rem;
   }
 
   .xl\:text-base {
@@ -4783,50 +4761,18 @@ body {
 }
 
 @media (min-width: 1800px) {
-  .\33xl\:pl-\[20\%\] {
-    padding-left: 20%;
-  }
-
-  .\33xl\:pl-\[22\%\] {
-    padding-left: 22%;
-  }
-
   .\33xl\:pl-\[25\%\] {
     padding-left: 25%;
   }
 }
 
 @media (min-width: 2000px) {
-  .\34xl\:pl-\[22\%\] {
-    padding-left: 22%;
-  }
-
-  .\34xl\:pl-\[25\%\] {
-    padding-left: 25%;
-  }
-
-  .\34xl\:pl-\[2\%\] {
-    padding-left: 2%;
-  }
-
-  .\34xl\:pl-\[27\%\] {
-    padding-left: 27%;
-  }
-
   .\34xl\:pl-\[30\%\] {
     padding-left: 30%;
   }
 }
 
 @media (min-width: 2300px) {
-  .\35xl\:pl-\[30\%\] {
-    padding-left: 30%;
-  }
-
-  .\35xl\:pl-\[3\%\] {
-    padding-left: 3%;
-  }
-
   .\35xl\:pl-\[35\%\] {
     padding-left: 35%;
   }

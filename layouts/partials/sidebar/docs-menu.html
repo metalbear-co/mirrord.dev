@@ -1,6 +1,6 @@
-<ul x-data="{selected: 0}" class="docs__menu list-none lg:h-full lg:border-r lg:border-solid lg:border-[#C9C9C9]">
-  {{- $currentPage := . -}}
-  {{- $section := $currentPage.Section -}}
+{{- $currentPage := . -}}
+{{- $section := $currentPage.Section -}}
+<ul x-data="{selected: $persist(document.querySelector('.submenu-active').getAttribute('data-id'))}" class="docs__menu list-none lg:h-full lg:border-r lg:border-solid lg:border-[#C9C9C9]">
   {{- range (where .Site.Sections "Section" "in" $section) }}
     {{- range $index, $el := .Sections.ByWeight.Reverse }}
       {{- $active := in $currentPage.RelPermalink .RelPermalink }}
@@ -33,7 +33,7 @@
               </li>
             {{ else }}
               {{ $active_link := in $currentPage.RelPermalink .RelPermalink }}
-              <li class="docs__submenu-item relative">
+              <li data-id="{{ $index }}" class="docs__submenu-item relative {{ if $active_link }}submenu-active {{ end }}">
                 <div class="flex justify-between items-center pr-6 lg:pr-3 before:absolute before:content-[''] before:right-0 before:top-0 before:w-[300%] before:h-full before:z-0 {{ if $active_link }}before:bg-active-docs-menu{{ end }}">
                   <a class="docs__submenu-link relative z-10 block text-sm font-medium hover:font-bold transition-all duration-200 ease-[ease] {{ if $active_link }}docs__submenu-link-active {{ else }}text-primary-text{{ end }}" href="{{ .Permalink }}">{{ .LinkTitle }}</a>
                   <span class="docs__taxonomy-tags relative z-10">
