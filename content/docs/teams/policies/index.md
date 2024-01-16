@@ -13,7 +13,7 @@ weight: 500
 toc: true
 ---
 
-# Mirrord Policies
+## Mirrord Policies
 
 The installation of the mirrord operator defines a [custom resource](
 https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/)

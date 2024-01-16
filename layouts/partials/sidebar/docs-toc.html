@@ -5,11 +5,11 @@
     {{- range .Fragments.Headings }}
     <ul>
       {{- range $index, $h2 := .Headings }}
-      <li><a @click="activeLink = '{{ .ID }}'" href="#{{ anchorize .ID }}" :class="{ 'toc-active': activeLink === '{{ .ID }}' }">{{ .Title | humanize }}</a></li>
+      <li><a @click="activeLink = '{{ .ID }}'" href="#{{ anchorize .ID }}" :class="{ 'toc-active': activeLink === '{{ .ID }}' }">{{ .Title | safeHTML }}</a></li>
       {{- if .Headings }}
       <ul class="subheading">
         {{- range $index2, $h3 := .Headings }}
-        <li><a @click="activeLink = '{{ .ID }}'" href="#{{ anchorize .ID }}" :class="{ 'toc-active': activeLink === '{{ .ID }}' }">{{ .Title | humanize }}</a></li>
+        <li><a @click="activeLink = '{{ .ID }}'" href="#{{ anchorize .ID }}" :class="{ 'toc-active': activeLink === '{{ .ID }}' }">{{ .Title | safeHTML }}</a></li>
         {{- end }}
       </ul>
       {{- end }}

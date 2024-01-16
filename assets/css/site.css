@@ -998,10 +998,6 @@ table td {
   height: 13px;
 }
 
-.h-screen {
-  height: 100vh;
-}
-
 .h-\[46px\] {
   height: 46px;
 }
@@ -1072,6 +1068,10 @@ table td {
 
 .h-\[20px\] {
   height: 20px;
+}
+
+.h-screen {
+  height: 100vh;
 }
 
 .h-\[22px\] {
@@ -2713,6 +2713,7 @@ body {
 }
 
 .docs__content h4 {
+  margin-bottom: 1rem;
   font-size: 1.125rem;
   line-height: 1.75rem;
 }
@@ -2727,14 +2728,17 @@ body {
 }
 
 .docs__content>p ~ h2[id]::before {
-  margin-top: -10rem;
-  margin-bottom: 1.5rem;
-  display: block;
-  height: 10rem;
   border-bottom-width: 1px;
   border-style: dashed;
   --tw-border-opacity: 1;
   border-color: rgb(155 155 155 / var(--tw-border-opacity));
+}
+
+.docs__content>h2[id]::before {
+  margin-top: -10rem;
+  margin-bottom: 1.5rem;
+  display: block;
+  height: 10rem;
   padding-bottom: 1rem;
   --tw-content: '';
   content: var(--tw-content);
@@ -2814,10 +2818,6 @@ body {
   color: rgb(241 245 249 / var(--tw-text-opacity));
 }
 
-.docs__content {
-  overflow-x: hidden;
-}
-
 .docs__content > pre > code {
   --tw-bg-opacity: 1;
   background-color: rgb(30 41 59 / var(--tw-bg-opacity));
@@ -2828,6 +2828,10 @@ body {
 .dark .docs__content > pre > code {
   --tw-bg-opacity: 1;
   background-color: rgb(30 41 59 / var(--tw-bg-opacity));
+}
+
+.docs__main {
+  overflow-x: hidden;
 }
 
 .docs__menu {
@@ -2916,9 +2920,9 @@ body {
   padding-left: 0.75rem;
 }
 
-.docs__toc #TableOfContents ul > li,
-.docs__toc #TableOfContents ul > li > ul > li,
-.docs__toc .docs-nav__toc ul > li,
+.docs__toc #TableOfContents ul > li, 
+.docs__toc #TableOfContents ul > li > ul > li, 
+.docs__toc .docs-nav__toc ul > li, 
 .docs__toc .docs-nav__toc ul > li > ul > li {
   margin-bottom: 0px;
 }
@@ -4731,16 +4735,12 @@ body {
     padding-left: 5rem;
   }
 
-  .xl\:pr-12 {
-    padding-right: 3rem;
+  .xl\:pr-0 {
+    padding-right: 0px;
   }
 
   .xl\:pl-\[20\%\] {
     padding-left: 20%;
-  }
-
-  .xl\:pr-0 {
-    padding-right: 0px;
   }
 
   .xl\:text-base {
@@ -4755,69 +4755,37 @@ body {
 }
 
 @media (min-width: 1536px) {
-  .\32xl\:pr-0 {
-    padding-right: 0px;
-  }
-
-  .\32xl\:pr-\[\] {
-    padding-right: ;
-  }
-
-  .\32xl\:pr-\[10\%\] {
-    padding-right: 10%;
-  }
-
   .\32xl\:pr-\[4\%\] {
     padding-right: 4%;
-  }
-
-  .\32xl\:pr-\[2\%\] {
-    padding-right: 2%;
   }
 }
 
 @media (min-width: 1800px) {
-  .\33xl\:pl-\[25\%\] {
-    padding-left: 25%;
-  }
-
-  .\33xl\:pr-\[4\%\] {
-    padding-right: 4%;
-  }
-
-  .\33xl\:pr-\[5\%\] {
-    padding-right: 5%;
-  }
-
   .\33xl\:pr-\[10\%\] {
     padding-right: 10%;
+  }
+
+  .\33xl\:pl-\[25\%\] {
+    padding-left: 25%;
   }
 }
 
 @media (min-width: 2000px) {
-  .\34xl\:pl-\[30\%\] {
-    padding-left: 30%;
-  }
-
-  .\34xl\:pr-\[10\%\] {
-    padding-right: 10%;
-  }
-
   .\34xl\:pr-\[15\%\] {
     padding-right: 15%;
+  }
+
+  .\34xl\:pl-\[30\%\] {
+    padding-left: 30%;
   }
 }
 
 @media (min-width: 2300px) {
-  .\35xl\:pl-\[35\%\] {
-    padding-left: 35%;
-  }
-
-  .\35xl\:pr-\[15\%\] {
-    padding-right: 15%;
-  }
-
   .\35xl\:pr-\[20\%\] {
     padding-right: 20%;
+  }
+
+  .\35xl\:pl-\[35\%\] {
+    padding-left: 35%;
   }
 }

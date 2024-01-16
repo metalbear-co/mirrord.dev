@@ -130,7 +130,7 @@ body {
 }
 
 .docs__content h4 {
-    @apply text-lg;
+    @apply text-lg mb-4;
 }
 
 .docs__content h1:target,
@@ -143,7 +143,11 @@ body {
 }
 
 .docs__content>p ~ h2[id]::before {
-    @apply block content-[''] h-40 -mt-[10rem] mb-6 border-b border-dashed border-[#9B9B9B] pb-4;
+    @apply border-b border-dashed border-[#9B9B9B];
+}
+
+.docs__content>h2[id]::before {
+    @apply block content-[''] h-40 -mt-[10rem] mb-6 pb-4;
 }
 
 .docs__content>h3[id]::before, 
@@ -179,13 +183,12 @@ body {
     @apply text-slate-100 bg-slate-800 overflow-x-auto py-4 px-4 mb-6;
 }
 
-.docs__content {
-    @apply overflow-x-hidden;
-}
-
-
 .docs__content > pre > code {
     @apply text-slate-100 bg-slate-800 dark:bg-slate-800;
+}
+
+.docs__main {
+    @apply overflow-x-hidden;
 }
 
 .docs__menu {
