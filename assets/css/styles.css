@@ -101,10 +101,6 @@ body {
 
 /* hero section */
 
-.typed-cursor {
-    @apply text-primary;
-}
-
 .single__page {
     @apply bg-[#FBFBFD] dark:bg-[#202020] transition-all duration-300 ease-[ease] lg:pt-[186px];
 }

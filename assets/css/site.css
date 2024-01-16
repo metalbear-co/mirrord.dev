@@ -2655,10 +2655,6 @@ body {
 
 /* hero section */
 
-.typed-cursor {
-  color: var(--primary);
-}
-
 .single__page {
   --tw-bg-opacity: 1;
   background-color: rgb(251 251 253 / var(--tw-bg-opacity));
@@ -2920,9 +2916,9 @@ body {
   padding-left: 0.75rem;
 }
 
-.docs__toc #TableOfContents ul > li, 
-.docs__toc #TableOfContents ul > li > ul > li, 
-.docs__toc .docs-nav__toc ul > li, 
+.docs__toc #TableOfContents ul > li,
+.docs__toc #TableOfContents ul > li > ul > li,
+.docs__toc .docs-nav__toc ul > li,
 .docs__toc .docs-nav__toc ul > li > ul > li {
   margin-bottom: 0px;
 }
