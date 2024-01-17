@@ -25,7 +25,7 @@ provide please let us know.
 To help you get started, here are examples of a basic configuration file, and a complete
 configuration file containing all fields.
 
-### Basic `config.json` {#root-basic}
+## Basic `config.json` {#root-basic}
 
 ```json
 {
@@ -38,7 +38,7 @@ configuration file containing all fields.
 }
 ```
 
-### Basic `config.json` with templating {#root-basic-templating}
+## Basic `config.json` with templating {#root-basic-templating}
 
 ```json
 {
@@ -51,7 +51,7 @@ configuration file containing all fields.
 }
 ```
 
-### Complete `config.json` {#root-complete}
+## Complete `config.json` {#root-complete}
 
  Don't use this example as a starting point, it's just here to show you all the available
  options.

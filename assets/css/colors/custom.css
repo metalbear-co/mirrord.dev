@@ -9,6 +9,7 @@
   --font-heading: {{ .Site.Data.theme.fonts.font_heading | default "Poppins" }}, 'sans-serif';
   --font-body: {{ .Site.Data.theme.fonts.font_body | default "Poppins" }}, 'sans-serif';
   --font-code: 'IBM Plex Mono', monospace;
+  --active-docs-menu: #EBEBEB;
 }
 
 [data-theme="dark"] {
@@ -16,4 +17,5 @@
   --body-color: #202020;
   --body-hover-color: #ffffff33;
   --border-color: #C9C9C9;
+  --active-docs-menu: rgba(255,_255,_255,_0.2);
 }

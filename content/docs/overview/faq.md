@@ -15,7 +15,7 @@ shallowToc: true
 
 ## General
 
-### What does mirrord actually do?
+#### What does mirrord actually do?
 
 First and most important, mirrord *doesn't just mirror traffic*. It does that, but also a lot more.
 
@@ -32,33 +32,33 @@ By proxying all of your local process' input and output points in this way, mirr
 2. Without going through lengthy CI and deployment processes
 3. Without deploying untested code to the cloud environment - the stable version of the code is still running in the cluster and handling requests - letting multiple users test on the same cluster without queueing to use it or breaking the cluster for everyone else.
 
-### Is mirrord free?
+#### Is mirrord free?
 
 mirrord is free and open source (MIT License).
 Our paid offering, mirrord for Teams, includes a Kubernetes operator that acts as a control plane for mirrord.
 You can read more about it [here]({{< ref "/docs/teams/introduction" >}} "mirrord for Teams").
 
-### Can I intercept traffic instead of duplicating it?
+#### Can I intercept traffic instead of duplicating it?
 
 Yes, you can use the `--steal` flag to intercept traffic instead of duplicating it.
 
-### Does mirrord install anything on the cluster?
+#### Does mirrord install anything on the cluster?
 
 No, mirrord doesn't install anything on the cluster, nor does it have any persistent state. It does spawn a short-living pod/container to run the proxy, which is automatically removed when mirrord exits. mirrord works using the Kubernetes API, and so the only prerequisite to start using mirrord is to have kubectl configured for your cluster.
 
 If you have any restrictions for pulling external images inside your cluster, you have to allow pulling of ghcr.io/metalbear-co/mirrord image.
 
-### How does mirrord protect against disrupting my shared environment with my local code?
+#### How does mirrord protect against disrupting my shared environment with my local code?
 
 * By letting you mirror traffic rather than intercept it, the stable version of the code can still run in the cluster and handle requests.
 * By letting you control which functionality runs locally and which runs in the cloud, you can configure mirrord in the way that's safest for your architecture. For example, you can configure mirrord to read files and receive incoming traffic from the cloud, but write files and send outgoing traffic locally.
 Our main goal in future versions of mirrord is to reduce the risk of disruption of the shared environment when using mirrord. This will be achieved by providing more granular configuration options (for example, filtering traffic by hostname or protocol), and advanced functionality like copy-on-write for databases.
 
-### Can I use mirrord to run a local container, rather than a local process, in the context of the remote Kubernetes cluster?
+#### Can I use mirrord to run a local container, rather than a local process, in the context of the remote Kubernetes cluster?
 
 The only way to do this at the moment is to install the mirrord CLI within the container and change its entrypoint to run the original process using mirrord. Support for running containers directly with mirrord will be added in the future - please follow [this issue](https://github.com/metalbear-co/mirrord/issues/1658) for updates.
 
-### What if I can't create containers with the capabilities mirrord requires in my cluster?
+#### What if I can't create containers with the capabilities mirrord requires in my cluster?
 
 mirrord works by creating an agent on a privileged pod in the remote cluster that accesses another pod's namespaces (read more about it [here](https://metalbear.co/blog/getting-started-with-ephemeral-containers/)).
 If you can't give your end users permissions to create pods with the capabilities mirrord needs, we suggest trying out [mirrord for Teams]({{< ref "/docs/teams/introduction" >}} "mirrord for Teams"). It adds a Kubernetes operator that acts as a control plane for mirrord clients, and lets them work with mirrord without creating pods themselves.
@@ -66,7 +66,7 @@ If mirrord for Teams doesn't work for you either, [let us know](hello@metalbear.
 
 ## Limitations
 
-### What frameworks/languages does mirrord support?
+#### What frameworks/languages does mirrord support?
 
 mirrord works by [hooking libc](https://metalbear.co/blog/mirrord-internals-hooking-libc-functions-in-rust-and-fixing-bugs/), so it should work with any language/framework that uses libc (vast majority).
 
@@ -74,11 +74,11 @@ This includes: Rust, Node, Python, Java, Kotlin, Ruby, and others (most language
 
 mirrord also supports for [Go](https://metalbear.co/blog/hooking-go-from-rust-hitchhikers-guide-to-the-go-laxy/), which doesn't use libc
 
-### Does mirrord support clusters with a service mesh like Istio or Linkerd?
+#### Does mirrord support clusters with a service mesh like Istio or Linkerd?
 
 Yes. However, traffic mirroring isn't currently supported - you can use the `--steal` flag to steal traffic instead.
 
-### Does mirrord support OpenShift?
+#### Does mirrord support OpenShift?
 
 Yes, mirrord works with OpenShift. However, OpenShift usually ships with a default security policy that doesn't let mirrord create pods.
 To fix this, you would need to tweak your `scc` settings - more information [here](https://docs.openshift.com/container-platform/3.11/admin_guide/manage_scc.html).
@@ -86,14 +86,14 @@ If you'd rather keep the default security policies, we recommend trying out [mir
 
 ## Comparisons
 
-### Why not just use a remote debugger?
+#### Why not just use a remote debugger?
 
 When you use a remote debugger, you still have to deploy new code to the cluster. When you plug local code into the cloud with mirrord, you don't have to wait for cloud deployment. Using mirrord is also less disruptive to the cluster, since the stable version of the code is still running and handling requests.
 
-### Why not just run a copy of the cluster on my machine with e.g. minikube?
+#### Why not just run a copy of the cluster on my machine with e.g. minikube?
 
 Our assumption is that some environments are too complex to run wholly on your local machine (or their components are just not virtualizable). If that's the case with your environment, you can only run the microservice you're currently working on locally, but connect it to your cloud environment with mirrord. Note that mirrord can also be used to connect your non-containerized process to your local Kubernetes cluster.
-### How is mirrord different from Telepresence?
+#### How is mirrord different from Telepresence?
 
 mirrord can be a great alternative to Telepresence. The main differences are:
 * mirrord works on the process level, meaning it doesn't require you to run a "daemon" locally and it doesn't change your local machine settings. For example, if you run another process, it *won't* be affected by mirrord.
@@ -108,7 +108,7 @@ More details can be found in this [GitHub discussion.](https://github.com/metalb
 
 ## Common Issues
 
-### I've run my program with mirrord, but it seems to have no effect
+#### I've run my program with mirrord, but it seems to have no effect
 
 There are currently two known cases where mirrord cannot load into the application's process:
 1. Statically linked binaries. Since mirrord uses the dynamic linker to load into the application's process,
@@ -130,7 +130,7 @@ There are currently two known cases where mirrord cannot load into the applicati
 
 Another reason that mirrord might seem not to work is if your remote pod has more than one container. mirrord works at the level of the container, not the whole pod. If your pod runs multiple containers, you need to make sure mirrord targets the correct one by by specifying it explicitly in the [target configuration](http://localhost:1313/docs/overview/configuration/#root-target). Note that we filter out the proxy containers added by popular service meshes automatically.
 
-### Incoming traffic to the remote target doesn't reach my local process
+#### Incoming traffic to the remote target doesn't reach my local process
 
 This could happen for several reasons:
 1. The local process is listening on a different port than the remote target. You can either change
@@ -140,7 +140,7 @@ This could happen for several reasons:
  remote port.
 2. You're running with `network.incoming.mode` set to `mirror` on a cluster with a service mesh like Istio or Linkerd, which isn't currently supported. In this case, you should use the `--steal` flag instead.
 
-### My application is trying to read a file locally instead of from the cluster
+#### My application is trying to read a file locally instead of from the cluster
 
 mirrord has a list of path patterns that are read locally by default regardless of the configured fs mode. You can
 override this behavior in the configuration.
@@ -164,13 +164,13 @@ In order to override that settings for a path or a pattern, add it to the approp
 3. `feature.fs.local` if you want read and write operations to that path to happen locally.
 4. `feature.fs.not_found` if you want the application to "think" that file does not exist.
 
-### My local process fails to resolve the domain name of a Kubernetes service in the same cluster
+#### My local process fails to resolve the domain name of a Kubernetes service in the same cluster
 
 If you've set `feature.fs.mode` to `local`, try changing it to `localwithoverrides`.
 
 When the `local` mode is set, all files will be opened locally. This might prevent your process from resolving cluster-internal domain names correctly, because it can no longer read Kubelet-generated configuration files like `/etc/resolv.conf`. With `localwithoverrides`, such files are read from the remote pod instead.
 
-### Old mirrord agent pods are not getting deleted after the mirrord run is completed
+#### Old mirrord agent pods are not getting deleted after the mirrord run is completed
 
 If an agent pod's status is `Running`, it means mirrord is probably still running locally as well. Once you
 terminate the local process, the agent pod's status should change to `Completed`.
@@ -187,7 +187,7 @@ As a temporary solution for cleaning up completed agent pods manually, you can r
 kubectl delete jobs --selector=app=mirrord --field-selector=status.successful=1
 ```
 
-### My local process gets permission (EACCESS) error on file access
+#### My local process gets permission (EACCESS) error on file access
 
 If your cluster is running on Bottlerocket or has SELinux enabled, please try enabling the `privileged` flag
 in the agent configuration:

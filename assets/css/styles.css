@@ -130,7 +130,7 @@ body {
 }
 
 .docs__content h4 {
-    @apply text-lg;
+    @apply text-lg mb-4;
 }
 
 .docs__content h1:target,
@@ -142,8 +142,12 @@ body {
     @apply text-primary;
 }
 
+.docs__content>p ~ h2[id]::before {
+    @apply border-b border-dashed border-[#9B9B9B];
+}
+
 .docs__content>h2[id]::before {
-    @apply block content-[''] h-40 -mt-[10rem] mb-6 border-b border-dashed border-[#9B9B9B] pb-4;
+    @apply block content-[''] h-40 -mt-[10rem] mb-6 pb-4;
 }
 
 .docs__content>h3[id]::before, 
@@ -183,8 +187,12 @@ body {
     @apply text-slate-100 bg-slate-800 dark:bg-slate-800;
 }
 
+.docs__main {
+    @apply overflow-x-hidden;
+}
+
 .docs__menu {
-    @apply p-0 ml-6 lg:m-0;
+    @apply p-0 ml-0 lg:m-0;
 }
 
 .docs__menu-item {
@@ -230,6 +238,10 @@ body {
 .docs__toc .docs-nav__toc ul,
 .docs__toc .docs-nav__toc ul > li > ul {
     @apply list-none pl-0 mb-0;
+}
+
+.docs__toc .docs-nav__toc .subheading {
+    @apply pl-3;
 }
 
 .docs__toc #TableOfContents ul > li,
@@ -285,7 +297,7 @@ body {
 }
 
 .docs__container {
-    @apply container max-w-[1400px] mx-auto pt-6 pb-8 px-4;
+    @apply container max-w-[2560px] mx-auto pt-6 pb-8;
 }
 
 .docs__wrapper {
@@ -297,11 +309,11 @@ body {
 }
 
 .docs__sidebar-mobile {
-    @apply flex items-center justify-between lg:hidden mb-8;
+    @apply flex items-center justify-between lg:hidden mb-8 px-4;
 }
 
 .docs__sidebar-search {
-    @apply flex items-center justify-between mb-6 lg:mb-0;
+    @apply flex items-center justify-between mb-6 lg:mb-0 pl-4 pr-4 lg:pr-0 xl:pr-4;
 }
 
 .docs__sidebar-wrapper {
