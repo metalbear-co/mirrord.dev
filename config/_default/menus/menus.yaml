@@ -1,38 +1,48 @@
 main:
-- name: Docs
-  url: /docs/overview/introduction/
-  weight: 10
-# - name: Quick Start
-#   url: /docs/overview/quick-start/
-#   weight: 20
 - name: User Stories
   url: /stories/
-  weight: 30
+  weight: 20
+- identifier: resources
+  name: Resources
+  url: "/resources/"
+  weight: 10
+- identifier: docs
+  name: Docs
+  url: /docs/overview/introduction/
+  weight: 100
+  parent: resources
 - identifier: blog
   name: Blog
   url: "https://metalbear.co/blog"
-  weight: 40
+  weight: 200
+  parent: resources
 - identifier: FAQ
   name: FAQ
   url: "/docs/overview/faq"
-  weight: 50
-# - identifier: pricing
-#   name: Pricing
-#   url: "/pricing"
-#   weight: 60
+  weight: 300
+  parent: resources
+- identifier: teams
+  name: mirrord for Teams
+  url: "https://app.metalbear.co/"
+  weight: 30
+- identifier: get-started
+  name: Register/Login
+  url: "https://app.metalbear.co/"
+  weight: 100
+  parent: teams
+- identifier: pricing
+  name: Pricing
+  url: "/pricing"
+  weight: 200
+  parent: teams
 - identifier: support
   name: Support
   url: "/#get-support"
-  weight: 70
-
-- identifier: self-serve
-  name: mirrord for Teams
-  url: "https://app.metalbear.co/"
-  weight: 80
+  weight: 40
 # - identifier: contact
 #   name: Contact Us
 #   url: "/contact"
-#   weight: 80
+#   weight: 50
 docs:
   - name: Overview
     weight: 10

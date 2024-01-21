@@ -12,6 +12,8 @@ Last change: 	03/06/2022
     @apply hidden lg:block;
 }
 
+[x-cloak] { display: none !important; }
+
 *, *::before, *::after {
     box-sizing: border-box;
 }
@@ -51,7 +53,7 @@ body {
 }
 
 .menu__item {
-    @apply mb-0 px-4;
+    @apply mb-0 pl-4 lg:pl-0 pr-4;
 }
 
 .menu__item-link {
