@@ -2,7 +2,7 @@
 title: "Configuration"
 description: "Config"
 date: 2023-05-17T13:59:39+01:00
-lastmod: 2023-11-26T10:00:39+01:00
+lastmod: 2024-01-23T13:37:39+01:00
 draft: false
 images: []
 menu:
@@ -96,9 +96,8 @@ configuration file containing all fields.
     "network": {
       "incoming": {
         "mode": "steal",
-        "http_header_filter": {
-          "filter": "host: api\..+",
-          "ports": [80, 8080]
+        "http_filter": {
+          "header_filter": "host: api\..+"
         },
         "port_mapping": [[ 7777, 8888 ]],
         "ignore_localhost": false,
@@ -138,9 +137,9 @@ Defaults to `false`.
 
 ## operator {#root-operator}
 
-Allow to lookup if operator is installed on cluster and use it.
-
-Defaults to `true`.
+Whether mirrord should use the operator.
+If not set, mirrord will first attempt to use the operator, but continue without it in case
+of failure.
 
 ## pause {#root-pause}
 Controls target pause feature. Unstable.
@@ -509,9 +508,8 @@ have support for a shortened version, that you can see [here](#root-shortened).
     "network": {
       "incoming": {
         "mode": "steal",
-        "http_header_filter": {
-          "filter": "host: api\..+",
-          "ports": [80, 8080]
+        "http_filter": {
+          "header_filter": "host: api\..+"
         },
         "port_mapping": [[ 7777, 8888 ]],
         "ignore_localhost": false,
@@ -690,9 +688,8 @@ for more details.
     "network": {
       "incoming": {
         "mode": "steal",
-        "http_header_filter": {
-          "filter": "host: api\..+",
-          "ports": [80, 8080]
+        "http_filter": {
+          "header_filter": "host: api\..+"
         },
         "port_mapping": [[ 7777, 8888 ]],
         "ignore_localhost": false,
@@ -734,7 +731,10 @@ listeners;
 [`"mode": "steal"`](#feature-network-incoming-mode);
 
 3. Off: Disables the incoming network feature.
-Steals all the incoming traffic:
+
+Examples:
+
+Steal all the incoming traffic:
 
 ```json
 {
@@ -746,8 +746,8 @@ Steals all the incoming traffic:
 }
 ```
 
-Steals only traffic that matches the
-[`http_header_filter`](#feature-network-incoming-http_header_filter) (steals only HTTP traffic).
+Steal only traffic that matches the
+[`http_filter`](#feature-network-incoming-http_filter) (steals only HTTP traffic).
 
 ```json
 {
@@ -755,9 +755,8 @@ Steals only traffic that matches the
     "network": {
       "incoming": {
         "mode": "steal",
-        "http_header_filter": {
-          "filter": "host: api\..+",
-          "ports": [80, 8080]
+        "http_filter": {
+          "header_filter": "host: api\..+"
         },
         "port_mapping": [[ 7777, 8888 ]],
         "ignore_localhost": false,
@@ -871,41 +870,7 @@ Supports regexes validated by the
 
 Case insensitive.
 
-##### feature.network.incoming.http_header_filter.ports {#feature-network-incoming-http_header_filter-ports}
-
-Activate the HTTP traffic filter only for these ports.
-
-Other ports will still be stolen (when `"steal`" is being used), they're just not checked
-for HTTP filtering.
-
-#### feature.network.incoming.filter {#feature-network-incoming-filter}
-Filter configuration for the HTTP traffic stealer feature.
-
-DEPRECATED - USE http_filter instead, unless using old operator/agent version (pre 3.46.0)
-Allows the user to set a filter (regex) for the HTTP headers, so that the stealer traffic
-feature only captures HTTP requests that match the specified filter, forwarding unmatched
-requests to their original destinations.
-
-Only does something when [`feature.network.incoming.mode`](#feature-network-incoming-mode) is
-set as `"steal"`, ignored otherwise.
-
-```json
-{
-  "filter": "host: api\..+",
-  "ports": [80, 8080]
-}
-```
-
-##### feature.network.incoming.http_header_filter.filter {#feature-network-incoming-http_header_filter-filter}
-
-
-Supports regexes validated by the
-[`fancy-regex`](https://docs.rs/fancy-regex/latest/fancy_regex/) crate.
-
-The HTTP traffic feature converts the HTTP headers to `HeaderKey: HeaderValue`,
-case-insensitive.
-
-##### feature.network.incoming.http_header_filter.ports {#feature-network-incoming-http_header_filter-ports}
+##### feature.network.incoming.http_filter.ports {#feature-network-incoming-http_filter-ports}
 
 Activate the HTTP traffic filter only for these ports.
 
@@ -1014,6 +979,42 @@ Valid values follow this pattern: `[protocol]://[name|address|subnet/mask]:[port
 
 Creates a new copy of the target. mirrord will use this copy instead of the original target
 (e.g. intercept network traffic). This feature requires a [mirrord operator](https://mirrord.dev/docs/teams/introduction/).
+
+This feature is not compatible with rollout targets and running without a target
+(`targetless` mode).
+Allows the user to target a pod created dynamically from the orignal [`target`](#target).
+The new pod inherits most of the original target's specification, e.g. labels.
+
+```json
+{
+  "feature": {
+    "copy_target": {
+      "scale_down": true
+    }
+  }
+}
+```
+
+```json
+{
+  "feature": {
+    "copy_target": true
+  }
+}
+```
+
+
+### feature.copy_target.scale_down {#feature-copy_target-scale_down}
+
+If this option is set, mirrord will scale down the target deployment to 0 for the time
+the copied pod is alive.
+
+This option is compatible only with deployment targets.
+```json
+    {
+      "scale_down": true
+    }
+```
 
 # internal_proxy {#root-internal_proxy}
 Configuration for the internal proxy mirrord spawns for each local mirrord session
