@@ -2,7 +2,7 @@
 title: "Configuration"
 description: "Config"
 date: 2023-05-17T13:59:39+01:00
-lastmod: 2023-11-26T10:00:39+01:00
+lastmod: 2024-01-23T13:37:39+01:00
 draft: false
 images: []
 menu:
@@ -25,7 +25,7 @@ provide please let us know.
 To help you get started, here are examples of a basic configuration file, and a complete
 configuration file containing all fields.
 
-## Basic `config.json` {#root-basic}
+### Basic `config.json` {#root-basic}
 
 ```json
 {
@@ -38,7 +38,7 @@ configuration file containing all fields.
 }
 ```
 
-## Basic `config.json` with templating {#root-basic-templating}
+### Basic `config.json` with templating {#root-basic-templating}
 
 ```json
 {
@@ -51,7 +51,7 @@ configuration file containing all fields.
 }
 ```
 
-## Complete `config.json` {#root-complete}
+### Complete `config.json` {#root-complete}
 
  Don't use this example as a starting point, it's just here to show you all the available
  options.
@@ -982,6 +982,39 @@ Creates a new copy of the target. mirrord will use this copy instead of the orig
 
 This feature is not compatible with rollout targets and running without a target
 (`targetless` mode).
+Allows the user to target a pod created dynamically from the orignal [`target`](#target).
+The new pod inherits most of the original target's specification, e.g. labels.
+
+```json
+{
+  "feature": {
+    "copy_target": {
+      "scale_down": true
+    }
+  }
+}
+```
+
+```json
+{
+  "feature": {
+    "copy_target": true
+  }
+}
+```
+
+
+### feature.copy_target.scale_down {#feature-copy_target-scale_down}
+
+If this option is set, mirrord will scale down the target deployment to 0 for the time
+the copied pod is alive.
+
+This option is compatible only with deployment targets.
+```json
+    {
+      "scale_down": true
+    }
+```
 
 # internal_proxy {#root-internal_proxy}
 Configuration for the internal proxy mirrord spawns for each local mirrord session
@@ -1028,3 +1061,4 @@ on process execution, delaying the layer startup and connection to proxy.
   }
 }
 ```
+
