@@ -180,10 +180,10 @@ rust crate.
 
 ##### Specifying a Filter
 The HTTP header filter can be specified in the mirrord configuration file by setting the incoming mode to
-`steal` and specifying a filter in `feature.network.incoming.http_header_filter.filter`.
+`steal` and specifying a filter in `feature.network.incoming.http_filter.header_filter` or `feature.network.incoming.http_filter.path_filter`.
 
 ##### Setting Custom HTTP Ports
-The configuration also allows specifying custom HTTP ports under `feature.network.incoming.http_header_filter.ports`.
+The configuration also allows specifying custom HTTP ports under `feature.network.incoming.http_filter.ports`.
 By default, ports 80 and 8080 are used as HTTP ports if a filter is specified, which means that the mirrord agent
 checks each new connection on those ports for HTTP, and if the connection has valid HTTP messages, they are filtered
 with the header filter.
