@@ -36,4 +36,4 @@ schemaSection: blog
 
 alert: true
 alertDismissable: true
-alertText: "🪞 mirrord for Teams is out now! Get started <a class=\"alert-link stretched-link\" href=\"/docs/teams/introduction\" rel=\"noopener\">here</a>."
+alertText: "We're coming to KubeCon EU 🥳 <a class=\"alert-link stretched-link\" href=\"https://kccnceu2024.sched.com/event/1YeN7\" rel=\"noopener\" target=\"_blank\">Come hear our talk</a> about the low level magic behind mirrord, or just to say hi 👋"
