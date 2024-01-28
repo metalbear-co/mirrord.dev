@@ -8,8 +8,9 @@ images: []
 menu:
   docs:
     parent: "reference"
-weight: 110
+weight: 140
 toc: true
+tags: ["open source", "team", "enterprise"]
 ---
 
 ## Incoming

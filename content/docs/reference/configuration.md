@@ -7,9 +7,10 @@ draft: false
 images: []
 menu:
   docs:
-    parent: "overview"
-weight: 121
+    parent: "reference"
+weight: 110
 toc: true
+tags: ["open source", "team", "enterprise"]
 ---
 
 mirrord allows for a high degree of customization when it comes to which features you want to

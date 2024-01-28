@@ -41,8 +41,8 @@
                     <a class="docs__taxonomy-tag text-primary-text" href="/tags/{{ . | urlize }}">
                       {{- if eq . "open source" }}
                       {{ partial (printf "svg/icon-%s.svg" "open-source") (dict "class" "inline-block text-current mr-1 w-[12px] h-[12px]") }}
-                      {{- else if eq . "teams" }}
-                      {{ partial (printf "svg/icon-%s.svg" "teams") (dict "class" "inline-block text-current mr-1 w-[15px] h-[12px]") }}
+                      {{- else if eq . "team" }}
+                      {{ partial (printf "svg/icon-%s.svg" "team") (dict "class" "inline-block text-current mr-1 w-[15px] h-[12px]") }}
                       {{- else }}
                       {{ partial (printf "svg/icon-%s.svg" "enterprise") (dict "class" "inline-block text-current mr-1 w-[12px] h-[12px]") }}
                       {{- end }}

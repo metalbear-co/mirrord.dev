@@ -6,9 +6,10 @@ lastmod: 2020-11-16T13:59:39+01:00
 draft: false
 menu:
   docs:
-    parent: "guides"
+    parent: "using-mirrord"
 weight: 100
 toc: true
+tags: ["open source", "team", "enterprise"]
 ---
 
 By default, mirrord mirrors all incoming traffic into the remote target, and sends a copy to your local process. This is useful when you want the remote target to answer requests, keeping the remote environment completely agnostic to your local code. However, sometimes you do want to test out how your local code responds to requests; or maybe your process writes to a database when receiving a request, and you want to avoid duplicate records (one from your local code, one from the remote target).
@@ -72,6 +73,6 @@ To specify a filter on a path, use the `feature.network.incoming.http_filter.pat
 Note that both `header_filter` and `path_filter` take regex value, so for example `"header_filter": "X-Header-.+: header-value-.+"` would work.
 
 ## What's next?
-1. If your local process reads from a queue, you might want to test out the [pause feature](/docs/guides/pause/), which temporarily pauses the remote target so it doesn't compete with your local process for queue messages.
-2. If you don't want to impersonate a remote target - for example, if you want to run a tool in the context of your cluster - check out our [guide on the targetless mode](/docs/guides/targetless/).
-3. If you just want to learn more about mirrord, why not checkout our [architecture](/docs/overview/architecture/) or [configuration](/docs/overview/configuration/) sections?
+1. If your local process reads from a queue, you might want to test out the [pause feature](/docs/using-mirrord/pause/), which temporarily pauses the remote target so it doesn't compete with your local process for queue messages.
+2. If you don't want to impersonate a remote target - for example, if you want to run a tool in the context of your cluster - check out our [guide on the targetless mode](/docs/using-mirrord/targetless/).
+3. If you just want to learn more about mirrord, why not check out our [architecture]({{< ref "/docs/reference/architecture" >}} "architecture") or [configuration]({{< ref "/docs/reference/configuration" >}} "configuration") sections?

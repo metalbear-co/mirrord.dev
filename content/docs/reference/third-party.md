@@ -8,8 +8,9 @@ images: []
 menu:
   docs:
     parent: "overview"
-weight: 130
+weight: 170
 toc: true
+tags: ["open source", "team", "enterprise"]
 ---
 
 List of third-party guides and videos about mirrord:

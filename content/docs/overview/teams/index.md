@@ -1,13 +1,16 @@
 ---
-title: "Introduction - mirrord for Teams"
+title: "mirrord for Teams"
 description: "Intro to mirrord for Teams"
 date: 2022-05-26T08:48:57+00:00
 lastmod: 2022-05-26T08:48:57+00:00
 draft: false
 images: []
-linktitle: "Introduction"
-weight: 100
+weight: 110
+menu:
+  docs:
+    parent: "overview"
 toc: true
+tags: ["team", "enterprise"]
 ---
 
 > Ready to start using mirrord for Teams? Register [here](https://app.metalbear.co) to get started.

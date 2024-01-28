@@ -1,5 +1,5 @@
 ---
-title: "Policies - mirrord for Teams"
+title: "Policies"
 description: "Limiting available features for selected targets with mirrord for Teams"
 date: 2024-01-03T13:37:00+00:00
 lastmod: 2024-01-03T13:37:00+00:00
@@ -11,9 +11,10 @@ docs:
 teams:
 weight: 500
 toc: true
+tags: ["team", "enterprise"]
 ---
 
-## Mirrord Policies
+## Policies
 
 The installation of the mirrord operator defines a [custom resource](
 https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/)

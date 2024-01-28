@@ -11,6 +11,7 @@ menu:
     teams:
 weight: 500
 toc: true
+tags: ["team", "enterprise"]
 ---
 
 ## I'm a Security Engineer evaluating mirrord for Teams, what do I need to know?

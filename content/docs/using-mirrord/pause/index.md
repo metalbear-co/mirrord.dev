@@ -6,7 +6,7 @@ lastmod: 2020-11-16T13:59:39+01:00
 draft: false
 menu:
   docs:
-    parent: "guides"
+    parent: "using-mirrord"
 weight: 110
 toc: true
 ---
@@ -22,12 +22,12 @@ To enable the pause feature, simply change the `pause` configuration to `true`:
 }
 ```
 
-If the remote target also receives incoming traffic, you might want to use [traffic stealing](/docs/guides/steal) as well, so that your local process answers any incoming requests instead of the (paused) remote target. This is especially important if the remote target receives health checks, because pausing it without the local process answering those healthchecks for it might cause it to be restarted by Kubernetes.
+If the remote target also receives incoming traffic, you might want to use [traffic stealing](/docs/using-mirrord/steal) as well, so that your local process answers any incoming requests instead of the (paused) remote target. This is especially important if the remote target receives health checks, because pausing it without the local process answering those healthchecks for it might cause it to be restarted by Kubernetes.
 
 [mirrord for Teams](/docs/teams/introduction/) offers a new, improved way to effectively pause whole deployments,
 check out [Copy Target](/docs/teams/copy-target/) for more information.
 
 ## What's next?
-1. If you'd like to intercept traffic rather than mirror it so that your local process is the one answering the remote requests, check out [this guide](/docs/guides/steal/). Note that you can even filter which traffic you intercept!
-2. If you don't want to impersonate a remote target - for example, if you want to run a tool in the context of your cluster - check out our [guide on the targetless mode](/docs/guides/targetless/).
-3. If you just want to learn more about mirrord, why not checkout our [architecture](/docs/overview/architecture/) or [configuration](/docs/overview/configuration/) sections?
+1. If you'd like to intercept traffic rather than mirror it so that your local process is the one answering the remote requests, check out [this guide](/docs/using-mirrord/steal/). Note that you can even filter which traffic you intercept!
+2. If you don't want to impersonate a remote target - for example, if you want to run a tool in the context of your cluster - check out our [guide on the targetless mode](/docs/using-mirrord/targetless/).
+3. If you just want to learn more about mirrord, why not check out our [architecture]({{< ref "/docs/reference/architecture" >}} "architecture") or [configuration]({{< ref "/docs/reference/configuration" >}} "configuration") sections?

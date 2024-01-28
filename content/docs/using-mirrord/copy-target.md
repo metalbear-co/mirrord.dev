@@ -9,11 +9,12 @@ linktitle: "Copy Target"
 menu:
 docs:
 teams:
-weight: 500
+weight: 140
 toc: true
+tags: ["open source", "team", "enterprise"]
 ---
 
-When you set the [`copy_target`](/docs/overview/configuration/#feature-copy_target) configuration field, instead of
+When you set the [`copy_target`](/docs/reference/configuration/#feature-copy_target) configuration field, instead of
 using the [target](/docs/reference/targets/) of the run directly, mirrord will create a new pod
 using the pod spec of the original target, and use that new pod as a target.
 
@@ -27,14 +28,14 @@ your application with mirrord.
 The new, copied pod will not have any
 [liveness, readiness or startup probes](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)
 even if the original pod spec does define them.
-This means you can [steal](/docs/overview/configuration/#feature-network-incoming-mode) traffic without having to
+This means you can [steal](/docs/reference/configuration/#feature-network-incoming-mode) traffic without having to
 also answer those probes. This might come in handy when debugging with breakpoints with stolen traffic. Without
 `copy_target`, if you linger too long on a breakpoint, the application might miss some probes, which could cause a
 target pod to restart.
 
 ## Replacing a Whole Deployment Using `scale_down`
 
-When the [`scale_down`](/docs/overview/configuration/#feature-copy_target-scale_down) option is set (only valid
+When the [`scale_down`](/docs/reference/configuration/#feature-copy_target-scale_down) option is set (only valid
 when the target is a deployment), mirrord will
 [scale](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#scaling-a-deployment) the target
 deployment down to zero, effectively replacing all existing pods of that deployment by the one new copied pod, that

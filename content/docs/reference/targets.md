@@ -8,16 +8,17 @@ images: []
 menu:
   docs:
     parent: "reference"
-weight: 110
+weight: 130
 toc: true
+tags: ["open source", "team", "enterprise"]
 ---
 
 ## Overview
 
 You can specify a target on your cluster for mirrord, giving your local application
 access to the remote target's network environment, file system and environment variables, according to the
-[configuration](https://mirrord.dev/docs/overview/configuration/).
-When a target is specified, a [mirrord-agent](/docs/overview/architecture/#mirrord-agent) pod will be created on the same
+[configuration]({{< ref "/docs/reference/configuration" >}} "configuration").
+When a target is specified, a [mirrord-agent](/docs/reference/architecture/#mirrord-agent) pod will be created on the same
 node as the target pod.
 The several kinds of supported targets are detailed below. There are also multiple ways to specify a
 target for mirrord: you can do it in a configuration file, in an IDE dialog, or in the CLI with an argument or an
@@ -56,11 +57,11 @@ e.g. `pod/lolz-64698df9b7-6plq8`,
 And for also specifying a container, you just add `/container/<CONTAINER-NAME>` at the end, e.g.
 `pod/lolz-64698df9b7-6plq8/container/main-container`.
 
-### Using a [configuration file](https://mirrord.dev/docs/overview/configuration/)
+### Using a [configuration file]({{< ref "/docs/reference/configuration" >}} "configuration")
 
 The target path from the last section is set under the
-[`target.path`](https://mirrord.dev/docs/overview/configuration/#target-path) field. The target's namespace can be set
-under [`target.namespace`](https://mirrord.dev/docs/overview/configuration/#target-namespace). By default, the namespace
+[`target.path`](/docs/reference/configuration/#target-path) field. The target's namespace can be set
+under [`target.namespace`](/docs/reference/configuration/#target-namespace). By default, the namespace
 currently specified in the local `kubeconfig` is used.
 
 ```json
@@ -118,5 +119,5 @@ Moreover, you should make sure [the environment variable used to specify a targe
 isn't set (or is set to an empty value).
 
 > **Note:** In order to set the namespace the agent is going to be created in, set the agent namespace, not the
-> target namespace. That value can be set via the [`agent.namespace` configuration file field]({{< ref "/docs/overview/configuration#agent-namespace" >}} "agent namespace configuration"), the `-a` CLI argument,
+> target namespace. That value can be set via the [`agent.namespace` configuration file field]({{< ref "/docs/reference/configuration#agent-namespace" >}} "agent namespace configuration"), the `-a` CLI argument,
 > or the `MIRRORD_AGENT_NAMESPACE` environment variable.
