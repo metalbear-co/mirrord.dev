@@ -9,7 +9,7 @@ linktitle: "Copy Target"
 menu:
 docs:
 teams:
-weight: 140
+weight: 150
 toc: true
 tags: ["open source", "team", "enterprise"]
 ---
