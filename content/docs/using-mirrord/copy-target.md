@@ -11,7 +11,7 @@ docs:
 teams:
 weight: 150
 toc: true
-tags: ["open source", "team", "enterprise"]
+tags: ["team", "enterprise"]
 ---
 
 When you set the [`copy_target`](/docs/reference/configuration/#feature-copy_target) configuration field, instead of
