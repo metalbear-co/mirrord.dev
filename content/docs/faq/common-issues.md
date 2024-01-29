@@ -13,7 +13,7 @@ toc: true
 tags: ["open source", "team", "enterprise"]
 ---
 
-#### I've run my program with mirrord, but it seems to have no effect
+### I've run my program with mirrord, but it seems to have no effect
 
 There are currently two known cases where mirrord cannot load into the application's process:
 1. Statically linked binaries. Since mirrord uses the dynamic linker to load into the application's process,
@@ -35,7 +35,7 @@ There are currently two known cases where mirrord cannot load into the applicati
 
 Another reason that mirrord might seem not to work is if your remote pod has more than one container. mirrord works at the level of the container, not the whole pod. If your pod runs multiple containers, you need to make sure mirrord targets the correct one by by specifying it explicitly in the [target configuration](/docs/reference/configuration/#root-target). Note that we filter out the proxy containers added by popular service meshes automatically.
 
-#### Incoming traffic to the remote target doesn't reach my local process
+### Incoming traffic to the remote target doesn't reach my local process
 
 This could happen for several reasons:
 1. The local process is listening on a different port than the remote target. You can either change
@@ -45,7 +45,7 @@ This could happen for several reasons:
  remote port.
 2. You're running with `network.incoming.mode` set to `mirror` on a cluster with a service mesh like Istio or Linkerd, which isn't currently supported. In this case, you should use the `--steal` flag instead.
 
-#### My application is trying to read a file locally instead of from the cluster
+### My application is trying to read a file locally instead of from the cluster
 
 mirrord has a list of path patterns that are read locally by default regardless of the configured fs mode. You can
 override this behavior in the configuration.
@@ -69,13 +69,13 @@ In order to override that settings for a path or a pattern, add it to the approp
 3. `feature.fs.local` if you want read and write operations to that path to happen locally.
 4. `feature.fs.not_found` if you want the application to "think" that file does not exist.
 
-#### My local process fails to resolve the domain name of a Kubernetes service in the same cluster
+### My local process fails to resolve the domain name of a Kubernetes service in the same cluster
 
 If you've set `feature.fs.mode` to `local`, try changing it to `localwithoverrides`.
 
 When the `local` mode is set, all files will be opened locally. This might prevent your process from resolving cluster-internal domain names correctly, because it can no longer read Kubelet-generated configuration files like `/etc/resolv.conf`. With `localwithoverrides`, such files are read from the remote pod instead.
 
-#### Old mirrord agent pods are not getting deleted after the mirrord run is completed
+### Old mirrord agent pods are not getting deleted after the mirrord run is completed
 
 If an agent pod's status is `Running`, it means mirrord is probably still running locally as well. Once you
 terminate the local process, the agent pod's status should change to `Completed`.
@@ -92,7 +92,7 @@ As a temporary solution for cleaning up completed agent pods manually, you can r
 kubectl delete jobs --selector=app=mirrord --field-selector=status.successful=1
 ```
 
-#### My local process gets permission (EACCESS) error on file access
+### My local process gets permission (EACCESS) error on file access
 
 If your cluster is running on Bottlerocket or has SELinux enabled, please try enabling the `privileged` flag
 in the agent configuration:

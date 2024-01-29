@@ -13,7 +13,7 @@ toc: true
 tags: ["open source", "team", "enterprise"]
 ---
 
-#### What frameworks/languages does mirrord support?
+### What frameworks/languages does mirrord support?
 
 mirrord works by [hooking libc](https://metalbear.co/blog/mirrord-internals-hooking-libc-functions-in-rust-and-fixing-bugs/), so it should work with any language/framework that uses libc (vast majority).
 
@@ -21,11 +21,11 @@ This includes: Rust, Node, Python, Java, Kotlin, Ruby, and others (most language
 
 mirrord also supports for [Go](https://metalbear.co/blog/hooking-go-from-rust-hitchhikers-guide-to-the-go-laxy/), which doesn't use libc
 
-#### Does mirrord support clusters with a service mesh like Istio or Linkerd?
+### Does mirrord support clusters with a service mesh like Istio or Linkerd?
 
 Yes. However, traffic mirroring isn't currently supported - you can use the `--steal` flag to steal traffic instead.
 
-#### Does mirrord support OpenShift?
+### Does mirrord support OpenShift?
 
 Yes, mirrord works with OpenShift. However, OpenShift usually ships with a default security policy that doesn't let mirrord create pods.
 To fix this, you would need to tweak your `scc` settings - more information [here](https://docs.openshift.com/container-platform/3.11/admin_guide/manage_scc.html).
