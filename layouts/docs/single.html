@@ -42,8 +42,8 @@
 						<a class="text-primary-text hover:text-primary-text text-sm xl:text-base" href="{{ .RelPermalink }}">
 							{{- if eq .LinkTitle "open source" }}
 							{{ partial (printf "svg/icon-%s.svg" "open-source") (dict "class" "inline-block text-current mr-1 xl:mr-2 w-[14px] h-[14px] xl:w-[23px] xl:h-[23px]") }}
-							{{- else if eq .LinkTitle "teams" }}
-							{{ partial (printf "svg/icon-%s.svg" "teams") (dict "class" "inline-block text-current mr-1 xl:mr-2 w-[17px] h-[13px] xl:w-[27px] xl:h-[23px]") }}
+							{{- else if eq .LinkTitle "team" }}
+							{{ partial (printf "svg/icon-%s.svg" "team") (dict "class" "inline-block text-current mr-1 xl:mr-2 w-[17px] h-[13px] xl:w-[27px] xl:h-[23px]") }}
 							{{- else }}
 							{{ partial (printf "svg/icon-%s.svg" "enterprise") (dict "class" "inline-block text-current mr-1 xl:mr-2 w-[13px] h-[13px] xl:w-[21px] xl:h-[21px]") }}
 							{{- end }}

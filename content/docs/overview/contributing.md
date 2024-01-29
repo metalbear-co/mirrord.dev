@@ -10,6 +10,7 @@ menu:
     parent: "overview"
 weight: 122
 toc: true
+tags: ["open source", "team", "enterprise"]
 ---
 
 There are a lot of ways you can contribute to mirrord, like:

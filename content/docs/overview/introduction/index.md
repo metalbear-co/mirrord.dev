@@ -8,9 +8,10 @@ draft: false
 images: []
 menu:
   docs:
-    parent: "overview"
+    parent: "introduction"
 weight: 100
 toc: true
+tags: ["open source", "team", "enterprise"]
 ---
 
 mirrord is an open-source tool that lets developers run local processes in the context of their cloud environment. It makes it incredibly easy to test your code on a cloud environment (e.g. staging) without actually going through the hassle of Dockerization, CI, or deployment, and without disrupting the environment by deploying untested code. Instead of saving it for the last step, now you can shift-left on cloud testing you can test your code in the cloud from the very beginning of your development process.
@@ -37,7 +38,7 @@ However, the point of mirrord is not just to make that final step in the dev loo
 
 mirrord runs in two places - in the memory of your local process (`mirrord-layer`), and as a pod in your cloud environment (`mirrord-agent`).
 
-{{<figure src="../architecture/architecture.svg" alt="mirrord - Basic Architecture" class="bg-white center large-width zoomable" style="overflow:hidden; width:795px" >}}
+{{<figure src="/docs/reference/architecture/architecture.svg" alt="mirrord - Basic Architecture" class="bg-white center large-width zoomable" style="overflow:hidden; width:795px" >}}
 
 When you start your local process with mirrord, it creates a pod in your cloud environment, which listens in on the pod you've passed as an argument. `mirrord-layer` then does the following:
 * Override the process' syscalls to:
