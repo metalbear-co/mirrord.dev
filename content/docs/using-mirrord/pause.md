@@ -6,6 +6,7 @@ lastmod: 2020-11-16T13:59:39+01:00
 draft: false
 weight: 140
 toc: true
+tags: ["open source", "team", "enterprise"]
 ---
 
 mirrord strives to have as little effect on the remote environment as possible, so when you select a remote target, it does nothing to affect its operation. However, this can be problematic when the application reads from a queue or message broker - both your local process and the remote target will be competing for the same messages, a competition that your remote target, with the advantage of being in the cluster, will most often win.
