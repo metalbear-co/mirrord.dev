@@ -1,0 +1,25 @@
+## Browser Support
+
+### Google Chrome
+
+The following setup is just a suggestion, made by one who managed to get it work.  
+The setup can be configured to match specific needs.
+
+#### Prerequisites
+
+1. [install mirrord](https://mirrord.dev/docs/overview/quick-start/#installation)
+2. [install microsocks](https://github.com/rofl0r/microsocks) (via brew or apt)
+3. [install "Socks5 Configurator" chrome extension](https://chromewebstore.google.com/detail/socks5-configurator/hnpgnjkeaobghpjjhaiemlahikgmnghb) 
+
+
+#### Steps
+
+1. In a terminal session, trigger `microsocks` using `mirrord`.
+   1. Example: `mirrord exec -a production_ns -n production_ns -t deployment/my_deployment microsocks`
+2. In a Chrome window:
+   1. open the Socks5 Configurator extension
+   2. make sure the "Socks5 Proxy" is enabled
+   3. type in its respective textbox `127.0.0.1:1080`
+   4. hit the save button
+3. That's it! you can verify your ip address has changed via a quick "what is my ip address" search in google 
+  
