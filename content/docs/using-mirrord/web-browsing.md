@@ -1,3 +1,19 @@
+---
+title: "Web Browsing"
+description: "Using mirrord & browser to set your IP address"
+date: 2024-01-30T17:03:00+00:00
+lastmod: 2024-01-30T17:03:00+00:00
+draft: false
+images: []
+linktitle: "Web Browsing"
+menu:
+docs:
+teams:
+weight: 150
+toc: true
+tags: ["team", "enterprise", "open source"]
+---
+
 ## Browser Support
 
 ### Google Chrome
