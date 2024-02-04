@@ -50,7 +50,7 @@
                             <button
                                 class="w-full flex items-center justify-center lg:justify-start text-current cursor-pointer focus:outline-none group lg:relative">
                                 {{- .Pre }}
-                                <span class="menu__link text-xl lg:text-sm lg:text-transparent group-hover:font-semibold lg:font-semibold uppercase lg:capitalize py-4 lg:py-2 pr-2">{{- .Name |
+                                <span class="menu__link text-xl lg:text-sm lg:text-transparent group-hover:font-semibold lg:font-semibold lg:capitalize py-4 lg:py-2 pr-2">{{- .Name |
                                     safeHTML }}</span>
                                 <span class="absolute top-0 left-0 w-full h-full hidden lg:flex justify-center items-center text-xl lg:text-sm font-normal group-hover:font-semibold pr-1">{{ .Name | safeHTML }}</span>
                                 {{- .Post }}
@@ -69,7 +69,7 @@
                                 {{- range .Children }}
                                 {{- $active = eq .Name $current.Title -}}
                                 <li class="submenu__item text-center lg:text-left py-1 px-4 mb-0">
-                                    <a class="submenu__item-link text-xl lg:text-sm text-current hover:font-semibold uppercase lg:capitalize {{ if $active }}active{{ end }}"
+                                    <a class="submenu__item-link text-xl lg:text-sm text-current hover:font-semibold lg:capitalize {{ if $active }}active{{ end }}"
                                         href="{{ .URL | relLangURL }}" {{ if $active }} aria-current="true"{{ end }} {{ if $.IsHome }} data-target="{{ .URL }}" {{ end }}>
                                         {{- .Pre -}}
                                         <span>{{ .Name | safeHTML }}</span>
