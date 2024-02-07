@@ -91,3 +91,5 @@ module:
       target: assets/js/vendor/clipboard
     - source: node_modules/flexsearch
       target: assets/js/vendor/flexsearch
+    - source: node_modules/instant.page
+      target: assets/js/vendor/instant.page
