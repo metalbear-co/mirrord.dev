@@ -16,8 +16,8 @@ One way to use mirrord's [targetless mode]({{< ref "/docs/using-mirrord/targetle
 
 #### Prerequisites
 
-1. [install microsocks](https://github.com/rofl0r/microsocks) (via brew or apt)
-2. [install "Socks5 Configurator" Chrome extension](https://chromewebstore.google.com/detail/socks5-configurator/hnpgnjkeaobghpjjhaiemlahikgmnghb) 
+1. [Install microsocks](https://github.com/rofl0r/microsocks) (via brew or apt)
+2. [Install "Socks5 Configurator" Chrome extension](https://chromewebstore.google.com/detail/socks5-configurator/hnpgnjkeaobghpjjhaiemlahikgmnghb) 
 
 
 #### Steps
@@ -29,7 +29,7 @@ One way to use mirrord's [targetless mode]({{< ref "/docs/using-mirrord/targetle
    2. Make sure the "Socks5 Proxy" is enabled
    3. Type in its respective textbox `127.0.0.1:1080`
    4. Hit the save button
-3. That's it! You can verify your ip address has changed via a quick "what is my ip address" search in Google 
+3. That's it! You can verify your IP address has changed via a quick "what is my ip address" search in Google 
   
 ## What's next?
 1. If you'd like to intercept traffic rather than mirror it so that your local process is the one answering the remote requests, check out [this guide](/docs/using-mirrord/steal/). Note that you can even filter which traffic you intercept!
