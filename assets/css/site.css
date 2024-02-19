@@ -3221,12 +3221,7 @@ body {
   padding-top: 5px;
   padding-bottom: 4px;
   font-size: 10px;
-  line-height: 1;
-  color: var(--primary-text);
-  --tw-text-opacity: 1;
-  color: rgb(34 34 34 / var(--tw-text-opacity));
-  --tw-content: 'Ctrl + /';
-  content: var(--tw-content);
+  line-height: 1;  
 }
 
 @media (min-width: 1000px) {
