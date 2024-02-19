@@ -22,13 +22,48 @@ To contribute to this project, please follow our [Code of Conduct](https://githu
 The following guide details the steps to achieve a PR in this repository successfully.
 ### Prerequisite 
 If you are running this locally, make sure you have the following prerequisites installed on your operating system before you start contributing:
-- Install dependencies and start the development server by running the command:
+- Install dependencies:
   ```
   yarn install
   ```
+  or
+
+  ```
+  npm install
+  ```
+
+- Create an index for search
+  ```
+  npm run build
+  ```
+  or
+  ```
+  hugo
+  ```
+
+  then
+  ```
+  npx pagefind --site public/docs --output-path static/pagefind
+  ```
+
+- Start your development environment
+  ```
+  npm run start
+  ```
+
+  or
+
   ```
   yarn dev
   ```
+
+  or 
+
+  ```
+  hugo serve
+  ```
+
+
 ### Set up your Local Development Environment
 
 1. **Fork the Repository**: Click the "Fork" button in the upper right-hand corner of the [mirrord.dev](https://github.com/metalbear-co/mirrord.dev/) repository on GitHub.

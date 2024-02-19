@@ -1,7 +1,6 @@
 <!-- vendor -->
 {{- $alpine := resources.Get "js/vendor/alpinejs/dist/cdn.min.js" }}
 {{- $clipboard := resources.Get "js/vendor/clipboard/dist/clipboard.min.js" }}
-{{- $flexsearch := resources.Get "js/vendor/flexsearch/dist/flexsearch.bundle.js" }}
 
 <!-- local js -->
 {{- $splide := resources.Get "js/splide.min.js" }}
@@ -15,7 +14,7 @@
 {{- $instantPage := resources.Get "js/instant.page.js" -}}
 {{- $instantPage := $instantPage | js.Build -}}
 
-{{- $js := slice $splide $alert $alpineClipboard $flexsearch $persist $alpine $instantPage | resources.Concat "js/main.js" }}
+{{- $js := slice $splide $alert $alpineClipboard $persist $alpine $instantPage | resources.Concat "js/main.js" }}
 {{- $js_min := $js | resources.Minify }}
 
 <script src="{{ $js_min.RelPermalink }}" defer></script>
