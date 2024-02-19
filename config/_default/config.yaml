@@ -89,5 +89,3 @@ module:
       target: assets/js/vendor/alpinejs
     - source: node_modules/clipboard
       target: assets/js/vendor/clipboard
-    - source: node_modules/flexsearch
-      target: assets/js/vendor/flexsearch
