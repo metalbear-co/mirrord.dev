@@ -35,5 +35,5 @@ to your mirrord configuration file.
 
 ## What's next?
 1. If you'd like to intercept traffic rather than mirror it so that your local process is the one answering the remote requests, check out [this guide](/docs/using-mirrord/steal/). Note that you can even filter which traffic you intercept!
-2. If your local process reads from a queue, you might want to test out the [pause feature](/docs/using-mirrord/pause/), which temporarily pauses the remote target so it doesn't compete with your local process for queue messages.
+2. Want to use Targetless mode to run a web browser in the context of your cluster? Check out this [guide]({{< ref "/docs/using-mirrord/web-browsing" >}} "web-browsing").
 3. If you just want to learn more about mirrord, why not check out our [architecture]({{< ref "/docs/reference/architecture" >}} "architecture") or [configuration]({{< ref "/docs/reference/configuration" >}} "configuration") sections?
