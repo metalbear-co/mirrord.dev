@@ -1,8 +1,8 @@
 ---
 title: "See active sessions"
 description: "How to see active sessions"
-date: 2024-02-20T13:59:39+01:00
-lastmod: 2024-02-20T13:59:39+01:00
+date: 2024-02-20T11:59:39+01:00
+lastmod: 2024-02-20T11:59:39+01:00
 draft: false
 weight: 150
 toc: true
