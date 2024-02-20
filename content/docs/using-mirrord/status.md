@@ -10,7 +10,7 @@ tags: ["team", "enterprise"]
 ---
 
 When the operator is installed as part of mirrord for Teams, users can use the command `mirrord operator status` to see active sessions in the cluster.
-For example, in the following output, we can see the session ID, the target used, the namespace of the target, the session duration, and the user running that session. We can also see that `Ports` is empty meaning, the user isn't stealing or mirroring any traffic at the moment.
+For example, in the following output, we can see the session ID, the target used, the namespace of the target, the session duration, and the user running that session. We can also see that `Ports` is empty, meaning the user isn't stealing or mirroring any traffic at the moment.
 ```
 +------------------+-----------------------------+-----------+---------------------------------------------------------------+-------+------------------+
 | Session ID       | Target                      | Namespace | User                                                          | Ports | Session Duration |
