@@ -1,5 +1,5 @@
 ---
-title: "See active sessions"
+title: "See Active Sessions"
 description: "How to see active sessions"
 date: 2024-02-20T11:59:39+01:00
 lastmod: 2024-02-20T11:59:39+01:00
