@@ -19,7 +19,7 @@ For example, in the following output, we can see the session ID, the target used
 +------------------+-----------------------------+-----------+---------------------------------------------------------------+-------+------------------+
 ```
 
-The `User` field is generated in the following format - `whoami/k8s-user/hostname`. `whoami` and `hostname` are from the local machine, while `k8s-user` is the user we see from the operator side.
+The `User` field is generated in the following format - `whoami/k8s-user@hostname`. `whoami` and `hostname` are from the local machine, while `k8s-user` is the user we see from the operator side.
 
 
 In this example, we can see that the session has an active steal on port 80, filtering HTTP traffic with the following filter: `X-PG-Tenant: Avi.+`
