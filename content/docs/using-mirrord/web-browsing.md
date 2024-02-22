@@ -23,7 +23,9 @@ One way to use mirrord's [targetless mode]({{< ref "/docs/using-mirrord/targetle
 #### Steps
 
 1. In a terminal session, trigger `microsocks` using `mirrord`.
-   1. Example: `mirrord exec -a production_ns -n production_ns -t deployment/my_deployment microsocks`
+   * If you want to use a specific target's network: `mirrord exec -n target-namespace -t deployment/my_deployment microsocks`
+   * If you just want a specific namespace networking: `mirrord exec -a namespace microsocks`
+   * And you can just do: `mirrord exec microsocks` if you want to use your current namespace.
 2. In a Chrome window:
    1. Open the Socks5 Configurator extension
    2. Make sure the "Socks5 Proxy" is enabled
