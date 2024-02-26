@@ -23,8 +23,8 @@ The configuration supports templating using the [Tera](https://keats.github.io/t
 Currently we don't provide additional values to the context, if you have anything you want us to
 provide please let us know.
 
-To use a configuration file in the cli, use the `-f <CONFIG_PATH>` flag.
-Or if using VSCode Extension or JetBrains plugin, create `.mirrord/mirrord.json` file or use the UI to do so.
+To use a configuration file in the CLI, use the `-f <CONFIG_PATH>` flag.
+Or if using VSCode Extension or JetBrains plugin, simply create a `.mirrord/mirrord.json` file or use the UI.
 
 To help you get started, here are examples of a basic configuration file, and a complete
 configuration file containing all fields.
