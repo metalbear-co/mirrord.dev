@@ -650,6 +650,14 @@ See the environment variables [reference](https://mirrord.dev/docs/reference/env
 }
 ```
 
+### feature.env.load_from_process {#feature-env-load_from_process}
+
+Allows for changing the way mirrord loads remote environment variables.
+If set, the variables are fetched after the user application is started.
+
+This setting is meant to resolve issues when using mirrord via the IntelliJ plugin on WSL
+and the remote environment contains a lot of variables.
+
 ### feature.env.exclude {#feature-env-exclude}
 
 Include the remote environment variables in the local process that are **NOT** specified by
@@ -726,15 +734,21 @@ Controls the incoming TCP traffic feature.
 See the incoming [reference](https://mirrord.dev/docs/reference/traffic/#incoming) for more
 details.
 
-Incoming traffic supports 3 modes of operation:
+Incoming traffic supports 3 [modes](#feature-network-incoming-mode) of operation:
 
 1. Mirror (**default**): Sniffs the TCP data from a port, and forwards a copy to the interested
 listeners;
 
-2. Steal: Captures the TCP data from a port, and forwards it to the local process, see
-[`"mode": "steal"`](#feature-network-incoming-mode);
+2. Steal: Captures the TCP data from a port, and forwards it to the local process.
 
 3. Off: Disables the incoming network feature.
+
+This field can either take an object with more configuration fields (that are documented below),
+or alternatively -
+- A boolean:
+  - `true`: use the default configuration, same as not specifying this field at all.
+  - `false`: disable incoming configuration.
+- One of the incoming [modes](#feature-network-incoming-mode) (lowercase).
 
 Examples:
 
@@ -745,6 +759,18 @@ Steal all the incoming traffic:
   "feature": {
     "network": {
       "incoming": "steal"
+    }
+  }
+}
+```
+
+Disable the incoming traffic feature:
+
+```json
+{
+  "feature": {
+    "network": {
+      "incoming": false
     }
   }
 }
@@ -982,7 +1008,7 @@ Valid values follow this pattern: `[protocol]://[name|address|subnet/mask]:[port
 ## feature.copy_target {#feature-copy_target}
 
 Creates a new copy of the target. mirrord will use this copy instead of the original target
-(e.g. intercept network traffic). This feature requires a [mirrord operator](https://mirrord.dev/docs/teams/introduction/).
+(e.g. intercept network traffic). This feature requires a [mirrord operator](https://mirrord.dev/docs/overview/teams/).
 
 This feature is not compatible with rollout targets and running without a target
 (`targetless` mode).
@@ -1036,7 +1062,7 @@ want to increase the timeouts a bit.
 }
 ```
 
-### internal_proxy.idle_timeout {#agent-idle_timeout}
+### internal_proxy.idle_timeout {#internal_proxy-idle_timeout}
 
 How much time to wait while we don't have any active connections before exiting.
 
@@ -1051,7 +1077,7 @@ and don't connect to the proxy.
 }
 ```
 
-### internal_proxy.start_idle_timeout {#agent-start_idle_timeout}
+### internal_proxy.start_idle_timeout {#internal_proxy-start_idle_timeout}
 
 How much time to wait for the first connection to the proxy in seconds.
 
@@ -1066,3 +1092,10 @@ on process execution, delaying the layer startup and connection to proxy.
 }
 ```
 
+### internal_proxy.log_destination {#internal_proxy-log_destination}
+Set the log file destination for the internal proxy.
+
+### internal_proxy.log_level {#internal_proxy-log_level}
+Set the log level for the internal proxy.
+RUST_LOG convention (i.e `mirrord=trace`)
+will only be used if log_destination is set
