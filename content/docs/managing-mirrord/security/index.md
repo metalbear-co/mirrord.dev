@@ -2,7 +2,7 @@
 title: "Security - mirrord for Teams"
 description: "Security in mirrord for Teams"
 date: 2022-07-10T08:48:57+00:00
-lastmod: 2022-07-10T08:48:57+00:00
+lastmod: 2024-03-01T00:00:00+00:00
 draft: false
 images: []
 linktitle: "Security"
@@ -57,7 +57,6 @@ In addition, the Operator impersonates any user that calls its API, and thus onl
 Below is the ClusterRole's yaml, which you can modify to suit your needs:
 
 ```yaml
-
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
@@ -66,6 +65,7 @@ rules:
 - apiGroups:
   - operator.metalbear.co
   resources:
+  - copytargets
   - mirrordoperators
   - targets
   - targets/port-locks
@@ -76,14 +76,21 @@ rules:
   - operator.metalbear.co
   resources:
   - mirrordoperators/certificate
+  - copytargets
   verbs:
   - create
 - apiGroups:
   - operator.metalbear.co
   resources:
   - targets
+  - copytargets
   verbs:
   - proxy
+  resources:
+  - sessions
+  verbs:
+  - deletecollection
+  - delete
   ```
 
 ### How do I limit user access to a specific namespace?
