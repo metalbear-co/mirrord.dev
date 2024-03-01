@@ -26,3 +26,28 @@ The session management commands are:
 - `mirrord operator session kill-all` which will forcefully stop **ALL** sessions!
 - `mirrord operator session kill --id {id}` which will forcefully stop a session with `id`,
   where you may obtain the session id through `mirrord operator status`;
+
+### `sessions` policies
+
+Every `mirrord-operator-user` has access to **all** session operations by **default**, as they come
+with `deletecollection` and `delete` privileges for the `sessions` resource. You may limit
+this by changing the RBAC configuration.
+
+```yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: mirrord-operator-user
+rules:
+# other parts omitted
+- apiGroups:
+  - operator.metalbear.co
+  resources:
+  - sessions
+  verbs:
+  - deletecollection
+  - delete
+```
+
+- `mirrord operator session kill-all` requires the `deletecollection` verb;
+- `mirrord operator session kill --id {id}` requires the `delete` verb;
