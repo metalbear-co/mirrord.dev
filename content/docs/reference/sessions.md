@@ -31,7 +31,8 @@ The session management commands are:
 
 Every `mirrord-operator-user` has access to **all** session operations by **default**, as they come
 with `deletecollection` and `delete` privileges for the `sessions` resource. You may limit
-this by changing the RBAC configuration.
+this by changing the RBAC configuration. Here is a sample `role.yaml` with the other Operator
+rules omitted:
 
 ```yaml
 apiVersion: rbac.authorization.k8s.io/v1
@@ -39,7 +40,6 @@ kind: ClusterRole
 metadata:
   name: mirrord-operator-user
 rules:
-# other parts omitted
 - apiGroups:
   - operator.metalbear.co
   resources:
