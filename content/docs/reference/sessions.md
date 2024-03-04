@@ -18,7 +18,7 @@ tags: ["team", "enterprise"]
 Whenever a user starts mirrord with the `operator` feature enabled, the Operator assigns a
 session to this user, until they stop running mirrord, at which point the session is closed
 in the Operator automatically. Users may also forcefully stop a session with the
-`mirrord operator session` cli commands. These allow users to manually close Operator sessions
+`mirrord operator session` CLI commands. These allow users to manually close Operator sessions
 while they're still alive (user is still running mirrord).
 
 The session management commands are:
