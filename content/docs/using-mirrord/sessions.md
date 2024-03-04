@@ -1,19 +1,19 @@
 ---
 title: "Sessions"
 description: "Session management for the mirrord Operator"
-date: 2024-03-01T00:00:00+00:00
-lastmod: 2024-03-01T00:00:00+00:00
+date: 2024-03-04T00:00:00+00:00
+lastmod: 2024-03-04T00:00:00+00:00
 draft: false
 images: []
 menu:
   docs:
-    parent: "reference"
+    parent: "using-mirrord"
 weight: 130
 toc: true
 tags: ["team", "enterprise"]
 ---
 
-## Overview
+## Stop active Operator sessions
 
 Whenever a user starts mirrord with the `operator` feature enabled, the Operator assigns a
 session to this user, until they stop running mirrord, at which point the session is closed
@@ -27,7 +27,7 @@ The session management commands are:
 - `mirrord operator session kill --id {id}` which will forcefully stop a session with `id`,
   where you may obtain the session id through `mirrord operator status`;
 
-### `sessions` policies
+### `sessions` RBAC
 
 Every `mirrord-operator-user` has access to **all** session operations by **default**, as they come
 with `deletecollection` and `delete` privileges for the `sessions` resource. You may limit
