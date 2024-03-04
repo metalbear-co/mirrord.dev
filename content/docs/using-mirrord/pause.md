@@ -9,7 +9,7 @@ toc: true
 tags: ["open source", "team", "enterprise"]
 ---
 
-**We're deprecating this feature in favour of [copy + scaledown](/docs/using-mirrord/copy-target). Read why [here](https://metalbear.co/blog/on-pausing-containers-how-we-built-and-why-we-deprecated-our-container-pause-feature/).**
+We're deprecating this feature in favour of [copy + scaledown](/docs/using-mirrord/copy-target). Read why [here](https://metalbear.co/blog/on-pausing-containers-how-we-built-and-why-we-deprecated-our-container-pause-feature/).
 
 mirrord strives to have as little effect on the remote environment as possible, so when you select a remote target, it does nothing to affect its operation. However, this can be problematic when the application reads from a queue or message broker - both your local process and the remote target will be competing for the same messages, a competition that your remote target, with the advantage of being in the cluster, will most often win.
 For this purpose, mirrord supports the pause feature. When enabled, mirrord will pause the remote target when it starts running, and unpause it when it stops. This way, your local process will be the only one reading from the queue, and you can test out how it handles messages without worrying about the remote target interfering.
