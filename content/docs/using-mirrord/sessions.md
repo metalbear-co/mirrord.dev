@@ -13,7 +13,13 @@ toc: true
 tags: ["team", "enterprise"]
 ---
 
-## See active Operator sessions
+## Overview
+
+Whenever a user starts mirrord installed as part of mirrord for teams, the Operator assigns a
+session to this user, until they stop running mirrord, at which point the session is closed
+in the Operator automatically.
+
+### See active Operator sessions
 
 When the operator is installed as part of mirrord for Teams, users can use the command 
 `mirrord operator status` to see active sessions in the cluster.
@@ -46,13 +52,11 @@ filtering HTTP traffic with the following filter: `X-PG-Tenant: Avi.+`
 +------------------+-----------------------------+-----------+---------------------------------------------------------------+----------------------------------------------------------+------------------+
 ```
 
-## Stop active Operator sessions
+### Stop active Operator sessions
 
-Whenever a user starts mirrord with the `operator` feature enabled, the Operator assigns a
-session to this user, until they stop running mirrord, at which point the session is closed
-in the Operator automatically. Users may also forcefully stop a session with the
-`mirrord operator session` CLI commands. These allow users to manually close Operator sessions
-while they're still alive (user is still running mirrord).
+Users may also forcefully stop a session with the `mirrord operator session` CLI commands.
+These allow users to manually close Operator sessions while they're still alive  (user is
+still running mirrord).
 
 The session management commands are:
 
@@ -60,7 +64,7 @@ The session management commands are:
 - `mirrord operator session kill --id {id}` which will forcefully stop a session with `id`,
   where you may obtain the session id through `mirrord operator status`;
 
-### `sessions` RBAC
+#### `sessions` RBAC
 
 Every `mirrord-operator-user` has access to **all** session operations by **default**, as they come
 with `deletecollection` and `delete` privileges for the `sessions` resource. You may limit
