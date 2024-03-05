@@ -15,7 +15,7 @@ tags: ["team", "enterprise"]
 
 ## Overview
 
-Whenever a user starts mirrord installed as part of mirrord for teams, the Operator assigns a
+Whenever a user starts mirrord on a cluster where mirrord for Teams is installed, the Operator assigns a
 session to this user, until they stop running mirrord, at which point the session is closed
 in the Operator automatically.
 
