@@ -90,7 +90,7 @@ social:
 #   weight: 30
 - name: Linkedin
   pre: linkedin
-  url: https://linkedin.com/metalbearco
+  url: https://www.linkedin.com/company/metalbearco/
   weight: 40
 footer_social:
 - name: Discord
@@ -107,5 +107,5 @@ footer_social:
   weight: 30
 - name: Linkedin
   pre: linkedin-solid
-  url: https://linkedin.com/metalbearco
+  url: https://www.linkedin.com/company/metalbearco/
   weight: 40
