@@ -27,4 +27,4 @@ List of third-party guides and videos about mirrord:
 | [Rethinking Cloud Development](https://www.youtube.com/watch?v=6ejod1da0KY) | Video | Overview and demo of mirrord |
 | [Advanced Kubernetes Debugging Techniques](https://github.com/konih/kubernetes-network-debugging/blob/main/advanced-debugging.md) | Slides | Slides about mirrord and other debugging tools |
 | [Mastering Local Microservices Debugging with Mirrord](https://medium.com/@emafuma/mastering-local-microservices-debugging-with-mirrord-0a99443c1544) | Blog | Demo of mirrord |
-
+| [Local Debugging of Dotnet Web API in AKS using Mirrord](https://medium.com/@srinivasmummareddy/local-debugging-of-dotnet-web-api-in-aks-using-mirrord-84d369738b35) | Blog | Demo of mirrord |
