@@ -1,4 +1,5 @@
 <head>    
+    {{- partial "header/google-tag.html" . }}
     <meta charset="utf-8">
     {{- hugo.Generator }}
     {{ if and (.Site.Params.alert) (ne .Section "docs") }}
