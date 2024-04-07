@@ -87,7 +87,7 @@ filter) for selected targets. Let us know if there are more features you would l
 
 When the mirrord CLI starts, it checks if an Operator is installed in the cluster and uses it if it's available. However, if the user lacks access to the Operator or if the Operator doesn't exist, mirrord attempts to create an agent directly.
 
-To prevent clients from attempting to create an agent without the Operator, you can add the [following key](/docs/	reference/configuration/#root-operator) to the mirrord configuration file:
+To prevent clients from attempting to create an agent without the Operator, you can add the [following key](/docs/reference/configuration/#root-operator) to the mirrord configuration file:
 
 ```json
 {
@@ -96,6 +96,6 @@ To prevent clients from attempting to create an agent without the Operator, you 
 ```
 
 
-To prevent mirrord clients from directly creating agents at the cluster level, we recommend using [Pod Admission Policies](https://kubernetes.io/docs/tasks/configure-pod-container/enforce-standards-namespace-labels/). Apply a baseline or stricter policy to all namespaces while excluding the mirrord namespace.
+To prevent mirrord clients from directly creating agents at the cluster level, we recommend disallowing the creation of pods with extra capabilities by using [Pod Admission Policies](https://kubernetes.io/docs/tasks/configure-pod-container/enforce-standards-namespace-labels/). Apply a baseline or stricter policy to all namespaces while excluding the mirrord namespace.
 
-Please note that you might have workloads that don't meet the security requirements imposed by that policy, please go through the relevant docs carefully.
+Note: before adding a new Pod Admission Policy, you should make sure it doesn't limit any functionality required by your existing workloads.
