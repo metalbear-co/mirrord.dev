@@ -37,13 +37,19 @@ Another reason that mirrord might seem not to work is if your remote pod has mor
 
 ### Incoming traffic to the remote target doesn't reach my local process
 
-This could happen for several reasons:
+#### The deployed service receives traffic instead of the local one
 1. The local process is listening on a different port than the remote target. You can either change
  the local process to listen on the same port as the remote target (don't worry about the port
  being used locally by other processes), or use the [`port_mapping`  configuration
  ](/docs/reference/configuration/#feature-network-incoming-port_mapping) to map the local port to a
  remote port.
 2. You're running with `network.incoming.mode` set to `mirror` on a cluster with a service mesh like Istio or Linkerd, which isn't currently supported. In this case, you should use the `--steal` flag instead.
+
+#### The deployed service traffic is stuck
+When stolen incoming connections (page loading forever, timeout) and you're using mesh, you can try using this configuration to fix it:
+```json
+{"agent": {"flush_connections": false}}
+```
 
 ### My application is trying to read a file locally instead of from the cluster
 
@@ -107,11 +113,3 @@ in the agent configuration:
 ### `mirrord operator status` fails with `503 Service Unavailable` on GKE
 
 If private networking is enabled, it is likely due to firewall rules blocking the mirrord operator's API service from the API server. To fix this, add a firewall rule that allows your cluster's master nodes to access TCP port 3000 in your cluster's pods. Please refer to the [GCP docs](https://cloud.google.com/kubernetes-engine/docs/how-to/private-clusters#add_firewall_rules) for information.
-
-
-### Incoming connections are stuck
-
-When stolen incoming connections (page loading forever, timeout) and you're using mesh, you can try using this configuration to fix it:
-```json
-{"agent": {"flush_connections": false}}
-```
