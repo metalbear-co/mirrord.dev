@@ -45,7 +45,7 @@ This could happen for several reasons:
  remote port.
 2. You're running with `network.incoming.mode` set to `mirror` on a cluster with a service mesh like Istio or Linkerd, which isn't currently supported. In this case, you should use the `--steal` flag instead.
 
-### The remote target stops receiving remote traffic
+### The remote target stops receiving remote traffic, but it doesn't reach my local process either
 This can happen in some clusters using a service mesh when stealing incoming traffic. You can use this configuration to fix it:
 ```json
 {"agent": {"flush_connections": false}}
