@@ -37,7 +37,7 @@ Another reason that mirrord might seem not to work is if your remote pod has mor
 
 ### Incoming traffic to the remote target doesn't reach my local process
 
-#### The deployed service receives traffic instead of the local one
+This could happen for several reasons:
 1. The local process is listening on a different port than the remote target. You can either change
  the local process to listen on the same port as the remote target (don't worry about the port
  being used locally by other processes), or use the [`port_mapping`  configuration
@@ -45,8 +45,8 @@ Another reason that mirrord might seem not to work is if your remote pod has mor
  remote port.
 2. You're running with `network.incoming.mode` set to `mirror` on a cluster with a service mesh like Istio or Linkerd, which isn't currently supported. In this case, you should use the `--steal` flag instead.
 
-#### The deployed service traffic is stuck
-When stolen incoming connections (page loading forever, timeout) and you're using mesh, you can try using this configuration to fix it:
+### The remote target stops receiving remote traffic
+This can happen in some clusters using a service mesh when stealing incoming traffic. You can use this configuration to fix it:
 ```json
 {"agent": {"flush_connections": false}}
 ```
