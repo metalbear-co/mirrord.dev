@@ -83,13 +83,13 @@ If the user doesn't have `get` access to the targets, then they won't be able to
 You can define [policies](/docs/managing-mirrord/policies/) that prevent stealing (or only prevent stealing without setting a
 filter) for selected targets. Let us know if there are more features you would like to be able to limit using policies.
 
-## How can I limit people from using mirrord OSS (avoiding/skipping the operator)
+## How can I prevent users from using mirrord without going through the Operator?
 
-When the mirrord CLI attempts to start, it automatically checks for the existence of an operator and utilizes it if available. However, if the user lacks access to the operator or if the operator doesn't exist, mirrord falls back to "OSS mode." In OSS mode, mirrord attempts to create an agent and operate independently.
+When the mirrord CLI starts, it checks if an Operator is installed in the cluster and uses it if it's available. However, if the user lacks access to the Operator or if the Operator doesn't exist, mirrord attempts to create an agent directly.
 
 Limiting mirrord OSS usage cluster-wide isn't straightforward since mirrord operates by leveraging generic Kubernetes functionality. However, adhering to robust security practices typically renders mirrord OSS unusable.
 
-If you want clients to automatically fail when attempting to use mirrord without the operator, you can modify the mirrord.json file as follows:
+To prevent clients from attempting to create an agent without the Operator, you can add the [following key](/docs/	reference/configuration/#root-operator) to the mirrord configuration file:
 
 ```json
 {
@@ -99,4 +99,4 @@ If you want clients to automatically fail when attempting to use mirrord without
 
 This configuration skips the detection and fallback logic, causing mirrord to fail if the operator cannot be utilized.
 
-To restrict mirrord usage at the cluster level, we recommend employing [Pod Admission Policies](https://kubernetes.io/docs/tasks/configure-pod-container/enforce-standards-namespace-labels/). Apply a baseline policy to all namespaces while excluding the mirrord namespace. By doing so, mirrord OSS functionality will be limited.
+To prevent mirrord clients from directly creating agents at the cluster level, we recommend using [Pod Admission Policies](https://kubernetes.io/docs/tasks/configure-pod-container/enforce-standards-namespace-labels/). Apply a baseline policy to all namespaces while excluding the mirrord namespace.
