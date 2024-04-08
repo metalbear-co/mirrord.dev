@@ -29,3 +29,4 @@ List of third-party guides and videos about mirrord:
 | [Mastering Local Microservices Debugging with Mirrord](https://medium.com/@emafuma/mastering-local-microservices-debugging-with-mirrord-0a99443c1544) | Blog | Demo of mirrord |
 | [Local Debugging of Dotnet Web API in AKS using Mirrord](https://medium.com/@srinivasmummareddy/local-debugging-of-dotnet-web-api-in-aks-using-mirrord-84d369738b35) | Blog | Demo of mirrord |
 | [Local Development With Mirrord](https://linuxblog.xyz/posts/mirrord/) | Blog | Demo of mirrord |
+| [Making locally executing code think it’s running on k8s](https://medium.com/@srinivasmummareddy/local-debugging-of-dotnet-web-api-in-aks-using-mirrord-84d369738b35) | Blog | Overview of mirrord |
