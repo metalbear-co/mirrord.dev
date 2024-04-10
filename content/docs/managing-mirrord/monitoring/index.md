@@ -17,5 +17,5 @@ tags: ["team", "enterprise"]
 ## Monitoring
 
 The mirrord Operator can produce logs in JSON format that can be digested by most popular logging solutions (DataDog, Dynatrace, etc).
-To enable JSON logging, specify `json_log: true` under `operator` in the operator helm chart values.
+To enable JSON logging, set `operator.json_log` to `true` in the Operator Helm chart values.
 Log level is info by default, and can be altered via operator container environment using `RUST_LOG` [directive](https://docs.rs/tracing-subscriber/latest/tracing_subscriber/filter/struct.EnvFilter.html).
