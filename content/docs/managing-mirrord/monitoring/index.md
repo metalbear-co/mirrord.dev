@@ -18,4 +18,4 @@ tags: ["team", "enterprise"]
 
 The mirrord Operator can produce logs in JSON format that can be digested by most popular logging solutions (DataDog, Dynatrace, etc).
 To enable JSON logging, set `operator.jsonLog` to `true` in the Operator Helm chart values.
-The log level is `INFO` by default, and can be changed via operator container environment using the `RUST_LOG` [directive](https://docs.rs/tracing-subscriber/latest/tracing_subscriber/filter/struct.EnvFilter.html). The most common value would be `mirrord=trace`/`mirrord=debug` etc.
+The log level is `INFO` by default, and can be changed using the `RUST_LOG` environment variable in the Operator container, which takes values in the following format: `mirrord={log_level}` (e.g. `mirrord=debug`).
