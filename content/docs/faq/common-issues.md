@@ -98,7 +98,7 @@ As a temporary solution for cleaning up completed agent pods manually, you can r
 kubectl delete jobs --selector=app=mirrord --field-selector=status.successful=1
 ```
 
-### My local process gets permission (EACCESS) error on file access
+### My local process gets permission (EACCESS) error on file access or DNS can't resolve
 
 If your cluster is running on Bottlerocket or has SELinux enabled, please try enabling the `privileged` flag
 in the agent configuration:
