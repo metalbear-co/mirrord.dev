@@ -42,12 +42,12 @@ Fields:
 |client_name|`whoami::realname` of client|`All`|
 |client_user|Kubernetes user of client (via k8s RBAC)|`All`|
 |http_filter|The client's configured [HTTP Filter](https://mirrord.dev/docs/reference/configuration/#feature-network-incoming-http-filter)|`Port Steal`|
-|port|port number (if relevant)|`Port Steal` `Port Mirror` `Port Release`|
+|port|port number|`Port Steal` `Port Mirror` `Port Release`|
 |scale_down|whether the session's target was scaled down|`Copy Target`|
-|session_id|unique id for individial mirrord execution (base64)|`Port Steal`
+|session_id|unique id for individual mirrord sessions|`Port Steal`
 `Port Mirror` `Port Release` `Session Start` `Session End`|
 |session_duration|the session's duration in seconds|`Session End`|
-|target|kubernetes resource targeted|`All`|
+|target|the session's target|`All`|
 
 
 ## DataDog dashboard
