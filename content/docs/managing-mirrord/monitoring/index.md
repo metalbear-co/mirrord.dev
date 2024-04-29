@@ -43,7 +43,7 @@ Fields:
 |client_user|Kubernetes user of client (via k8s RBAC)|`All`|
 |http_filter|The client's configured [HTTP Filter](https://mirrord.dev/docs/reference/configuration/#feature-network-incoming-http-filter)|`Port Steal`|
 |port|port number (if relevant)|`Port Steal` `Port Mirror` `Port Release`|
-|scale_down|if target was scaled down|`Copy Target`|
+|scale_down|whether the session's target was scaled down|`Copy Target`|
 |session_id|unique id for individial mirrord execution (base64)|`Port Steal`
 `Port Mirror` `Port Release` `Session Start` `Session End`|
 |session_duration|time in seconds of session's existance|`Session End`|
