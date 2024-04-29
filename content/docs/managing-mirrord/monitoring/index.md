@@ -46,7 +46,7 @@ Fields:
 |scale_down|whether the session's target was scaled down|`Copy Target`|
 |session_id|unique id for individial mirrord execution (base64)|`Port Steal`
 `Port Mirror` `Port Release` `Session Start` `Session End`|
-|session_duration|time in seconds of session's existance|`Session End`|
+|session_duration|the session's duration in seconds|`Session End`|
 |target|kubernetes resource targeted|`All`|
 
 
