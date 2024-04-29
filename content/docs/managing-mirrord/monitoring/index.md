@@ -24,7 +24,7 @@ The log level is `INFO` by default, and can be changed using the `RUST_LOG` envi
 
 _functional logs are available from operator version 3.80.0 / Chart version 1.3.2 and are currently WIP, meaning it can change_
 
-There are logs which we set on info level for building dashboards/integrations above, and tend to keep the interface stable.
+The following logs are written with log level `INFO`, and can be used for dashboards within monitoring solutions in order to monitor mirrord usage within your organization:
 
 Log messages:
 - Copy Target
