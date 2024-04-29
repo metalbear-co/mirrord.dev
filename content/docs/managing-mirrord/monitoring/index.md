@@ -22,32 +22,30 @@ The log level is `INFO` by default, and can be changed using the `RUST_LOG` envi
 
 ## Functional Logs
 
-_functional logs are available from operator version 3.80.0 / Chart version 1.3.2 and are currently WIP, meaning it can change_
-
 The following logs are written with log level `INFO`, and can be used for dashboards within monitoring solutions in order to monitor mirrord usage within your organization:
 
 Log messages:
-- Copy Target
-- Port Steal
-- Port Mirror
-- Port Release
-- Session Start
-- Session End
+- Target Copied
+- Port Stolen
+- Port Mirrored
+- Port Released
+- Session Started
+- Session Ended
 
 Fields:
 
 |field|description|events|
 |---|---|---|
+|target|the session's target|`All`|
 |client_hostname|`whoami::hostname` of client|`All`|
 |client_name|`whoami::realname` of client|`All`|
 |client_user|Kubernetes user of client (via k8s RBAC)|`All`|
-|http_filter|The client's configured [HTTP Filter](https://mirrord.dev/docs/reference/configuration/#feature-network-incoming-http-filter)|`Port Steal`|
-|port|port number|`Port Steal` `Port Mirror` `Port Release`|
-|scale_down|whether the session's target was scaled down|`Copy Target`|
-|session_id|unique id for individual mirrord sessions|`Port Steal`
-`Port Mirror` `Port Release` `Session Start` `Session End`|
-|session_duration|the session's duration in seconds|`Session End`|
-|target|the session's target|`All`|
+|session_id|unique id for individual mirrord sessions|`Port Steal` `Port Mirrored` `Port Released` `Session Started` `Session Ended`|
+|session_duration|the session's duration in seconds|`Session Ended`|
+|port|port number|`Port Stolen` `Port Mirrored` `Port Released`|
+|http_filter|the client's configured [HTTP Filter](https://mirrord.dev/docs/reference/configuration/#feature-network-incoming-http-filter)|`Port Stolen`|
+|scale_down|whether the session's target was scaled down|`Target Copied`|
+
 
 
 ## DataDog dashboard
