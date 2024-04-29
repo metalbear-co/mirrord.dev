@@ -19,3 +19,38 @@ tags: ["team", "enterprise"]
 The mirrord Operator can produce logs in JSON format that can be digested by most popular logging solutions (DataDog, Dynatrace, etc).
 To enable JSON logging, set `operator.jsonLog` to `true` in the Operator Helm chart values.
 The log level is `INFO` by default, and can be changed using the `RUST_LOG` environment variable in the Operator container, which takes values in the following format: `mirrord={log_level}` (e.g. `mirrord=debug`).
+
+## Functional Logs
+
+_functional logs are available from operator version 3.80.0 / Chart version 1.3.2 and are currently WIP, meaning it can change_
+
+There are logs which we set on info level for building dashboards/integrations above, and tend to keep the interface stable.
+
+Log messages:
+- Copy Target
+- Port Steal
+- Port Mirror
+- Port Release
+- Session Start
+- Session End
+
+Fields:
+
+|field|description|events|
+|---|---|---|
+|client_hostname|`whoami::hostname` of client|`All`|
+|client_name|`whoami::realname` of client|`All`|
+|client_user|kubenetes user of client (via k8s RBAC)|`All`|
+|http_filter|http filter for stealing http connections|`Port Steal`|
+|port|port number (if relevant)|`Port Steal` `Port Mirror` `Port Release`|
+|scale_down|if target was scaled down|`Copy Target`|
+|session_id|unique id for individial mirrord execution (base64)|`Port Steal`
+`Port Mirror` `Port Release` `Session Start` `Session End`|
+|session_duration|time in seconds of session's existance|`Session End`|
+|target|kubernetes resource targeted|`All`|
+
+
+## DataDog dashboard
+
+We offer a DataDog dashboard you can import to track statistics (working on official DD integration as well).
+Download it <a href="/Mirrord_Operator_Dashboard.json" download>here</a>
