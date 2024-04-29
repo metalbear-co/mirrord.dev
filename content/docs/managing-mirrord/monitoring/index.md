@@ -40,7 +40,7 @@ Fields:
 |---|---|---|
 |client_hostname|`whoami::hostname` of client|`All`|
 |client_name|`whoami::realname` of client|`All`|
-|client_user|kubenetes user of client (via k8s RBAC)|`All`|
+|client_user|Kubernetes user of client (via k8s RBAC)|`All`|
 |http_filter|http filter for stealing http connections|`Port Steal`|
 |port|port number (if relevant)|`Port Steal` `Port Mirror` `Port Release`|
 |scale_down|if target was scaled down|`Copy Target`|
