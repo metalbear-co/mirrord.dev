@@ -23,7 +23,7 @@ mirrord also supports for [Go](https://metalbear.co/blog/hooking-go-from-rust-hi
 
 ### Does mirrord support clusters with a service mesh like Istio or Linkerd?
 
-Yes. However, traffic mirroring isn't currently supported - you can use the `--steal` flag to steal traffic instead.
+Yes.
 
 ### Does mirrord support OpenShift?
 
