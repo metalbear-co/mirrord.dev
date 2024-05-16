@@ -95,7 +95,8 @@ To prevent clients from attempting to create an agent without the Operator, you 
 }
 ```
 
-
 To prevent mirrord clients from directly creating agents at the cluster level, we recommend disallowing the creation of pods with extra capabilities by using [Pod Admission Policies](https://kubernetes.io/docs/tasks/configure-pod-container/enforce-standards-namespace-labels/). Apply a baseline or stricter policy to all namespaces while excluding the mirrord namespace.
 
 Note: before adding a new Pod Admission Policy, you should make sure it doesn't limit any functionality required by your existing workloads.
+
+To prevent mirrord clients from communicating directly with the already existing agents, we recommend enabling TLS protocol for the operator–agent connections. You can do this in the operator Helm chart or manually by setting `OPERATOR_AGENT_CONNECTION_TLS=true` in the operator container environment.
