@@ -35,5 +35,5 @@ One way to use mirrord's [targetless mode]({{< ref "/docs/using-mirrord/targetle
   
 ## What's next?
 1. If you'd like to intercept traffic rather than mirror it so that your local process is the one answering the remote requests, check out [this guide](/docs/using-mirrord/steal/). Note that you can even filter which traffic you intercept!
-2. If your local process reads from a queue, you might want to test out the [pause feature](/docs/using-mirrord/pause/), which temporarily pauses the remote target so it doesn't compete with your local process for queue messages.
+2. If your local process reads from a queue, you might want to test out the [copy target feature](/docs/using-mirrord/copy-target/), which temporarily creates a copy of the mirrord session target. With its `scaledown` flag it allows you to temporarily delete all replicas in your targeted rollout or deployment, so that none competes with your local process for queue messages.
 3. If you just want to learn more about mirrord, why not check out our [architecture]({{< ref "/docs/reference/architecture" >}} "architecture") or [configuration]({{< ref "/docs/reference/configuration" >}} "configuration") sections?
