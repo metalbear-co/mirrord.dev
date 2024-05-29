@@ -180,8 +180,8 @@ The regular expression is evaluated with the [fancy_regex](https://docs.rs/fancy
 rust crate.
 
 ##### Specifying a Filter
-The HTTP header filter can be specified in the mirrord configuration file by setting the incoming mode to
-`steal` and specifying a filter in `feature.network.incoming.http_filter.header_filter` or `feature.network.incoming.http_filter.path_filter`.
+An HTTP filter can be specified in the mirrord configuration file by setting the incoming mode to
+`steal` and specifying a filter in [`feature.network.incoming.http_filter.header_filter`](https://mirrord.dev/docs/reference/configuration/#feature-network-incoming-http-header-filter) or [`feature.network.incoming.http_filter.path_filter`](https://mirrord.dev/docs/reference/configuration/#feature-network-incoming-http-path-filter).
 
 ##### Setting Custom HTTP Ports
 The configuration also allows specifying custom HTTP ports under `feature.network.incoming.http_filter.ports`.
