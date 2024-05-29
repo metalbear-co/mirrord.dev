@@ -183,48 +183,7 @@ rust crate.
 An HTTP filter can be specified in the mirrord configuration file by setting the incoming mode to
 `steal` and specifying a filter in [`feature.network.incoming.http_filter.header_filter`](https://mirrord.dev/docs/reference/configuration/#feature-network-incoming-http-header-filter) or [`feature.network.incoming.http_filter.path_filter`](https://mirrord.dev/docs/reference/configuration/#feature-network-incoming-http-path-filter).
 
-###### Filtering out healthchecks using a negative look-ahead
-
-The HTTP filters both take "fancy" regexes that support negative look-aheads.
-This can be useful for avoiding the stealing of Kubernetes liveness, readiness and startup probes.
-
-For filtering out any probes sent to the application by kubernetes, you can use this header filter,
-to require a user-agent that does not start with "kube-probe":
-
-```json
-{
-  "feature": {
-    "network": {
-      "incoming": {
-        "mode": "steal",
-        "http_filter": {
-          "header_filter": "^User-Agent: (?!kube-probe)",
-        }
-      }
-    }
-  }
-}
-```
-
-To avoid stealing requests sent to URIs starting with "/health/", you can set this filter:
-
-```json
-{
-  "feature": {
-    "network": {
-      "incoming": {
-        "mode": "steal",
-        "http_filter": {
-          "path_filter": "^(?!/health/)",
-        }
-      }
-    }
-  }
-}
-```
-
-
-###### Setting Custom HTTP Ports
+##### Setting Custom HTTP Ports
 The configuration also allows specifying custom HTTP ports under `feature.network.incoming.http_filter.ports`.
 By default, ports 80 and 8080 are used as HTTP ports if a filter is specified, which means that the mirrord agent
 checks each new connection on those ports for HTTP, and if the connection has valid HTTP messages, they are filtered
