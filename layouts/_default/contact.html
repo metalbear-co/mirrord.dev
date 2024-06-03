@@ -1,13 +1,14 @@
 {{- define "main" }}
 <main id="site-main" class="site__main single-page bg-white -translate-y-[1px]">
   <div class="bg-[#FBFBFD] pt-16 lg:pt-24 overflow-hidden" id="contact-us">
-    <div class="container w-full max-w-screen-lg mx-auto px-4 relative before:absolute before:content-[''] before:top-[50%] before:-left-[30%] before:w-[200%] before:bg-white before:h-[50%]">
+    <div
+      class="container w-full max-w-screen-lg mx-auto px-4 relative before:absolute before:content-[''] before:top-[50%] before:-left-[30%] before:w-[200%] before:bg-white before:h-[50%]">
       <div class="bg-tertiary rounded-3xl py-6 px-2 relative">
         <header class="text-center">
           <h1>Contact Us</h1>
         </header>
-
-        <div class="contact-us__form w-10/12 lg:w-1/2 mx-auto relative" x-data="{ submittedMessage: null }">
+        <div id="contact-form-id" class="contact-us__form w-10/12 lg:w-1/2 mx-auto relative"
+          x-data="{ submittedMessage: null }">
           <form id="contact-form">
             <label for="name">First Name*</label>
             <input
@@ -38,8 +39,8 @@
             <span x-text="submittedMessage && submittedMessage.text"></span>
           </div>
           <p class="mt-3">Or if you prefer,
-            <a href="https://calendly.com/eyal-metalbear/mirrord-session">schedule a demo</a>.
-            </p>
+            <a href="https://calendly.com/eyal-metalbear/mirrord-session">Schedule a demo</a>.
+          </p>
         </div>
       </div>
     </div>
@@ -49,9 +50,17 @@
   <script>
     // taken from https://docs.web3forms.com/how-to-guides/html-and-javascript#javascript
     const form = document.getElementById('contact-form');
-    const result = document.getElementById('result');
 
-    form.addEventListener('submit', function(e) {
+    function updateResult(message) {
+      document.getElementById('contact-form-id').attributes['x-data'].value = "{ submittedMessage: { text: '" + message + "' } }";
+    }
+
+    function resetResult(message) {
+      document.getElementById('contact-form-id').attributes['x-data'].value = "{ submittedMessage: null }";
+    }
+
+
+    form.addEventListener('submit', function (e) {
       e.preventDefault();
       const formData = new FormData(form);
       const object = {
@@ -89,7 +98,7 @@
 
       }
       const json = JSON.stringify(object);
-      result.innerHTML = "Submitting your message..."
+      updateResult("Submitting your message...");
 
       fetch('https://forms-eu1.hsforms.com/submissions/v3/integration/submit/143742664/bc248685-ec2b-4504-9d22-51d2b17c2be6', {
         method: 'POST',
@@ -102,22 +111,20 @@
         .then(async (response) => {
           let json = await response.json();
           if (response.status == 200) {
-            result.innerHTML = "Thank you for contacting us! We'll get back to you soon.";
+            updateResult("Thank you for contacting us! We'll get back to you soon.");
           } else {
             console.log(response);
-            result.innerHTML =
-              `Failed to submit message, got error response from server: ${json.message}. Please contact us at
-              support@metalbear.co`;
+            updateResult(`Failed to submit message, got error response from server: ${json.message}. Please contact us at support@metalbear.co`);
           }
         })
         .catch(error => {
           console.log(error);
-          result.innerHTML = "Failed to submit your message. Please contact us at support@metalbear.co";
+          updateResult("Failed to submit your message. Please contact us at support@metalbear.co");
         })
-        .then(function() {
+        .then(function () {
           form.reset();
           setTimeout(() => {
-            result.style.display = "none";
+            resetResult()
           }, 15000);
         });
     });
