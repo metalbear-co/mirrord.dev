@@ -8,12 +8,15 @@
         </header>
 
         <div class="contact-us__form w-10/12 lg:w-1/2 mx-auto relative" x-data="{ submittedMessage: null }">
-          <form id="contact-form" method="post" action="https://api.web3forms.com/submit">
-            <input type="hidden" name="access_key" value="39afe569-931e-42d7-b2c7-97e43cde610b">
-            <label for="name">Name*</label>
+          <form id="contact-form">
+            <label for="name">First Name*</label>
             <input
               class="contact-us__input mb-3 w-full outline-none focus:outline-none text-base text-[#222222] placeholder:text-[#222222] focus-within:text-[#222222] placeholder:font-light border border-solid border-[#222222] rounded-[5px] lg:rounded-[10px] px-8 py-[10px] lg:py-4"
-              type="text" id="name" name="name" data-required="true" required="">
+              type="text" id="firstname" name="firstname" data-required="true" required="">
+            <label for="name">Last Name*</label>
+            <input
+              class="contact-us__input mb-3 w-full outline-none focus:outline-none text-base text-[#222222] placeholder:text-[#222222] focus-within:text-[#222222] placeholder:font-light border border-solid border-[#222222] rounded-[5px] lg:rounded-[10px] px-8 py-[10px] lg:py-4"
+              type="text" id="lastname" name="lastname" data-required="true" required="">
             <label for="work-email">Work Email*</label>
             <input
               class="contact-us__input mb-3 w-full outline-none focus:outline-none text-base text-[#222222] placeholder:text-[#222222] focus-within:text-[#222222] placeholder:font-light border border-solid border-[#222222] rounded-[5px] lg:rounded-[10px] px-8 py-[10px] lg:py-4"
@@ -51,11 +54,44 @@
     form.addEventListener('submit', function(e) {
       e.preventDefault();
       const formData = new FormData(form);
-      const object = Object.fromEntries(formData);
+      const object = {
+        context: {
+          pageUri: window.location.href,
+          pageName: document.title
+        },
+        fields: [
+          {
+            "objectTypeId": "0-1",
+            "name": "email",
+            "value": formData.get('work-email')
+          },
+          {
+            "objectTypeId": "0-1",
+            "name": "firstname",
+            "value": formData.get('firstname')
+          },
+          {
+            "objectTypeId": "0-1",
+            "name": "lastname",
+            "value": formData.get('lastname')
+          },
+          {
+            "objectTypeId": "0-1",
+            "name": "message",
+            "value": formData.get('message')
+          },
+          {
+            "objectTypeId": "0-1",
+            "name": "message",
+            "value": formData.get('message')
+          },
+        ],
+
+      }
       const json = JSON.stringify(object);
       result.innerHTML = "Submitting your message..."
 
-      fetch('https://api.web3forms.com/submit', {
+      fetch('https://forms-eu1.hsforms.com/submissions/v3/integration/submit/143742664/bc248685-ec2b-4504-9d22-51d2b17c2be6', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
