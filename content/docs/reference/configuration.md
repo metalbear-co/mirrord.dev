@@ -96,9 +96,9 @@ configuration file containing all fields.
     },
     "fs": {
       "mode": "write",
-      "read_write": ".+\.json" ,
-      "read_only": [ ".+\.yaml", ".+important-file\.txt" ],
-      "local": [ ".+\.js", ".+\.mjs" ]
+      "read_write": ".+\\.json" ,
+      "read_only": [ ".+\\.yaml", ".+important-file\\.txt" ],
+      "local": [ ".+\\.js", ".+\\.mjs" ]
     },
     "network": {
       "incoming": {
@@ -549,9 +549,9 @@ have support for a shortened version, that you can see [here](#root-shortened).
     },
     "fs": {
       "mode": "write",
-      "read_write": ".+\.json" ,
-      "read_only": [ ".+\.yaml", ".+important-file\.txt" ],
-      "local": [ ".+\.js", ".+\.mjs" ]
+      "read_write": ".+\\.json" ,
+      "read_only": [ ".+\\.yaml", ".+important-file\\.txt" ],
+      "local": [ ".+\\.js", ".+\\.mjs" ]
     },
     "network": {
       "incoming": {
@@ -638,10 +638,10 @@ For more information, check the file operations
   "feature": {
     "fs": {
       "mode": "write",
-      "read_write": ".+\.json" ,
-      "read_only": [ ".+\.yaml", ".+important-file\.txt" ],
-      "local": [ ".+\.js", ".+\.mjs" ],
-      "not_found": [ "\.config/gcloud" ]
+      "read_write": ".+\\.json" ,
+      "read_only": [ ".+\\.yaml", ".+important-file\\.txt" ],
+      "local": [ ".+\\.js", ".+\\.mjs" ],
+      "not_found": [ "\\.config/gcloud" ]
     }
   }
 }
