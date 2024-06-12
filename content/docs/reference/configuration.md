@@ -120,10 +120,10 @@ configuration file containing all fields.
         "unix_streams": "bear.+"
       },
       "dns": false,
-      "copy_target": {
-        "scale_down": false
-      }
     },
+    "copy_target": {
+      "scale_down": false
+    }
   },
   "operator": true,
   "kubeconfig": "~/.kube/config",
