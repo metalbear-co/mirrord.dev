@@ -53,11 +53,11 @@ body {
 }
 
 .menu__item {
-    @apply mb-0 pl-4 lg:pl-0 pr-4;
+    @apply mb-0 px-4 lg:px-8;
 }
 
 .menu__item-link {
-    @apply py-4 lg:py-2 px-2 hover:no-underline;
+    @apply py-4 lg:py-2 px-[2px] hover:no-underline;
 }
 
 .active-link {
@@ -489,4 +489,8 @@ body {
 
 .medium-zoom-image--opened {
     z-index: 9999;
-  }
+}
+
+.pricing-page-title {
+    transform: rotateX(160deg);
+}
