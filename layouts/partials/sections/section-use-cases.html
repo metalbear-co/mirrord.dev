@@ -1,0 +1,119 @@
+<div class="bg-[#FBFBFD] rounded-tr-[125px] lg:rounded-tr-[180px] pt-16">
+    <div class="container w-full max-w-screen-xl mx-auto px-4">
+        <header class="text-center mb-12">
+            <h2 id="use-cases" class="text-2xl lg:text-4xl text-[#222222]">The same SDLC, but <span class="text-primary">faster</span></h2>
+        </header>
+
+        <div x-data="{ 
+            init() {
+              new Splide(this.$refs.slider, {
+                trimSpace: false,
+                focus    : 'center',
+                perPage  : 1,
+                padding: { left: '0', right: '3rem' },
+                gap: '1.5rem',
+                arrows: false,
+                pagination: false
+                }).mount()
+              },
+          }" class="bg-[#FBFBFD] lg:hidden">
+            <div class="splide" x-ref="slider">
+                <div class="splide__track">
+                    <ul class="splide__list">
+
+                        <li class="splide__slide rounded-md pt-8 pb-8 px-[28px] border border-[#000000]">
+                            <div class="mb-4">
+                                <svg class="mx-auto mb-3" width="22" height="17" viewBox="0 0 22 17" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M21.3218 8.5995L16.3769 13.4345L15.141 12.2259L18.8498 8.5995L15.141 4.97307L16.3769 3.76455L21.3218 8.5995ZM2.81512 8.5995L6.52397 12.2259L5.28798 13.4345L0.34314 8.5995L5.28798 3.76455L6.5231 4.97307L2.81512 8.5995ZM8.89893 16.2917H7.03883L12.766 0.907333H14.6261L8.89893 16.2917Z"
+                                        fill="#222222" />
+                                </svg>
+                                <div class="w-14 h-1 bg-[#F46262] mx-auto"></div>
+                            </div>
+                            <h3 class="text-base text-[#222222] text-center mb-4">DEVELOPMENT</h3>
+                            <p class="text-sm text-[#222222] text-center leading-relaxed mb-0">Stop trying to run everything locally. Plug your new code in and out of your cloud environment right from your IDE, and quickly test it out in cloud conditions. No Dockerization or deployment required!</p>
+                        </li>
+
+                        <li class="splide__slide rounded-md pt-8 pb-8 px-[28px] border border-[#000000]">
+                            <div class="mb-4">
+                                <svg class="mx-auto mb-3" width="21" height="20" viewBox="0 0 21 20" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M2.76854 19.1299C2.20545 19.1299 1.72324 18.9323 1.32191 18.537C0.92127 18.141 0.720947 17.6653 0.720947 17.1098V2.96859C0.720947 2.41305 0.92127 1.9373 1.32191 1.54134C1.72324 1.14606 2.20545 0.948425 2.76854 0.948425H17.1017C17.2382 0.948425 17.3661 0.960883 17.4856 0.985798C17.605 1.01139 17.7245 1.04943 17.8439 1.09994L15.9499 2.96859H2.76854V17.1098H17.1017V10.3927L19.1492 8.37254V17.1098C19.1492 17.6653 18.9489 18.141 18.5483 18.537C18.147 18.9323 17.6647 19.1299 17.1017 19.1299H2.76854ZM9.4488 15.0896L3.66436 9.38262L5.09767 7.9685L9.4488 12.2614L18.8421 2.99384L20.301 4.38271L9.4488 15.0896Z"
+                                        fill="#222222" />
+                                </svg>
+                                <div class="w-14 h-1 bg-[#F46262] mx-auto"></div>
+                            </div>
+                            <h3 class="text-base text-[#222222] text-center mb-4">CI</h3>
+                            <p class="text-sm text-[#222222] text-center leading-relaxed mb-0"> CI taking ages to set up ephemeral environments for end-to-end testing?
+                                Use the mirrord CLI to run your tests in your already existing staging environment. It's non-invasive, supports concurrency, and cleans up after itself.</p>
+                        </li>
+
+                        <li class="splide__slide rounded-md pt-8 pb-8 px-[28px] border border-[#000000]">
+                            <div class="mb-4">
+                                <svg class="mx-auto mb-3" width="22" height="21" viewBox="0 0 22 21" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M16.7596 10.609V15.8537M18.5078 10.609V2.74204C18.5078 2.27838 18.3237 1.83372 17.9958 1.50586C17.6679 1.17801 17.2233 0.99382 16.7596 0.99382C16.296 0.99382 15.8513 1.17801 15.5234 1.50586C15.1956 1.83372 15.0114 2.27838 15.0114 2.74204V10.609M1.02563 4.49026C1.02563 2.74204 1.89975 0.99382 2.77386 0.99382L4.52208 4.49026H6.2703L8.01852 0.99382C8.89263 0.99382 9.76674 2.74204 9.76674 4.49026C9.76674 6.46051 8.89263 7.9867 7.14441 8.86081V18.476C7.14441 19.3501 7.14441 20.2242 5.39619 20.2242C3.64797 20.2242 3.64797 19.3501 3.64797 18.476V8.86081C1.89975 7.9867 1.02563 6.46051 1.02563 4.49026ZM15.0114 15.8537L15.8855 20.2242H17.6337L18.5078 15.8537H15.0114ZM12.3891 10.609H21.1302H12.3891Z"
+                                        stroke="#222222" stroke-width="1.39858" />
+                                </svg>
+                                <div class="w-14 h-1 bg-[#F46262] mx-auto"></div>
+                            </div>
+                            <h3 class="text-base text-[#222222] text-center mb-4">DEBUGGING</h3>
+                            <p class="text-sm text-[#222222] text-center leading-relaxed mb-0">New version breaks in staging but works on your machine? Reproduce the bug in staging with your local process plugged in, and debug it right
+                                in your IDE. Then immediately test your fix, no deployment necessary.</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="hidden lg:grid grid-cols-12 gap-x-8">
+            <div class="col-span-4 rounded-md pt-10 pb-8 px-8 border border-[#000000]">
+                <div class="mb-4">
+                    <svg class="mx-auto mb-3" width="30" height="22" viewBox="0 0 30 22" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M30 11L22.9288 17.9141L21.1613 16.1859L26.465 11L21.1613 5.81411L22.9288 4.08589L30 11ZM3.535 11L8.83875 16.1859L7.07125 17.9141L0 11L7.07125 4.08589L8.8375 5.81411L3.535 11ZM12.235 22H9.575L17.765 0H20.425L12.235 22Z"
+                            fill="#222222" />
+                    </svg>
+                    <div class="w-16 h-1 bg-[#F46262] mx-auto"></div>
+                </div>
+                <h3 class="text-xl text-[#222222] text-center mb-6">DEVELOPMENT</h3>
+                <p class="text-lg text-[#222222] text-center leading-relaxed mb-0">Stop trying to run everything locally. Plug your new code in and out of your cloud environment right from your IDE, and quickly test it out in cloud conditions. No Dockerization or deployment required!
+                    </p>
+            </div>
+
+            <div class="col-span-4 rounded-md pt-10 pb-8 px-8 border border-[#000000]">
+                <div class="mb-4">
+                    <svg class="mx-auto mb-3" width="28" height="26" viewBox="0 0 28 26" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M2.9281 26C2.12288 26 1.43331 25.7174 0.859399 25.1521C0.286466 24.5859 0 23.9056 0 23.1111V2.88889C0 2.09444 0.286466 1.41411 0.859399 0.847889C1.43331 0.282629 2.12288 0 2.9281 0H23.4248C23.62 0 23.8031 0.0178147 23.9739 0.0534444C24.1447 0.090037 24.3155 0.144445 24.4863 0.216667L21.7778 2.88889H2.9281V23.1111H23.4248V13.5056L26.3529 10.6167V23.1111C26.3529 23.9056 26.0665 24.5859 25.4935 25.1521C24.9196 25.7174 24.2301 26 23.4248 26H2.9281ZM12.481 20.2222L4.20915 12.0611L6.25882 10.0389L12.481 16.1778L25.9137 2.925L28 4.91111L12.481 20.2222Z"
+                            fill="#222222" />
+                    </svg>
+                    <div class="w-16 h-1 bg-[#F46262] mx-auto"></div>
+                </div>
+                <h3 class="text-xl text-[#222222] text-center mb-6">CI</h3>
+                <p class="text-lg text-[#222222] text-center leading-relaxed mb-0">CI taking ages to set up ephemeral environments for end-to-end testing?
+                    Use the mirrord CLI to run your tests in your already existing staging environment. It's non-invasive, supports concurrency, and cleans up after itself.</p>
+            </div>
+
+            <div class="col-span-4 rounded-md pt-10 pb-8 px-8 border border-[#000000]">
+                <div class="mb-4">
+                    <svg class="mx-auto mb-3" width="30" height="30" viewBox="0 0 30 30" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M23.75 15V22.5M26.25 15V3.75C26.25 3.08696 25.9866 2.45107 25.5178 1.98223C25.0489 1.51339 24.413 1.25 23.75 1.25C23.087 1.25 22.4511 1.51339 21.9822 1.98223C21.5134 2.45107 21.25 3.08696 21.25 3.75V15M1.25 6.25C1.25 3.75 2.5 1.25 3.75 1.25L6.25 6.25H8.75L11.25 1.25C12.5 1.25 13.75 3.75 13.75 6.25C13.75 9.0675 12.5 11.25 10 12.5V26.25C10 27.5 10 28.75 7.5 28.75C5 28.75 5 27.5 5 26.25V12.5C2.5 11.25 1.25 9.0675 1.25 6.25ZM21.25 22.5L22.5 28.75H25L26.25 22.5H21.25ZM17.5 15H30H17.5Z"
+                            stroke="#222222" stroke-width="2" />
+                    </svg>
+                    <div class="w-16 h-1 bg-[#F46262] mx-auto"></div>
+                </div>
+                <h3 class="text-xl text-[#222222] text-center mb-6">DEBUGGING</h3>
+                <p class="text-lg text-[#222222] text-center leading-relaxed mb-0">New version breaks in staging but works on your machine? Reproduce the bug in staging with your local process plugged in, and debug it right
+                    in your IDE. Then immediately test your fix, no deployment necessary.</p>
+            </div>
+        </div>
+    </div>
+</div>

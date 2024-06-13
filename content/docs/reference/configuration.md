@@ -2,7 +2,7 @@
 title: "Configuration"
 description: "Config"
 date: 2023-05-17T13:59:39+01:00
-lastmod: 2024-05-29T13:37:39+01:00
+lastmod: 2024-06-12T13:37:39+01:00
 draft: false
 images: []
 menu:
@@ -96,15 +96,15 @@ configuration file containing all fields.
     },
     "fs": {
       "mode": "write",
-      "read_write": ".+\.json" ,
-      "read_only": [ ".+\.yaml", ".+important-file\.txt" ],
-      "local": [ ".+\.js", ".+\.mjs" ]
+      "read_write": ".+\\.json" ,
+      "read_only": [ ".+\\.yaml", ".+important-file\\.txt" ],
+      "local": [ ".+\\.js", ".+\\.mjs" ]
     },
     "network": {
       "incoming": {
         "mode": "steal",
         "http_filter": {
-          "header_filter": "host: api\..+"
+          "header_filter": "host: api\\..+"
         },
         "port_mapping": [[ 7777, 8888 ]],
         "ignore_localhost": false,
@@ -119,11 +119,11 @@ configuration file containing all fields.
         "ignore_localhost": false,
         "unix_streams": "bear.+"
       },
-      "dns": false,
-      "copy_target": {
-        "scale_down": false
-      }
+      "dns": false
     },
+    "copy_target": {
+      "scale_down": false
+    }
   },
   "operator": true,
   "kubeconfig": "~/.kube/config",
@@ -254,7 +254,7 @@ We provide sane defaults for this option, so you don't have to set up anything h
     "communication_timeout": 30,
     "startup_timeout": 360,
     "network_interface": "eth0",
-    "flush_connections": false,
+    "flush_connections": false
   }
 }
 ```
@@ -450,7 +450,7 @@ Complete setup:
 {
   "image": {
     "registry": "internal.repo/images/mirrord",
-    "tag": "latest",
+    "tag": "latest"
   }
 }
 ```
@@ -549,15 +549,15 @@ have support for a shortened version, that you can see [here](#root-shortened).
     },
     "fs": {
       "mode": "write",
-      "read_write": ".+\.json" ,
-      "read_only": [ ".+\.yaml", ".+important-file\.txt" ],
-      "local": [ ".+\.js", ".+\.mjs" ]
+      "read_write": ".+\\.json" ,
+      "read_only": [ ".+\\.yaml", ".+important-file\\.txt" ],
+      "local": [ ".+\\.js", ".+\\.mjs" ]
     },
     "network": {
       "incoming": {
         "mode": "steal",
         "http_filter": {
-          "header_filter": "host: api\..+"
+          "header_filter": "host: api\\..+"
         },
         "port_mapping": [[ 7777, 8888 ]],
         "ignore_localhost": false,
@@ -638,10 +638,10 @@ For more information, check the file operations
   "feature": {
     "fs": {
       "mode": "write",
-      "read_write": ".+\.json" ,
-      "read_only": [ ".+\.yaml", ".+important-file\.txt" ],
-      "local": [ ".+\.js", ".+\.mjs" ],
-      "not_found": [ "\.config/gcloud" ]
+      "read_write": ".+\\.json" ,
+      "read_only": [ ".+\\.yaml", ".+important-file\\.txt" ],
+      "local": [ ".+\\.js", ".+\\.mjs" ],
+      "not_found": [ "\\.config/gcloud" ]
     }
   }
 }
@@ -761,7 +761,7 @@ for more details.
       "incoming": {
         "mode": "steal",
         "http_filter": {
-          "header_filter": "host: api\..+"
+          "header_filter": "host: api\\..+"
         },
         "port_mapping": [[ 7777, 8888 ]],
         "ignore_localhost": false,
@@ -852,7 +852,7 @@ Steal only traffic that matches the
       "incoming": {
         "mode": "steal",
         "http_filter": {
-          "header_filter": "host: api\..+"
+          "header_filter": "host: api\\..+"
         },
         "port_mapping": [[ 7777, 8888 ]],
         "ignore_localhost": false,
@@ -934,7 +934,7 @@ Can be set to either `"continue"` or `"override"`.
 - `"override"`: If port lock detected then override it with new lock and force close the
   original locking connection.
 
-#### feature.network.incoming.filter {#feature-network-incoming-http-filter}
+#### feature.network.incoming.http_filter {#feature-network-incoming-http-filter}
 Filter configuration for the HTTP traffic stealer feature.
 
 Allows the user to set a filter (regex) for the HTTP headers, so that the stealer traffic
@@ -947,7 +947,7 @@ set as `"steal"`, ignored otherwise.
 For example, to filter based on header:
 ```json
 {
-  "header_filter": "host: api\..+",
+  "header_filter": "host: api\\..+"
 }
 ```
 Setting that filter will make mirrord only steal requests with the `host` header set to hosts
@@ -956,7 +956,7 @@ that start with "api", followed by a dot, and then at least one more character.
 For example, to filter based on path:
 ```json
 {
-  "path_filter": "^/api/",
+  "path_filter": "^/api/"
 }
 ```
 Setting this filter will make mirrord only steal requests to URIs starting with "/api/".
@@ -966,7 +966,7 @@ This can be useful for filtering out Kubernetes liveness, readiness and startup 
 For example, for avoiding stealing any probe sent by kubernetes, you can set this filter:
 ```json
 {
-  "header_filter": "^User-Agent: (?!kube-probe)",
+  "header_filter": "^User-Agent: (?!kube-probe)"
 }
 ```
 Setting this filter will make mirrord only steal requests that **do** have a user agent that
@@ -975,7 +975,7 @@ Setting this filter will make mirrord only steal requests that **do** have a use
 Similarly, you can exclude certain paths using a negative look-ahead:
 ```json
 {
-  "path_filter": "^(?!/health/)",
+  "path_filter": "^(?!/health/)"
 }
 ```
 Setting this filter will make mirrord only steal requests to URIs that do not start with
@@ -1004,6 +1004,8 @@ Activate the HTTP traffic filter only for these ports.
 
 Other ports will *not* be stolen, unless listed in
 [`feature.network.incoming.ports`](#feature-network-incoming-ports).
+
+Set to [80, 8080] by default.
 
 ### feature.network.outgoing {#feature-network-outgoing}
 Tunnel outgoing network operations through mirrord.
@@ -1148,7 +1150,11 @@ This option is compatible only with deployment targets.
 mirrord Experimental features.
 This shouldn't be used unless someone from MetalBear/mirrord tells you to.
 
-## experimental {#fexperimental-tcp_ping4_mock}
+## _experimental_ readlink {#fexperimental-readlink}
+
+Enables the `readlink` hook.
+
+## _experimental_ tcp_ping4_mock {#fexperimental-tcp_ping4_mock}
 
 <https://github.com/metalbear-co/mirrord/issues/2421#issuecomment-2093200904>
 
@@ -1163,7 +1169,7 @@ want to increase the timeouts a bit.
 {
   "internal_proxy": {
     "start_idle_timeout": 30,
-    "idle_timeout": 5,
+    "idle_timeout": 5
   }
 }
 ```

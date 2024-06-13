@@ -14,7 +14,7 @@
                 <picture>
                     <source media="(max-width: 768px)" srcset="/product-page-1-mobile.png">
                     <source media="(min-width: 769px)" srcset="/product-page-1.png">
-                    <img class="max-w-full h-auto md:translate-x-20 lg:translate-x-24" src="/product-page-1.png"
+                    <img class="max-w-full h-auto md:translate-x-8 lg:translate-x-24" src="/product-page-1.png"
                         alt="page">
                 </picture>
             </div>
@@ -35,14 +35,19 @@
         <div class="absolute -top-[260px] left-0 w-full h-full hidden lg:block z-0">
             <img class="w-full h-auto" src="/product-bg.png" alt="page">
         </div>
-        <div class="container w-full max-w-screen-xl mx-auto px-6 lg:px-2 xl:px-0 pt-12 pb-12 lg:pt-24 lg:pb-32">
-            <div class="grid grid-cols-2 relative z-20">
-                <div class="col-span-2 lg:col-span-1 flex lg:justify-end lg:order-2">
-                    <div class="w-[85%]">
-                        <h2 class="text-[2.1875rem] lg:text-[6.5rem] xl:text-[7.5rem] text-black font-semibold leading-[0.95]">CLI or
+        <div class="absolute -top-[150px] left-0 w-full h-full lg:hidden z-0">
+            <img class="w-full h-auto" src="/product-bg-mobile.png" alt="page">
+        </div>
+        <div class="container w-full max-w-screen-2xl mx-auto px-6 lg:px-2 xl:px-0 pt-12 pb-12 lg:pt-24 lg:pb-36">
+            <div class="grid grid-cols-12 relative z-20">
+                <div class="col-span-12 lg:col-span-5 flex lg:justify-end lg:order-2">
+                    <div class="lg:pl-10">
+                        <h2
+                            class="text-[2.1875rem] lg:text-[6rem] xl:text-[7.75rem] text-black font-semibold leading-[0.95] mb-8">
+                            CLI or
                             IDE, Your Choice</h2>
                         <h3
-                            class="text-2xl lg:text-[1.75rem] lg:leading-normal text-[#756DF3] font-semibold leading-[1.43]">
+                            class="text-2xl lg:text-[1.85rem] xl:text-[2rem] lg:leading-normal text-[#756DF3] font-semibold leading-[1.43]">
                             mirrord meets
                             your
                             developers where they are.</h3>
@@ -96,32 +101,36 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-span-2 lg:col-span-1 pt-4 lg:order-1">
-                    <img class="xl:scale-110" src="/product-page-2.png" alt="page">
+                <div class="col-span-12 lg:col-span-7 pt-4 lg:order-1">
+                    <div class="lg:w-[95%]">
+                        <img class="max-w-full" src="/product-page-2.png" alt="page">
+                    </div>
                 </div>
+            </div>
+        </div>
+        <div class="relative">
+            <div class="absolute -top-[200px] xl:-top-[360px] left-0 w-full h-full hidden lg:block z-0">
+                <img class="w-full h-auto" src="/homepage-footer-bg.png" alt="home">
             </div>
         </div>
     </div>
 
     <div class="bg-[#756DF3] rounded-tr-[125px] lg:rounded-tr-[270px] relative z-20">
-        <div class="container w-full max-w-screen-xl mx-auto px-6 pt-16 lg:pt-24 xl:pt-32 pb-20 lg:pb-40">
-            <header class="relative">
-                <h2 class="text-[2.1875rem] lg:text-[6.5rem] xl:text-[7.5rem] text-white font-semibold leading-[0.95] mb-6 lg:mb-16">Hack
+        <div class="container w-full max-w-screen-2xl mx-auto px-6 pt-16 lg:pt-24 xl:pt-32 pb-16 lg:pb-40">
+            <header class="mb-6 lg:mb-24">
+                <h2
+                    class="text-[2.1875rem] lg:text-[6.15rem] xl:text-[8rem] text-white font-semibold leading-[0.95] mb-6 lg:mb-16">
+                    Hack
                     Locally, Works Remotely
                 </h2>
                 <h3 class="text-2xl lg:text-[2.25rem] text-white font-semibold leading-[1.43]">Configure once, use
                     everywhere.</h3>
             </header>
-            <div class="relative mb-24 hidden lg:block">
-                <div class="absolute right-0 -top-[220px] w-full flex justify-end">
-                    <img class="lg:scale-[0.8] xl:scale-100 translate-x-20" src="/product-page-3.png" alt="page">
-                </div>
-            </div>
-            <div class="max-w-[1100px]">
-                <div class="grid grid-cols-12 gap-6 mb-12 lg:mb-24">
+            <div class="lg:max-w-[1000px] xl:max-w-[1280px]">
+                <div class="grid grid-cols-12 gap-y-10 lg:gap-y-0 lg:gap-x-6 xl:gap-x-10 mb-12 lg:mb-24">
                     <div
-                        class="col-span-12 lg:col-span-3 rounded-[10px] border border-solid border-white p-6 flex flex-col justify-between">
-                        <div class="pr-3">
+                        class="col-span-12 lg:col-span-3 pt-6 pb-3 px-4 rounded-[10px] border border-solid border-white flex flex-col justify-between">
+                        <div>
                             <p class="text-white text-sm lg:text-base">Access to everything in-development services need
                                 -
                                 network traffic, disks,
@@ -129,7 +138,7 @@
                                 variables, queues, and more
                             </p>
                         </div>
-                        <div class="flex justify-end">
+                        <div class="h-[46px] flex justify-end items-end">
                             <svg width="35" height="35" viewBox="0 0 35 35" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -139,8 +148,8 @@
                         </div>
                     </div>
                     <div
-                        class="col-span-12 lg:col-span-3 rounded-[10px] border border-solid border-white p-6 flex flex-col justify-between">
-                        <div class="pr-3">
+                        class="col-span-12 lg:col-span-3 pt-6 pb-3 px-4 rounded-[10px] border border-solid border-white flex flex-col justify-between">
+                        <div class="">
                             <p class="text-white text-sm lg:text-base">Developers don’t have to maintain their own
                                 personal
                                 k8s
@@ -180,8 +189,8 @@
                         </div>
                     </div>
                     <div
-                        class="col-span-12 lg:col-span-3 rounded-[10px] border border-solid border-white p-6 flex flex-col justify-between">
-                        <div class="pr-3">
+                        class="col-span-12 lg:col-span-3 pt-6 pb-3 px-4 rounded-[10px] border border-solid border-white flex flex-col justify-between">
+                        <div class="">
                             <p class="text-white text-sm lg:text-base">Debug in the cloud directly from your IDE,
                                 without
                                 clunky
@@ -198,12 +207,40 @@
                             </svg>
                         </div>
                     </div>
+                    <div class="col-span-12 lg:col-span-3">
+                        <div class="relative w-full h-full hidden lg:block">
+                            <div
+                                class="absolute left-0 bottom-0 lg:-bottom-4 w-full h-full lg:w-[130%] xl:w-[150%] lg:h-[170%] flex justify-end items-end">
+                                <div class="w-[90%]">
+                                    <img class="w-full h-auto" src="/product-page-3.png" alt="page">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-[90%] mx-auto lg:hidden">
+                            <img class="w-full h-auto" src="/product-page-3.png" alt="page">
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="grid grid-cols-12 gap-6">
-                <div class="col-span-12 lg:col-span-2 lg:order-2">
-                    <div class="flex items-center space-x-3 mb-4">
-                        <div class="flex-none w-[18px] hidden lg:block">
+        </div>
+    </div>
+
+    <div class="bg-[#444083] relative z-20">
+        <div class="container w-full max-w-screen-2xl mx-auto px-6 pt-16 lg:pt-24 xl:pt-32 pb-32 lg:pb-40">
+            <header class="mb-6 lg:mb-24">
+                <h3 class="text-2xl lg:text-[5.25rem] text-white font-normal leading-[1.35]">The mirrord for Teams</h3>
+                <h2
+                    class="text-[2.1875rem] lg:text-[6.5rem] xl:text-[8rem] text-[#AEA9FF] font-semibold leading-[0.95] mb-6 lg:mb-16">
+                    Speedrun Challenge
+                </h2>
+                <p class="text-base lg:text-[2.125rem] text-[#FAFAFD] font-semibold leading-[1.4]">We can get mirrord
+                    for Teams running in minutes in any environment -- no matter how complex.</p>
+            </header>
+
+            <div class="relative hidden xl:block">
+                <div class="absolute top-0 right-0 w-full flex justify-end">
+                    <div class="w-[80px] flex space-x-3 mb-4">
+                        <div class="flex-none w-[18px] pt-2 hidden lg:block">
                             <svg width="18" height="14" viewBox="0 0 18 14" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -212,34 +249,58 @@
                             </svg>
                         </div>
                         <div class="flex-1 text-center lg:text-left">
-                            <h3 class="text-white text-2xl lg:text-xl font-semibold leading-[1.43] mb-0">Watch a demo
-                            </h3>
-                        </div>
-                    </div>
-                    <div class="text-center lg:text-right">
-                        <p class="text-white text-xl lg:text-lg leading-[1.43]">Lorem ipsum dolor sit amet, consectetur
-                            adipiscing
-                            elit, sed do eiusmod.</p>
-                    </div>
-                </div>
-                <div class="col-span-12 lg:col-span-10 lg:order-1">
-                    <div class="aspect-w-16 aspect-h-9">
-                        <div class="absolute top-0 left-0 w-full h-full">
-                            <img class="w-full h-full" src="/product-page-4.png" alt="page">
+                            <h3 class="text-white text-2xl lg:text-xl font-semibold leading-[1.43] mb-0">See how
+                                it’s done</h3>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="lg:hidden w-[85%] mx-auto pt-16 lg:pt-8">
-                <img class="block mx-auto" src="/product-page-3.png" alt="page">
+            <div class="max-w-[1100px] mx-auto mb-12 lg:mb-24">
+                <div
+                    class="aspect-w-16 aspect-h-9 bg-[#AEA9FF] rounded-[18px] border border-solid border-[#222222] drop-shadow-[13.7088px_13.7088px_0px_#222222]">
+                    <div class="absolute w-full h-full top-0 left-0 flex justify-center items-center z-50">
+                        {{- partial "svg/product-play-icon.svg" (dict "class" "w-[48px] md:w-[86px] lg:w-[110px]") }}
+                    </div>
+                    <div class="absolute w-full h-full top-0 left-0 z-40">
+                        <div class="w-[80%] h-[74%] mx-auto relative top-[20%] flex flex-col justify-between">
+                            <div>
+                                <img class="w-full h-auto" src="/product-play-image.png" alt="play">
+                            </div>
+                            <div class="flex justify-between items-end">
+                                <div>
+                                    <h3 class="text-xl md:text-[3.25rem] lg:text-[5.125rem] text-white font-semibold leading-[1] lg:leading-[0.9]">
+                                        mirrord<br>
+                                        Speedrun</h3>
+                                </div>
+                                <div>
+                                    <div class="w-[96px] md:w-[280px] lg:w-[350px] translate-x-4 md:translate-x-8 lg:translate-x-16">
+                                        <img class="w-full h-auto" src="/product-play-clock.gif" alt="gif">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="max-w-[860px] mx-auto">
+                <div class="text-center mb-12">
+                    <p class="text-base lg:text-[2.125rem] text-[#FAFAFD] leading-[1.4]">Curious about
+                        mirrord for Teams but don't want to set anything up? We'll do it for you --
+                        <strong>fast</strong>.
+                    </p>
+                </div>
+                <div class="flex justify-center">
+                    <a class="w-[252px] lg:w-[400px] h-[50px] lg:h-[86px] flex items-center justify-center text-[#444083] text-base lg:text-2xl font-semibold bg-[#FFD18C] border border-solid border-[#222222] rounded-[6px] lg:rounded-[10px] shadow-[-7px_6px_0px_#000000] lg:shadow-[-12px_11px_0px_#000000] transition-colors duration-200 ease-[ease]"
+                        href="https://app.metalbear.co/">Book Your Speedrun</a>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="overflow-hidden pb-10 lg:pb-24">
+    <div x-data="{ open: false }" class="overflow-hidden pb-10 lg:pb-24">
         <div class="bg-[#FAFAFD] rounded-bl-[60px] lg:rounded-bl-[270px] relative z-20">
-            <div class="container w-full max-w-screen-xl mx-auto px-6 lg:px-3 xl:px-0 pt-20 pb-8 lg:pb-24">
-                <header class="relative text-center px-8 lg:px-0">
+            <div class="container w-full max-w-screen-xl mx-auto px-6 lg:px-3 xl:px-0 pt-16 lg:pt-20 pb-8 lg:pb-24">
+                <header class="relative text-center px-12 lg:px-0">
                     <h2
                         class="text-[2.1875rem] lg:text-[6.75rem] text-black font-semibold leading-[1.43] mb-4 lg:mb-16">
                         Ship <span class="text-[#756DF3]">Faster</span>, Ship
@@ -303,11 +364,41 @@
                         </div>
 
                         <div class="pt-6 lg:pt-10">
-                            <p class="flex items-center justify-center space-x-2 text-center text-xs lg:text-base"><span
-                                    class="border-b border-solid border-[#FAFAFD] pb-1">*What’s Remocal?
-                                </span> <a
-                                    class="text-[#222222] text-xs lg:text-base border-b border-solid border-[#222222] pb-[2px]"
-                                    href="/">More here</a></p>
+                            <div class="relative">
+                                <p class="flex items-center justify-center space-x-2 text-center text-xs lg:text-base">
+                                    <span class="border-b border-solid border-[#FAFAFD] pb-[2px]">*What’s
+                                        Remocal?</span>
+                                    <span @click="open = true;"
+                                        class="text-[#222222] text-xs lg:text-base cursor-pointer border-b border-solid border-[#222222] pb-[2px]">More
+                                        here</span>
+                                </p>
+                                <div x-show="open" @click.outside="open = false"
+                                    class="absolute left-0 bottom-8 lg:bottom-12 w-full lg:w-[90%] bg-primary z-[100] border border-solid border-[#222222] rounded-[6px] lg:rounded-[11px] shadow-[-5px_5px_0px_#000000] lg:shadow-[-9px_8px_0px_#000000]">
+                                    <div class="relative p-8 lg:p-16">
+                                        <div class="text-left pb-16 lg:pb-4 pr-8 lg:pr-3">
+                                            <h3 class="text-[1.5rem] text-white font-extrabold font-heading">*What’s
+                                                Remocal?
+                                            </h3>
+                                            <p class="text-sm text-white font-semibold leading-[1.5]">Remote + Local =
+                                                Remocal.
+                                            </p>
+                                            <p class="text-sm text-white font-normal leading-[1.5]">mirrord makes your
+                                                local
+                                                development experience feel 100% remote by making the
+                                                running process think it's running in Staging. That means when you run
+                                                your code
+                                                with mirrord, it's the same as running it in Staging, without having to
+                                                move
+                                                your code arround, 'git push' to test, or do anything more than work
+                                                directly
+                                                from your CLI or IDE as you always have.</p>
+                                            <div class="absolute w-[120px] bottom-4 right-4">
+                                                <img class="w-[120px] h-auto" src="/popup-image.png" alt="popup-image">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -316,6 +407,9 @@
         <div class="relative">
             <div class="absolute -top-[260px] left-0 w-full h-full z-10 hidden lg:block">
                 <img class="w-full h-auto" src="/product-bg.png" alt="page">
+            </div>
+            <div class="absolute -top-[100px] left-0 w-full h-full z-10 lg:hidden">
+                <img class="w-full h-auto" src="/product-footer-bg-mobile.png" alt="page">
             </div>
         </div>
     </div>
