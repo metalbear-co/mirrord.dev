@@ -11,7 +11,7 @@
             </div>
             <div class="nav__toggle col-span-1 h-8 flex items-center justify-end lg:hidden">
                 <button @click="sideNav = !sideNav" aria-label="Menu"
-                    class="text-[#222222] cursor-pointer border-none outline-none focus:outline-none focus:bg-transparent transition-all duration-300 ease-[ease] z-[60]">
+                    class="text-[#222222] cursor-pointer border-none outline-none focus:outline-none focus:bg-transparent transition-all duration-300 ease-[ease] z-30">
                     <svg class="fill-current transition duration-300 ease-in-out transform" width="22" height="24">
                         <line class="stroke-current stroke-2 transition duration-500 ease-in-out transform"
                             :class="{ 'translate-x-1.5 translate-y-0 rotate-45': sideNav === true }" id="top" x1="0"
@@ -25,10 +25,10 @@
                     </svg>
                 </button>
             </div>
-            <div x-cloak="mobile" class="nav__wrapper col-span-10 fixed lg:static w-full h-screen lg:h-auto left-0 top-0 flex justify-end lg:block transition-all duration-300 ease-[ease] z-50"
+            <div x-cloak="mobile" class="nav__wrapper col-span-10 fixed lg:static w-full h-screen lg:h-auto left-0 top-0 flex justify-end lg:block transition-all duration-300 ease-[ease] z-20"
                 :class="sideNav ? 'nav__wrapper-active' : 'nav__wrapper-not-active'">
                 <nav x-data="{ selectedMenu: null }"
-                    class="nav__menu w-full h-full lg:h-auto lg:flex lg:items-center lg:justify-end transition-all duration-300 ease-[ease]"
+                    class="nav__menu w-full h-full lg:h-auto lg:flex lg:items-center lg:justify-between transition-all duration-300 ease-[ease]"
                     :class="sideNav ? 'mr-0' : '-mr-[100%]'">
                     <div class="nav__brand-mobile lg:hidden px-6 pt-12 mb-6">
                         <a class="navbar__logo flex items-center justify-center" href="{{ "/" | relLangURL }}" aria-label="{{ .Site.Params.Title }}"
@@ -45,7 +45,7 @@
                         {{- $active = or $active (and (eq .Name ($section | humanize)) (eq $current.Section $section)) -}}
                         {{- $active = or $active (and (eq .Name "Blog") (eq $current.Section "blog" "contributors")) -}}
                         <li @click="selectedMenu !== {{ $index }} ? selectedMenu = {{ $index }} : selectedMenu = null"
-                            class="menu__item relative group font-heading text-[#222222] transition duration-300 ease-[ease] z-30">
+                            class="menu__item relative group font-heading text-[#222222] transition duration-300 ease-[ease]">
                             {{- if .HasChildren }}
                             <button
                                 class="w-full flex items-center justify-center lg:justify-start text-current cursor-pointer focus:outline-none group lg:relative">
@@ -63,7 +63,7 @@
                                         class=""></path>
                                 </svg>
                             </button>
-                            <ul x-cloak class="submenu whitespace-nowrap list-none bg-gray-50 lg:w-40 top-full transition-all duration-200 ease-[ease] transform origin-top lg:shadow-md lg:rounded-lg pb-1 pl-0 mb-0 z-30"
+                            <ul x-cloak class="submenu whitespace-nowrap list-none bg-gray-50 lg:w-40 top-full transition-all duration-200 ease-[ease] transform origin-top z-10 lg:shadow-md lg:rounded-lg pb-1 pl-0 mb-0"
                                 :class="selectedMenu === {{ $index }} ? 'static lg:absolute visible scale-y-100 opacity-100' : 'absolute invisible lg:group-hover:visible scale-y-0 lg:group-hover:scale-y-100 opacity-0 lg:group-hover:opacity-100'"
                                 aria-hidden="true">
                                 {{- range .Children }}
@@ -92,10 +92,10 @@
                     <div class="col-span-2">
                         <!-- {{- partial "header/social.html" . }} -->
 
-                        <!-- <div class="flex justify-center lg:justify-end items-center space-x-6 pt-6 lg:pt-0">
+                        <div class="flex justify-center lg:justify-end items-center space-x-6 pt-6 lg:pt-0">
                             <a class="text-lg lg:text-sm leading-[1.1] py-2 px-8 flex items-center justify-center text-white hover:text-[#222222] bg-primary hover:bg-white border border-solid border-[#222222] rounded-[6px] shadow-[-3px_3px_0px_#000000] lg:shadow-[-5px_5px_0px_#000000] transition-colors duration-200 ease-[ease]" href="/docs/overview/quick-start/">Get Started</a>
                             <a class="text-[#222222] text-lg lg:text-sm border-b border-solid border-[#222222] px-1 py-1" href="/contact">Contact Us</a>
-                        </div> -->
+                        </div>
                         {{- partial "header/social-mobile.html" . }}
 
                     </div>
@@ -105,7 +105,7 @@
     </div>
 </header>
 
-<!-- <div class="fixed top-0 left-0 h-full hidden lg:flex pt-[45vh] z-50">
+<div class="fixed top-0 left-0 h-full hidden lg:flex pt-[45vh] z-50">
     <div>
         {{- $currentPage := . }}
         {{- $page_url := $currentPage.RelPermalink | relLangURL }}
@@ -122,4 +122,4 @@
         </div>
         {{- end }}
     </div>
-</div> -->
+</div>

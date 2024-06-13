@@ -1,0 +1,18 @@
+<div id="how-it-works" class="pt-16 pb-8 lg:pb-16">
+    <div class="container w-full max-w-screen-xl mx-auto px-4">
+        <header class="text-center mb-12">
+            <h2 class="text-2xl lg:text-4xl text-[#222222]">How It Works</h2>
+        </header>
+        <div>
+            <div class="text-[#222222] md:hidden">
+                {{- partial "svg/diagram-mobile.svg" . }}
+            </div>
+            <div class="text-[#222222] hidden md:block">
+                {{- partial "svg/diagram.svg" . }}
+            </div>
+            <div class="text-center text-[#222222] text-sm lg:text-lg leading-normal pt-12 px-8 lg:px-0">
+                <p>mirrord runs in two places - in the memory of your local process, and as a pod in your cloud environment. The two components work together to fuse your local process with its remote counterpart so that inputs to the remote pod are mirrored to the local process, and outputs from the local process are tunneled to the remote pod.  This includes network traffic, file access, and environment variable - everything needed to make your local process “think” it's running in the cloud.</p>
+            </div>
+        </div>
+    </div>
+</div>
