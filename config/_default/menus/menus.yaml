@@ -1,48 +1,58 @@
 main:
-- name: User Stories
-  url: /stories/
-  weight: 20
-- identifier: resources
-  name: Resources
-  url: "/resources/"
+- name: Product
+  url: /product/
   weight: 10
-- identifier: docs
-  name: Docs
+- name: Pricing
+  url: /pricing/
+  weight: 20
+- name: Docs
   url: /docs/overview/introduction/
-  weight: 100
-  parent: resources
-- identifier: blog
-  name: Blog
-  url: "https://metalbear.co/blog"
-  weight: 200
-  parent: resources
-- identifier: FAQ
-  name: FAQ
-  url: "/docs/faq/general"
-  weight: 300
-  parent: resources
-- identifier: teams
-  name: mirrord for Teams
+  weight: 30
+- name: Login/Sign Up
   url: "https://app.metalbear.co/"
   weight: 30
-- identifier: get-started
-  name: Register/Login
-  url: "https://app.metalbear.co/"
-  weight: 100
-  parent: teams
-- identifier: pricing
-  name: Pricing
-  url: "/pricing"
-  weight: 200
-  parent: teams
-- identifier: support
-  name: Support
-  url: "/#get-support"
-  weight: 40
-# - identifier: contact
-#   name: Contact Us
-#   url: "/contact"
-#   weight: 50
+
+# - identifier: resources
+#   name: Resources
+#   url: "/resources/"
+#   weight: 10
+# - identifier: docs
+#   name: Docs
+#   url: /docs/overview/introduction/
+#   weight: 100
+#   parent: resources
+# - identifier: blog
+#   name: Blog
+#   url: "https://metalbear.co/blog"
+#   weight: 200
+#   parent: resources
+# - identifier: FAQ
+#   name: FAQ
+#   url: "/docs/faq/general"
+#   weight: 300
+#   parent: resources
+# - identifier: teams
+#   name: mirrord for Teams
+#   url: "https://app.metalbear.co/"
+#   weight: 30
+# - identifier: get-started
+#   name: Register/Login
+#   url: "https://app.metalbear.co/"
+#   weight: 100
+#   parent: teams
+# - identifier: pricing
+#   name: Pricing
+#   url: "/pricing"
+#   weight: 200
+#   parent: teams
+# - identifier: support
+#   name: Support
+#   url: "/#get-support"
+#   weight: 40
+# # - identifier: contact
+# #   name: Contact Us
+# #   url: "/contact"
+# #   weight: 50
 docs:
   - name: Overview
     weight: 10

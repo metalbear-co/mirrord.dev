@@ -1,6 +1,6 @@
 <footer class="bg-[#FAFAFD] -translate-y-[2px]">
-    <div class="container w-full max-w-screen-lg mx-auto pt-4 pb-6 px-4 lg:px-8">
-        <div class="flex justify-center items-center">
+    <div class="container w-full max-w-screen-xl mx-auto pt-4 pb-6 px-4 lg:px-8">
+        <div class="hidden lg:flex justify-center items-center">
             <ul class="pl-0 list-none flex space-x-2 lg:space-x-6 lg:border-b border-solid border-[#222222]">
                 {{- range $index, $menu := .Site.Menus.footer_menu }}
                 <li class="mb-2"><a class="text-[#222222] text-[10px] lg:text-xs font-medium" href="{{ .URL | relLangURL }}">{{
@@ -8,17 +8,16 @@
                 {{- end }}
             </ul>
         </div>
-        <div class="flex justify-center items-center">
+        <div class="flex justify-center items-center border-b lg:border-b-0 border-solid border-[#222222] pb-6 lg:pb-0">
             {{- partial "footer/social.html" . }}
         </div>
-        <div class="flex justify-center lg:justify-between items-center pt-6">
-            <div class="">
-                <p class="text-xs text-[#222222] mb-0">© <span x-text="new Date().getFullYear()"></span>
+        <div class="flex justify-between items-center pt-6">
+            <div>
+                <p class="text-xs text-[#222222] font-light mb-0">© <span x-text="new Date().getFullYear()"></span>
                     MetalBear</p>
             </div>
-            <span class="w-1 h-1 lg:hidden bg-[#222222] rounded-full mx-2"></span>
-            <div class="">
-                <p class="text-xs text-[#222222] mb-0">Designed by <a class="text-[#222222] underline"
+            <div>
+                <p class="text-xs text-[#222222] font-light mb-0">Designed by <a class="text-[#222222] underline"
                         href="http://studioartik.com/">ARTIK Studio</a></p>
             </div>
         </div>
