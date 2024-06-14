@@ -1,5 +1,5 @@
 {{- define "main" }}
-<main id="site-main" class="site__main single-page bg-[#FFFFFF]">
+<main id="site-main" class="site__main single-page bg-[#FFFFFF] overflow-hidden">
     <div class="bg-[#FAFAFD] rounded-bl-[60px] lg:rounded-bl-[270px] overflow-hidden relative z-10">
         <div class="container w-full max-w-screen-xl mx-auto px-6 pt-6 lg:pt-20 pb-10">
             <header class="text-center max-w-[1000px] mx-auto">
@@ -12,14 +12,15 @@
             </header>
             <div class="max-w-[75%] lg:max-w-[65%] mx-auto">
                 <picture>
-                    <source media="(max-width: 768px)" srcset="/product-page-1-mobile.png">
-                    <source media="(min-width: 769px)" srcset="/product-page-1.png">
-                    <img class="max-w-full h-auto md:translate-x-8 lg:translate-x-24" src="/product-page-1.png"
+                    <source media="(max-width: 1024px)" srcset="/product-page-1-mobile.png">
+                    <source media="(min-width: 1025px)" srcset="/product-page-1.png">
+                    <img class="max-w-full h-auto md:translate-x-8 lg:translate-x-[70px]" src="/product-page-1.png"
                         alt="page">
                 </picture>
             </div>
             <div class="flex items-center justify-center space-x-2 text-center pt-6 lg:pt-16">
-                <a class="text-[#222222] text-sm lg:text-xl border-b border-solid border-[#222222] pb-1" href="/">Here’s
+                <a class="text-[#222222] text-sm lg:text-xl hover:font-medium border-b border-solid border-[#222222] pb-1"
+                    href="/">Here’s
                     how it
                     works</a>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -32,7 +33,7 @@
     </div>
 
     <div class="relative">
-        <div class="absolute -top-[260px] left-0 w-full h-full hidden lg:block z-0">
+        <div class="absolute -top-[380px] left-0 w-full h-full hidden lg:block z-0">
             <img class="w-full h-auto" src="/product-bg.png" alt="page">
         </div>
         <div class="absolute -top-[150px] left-0 w-full h-full lg:hidden z-0">
@@ -109,14 +110,14 @@
             </div>
         </div>
         <div class="relative">
-            <div class="absolute -top-[200px] xl:-top-[360px] left-0 w-full h-full hidden lg:block z-0">
+            <div class="absolute -top-[200px] lg:-top-[200px] left-0 w-full h-full hidden lg:block z-0 bg-red-200">
                 <img class="w-full h-auto" src="/homepage-footer-bg.png" alt="home">
             </div>
         </div>
     </div>
 
     <div class="bg-[#756DF3] rounded-tr-[125px] lg:rounded-tr-[270px] relative z-20">
-        <div class="container w-full max-w-screen-2xl mx-auto px-6 pt-16 lg:pt-24 xl:pt-32 pb-16 lg:pb-40">
+        <div class="container w-full max-w-screen-2xl mx-auto px-6 pt-16 lg:pt-24 xl:pt-32 pb-16 lg:pb-16">
             <header class="mb-6 lg:mb-24">
                 <h2
                     class="text-[2.1875rem] lg:text-[6.15rem] xl:text-[8rem] text-white font-semibold leading-[0.95] mb-6 lg:mb-16">
@@ -210,7 +211,7 @@
                     <div class="col-span-12 lg:col-span-3">
                         <div class="relative w-full h-full hidden lg:block">
                             <div
-                                class="absolute left-0 bottom-0 lg:-bottom-4 w-full h-full lg:w-[130%] xl:w-[150%] lg:h-[170%] flex justify-end items-end">
+                                class="absolute left-0 bottom-0 lg:-bottom-4 w-full h-full lg:w-[130%] xl:w-[140%] lg:h-[170%] flex justify-end items-end">
                                 <div class="w-[90%]">
                                     <img class="w-full h-auto" src="/product-page-3.png" alt="page">
                                 </div>
@@ -225,7 +226,7 @@
         </div>
     </div>
 
-    <div class="bg-[#444083] relative z-20">
+    <div x-data="{ openVideo: false}" class="bg-[#444083] relative z-20">
         <div class="container w-full max-w-screen-2xl mx-auto px-6 pt-16 lg:pt-24 xl:pt-32 pb-32 lg:pb-40">
             <header class="mb-6 lg:mb-24">
                 <h3 class="text-2xl lg:text-[5.25rem] text-white font-normal leading-[1.35]">The mirrord for Teams</h3>
@@ -256,8 +257,8 @@
                 </div>
             </div>
             <div class="max-w-[1100px] mx-auto mb-12 lg:mb-24">
-                <div
-                    class="aspect-w-16 aspect-h-9 bg-[#AEA9FF] rounded-[18px] border border-solid border-[#222222] drop-shadow-[13.7088px_13.7088px_0px_#222222]">
+                <div @click="openVideo = !openVideo"
+                    class="aspect-w-16 aspect-h-9 bg-[#AEA9FF] rounded-[18px] cursor-pointer border border-solid border-[#222222] drop-shadow-[13.7088px_13.7088px_0px_#222222]">
                     <div class="absolute w-full h-full top-0 left-0 flex justify-center items-center z-50">
                         {{- partial "svg/product-play-icon.svg" (dict "class" "w-[48px] md:w-[86px] lg:w-[110px]") }}
                     </div>
@@ -268,12 +269,14 @@
                             </div>
                             <div class="flex justify-between items-end">
                                 <div>
-                                    <h3 class="text-xl md:text-[3.25rem] lg:text-[5.125rem] text-white font-semibold leading-[1] lg:leading-[0.9]">
+                                    <h3
+                                        class="text-xl md:text-[3.25rem] lg:text-[5.125rem] text-white font-semibold leading-[1] lg:leading-[0.9]">
                                         mirrord<br>
                                         Speedrun</h3>
                                 </div>
                                 <div>
-                                    <div class="w-[96px] md:w-[280px] lg:w-[350px] translate-x-4 md:translate-x-8 lg:translate-x-16">
+                                    <div
+                                        class="w-[96px] md:w-[280px] lg:w-[350px] translate-x-4 md:translate-x-8 lg:translate-x-16">
                                         <img class="w-full h-auto" src="/product-play-clock.gif" alt="gif">
                                     </div>
                                 </div>
@@ -282,6 +285,42 @@
                     </div>
                 </div>
             </div>
+
+            <div x-cloak x-show="openVideo" @click.self="openVideo = false"
+                class="fixed h-screen inset-0 top-0 left-0 bottom-0 right-0 bg-black/90 transition-all duration-300 ease-[ease] z-[100] flex items-center justify-center cursor-pointer">
+                <div class="container max-w-4xl mx-auto px-6 py-4">
+                    <div class="text-white flex justify-end mb-6">
+                        <svg @click="openVideo = !openVideo" class="w-4 h-4 fill-current relative z-[1000]"
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 27.12 27.12">
+                            <title>Asset 9</title>
+                            <g id="Layer_2" data-name="Layer 2">
+                                <g id="Layer_1-2" data-name="Layer 1">
+                                    <rect x="12.06" y="-4.12" width="3" height="35.36"
+                                        transform="translate(-5.62 13.56) rotate(-45)">
+                                    </rect>
+                                    <rect x="-4.12" y="12.06" width="35.36" height="3"
+                                        transform="translate(-5.62 13.56) rotate(-45)">
+                                    </rect>
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+                    <div @click.outside="openVideo = false" class="aspect-w-4 aspect-h-3">
+                        <video id="my-video" class="video-js w-full h-full border-0" controls preload="auto" width="1280" height="960"
+                            poster="/video-cover.png" data-setup='{"controls": true, "autoplay": true, "preload": "auto"}'>
+                            <source src="https://descriptusercontent.com/published/b0ac8452-46c1-414e-8e67-217dd1d0aa0f/original.mp4" type="video/mp4" />
+                            <!-- <source src="https://descriptusercontent.com/published/b0ac8452-46c1-414e-8e67-217dd1d0aa0f/original.mp4" type="video/webm" /> -->
+                            <p class="vjs-no-js">
+                                To view this video please enable JavaScript, and consider upgrading to a
+                                web browser that
+                                <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5
+                                    video</a>
+                            </p>
+                        </video>
+                    </div>
+                </div>
+            </div>
+
             <div class="max-w-[860px] mx-auto">
                 <div class="text-center mb-12">
                     <p class="text-base lg:text-[2.125rem] text-[#FAFAFD] leading-[1.4]">Curious about
@@ -290,7 +329,7 @@
                     </p>
                 </div>
                 <div class="flex justify-center">
-                    <a class="w-[252px] lg:w-[400px] h-[50px] lg:h-[86px] flex items-center justify-center text-[#444083] text-base lg:text-2xl font-semibold bg-[#FFD18C] border border-solid border-[#222222] rounded-[6px] lg:rounded-[10px] shadow-[-7px_6px_0px_#000000] lg:shadow-[-12px_11px_0px_#000000] transition-colors duration-200 ease-[ease]"
+                    <a class="w-[252px] lg:w-[400px] h-[50px] lg:h-[86px] flex items-center justify-center text-[#444083] text-base lg:text-2xl font-semibold bg-[#FFD18C] hover:bg-[#E4E3FD] border border-solid border-[#222222] rounded-[6px] lg:rounded-[10px] shadow-[-7px_6px_0px_#000000] lg:shadow-[-12px_11px_0px_#000000] transition-colors duration-200 ease-[ease]"
                         href="https://app.metalbear.co/">Book Your Speedrun</a>
                 </div>
             </div>
@@ -359,7 +398,7 @@
                         </div>
 
                         <div class="pt-6 lg:pt-10 flex justify-center">
-                            <a class="w-[164px] lg:w-[280px] h-[34px] lg:h-[56px] flex items-center justify-center text-white hover:text-[#222222] bg-primary hover:bg-white border border-solid border-[#222222] rounded-[6px] lg:rounded-[10px] shadow-[-5px_5px_0px_#000000] lg:shadow-[-9px_8px_0px_#000000] transition-colors duration-200 ease-[ease]"
+                            <a class="w-[164px] lg:w-[280px] h-[34px] lg:h-[56px] flex items-center justify-center text-white hover:text-[#444083] font-semibold bg-primary hover:bg-[#FFD18C] border border-solid border-[#222222] rounded-[6px] lg:rounded-[10px] shadow-[-5px_5px_0px_#000000] lg:shadow-[-9px_8px_0px_#000000] transition-colors duration-200 ease-[ease]"
                                 href="/#installation">Try It Now</a>
                         </div>
 
@@ -369,7 +408,7 @@
                                     <span class="border-b border-solid border-[#FAFAFD] pb-[2px]">*What’s
                                         Remocal?</span>
                                     <span @click="open = true;"
-                                        class="text-[#222222] text-xs lg:text-base cursor-pointer border-b border-solid border-[#222222] pb-[2px]">More
+                                        class="text-[#222222] text-xs lg:text-base hover:font-medium cursor-pointer border-b border-solid border-[#222222] pb-[2px]">More
                                         here</span>
                                 </p>
                                 <div x-show="open" @click.outside="open = false"
@@ -405,7 +444,7 @@
             </div>
         </div>
         <div class="relative">
-            <div class="absolute -top-[260px] left-0 w-full h-full z-10 hidden lg:block">
+            <div class="absolute -top-[400px] left-0 w-full h-full z-10 hidden lg:block">
                 <img class="w-full h-auto" src="/product-bg.png" alt="page">
             </div>
             <div class="absolute -top-[100px] left-0 w-full h-full z-10 lg:hidden">

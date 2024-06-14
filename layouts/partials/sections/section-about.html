@@ -1,4 +1,4 @@
-<div class="mb-20">
+<div x-data="{ open: false }" class="mb-20">
     <div class="bg-[#756DF3] rounded-br-[123px] lg:rounded-br-[183px] relative">
         <div class="hidden xl:block absolute top-0 left-0 w-full h-[25%] bg-[#FAFAFD] z-10"></div>
         <div class="container w-full max-w-screen-xl mx-auto px-6 pt-12 pb-20">
@@ -24,9 +24,34 @@
                                 developers work –
                                 forever.</p>
                         </div>
-                        <div class="flex justify-center xl:justify-start pt-6">
-                            <a class="w-[198px] h-[47px] lg:w-[280px] lg:h-[56px] text-xs lg:text-xl text-[#222222] font-body inline-flex justify-center items-center bg-[#FBFBFD] border border-solid border-[#222222] rounded-[6px] lg:rounded-[10px] shadow-[-5px_5px_0px_#000000] lg:shadow-[-9px_8px_0px_#000000] transition-colors duration-200 ease-[ease]"
-                                href="/#installation">What’s a Remocal?</a>
+                        <div class="relative flex justify-center xl:justify-start pt-6">
+                            <span @click="open = true;"
+                                class="w-[198px] h-[47px] lg:w-[280px] lg:h-[56px] text-xs lg:text-xl text-[#222222] font-body cursor-pointer inline-flex justify-center items-center bg-[#FBFBFD] hover:bg-[#E4E3FD] border border-solid border-[#222222] rounded-[6px] lg:rounded-[10px] shadow-[-5px_5px_0px_#000000] lg:shadow-[-9px_8px_0px_#000000] transition-colors duration-200 ease-[ease]">What’s
+                                a Remocal?</span>
+
+                            <div x-show="open" @click.outside="open = false"
+                                class="absolute left-0 bottom-14 lg:bottom-16 w-full lg:w-[90%] bg-primary z-[100] border border-solid border-[#222222] rounded-[6px] lg:rounded-[11px] shadow-[-5px_5px_0px_#000000] lg:shadow-[-9px_8px_0px_#000000]">
+                                <div class="relative p-8 lg:p-16">
+                                    <div class="text-left pb-16 lg:pb-4 pr-8 lg:pr-3">
+                                        <h3 class="text-[1.5rem] text-white font-extrabold font-heading">*What’s
+                                            Remocal?</h3>
+                                        <p class="text-sm text-white font-semibold leading-[1.5]">Remote + Local =
+                                            Remocal.
+                                        </p>
+                                        <p class="text-sm text-white font-normal leading-[1.5]">mirrord makes your local
+                                            development experience feel 100% remote by making the
+                                            running process think it's running in Staging. That means when you run your
+                                            code
+                                            with mirrord, it's the same as running it in Staging, without having to move
+                                            your code arround, 'git push' to test, or do anything more than work
+                                            directly
+                                            from your CLI or IDE as you always have.</p>
+                                        <div class="absolute w-[120px] bottom-4 right-4">
+                                            <img class="w-[120px] h-auto" src="popup-image.png" alt="popup-image">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
