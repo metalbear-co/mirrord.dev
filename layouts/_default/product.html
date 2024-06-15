@@ -226,7 +226,7 @@
         </div>
     </div>
 
-    <div x-data="{ openVideo: false}" class="bg-[#444083] relative z-20">
+    <div class="bg-[#444083] relative z-20">
         <div class="container w-full max-w-screen-2xl mx-auto px-6 pt-16 lg:pt-24 xl:pt-32 pb-32 lg:pb-40">
             <header class="mb-6 lg:mb-24">
                 <h3 class="text-2xl lg:text-[5.25rem] text-white font-normal leading-[1.35]">The mirrord for Teams</h3>
@@ -256,11 +256,14 @@
                     </div>
                 </div>
             </div>
-            <div class="max-w-[1100px] mx-auto mb-12 lg:mb-24">
-                <div @click="openVideo = !openVideo"
+            <div x-data="{ openVideo: false, toggleVideo() { this.openVideo = !this.openVideo; if (this.openVideo) { this.$refs.video.play(); } else { this.$refs.video.pause(); this.$refs.video.currentTime = 0; } } }"
+                class="max-w-[1100px] mx-auto mb-12 lg:mb-24">
+                <div
                     class="aspect-w-16 aspect-h-9 bg-[#AEA9FF] rounded-[18px] cursor-pointer border border-solid border-[#222222] drop-shadow-[13.7088px_13.7088px_0px_#222222]">
-                    <div class="absolute w-full h-full top-0 left-0 flex justify-center items-center z-50">
-                        {{- partial "svg/product-play-icon.svg" (dict "class" "w-[48px] md:w-[86px] lg:w-[110px]") }}
+                    <div @click="toggleVideo" class="absolute w-full h-full top-0 left-0 flex justify-center items-center z-50">
+                        <div class="w-[48px] md:w-[86px] lg:w-[110px] relative">
+                            {{- partial "svg/product-play-icon.svg" (dict "class" "w-[48px] md:w-[86px] lg:w-[110px]") }}
+                        </div>
                     </div>
                     <div class="absolute w-full h-full top-0 left-0 z-40">
                         <div class="w-[80%] h-[74%] mx-auto relative top-[20%] flex flex-col justify-between">
@@ -283,41 +286,24 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
 
-            <div x-cloak x-show="openVideo" @click.self="openVideo = false"
-                class="fixed h-screen inset-0 top-0 left-0 bottom-0 right-0 bg-black/90 transition-all duration-300 ease-[ease] z-[100] flex items-center justify-center cursor-pointer">
-                <div class="container max-w-4xl mx-auto px-6 py-4">
-                    <div class="text-white flex justify-end mb-6">
-                        <svg @click="openVideo = !openVideo" class="w-4 h-4 fill-current relative z-[1000]"
-                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 27.12 27.12">
-                            <title>Asset 9</title>
-                            <g id="Layer_2" data-name="Layer 2">
-                                <g id="Layer_1-2" data-name="Layer 1">
-                                    <rect x="12.06" y="-4.12" width="3" height="35.36"
-                                        transform="translate(-5.62 13.56) rotate(-45)">
-                                    </rect>
-                                    <rect x="-4.12" y="12.06" width="35.36" height="3"
-                                        transform="translate(-5.62 13.56) rotate(-45)">
-                                    </rect>
-                                </g>
-                            </g>
-                        </svg>
-                    </div>
-                    <div @click.outside="openVideo = false" class="aspect-w-4 aspect-h-3">
-                        <video id="my-video" class="video-js w-full h-full border-0" controls preload="auto" width="1280" height="960"
-                            poster="/video-cover.png" data-setup='{"controls": true, "autoplay": true, "preload": "auto"}'>
-                            <source src="https://descriptusercontent.com/published/b0ac8452-46c1-414e-8e67-217dd1d0aa0f/original.mp4" type="video/mp4" />
-                            <!-- <source src="https://descriptusercontent.com/published/b0ac8452-46c1-414e-8e67-217dd1d0aa0f/original.mp4" type="video/webm" /> -->
+                    <div x-show="openVideo" x-cloak x-transition
+                        class="video-box w-full h-full top-0 left-0 rounded-[18px] bg-black transition-all duration-300 ease-[ease] z-[100] flex items-center justify-center">
+                        <video x-ref="video" id="my-video" class="video-js w-full h-full border-0 rounded-[18px]"
+                            controls preload="auto" width="1280" height="960"
+                            data-setup='{"controls": true, "autoplay": true, "preload": "auto"}'>
+                            <source
+                                src="https://descriptusercontent.com/published/1f401de8-15a8-4457-86bd-2fb9038105e2/original.mp4"
+                                type="video/mp4" />
                             <p class="vjs-no-js">
-                                To view this video please enable JavaScript, and consider upgrading to a
-                                web browser that
+                                To view this video please enable JavaScript, and consider upgrading to a web browser
+                                that
                                 <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5
                                     video</a>
                             </p>
                         </video>
                     </div>
+
                 </div>
             </div>
 
@@ -330,7 +316,7 @@
                 </div>
                 <div class="flex justify-center">
                     <a class="w-[252px] lg:w-[400px] h-[50px] lg:h-[86px] flex items-center justify-center text-[#444083] text-base lg:text-2xl font-semibold bg-[#FFD18C] hover:bg-[#E4E3FD] border border-solid border-[#222222] rounded-[6px] lg:rounded-[10px] shadow-[-7px_6px_0px_#000000] lg:shadow-[-12px_11px_0px_#000000] transition-colors duration-200 ease-[ease]"
-                        href="https://app.metalbear.co/">Book Your Speedrun</a>
+                        href="https://calendly.com/aviram-5/mirrord-speedrun">Book Your Speedrun</a>
                 </div>
             </div>
         </div>
