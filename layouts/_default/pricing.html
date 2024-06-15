@@ -114,7 +114,7 @@
                                 in Team, plus...</p>
                             <div class="px-6 pt-6">
                                 <p class="text-white font-normal text-sm lg:text-lg leading-[1.3]">The mirrord for Teams
-                                    Enterprise plan brings heightened security features such as LDAP & SAML, support for
+                                    Enterprise plan brings heightened security features such as support for
                                     airgapped clusters, and premium support.</p>
                             </div>
                         </div>
@@ -234,9 +234,7 @@
             </div>
             <div class="grid grid-cols-12 border-b border-solid border-[#DFDEFB]">
                 <div class="col-span-6 flex items-center pl-1 lg:pl-6 py-1 lg:py-2">
-                    <p class="text-[#222222] text-xs lg:text-lg font-normal font-body mb-0">Deployment replacements and
-                        Replica
-                        management</p>
+                    <p class="text-[#222222] text-xs lg:text-lg font-normal font-body mb-0">Usage Monitoring</p>
                 </div>
                 <div class="col-span-3 flex justify-end items-center py-1 lg:py-2">
                     <div class="w-[164px] lg:w-[230px] flex justify-center">
@@ -251,8 +249,7 @@
             </div>
             <div class="grid grid-cols-12 border-b border-solid border-[#DFDEFB]">
                 <div class="col-span-6 flex items-center pl-1 lg:pl-6 py-1 lg:py-2">
-                    <p class="text-[#222222] text-xs lg:text-lg font-normal font-body mb-0">mirrord Actions - Coming
-                        Soon</p>
+                    <p class="text-[#222222] text-xs lg:text-lg font-normal font-body mb-0">Logging/Auditing</p>
                 </div>
                 <div class="col-span-3 flex justify-end items-center py-1 lg:py-2">
                     <div class="w-[164px] lg:w-[230px] flex justify-center">
@@ -267,8 +264,7 @@
             </div>
             <div class="grid grid-cols-12">
                 <div class="col-span-6 flex items-center pl-1 lg:pl-6 py-1 lg:py-2">
-                    <p class="text-[#222222] text-xs lg:text-lg font-normal font-body mb-0">Queue Filtering - Coming
-                        Soon</p>
+                    <p class="text-[#222222] text-xs lg:text-lg font-normal font-body mb-0">Session Management</p>
                 </div>
                 <div class="col-span-3 flex justify-end items-center py-1 lg:py-2">
                     <div class="w-[164px] lg:w-[230px] flex justify-center">
@@ -306,7 +302,46 @@
             </div>
             <div class="grid grid-cols-12 border-b border-solid border-[#DFDEFB]">
                 <div class="col-span-6 flex items-center pl-1 lg:pl-6 py-1 lg:py-2">
-                    <p class="text-[#222222] text-xs lg:text-lg font-normal font-body mb-0">RBAC & SSO</p>
+                    <p class="text-[#222222] text-xs lg:text-lg font-normal font-body mb-0">Role Based Access Control</p>
+                </div>
+                <div class="col-span-3 flex justify-end items-center py-1 lg:py-2">
+                    <div class="w-[164px] lg:w-[230px] flex justify-center">
+                        {{- partial "svg/pricing-check-icon.svg" (dict "class" "w-[13px] lg:w-[22px]") }}
+                    </div>
+                </div>
+                <div class="col-span-3 flex justify-end items-center py-1 lg:py-2">
+                    <div class="w-[164px] lg:w-[230px] flex justify-center">
+                        {{- partial "svg/pricing-check-icon.svg" (dict "class" "w-[13px] lg:w-[22px]") }}
+                    </div>
+                </div>
+            </div>            
+            <div class="grid grid-cols-12">
+                <div class="col-span-6 flex items-center pl-1 lg:pl-6 py-1 lg:py-2">
+                    <p class="text-[#222222] text-xs lg:text-lg font-normal font-body mb-0">Support for airgapped
+                        clusters</p>
+                </div>
+                <div class="col-span-3 flex justify-end items-center py-1 lg:py-2">
+                    <div class="w-[164px] lg:w-[230px] flex justify-center">
+                        &nbsp;
+                    </div>
+                </div>
+                <div class="col-span-3 flex justify-end items-center py-1 lg:py-2">
+                    <div class="w-[164px] lg:w-[230px] flex justify-center">
+                        {{- partial "svg/pricing-check-icon.svg" (dict "class" "w-[13px] lg:w-[22px]") }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- table 3.5 -->
+            <div class="grid grid-cols-12 mt-3 lg:mt-8">
+                <div class="col-span-12 bg-[#756DF3] bg-opacity-20 h-[29px] lg:h-[70px] flex items-center pl-1 lg:pl-6">
+                    <h3 class="text-[#222222] text-sm lg:text-xl font-semibold font-body mb-0">Advanced</h3>
+                </div>
+            </div>
+            <div class="grid grid-cols-12 border-b border-solid border-[#DFDEFB]">
+                <div class="col-span-6 flex items-center pl-1 lg:pl-6 py-1 lg:py-2">
+                    <p class="text-[#222222] text-xs lg:text-lg font-normal font-body mb-0">Queue Filtering (coming soon)
+                    </p>
                 </div>
                 <div class="col-span-3 flex justify-end items-center py-1 lg:py-2">
                     <div class="w-[164px] lg:w-[230px] flex justify-center">
@@ -321,11 +356,11 @@
             </div>
             <div class="grid grid-cols-12 border-b border-solid border-[#DFDEFB]">
                 <div class="col-span-6 flex items-center pl-1 lg:pl-6 py-1 lg:py-2">
-                    <p class="text-[#222222] text-xs lg:text-lg font-normal font-body mb-0">LDAP / SAML (Roadmap?)</p>
+                    <p class="text-[#222222] text-xs lg:text-lg font-normal font-body mb-0">Support for deployments with multiple pods</p>
                 </div>
                 <div class="col-span-3 flex justify-end items-center py-1 lg:py-2">
                     <div class="w-[164px] lg:w-[230px] flex justify-center">
-                        &nbsp;
+                        {{- partial "svg/pricing-check-icon.svg" (dict "class" "w-[13px] lg:w-[22px]") }}
                     </div>
                 </div>
                 <div class="col-span-3 flex justify-end items-center py-1 lg:py-2">
@@ -333,11 +368,25 @@
                         {{- partial "svg/pricing-check-icon.svg" (dict "class" "w-[13px] lg:w-[22px]") }}
                     </div>
                 </div>
-            </div>
+            </div>            
+            <div class="grid grid-cols-12 border-b border-solid border-[#DFDEFB]">
+                <div class="col-span-6 flex items-center pl-1 lg:pl-6 py-1 lg:py-2">
+                    <p class="text-[#222222] text-xs lg:text-lg font-normal font-body mb-0">Support for targeting Jobs and CronJobs</p>
+                </div>
+                <div class="col-span-3 flex justify-end items-center py-1 lg:py-2">
+                    <div class="w-[164px] lg:w-[230px] flex justify-center">
+                        {{- partial "svg/pricing-check-icon.svg" (dict "class" "w-[13px] lg:w-[22px]") }}
+                    </div>
+                </div>
+                <div class="col-span-3 flex justify-end items-center py-1 lg:py-2">
+                    <div class="w-[164px] lg:w-[230px] flex justify-center">
+                        {{- partial "svg/pricing-check-icon.svg" (dict "class" "w-[13px] lg:w-[22px]") }}
+                    </div>
+                </div>
+            </div>            
             <div class="grid grid-cols-12">
                 <div class="col-span-6 flex items-center pl-1 lg:pl-6 py-1 lg:py-2">
-                    <p class="text-[#222222] text-xs lg:text-lg font-normal font-body mb-0">Support for airgapped
-                        clusters</p>
+                    <p class="text-[#222222] text-xs lg:text-lg font-normal font-body mb-0">Support for targeting StatefulSets</p>
                 </div>
                 <div class="col-span-3 flex justify-end items-center py-1 lg:py-2">
                     <div class="w-[164px] lg:w-[230px] flex justify-center">
@@ -368,7 +417,7 @@
                 </div>
                 <div class="col-span-3 flex justify-end items-center py-1 lg:py-2">
                     <div class="w-[164px] lg:w-[230px] flex justify-center">
-                        <p class="text-primary text-xs lg:text-lg font-normal font-body mb-0">12h</p>
+                        <p class="text-primary text-xs lg:text-lg font-normal font-body mb-0">Custom (< 24h)</p>
                     </div>
                 </div>
             </div>
@@ -385,7 +434,7 @@
                 </div>
                 <div class="col-span-3 flex justify-end items-center py-1 lg:py-2">
                     <div class="w-[164px] lg:w-[230px] flex justify-center">
-                        {{- partial "svg/pricing-check-icon.svg" (dict "class" "w-[13px] lg:w-[22px]") }}
+                        &nbsp;
                     </div>
                 </div>
             </div>
@@ -410,7 +459,7 @@
                 <div class="col-span-6 flex items-center pl-1 lg:pl-6 py-1 lg:py-2">
                     <p class="text-[#222222] text-xs lg:text-lg font-normal font-body mb-0">Customer success team and
                         Professional
-                        services available</p>
+                        services</p>
                 </div>
                 <div class="col-span-3 flex justify-end items-center py-1 lg:py-2">
                     <div class="w-[164px] lg:w-[230px] flex justify-center">
@@ -433,8 +482,7 @@
             <div class="grid grid-cols-12 border-b border-solid border-[#DFDEFB]">
                 <div class="col-span-6 flex items-center pl-1 lg:pl-6 py-1 lg:py-2">
                     <p class="text-[#222222] text-xs lg:text-lg font-normal font-body mb-0">Monthly or Annual with
-                        Credit Card,
-                        monthly true-up</p>
+                        Credit Card</p>
                 </div>
                 <div class="col-span-3 flex justify-end items-center py-1 lg:py-2">
                     <div class="w-[164px] lg:w-[230px] flex justify-center text-center">
