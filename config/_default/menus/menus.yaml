@@ -64,7 +64,7 @@ docs:
     url: /docs/help/
 footer_menu:
 - name: Get Started
-  url: /docs/overview/quick-start/
+  url: https://app.metalbear.co
   weight: 10
 - name: Docs
   url: /docs/overview/introduction/
@@ -78,9 +78,9 @@ footer_menu:
 - name: vs Telepresence
   url: "/compare/telepresence/"
   weight: 50
-- name: Support
-  url: "/#get-support"
-  weight: 60
+# - name: Support
+#   url: "/#get-support"
+#   weight: 60
 - identifier: contact
   name: Contact Us
   url: "/contact"
