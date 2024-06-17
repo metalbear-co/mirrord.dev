@@ -60,9 +60,13 @@ body {
     @apply py-4 lg:py-2 px-[2px] hover:no-underline;
 }
 
-.active-link {
-    @apply lg:before:absolute lg:before:left-0 lg:before:-bottom-[2px] lg:before:w-full lg:before:bg-tertiary lg:before:h-[4px];
+.menu__item-link.active-link {
+    @apply text-[#756DF3] font-semibold;
 }
+
+/* .active-link {
+    @apply lg:before:absolute lg:before:left-0 lg:before:-bottom-[2px] lg:before:w-full lg:before:bg-tertiary lg:before:h-[4px];
+} */
 
 .none-line {
     @apply lg:before:bg-transparent;

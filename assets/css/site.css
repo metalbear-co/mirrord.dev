@@ -1219,6 +1219,10 @@ table td {
   height: 100vh;
 }
 
+.min-h-\[168px\] {
+  min-height: 168px;
+}
+
 .w-1\/2 {
   width: 50%;
 }
@@ -1371,8 +1375,16 @@ table td {
   width: 36px;
 }
 
+.w-\[37px\] {
+  width: 37px;
+}
+
 .w-\[38\%\] {
   width: 38%;
+}
+
+.w-\[39px\] {
+  width: 39px;
 }
 
 .w-\[47px\] {
@@ -1391,16 +1403,16 @@ table td {
   width: 54px;
 }
 
-.w-\[59px\] {
-  width: 59px;
-}
-
 .w-\[60\%\] {
   width: 60%;
 }
 
 .w-\[62px\] {
   width: 62px;
+}
+
+.w-\[65\%\] {
+  width: 65%;
 }
 
 .w-\[70\%\] {
@@ -1421,6 +1433,10 @@ table td {
 
 .w-\[92\%\] {
   width: 92%;
+}
+
+.w-\[94\%\] {
+  width: 94%;
 }
 
 .w-\[95\%\] {
@@ -1493,6 +1509,11 @@ table td {
 
 .-translate-x-\[11px\] {
   --tw-translate-x: -11px;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.-translate-x-\[5px\] {
+  --tw-translate-x: -5px;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
@@ -2128,12 +2149,12 @@ table td {
   padding: 2rem;
 }
 
-.p-\[10px\] {
-  padding: 10px;
-}
-
 .p-\[1px\] {
   padding: 1px;
+}
+
+.p-\[7px\] {
+  padding: 7px;
 }
 
 .px-1 {
@@ -2925,17 +2946,19 @@ body {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
   }
+}
 
-  .active-link::before {
-    position: absolute;
-    left: 0px;
-    bottom: -2px;
-    height: 4px;
-    width: 100%;
-    content: var(--tw-content);
-    background-color: var(--tertiary);
-  }
+.menu__item-link.active-link {
+  font-weight: 600;
+  --tw-text-opacity: 1;
+  color: rgb(117 109 243 / var(--tw-text-opacity));
+}
 
+/* .active-link {
+    @apply lg:before:absolute lg:before:left-0 lg:before:-bottom-[2px] lg:before:w-full lg:before:bg-tertiary lg:before:h-[4px];
+} */
+
+@media (min-width: 1000px) {
   .none-line::before {
     content: var(--tw-content);
     background-color: transparent;
@@ -4285,6 +4308,10 @@ body {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
+.hover\:pb-\[3px\]:hover {
+  padding-bottom: 3px;
+}
+
 .hover\:font-bold:hover {
   font-weight: 700;
 }
@@ -4356,10 +4383,6 @@ body {
   --tw-scale-x: 1.5;
   --tw-scale-y: 1.5;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.group:hover .group-hover\:font-bold {
-  font-weight: 700;
 }
 
 .group:hover .group-hover\:font-semibold {
@@ -4902,24 +4925,24 @@ body {
     width: 55px;
   }
 
-  .lg\:w-\[60px\] {
-    width: 60px;
+  .lg\:w-\[56px\] {
+    width: 56px;
   }
 
-  .lg\:w-\[66px\] {
-    width: 66px;
+  .lg\:w-\[60px\] {
+    width: 60px;
   }
 
   .lg\:w-\[72\%\] {
     width: 72%;
   }
 
-  .lg\:w-\[80\%\] {
-    width: 80%;
+  .lg\:w-\[73px\] {
+    width: 73px;
   }
 
-  .lg\:w-\[83px\] {
-    width: 83px;
+  .lg\:w-\[80\%\] {
+    width: 80%;
   }
 
   .lg\:w-\[90\%\] {
@@ -5609,10 +5632,6 @@ body {
 
   .xl\:w-\[27px\] {
     width: 27px;
-  }
-
-  .xl\:w-\[75\%\] {
-    width: 75%;
   }
 
   .xl\:w-full {
