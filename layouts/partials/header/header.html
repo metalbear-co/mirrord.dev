@@ -79,10 +79,10 @@
                                 {{- end }}
                             </ul>
                             {{- else }}
-                            <a class='menu__item-link block lg:inline-block text-xl lg:text-sm text-current font-semibold group lg:relative {{ if $active }} active-link {{ end }} {{ if eq $current.Title "Quick Start" }} {{ if eq .Name "Docs" }} none-line {{ end }} {{ end }}'
+                            <a class='menu__item-link block lg:inline-block text-xl lg:text-sm text-current hover:font-semibold group lg:relative {{ if $active }} active-link {{ end }} {{ if eq $current.Title "Quick Start" }} {{ if eq .Name "Docs" }} none-line {{ end }} {{ end }}'
                                 href="{{.URL | relLangURL}}">
-                                <span class="text-transparent">{{ if eq .Name "Quick Start" }}{{ replace .Name .Name "Get Started" }}{{ else }}{{ .Name | safeHTML }}{{ end }}</span>{{- .Post -}}  
-                                <span class="absolute top-0 left-0 w-full h-full flex justify-center items-center font-normal group-hover:font-bold">{{ .Name | safeHTML }}</span>
+                                <span class="text-transparent font-semibold">{{ if eq .Name "Quick Start" }}{{ replace .Name .Name "Get Started" }}{{ else }}{{ .Name | safeHTML }}{{ end }}</span>{{- .Post -}}  
+                                <span class="absolute top-0 left-0 w-full h-full flex justify-center items-center group-hover:font-semibold">{{ .Name | safeHTML }}</span>
                             </a>
                             {{- end }}
                         </li>
