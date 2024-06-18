@@ -24,6 +24,7 @@ tags: ["team", "enterprise"]
     - `CAP_NET_ADMIN` - for modifying routing tables
     - `CAP_SYS_PTRACE` - for reading the target pod's environment variables
     - `CAP_SYS_ADMIN` - for joining the target pod's network namespace
+- mirrord doesn't copy/sync files/secrets (unless log to file is active in debug/trace, then some info might get dumped there) to the filesystem. The access it provides to secret/files is in memory (unless app itself does write/leak it).
 - Missing anything? Feel free to ask us on Discord or hi@metalbear.co
 
 ## Are you SOC2/GDPR compliant?
