@@ -32,3 +32,5 @@ List of third-party guides and videos about mirrord:
 | [Making locally executing code think it’s running on k8s](https://gluo.be/mirrord-making-locally-executing-code-think-its-running-on-k8s/) | Blog | Overview of mirrord |
 | [Intro to “Remocal” Kubernetes Development with mirrord](https://www.youtube.com/live/nuipmDu-Rnw?si=DXiWJr29et1b-xC6) | Video | Overview and use cases for mirrord |
 | [What is Remocal? How can this approach help enhance DX (developer experience)?](https://www.mishraajay.in/blog/moreinnerdevloop) | Blog | Demo of mirrord |
+| [Why Fast Feedback Loops Matter When Working with Kubernetes](https://piotrzan.medium.com/why-fast-feedback-loops-matter-when-working-with-kubernetes-58b8d2cb8e8e) | Blog | Overview of mirrord |
+| [Fast Feedback Loops - Developing on Kubernetes with Mirrord](https://www.youtube.com/watch?v=EK_ivK8HlNo) | Video | Demo of mirrord |
