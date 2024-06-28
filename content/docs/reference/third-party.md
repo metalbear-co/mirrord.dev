@@ -34,3 +34,4 @@ List of third-party guides and videos about mirrord:
 | [What is Remocal? How can this approach help enhance DX (developer experience)?](https://www.mishraajay.in/blog/moreinnerdevloop) | Blog | Demo of mirrord |
 | [Why Fast Feedback Loops Matter When Working with Kubernetes](https://piotrzan.medium.com/why-fast-feedback-loops-matter-when-working-with-kubernetes-58b8d2cb8e8e) | Blog | Overview of mirrord |
 | [Fast Feedback Loops - Developing on Kubernetes with Mirrord](https://www.youtube.com/watch?v=EK_ivK8HlNo) | Video | Demo of mirrord |
+| [Perfect Development Workflow with Mirrord: Every Developer’s Hero](https://devopsmaestro.hashnode.dev/perfect-development-workflow-with-mirrord-every-developers-hero) | Blog | Overview of mirrord|
