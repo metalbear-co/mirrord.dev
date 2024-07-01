@@ -40,6 +40,7 @@ Fields:
 |client_hostname|`whoami::hostname` of client|`All`|
 |client_name|`whoami::realname` of client|`All`|
 |client_user|Kubernetes user of client (via k8s RBAC)|`All`|
+|client_id|unique client id produced from client's certificate|`All`|
 |session_id|unique id for individual mirrord sessions|`Port Steal` `Port Mirrored` `Port Released` `Session Started` `Session Ended`|
 |session_duration|the session's duration in seconds|`Session Ended`|
 |port|port number|`Port Stolen` `Port Mirrored` `Port Released`|
