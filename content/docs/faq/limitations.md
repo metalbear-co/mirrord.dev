@@ -31,9 +31,9 @@ Yes, mirrord works with OpenShift. However, OpenShift usually ships with a defau
 To fix this, you would need to tweak your `scc` settings - more information [here](https://docs.openshift.com/container-platform/3.11/admin_guide/manage_scc.html).
 If you'd rather keep the default security policies, we recommend trying out [mirrord for Teams]({{< ref "/docs/overview/teams" >}} "mirrord for Teams"). See [this question](#what-if-i-cant-create-containers-with-the-capabilities-mirrord-requires-in-my-cluster) for more info.
 
-### Does mirrord support binaries that are statically compiled?
+### Does mirrord support binaries that are statically compiled? (Linux)
 
-No, mirrord needs to be able to leverage dynamic linking in order to work. This means static binaries are not (and will not for the foreseeable future) be supported.
+No, mirrord needs to be able to leverage dynamic linking in order to work. This means static binaries are not supported.
 
 To check a binary, you can use the `file <FILE_NAME>` command - dynamically linked binaries will look like this:
 
