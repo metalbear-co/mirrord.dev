@@ -42,4 +42,11 @@ marvin@heart-of-gold:~$ file /usr/bin/ls
 /usr/bin/ls: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=36b86f957a1be53733633d184c3a3354f3fc7b12, for GNU/Linux 3.2.0, stripped
 ```
 
+And static binaries will look like this:
+
+```bash
+marvin@heart-of-gold:~/MetalBear$ file some_static_binary 
+some_static_binary: ELF 64-bit LSB executable, x86-64, version 1 (GNU/Linux), statically linked, BuildID[sha1]=2e1eda62d5f755377435c009e856cd7b9836734e, for GNU/Linux 3.2.0, not stripped
+```
+
 Sometimes Go is statically compiled by default, so it's important to check and compile dynamically if necessary. See [this section in Common Issues](./common-issues.md/#ive-run-my-program-with-mirrord-but-it-seems-to-have-no-effect) for more info.
