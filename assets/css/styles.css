@@ -64,6 +64,32 @@ body {
     @apply text-[#756DF3] font-semibold;
 }
 
+.menu__item.button a {
+    @apply lg:w-[168px] lg:h-[48px] lg:hover:bg-[#E4E3FD] lg:border lg:border-solid lg:border-[#222222] rounded-[8px] hover:font-normal group-hover:font-normal;
+}
+
+.menu__item.button a span {
+    @apply font-semibold lg:font-normal group-hover:font-normal hover:font-normal;
+}
+
+@media (min-width: 1024px) {
+    .menu__item.button:hover a span {
+        font-weight: 400;
+    }
+}
+
+.menu__item.mobile-menu-spacer {
+    @apply w-full lg:w-auto h-[calc(100vh_-_684px)] lg:h-auto flex items-end justify-center lg:block;
+}
+
+.menu__item.mobile-menu-spacer a .mobile-menu-spacer-item {
+    @apply static lg:absolute font-semibold lg:font-normal group-hover:font-semibold hover:font-semibold;
+}
+
+.menu__item.text-upper a span {
+    @apply uppercase lg:capitalize;
+}
+
 /* .active-link {
     @apply lg:before:absolute lg:before:left-0 lg:before:-bottom-[2px] lg:before:w-full lg:before:bg-tertiary lg:before:h-[4px];
 } */
@@ -497,4 +523,8 @@ body {
 
 .pricing-page-title {
     transform: rotateX(160deg);
+}
+
+.content-accordion a {
+    @apply underline;
 }

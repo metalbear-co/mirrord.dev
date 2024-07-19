@@ -1,16 +1,39 @@
 main:
+- name: Home
+  url: "/"
+  params:
+    class: "text-upper lg:hidden"
+  weight: 10
 - name: Product
   url: /product/
+  params:
+    class: "text-upper"
   weight: 10
 - name: Pricing
   url: /pricing/
+  params:
+    class: "text-upper"
   weight: 20
 - name: Docs
   url: /docs/overview/introduction/
+  params:
+    class: "text-upper"
   weight: 30
 - name: Login/Sign Up
   url: "https://app.metalbear.co/"
+  params:
+    class: "mobile-menu-spacer"
   weight: 30
+- name: Contact us
+  url: "/contact/"
+  params:
+    class: "font-semibold lg:font-normal lg:hidden"
+  weight: 40
+- name: Schedule A Demo
+  url: "https://calendly.com/eyal-metalbear/mirrord-session"
+  params:
+    class: "button"
+  weight: 50
 
 # - identifier: resources
 #   name: Resources

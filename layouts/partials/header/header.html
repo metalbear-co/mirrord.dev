@@ -1,7 +1,7 @@
 {{- $site := .Site }}
 {{- $currentPage := . }}
 {{- $page_url := $currentPage.RelPermalink | relLangURL }}
-<header x-data="{sideNav: false}" class="header {{ if (ne .Section "stories") }}bg-[#FBFBFD] {{ end }} py-8 {{ if (eq .Section "docs") }}lg:fixed lg:w-full lg:z-30 lg:rounded-bl-[200px]{{ end }}{{- if eq $page_url "/pricing/" }}lg:rounded-bl-[200px] {{ end }}">
+<header x-data="{sideNav: false}" class="header {{ if (ne .Section "stories") }}bg-[#FBFBFD] {{ end }} py-8 {{ if (eq .Section "docs") }}lg:fixed lg:w-full lg:z-30 lg:rounded-bl-[200px]{{ end }}{{- if or (eq $page_url "/pricing/") (eq $page_url "/contact/") }}lg:rounded-bl-[200px] {{ end }}">
     <div class="header__container header__container-all">
         <div class="grid grid-cols-12 items-center">
             <div class="nav__brand col-span-11 lg:col-span-2">
@@ -36,7 +36,7 @@
                             {{- partial "svg/logo-mobile.svg" . }}
                         </a>
                     </div>
-                    <ul class="navbar__menu menu lg:flex list-none pl-0 mb-0">
+                    <ul class="navbar__menu menu lg:flex lg:items-center list-none pl-0 mb-0">
                         {{- $current := . -}}
                         {{- $section := $current.Section -}}
                         {{- range $index, $menus := .Site.Menus.main }}
@@ -45,7 +45,7 @@
                         {{- $active = or $active (and (eq .Name ($section | humanize)) (eq $current.Section $section)) -}}
                         {{- $active = or $active (and (eq .Name "Blog") (eq $current.Section "blog" "contributors")) -}}
                         <li @click="selectedMenu !== {{ $index }} ? selectedMenu = {{ $index }} : selectedMenu = null"
-                            class="menu__item relative group font-heading text-[#222222] transition duration-300 ease-[ease] z-30">
+                            class="menu__item relative group font-heading text-[#222222] transition duration-300 ease-[ease] z-30 {{ with .Params.class }}{{ . }}{{ end }}">
                             {{- if .HasChildren }}
                             <button
                                 class="w-full flex items-center justify-center lg:justify-start text-current cursor-pointer focus:outline-none group lg:relative">
@@ -82,7 +82,7 @@
                             <a class='menu__item-link block lg:inline-block text-xl lg:text-sm text-current hover:font-semibold group lg:relative {{ if $active }} active-link {{ end }} {{ if eq $current.Title "Quick Start" }} {{ if eq .Name "Docs" }} none-line {{ end }} {{ end }}'
                                 href="{{.URL | relLangURL}}">
                                 <span class="text-transparent font-semibold">{{ if eq .Name "Quick Start" }}{{ replace .Name .Name "Get Started" }}{{ else }}{{ .Name | safeHTML }}{{ end }}</span>{{- .Post -}}  
-                                <span class="absolute top-0 left-0 w-full h-full flex justify-center items-center group-hover:font-semibold">{{ .Name | safeHTML }}</span>
+                                <span class="absolute top-0 left-0 w-full h-full flex justify-center items-center group-hover:font-semibold {{ with .Params.class }}{{ . }}-item{{ end }}">{{ .Name | safeHTML }}</span>
                             </a>
                             {{- end }}
                         </li>

@@ -6,8 +6,8 @@
 {{- $currentPage := . }}
 {{- $page_url := $currentPage.RelPermalink | relLangURL }}
 
-<body class="font-body {{ if .IsHome }}bg-white {{ else if eq .Section " stories" }}bg-white {{ else if eq
-  $page_url "/pricing/" }}bg-white {{ else }}bg-[#FBFBFD] dark:bg-[#202020]{{ end }}">
+<body class="font-body {{ if or .IsHome (eq .Section "stories") (eq $page_url "/pricing/") (eq $page_url "/contact/") }}bg-white{{ else }}bg-[#FBFBFD] dark:bg-[#202020]{{ end }}">
+
 
   <div class="overflow-hidden">
 
