@@ -3566,6 +3566,7 @@ body {
 }
 
 .docs__sidebar--left {
+  display: grid;
   padding-top: 1rem;
 }
 
@@ -3676,7 +3677,6 @@ body {
   right: 0.5rem;
   border-radius: 5px;
   --tw-bg-opacity: 1;
-  background-color: rgb(217 217 217 / var(--tw-bg-opacity));
   padding-left: 6px;
   padding-right: 6px;
   padding-top: 5px;
