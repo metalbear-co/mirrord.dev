@@ -65,7 +65,7 @@ body {
 }
 
 .menu__item.button a {
-    @apply lg:w-[168px] lg:h-[48px] lg:hover:bg-[#E4E3FD] lg:border lg:border-solid lg:border-[#222222] rounded-[8px] hover:font-normal group-hover:font-normal;
+    @apply lg:w-[168px] lg:h-[48px] lg:bg-[#E4E3FD] lg:border lg:border-solid lg:border-[#222222] lg:hover:shadow-[-7px_6.5px_0px_000000] rounded-[8px] hover:font-normal group-hover:font-normal transition-all duration-200 ease-[ease];
 }
 
 .menu__item.button a span {
@@ -78,16 +78,8 @@ body {
     }
 }
 
-.menu__item.mobile-menu-spacer {
-    @apply w-full lg:w-auto h-[calc(100vh_-_684px)] lg:h-auto flex items-end justify-center lg:block;
-}
-
-.menu__item.mobile-menu-spacer a .mobile-menu-spacer-item {
-    @apply static lg:absolute font-semibold lg:font-normal group-hover:font-semibold hover:font-semibold;
-}
-
-.menu__item.text-upper a span {
-    @apply uppercase lg:capitalize;
+.menu__item.menu-item-desktop {
+    @apply hidden lg:block;
 }
 
 /* .active-link {

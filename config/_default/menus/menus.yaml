@@ -22,18 +22,24 @@ main:
 - name: Login/Sign Up
   url: "https://app.metalbear.co/"
   params:
-    class: "mobile-menu-spacer"
+    class: "menu-item-desktop"
   weight: 30
-- name: Contact us
-  url: "/contact/"
-  params:
-    class: "font-semibold lg:font-normal lg:hidden"
-  weight: 40
 - name: Schedule A Demo
   url: "https://calendly.com/eyal-metalbear/mirrord-session"
   params:
-    class: "button"
+    class: "button menu-item-desktop"
   weight: 50
+
+main_mobile:
+- name: Login/Sign Up
+  url: "https://app.metalbear.co/"
+  weight: 10
+- name: Contact us
+  url: "/contact/"
+  weight: 20
+- name: Schedule A Demo
+  url: "https://calendly.com/eyal-metalbear/mirrord-session"
+  weight: 30
 
 # - identifier: resources
 #   name: Resources
@@ -72,10 +78,10 @@ main:
 #   name: Support
 #   url: "/#get-support"
 #   weight: 40
-# # - identifier: contact
-# #   name: Contact Us
-# #   url: "/contact"
-# #   weight: 50
+# - identifier: contact
+#   name: Contact Us
+#   url: "/contact"
+#   weight: 50
 docs:
   - name: Overview
     weight: 10
@@ -117,10 +123,10 @@ social:
   pre: github
   url: https://github.com/metalbear-co/mirrord
   weight: 20
-# - name: Twitter
-#   pre: twitter
-#   url: https://twitter.com/metalbearco
-#   weight: 30
+- name: Twitter
+  pre: twitter
+  url: https://twitter.com/metalbearco
+  weight: 30
 - name: Linkedin
   pre: linkedin
   url: https://www.linkedin.com/company/metalbearco/
