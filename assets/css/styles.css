@@ -239,6 +239,10 @@ body {
 }
 
 /* TOC */
+.docs__toc:not(.docs__toc:has(a)) {
+    display: none;
+}
+
 .docs__toc #TableOfContents ul,
 .docs__toc #TableOfContents ul > li > ul,
 .docs__toc .docs-nav__toc ul,

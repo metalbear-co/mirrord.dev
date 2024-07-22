@@ -3385,10 +3385,14 @@ body {
 }
 
 /* TOC */
+.docs__toc:not(.docs__toc:has(a)) {
+  display: none;
+}
 
 .docs__toc #TableOfContents ul,
 .docs__toc #TableOfContents ul > li > ul,
 .docs__toc .docs-nav__toc ul,
+
 .docs__toc .docs-nav__toc ul > li > ul {
   margin-bottom: 0px;
   list-style-type: none;
@@ -4306,10 +4310,6 @@ body {
 .hover\:bg-white:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-}
-
-.hover\:pb-\[3px\]:hover {
-  padding-bottom: 3px;
 }
 
 .hover\:font-bold:hover {
