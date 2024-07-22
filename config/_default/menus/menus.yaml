@@ -28,6 +28,7 @@ main:
   url: "https://calendly.com/eyal-metalbear/mirrord-session"
   params:
     class: "button menu-item-desktop"
+    target: "_blank"
   weight: 50
 
 main_mobile:

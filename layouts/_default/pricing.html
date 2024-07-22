@@ -513,7 +513,7 @@
                 <h3 class="text-[#222222] text-[1.875rem] lg:text-[2.25rem] font-heading font-bold leading-[1.16]">
                     Frequently asked questions</h3>
             </header>
-            <div x-data="{ open: [0] }">
+            <div x-data="{ open: [] }">
                 {{- $lastIndex := sub (len .Params.questions) 1 }}
                 {{- range $index, $qa := .Params.questions }}
                 <div class="border-b border-[#E4E3FD]" :class="{ 'border-none': {{ $index }} === {{ $lastIndex }} }">
@@ -569,7 +569,7 @@
                                 <p class="text-sm xl:text-lg text-white font-body font-bold mb-0">Free Forever.</p>
                             </div>
                             <div class="flex justify-center xl:justify-start pt-4">
-                                <a class="w-[246px] h-[50px] lg:w-[286px] lg:h-[58px] text-base lg:text-xl text-[#222222] font-body inline-flex justify-center items-center bg-[#FBFBFD] hover:bg-[#E4E3FD] border border-solid border-[#222222] rounded-[6px] lg:rounded-[10px] shadow-[-5px_5px_0px_#000000] lg:shadow-[-9px_8px_0px_#000000] transition-colors duration-200 ease-[ease]"
+                                <a target="_blank" class="w-[246px] h-[50px] lg:w-[286px] lg:h-[58px] text-base lg:text-xl text-[#222222] font-body inline-flex justify-center items-center bg-[#FBFBFD] hover:bg-[#E4E3FD] border border-solid border-[#222222] rounded-[6px] lg:rounded-[10px] shadow-[-5px_5px_0px_#000000] lg:shadow-[-9px_8px_0px_#000000] transition-colors duration-200 ease-[ease]"
                                     href="https://github.com/metalbear-co/mirrord">Try It Now</a>
                             </div>
                         </div>
