@@ -3,7 +3,7 @@ repoHost: GitHub
 docsRepo: 'https://github.com/metalbear-co/mirrord.dev'
 docsRepoBranch: master
 docsRepoSubPath: ''
-title: mirrord
+title: Faster, Simpler Kubernetes Development
 titleSeparator: '-'
 titleAddition: Rethinking cloud development
 description: >-
