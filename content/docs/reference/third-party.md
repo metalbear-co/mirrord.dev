@@ -35,3 +35,6 @@ List of third-party guides and videos about mirrord:
 | [Why Fast Feedback Loops Matter When Working with Kubernetes](https://piotrzan.medium.com/why-fast-feedback-loops-matter-when-working-with-kubernetes-58b8d2cb8e8e) | Blog | Overview of mirrord |
 | [Fast Feedback Loops - Developing on Kubernetes with Mirrord](https://www.youtube.com/watch?v=EK_ivK8HlNo) | Video | Demo of mirrord |
 | [Perfect Development Workflow with Mirrord: Every Developer’s Hero](https://devopsmaestro.hashnode.dev/perfect-development-workflow-with-mirrord-every-developers-hero) | Blog | Overview of mirrord |
+| [Top 5 Kubernetes Development Tools for Developers](https://medium.com/@victoriaporomon/top-5-kubernetes-development-tools-for-developers-d2bf9aac1ded) | Blog | Overview of mirrord |
+| [Cloud-First application development with mirrord](https://www.mishraajay.in/blog/mirrordcmplxapp) | Blog | Demo of mirrord |
+| [Using mirrord for Local Development and Debugging](https://uthy.hashnode.dev/using-mirrord-for-local-development-and-debugging) | Blog | Overview and demo of mirrord |

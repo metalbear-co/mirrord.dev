@@ -1,15 +1,45 @@
 main:
+- name: Home
+  url: "/"
+  params:
+    class: "text-upper lg:hidden"
+  weight: 10
 - name: Product
   url: /product/
+  params:
+    class: "text-upper"
   weight: 10
 - name: Pricing
   url: /pricing/
+  params:
+    class: "text-upper"
   weight: 20
 - name: Docs
   url: /docs/overview/introduction/
+  params:
+    class: "text-upper"
   weight: 30
 - name: Login/Sign Up
   url: "https://app.metalbear.co/"
+  params:
+    class: "menu-item-desktop"
+  weight: 30
+- name: Schedule A Demo
+  url: "https://calendly.com/eyal-metalbear/mirrord-session"
+  params:
+    class: "button menu-item-desktop"
+    target: "_blank"
+  weight: 50
+
+main_mobile:
+- name: Login/Sign Up
+  url: "https://app.metalbear.co/"
+  weight: 10
+- name: Contact us
+  url: "/contact/"
+  weight: 20
+- name: Schedule A Demo
+  url: "https://calendly.com/eyal-metalbear/mirrord-session"
   weight: 30
 
 # - identifier: resources
@@ -49,10 +79,10 @@ main:
 #   name: Support
 #   url: "/#get-support"
 #   weight: 40
-# # - identifier: contact
-# #   name: Contact Us
-# #   url: "/contact"
-# #   weight: 50
+# - identifier: contact
+#   name: Contact Us
+#   url: "/contact"
+#   weight: 50
 docs:
   - name: Overview
     weight: 10
@@ -94,10 +124,10 @@ social:
   pre: github
   url: https://github.com/metalbear-co/mirrord
   weight: 20
-# - name: Twitter
-#   pre: twitter
-#   url: https://twitter.com/metalbearco
-#   weight: 30
+- name: Twitter
+  pre: twitter
+  url: https://twitter.com/metalbearco
+  weight: 30
 - name: Linkedin
   pre: linkedin
   url: https://www.linkedin.com/company/metalbearco/
