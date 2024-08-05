@@ -127,6 +127,6 @@ To work around this issue (on macOS), you can use the following mirrord configur
    "experimental": {"trust_any_certificate": true}
 }
 ```
-This configuration would make any certificate trusted for the process. We might add a proper verification feature if we see it being used broadly (make sure to not disable telemetry so we can know the popularity of the need).
+This configuration would make any certificate trusted for the process.
 
 Another alternatives are either disable certificate validation in your application or import the problematic certificate (or its root CA) into your macOS Keychain. For guidance on how to do this, refer to this [Apple support article](https://support.apple.com/guide/keychain-access/change-the-trust-settings-of-a-certificate-kyca11871/mac).
