@@ -121,4 +121,12 @@ When running processes locally versus in a container within Kubernetes, some lan
 
 A specific issue with Go can be found [here](https://github.com/golang/go/issues/51991), where Go encounters certificate validation errors due to certain AWS services serving certificates that are deemed invalid by the macOS Keychain, but not by Go’s certificate validation in other environments.
 
-To work around this issue, you can either disable certificate validation in your application or import the problematic certificate (or its root CA) into your macOS Keychain. For guidance on how to do this, refer to this [Apple support article](https://support.apple.com/guide/keychain-access/change-the-trust-settings-of-a-certificate-kyca11871/mac).
+To work around this issue (on macOS), you can use the following mirrord configuration:
+```json
+{
+   "experimental": {"trust_any_certificate": true}
+}
+```
+This configuration would make any certificate trusted for the process. We might add a proper verification feature if we see it being used broadly (make sure to not disable telemetry so we can know the popularity of the need).
+
+Another alternatives are either disable certificate validation in your application or import the problematic certificate (or its root CA) into your macOS Keychain. For guidance on how to do this, refer to this [Apple support article](https://support.apple.com/guide/keychain-access/change-the-trust-settings-of-a-certificate-kyca11871/mac).
