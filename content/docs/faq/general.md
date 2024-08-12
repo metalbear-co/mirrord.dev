@@ -54,7 +54,7 @@ Our main goal in future versions of mirrord is to reduce the risk of disruption 
 
 ### Can I use mirrord to run a local container, rather than a local process, in the context of the remote Kubernetes cluster?
 
-The only way to do this at the moment is to install the mirrord CLI within the container and change its entrypoint to run the original process using mirrord. Support for running containers directly with mirrord will be added in the future - please follow [this issue](https://github.com/metalbear-co/mirrord/issues/1658) for updates.
+Yes! You can use the `mirrord container` command to run a local container in the context of the remote Kubernetes cluster. You can read more about it [here]({{< ref "/docs/using-mirrord/local-container" >}} "Local Container").
 
 ### What if I can't create containers with the capabilities mirrord requires in my cluster?
 

@@ -64,7 +64,18 @@ For example:
 mirrord exec --target pod/app-pod-01 python main.py
 ```
 
-Use `mirrord exec --help` to get all possible commands + arguments.
+Or, if you'd rather run a local container than a native process, run:
+```bash
+mirrord container --target <target-path> -- <command used to run the local container>
+```
+
+For example:
+
+```bash
+mirrord container -- docker run nginx
+```
+
+Use `mirrord exec --help` or `mirrord container --help` to get all possible commands + arguments.
 
 
 ## VS Code Extension
