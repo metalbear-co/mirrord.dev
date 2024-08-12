@@ -113,7 +113,7 @@ in the agent configuration:
 
 ### `mirrord operator status` fails with `503 Service Unavailable` on GKE
 
-If private networking is enabled, it is likely due to firewall rules blocking the mirrord operator's API service from the API server. To fix this, add a firewall rule that allows your cluster's master nodes to access TCP port 3000 in your cluster's pods. Please refer to the [GCP docs](https://cloud.google.com/kubernetes-engine/docs/how-to/private-clusters#add_firewall_rules) for information.
+If private networking is enabled, it is likely due to firewall rules blocking the mirrord operator's API service from the API server. To fix this, add a firewall rule that allows your cluster's master nodes to access TCP port 443 in your cluster's pods. Please refer to the [GCP docs](https://cloud.google.com/kubernetes-engine/docs/how-to/private-clusters#add_firewall_rules) for information.
 
 ### My local process encounters unexpected certificate validation errors
 
@@ -121,4 +121,12 @@ When running processes locally versus in a container within Kubernetes, some lan
 
 A specific issue with Go can be found [here](https://github.com/golang/go/issues/51991), where Go encounters certificate validation errors due to certain AWS services serving certificates that are deemed invalid by the macOS Keychain, but not by Go’s certificate validation in other environments.
 
-To work around this issue, you can either disable certificate validation in your application or import the problematic certificate (or its root CA) into your macOS Keychain. For guidance on how to do this, refer to this [Apple support article](https://support.apple.com/guide/keychain-access/change-the-trust-settings-of-a-certificate-kyca11871/mac).
+To work around this issue (on macOS), you can use the following mirrord configuration:
+```json
+{
+   "experimental": {"trust_any_certificate": true}
+}
+```
+This configuration would make any certificate trusted for the process.
+
+Other alternatives are to either disable certificate validation in your application or import the problematic certificate (or its root CA) into your macOS Keychain. For guidance on how to do this, refer to this [Apple support article](https://support.apple.com/guide/keychain-access/change-the-trust-settings-of-a-certificate-kyca11871/mac).
