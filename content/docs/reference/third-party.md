@@ -39,3 +39,4 @@ List of third-party guides and videos about mirrord:
 | [Cloud-First application development with mirrord](https://www.mishraajay.in/blog/mirrordcmplxapp) | Blog | Demo of mirrord |
 | [Using mirrord for Local Development and Debugging](https://uthy.hashnode.dev/using-mirrord-for-local-development-and-debugging) | Blog | Overview and demo of mirrord |
 | [Remocal Development: The Future of Modern Development](https://www.youtube.com/watch?v=GjWCPLHSSI8) | Video | Dive into mirrord use cases |
+| [Kubernetes Debugging with Mirrord and VS Code](https://youtu.be/gqIlf3DdlfQ?si=yTXrnfpZzt_snDMA) | Video | Overview of mirrord |
