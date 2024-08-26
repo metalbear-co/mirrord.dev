@@ -39,7 +39,7 @@ Another reason that mirrord might seem not to work is if your remote pod has mor
 
 When executing a task Turbo strips most of the existing process environment, including internal mirrord variables required during libc call interception setup. There are two alternative ways to solve this problem:
 
-1. Explicitly tell Turbo to pass mirrord environment to the task. To do this, merge the snippet below into your `turbo.json`. You will be able to run the task like `mirrord exec turbo dev`
+1. Explicitly tell Turbo to pass mirrord environment to the task. To do this, merge the snippet below into your `turbo.json`. You should be able to run the task like `mirrord exec turbo dev`.
 ```json
 {
   "globalPassThroughEnv": ["MIRRORD_*", "LD_PRELOAD", "DYLD_INSERT_LIBRARIES"]
