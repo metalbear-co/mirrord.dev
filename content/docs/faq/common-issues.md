@@ -35,6 +35,19 @@ There are currently two known cases where mirrord cannot load into the applicati
 
 Another reason that mirrord might seem not to work is if your remote pod has more than one container. mirrord works at the level of the container, not the whole pod. If your pod runs multiple containers, you need to make sure mirrord targets the correct one by by specifying it explicitly in the [target configuration](/docs/reference/configuration/#root-target). Note that we filter out the proxy containers added by popular service meshes automatically.
 
+### I've run my [Turbo](https://turbo.build/) task with mirrord, but it seems to have no effect
+
+When executing a task Turbo strips most of the existing process environment, including internal mirrord variables required during libc call interception setup. There are two alternative ways to solve this problem:
+
+1. Explicitly tell Turbo to pass mirrord environment to the task. To do this, merge the snippet below into your `turbo.json`. You will be able to run the task like `mirrord exec turbo dev`
+```json
+{
+  "globalPassThroughEnv": ["MIRRORD_*", "LD_PRELOAD", "DYLD_INSERT_LIBRARIES"]
+}
+```
+
+2. Invoke mirrord inside the Turbo task command line itself.
+
 ### Incoming traffic to the remote target doesn't reach my local process
 
 This could happen for several reasons:
