@@ -76,6 +76,6 @@ this will expand all the extra fields stored in "log" field.
 
 ### fluentd + elasticsearch
 
-And assuming you are using `logstash_format true` and the connected mapping will store the extra fields in a `keyword` type we have a ready made dashboard you can simply import.
+Assuming you are using `logstash_format true` and the connected mapping will store the extra fields in a `keyword` type, we have a ready made dashboard you can simply import.
 
 Download it <a href="/operator-fluentd-kibana.ndjson" download>here</a> (Use Saved Objects to import)
