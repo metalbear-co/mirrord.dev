@@ -38,3 +38,7 @@ List of third-party guides and videos about mirrord:
 | [Top 5 Kubernetes Development Tools for Developers](https://medium.com/@victoriaporomon/top-5-kubernetes-development-tools-for-developers-d2bf9aac1ded) | Blog | Overview of mirrord |
 | [Cloud-First application development with mirrord](https://www.mishraajay.in/blog/mirrordcmplxapp) | Blog | Demo of mirrord |
 | [Using mirrord for Local Development and Debugging](https://uthy.hashnode.dev/using-mirrord-for-local-development-and-debugging) | Blog | Overview and demo of mirrord |
+| [Remocal Development: The Future of Modern Development](https://www.youtube.com/watch?v=GjWCPLHSSI8) | Video | Dive into mirrord use cases |
+| [Kubernetes Debugging with Mirrord and VS Code](https://youtu.be/gqIlf3DdlfQ?si=yTXrnfpZzt_snDMA) | Video | Overview of mirrord |
+| [Remocal Development: The Future of Efficient Kubernetes Workflows](https://thenewstack.io/remocal-development-the-future-of-efficient-kubernetes-workflows/) | Blog | Overview of mirrord |
+| [Use this tool for easy debug right on Kubernetes](https://www.youtube.com/shorts/VGygxsQuhtY) | Video | Overview of mirrord |
