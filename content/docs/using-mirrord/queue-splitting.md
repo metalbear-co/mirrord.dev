@@ -25,12 +25,12 @@ intention:
    configuration. Messages that match the filter will reach your local application, and messages that do not, will
    reach either the deployed application, or another teammate's local application, if they match their filter.**
 
-So far queue splitting is available for [Amazon SQS](https://aws.amazon.com/sqs/) queues. Pretty soon we'll support
-kafka queues as well.
+So far queue splitting is available for [Amazon SQS](https://aws.amazon.com/sqs/). Pretty soon we'll support
+Kafka as well.
 
 ## SQS-enabled mirrord operator installation
 
-In order to use the queue splitting feature, some extra values need be provided during the installation.
+In order to use the queue splitting feature, some extra values need be provided during the installation of the mirrord Operator.
 
 First of all, the SQS splitting feature needs to be enabled.
 When installing with the [mirrord-operator helm chart](https://github.com/metalbear-co/charts/tree/main/mirrord-operator)
@@ -38,7 +38,7 @@ this means setting the [`operator.sqsSplitting`](https://github.com/metalbear-co
 [value](https://helm.sh/docs/chart_template_guide/values_files/). When installing via the `mirrord operator setup`
 command, the `--sqs-splitting` flag should be set.
 
-When sqs splitting is enabled during installation, some additional resources are created, and the SQS component of
+When SQS splitting is enabled during installation, some additional resources are created, and the SQS component of
 the mirrord operator is started.
 
 Additionally, the mirrord operator has to be able to create, read from, write to, and delete SQS queues.
@@ -153,6 +153,6 @@ In the example above, a filter was only defined for one of the queues this targe
 specifying a match-none filter for the second queue. Meaning our application will not see any messages in the
 `ad-queue`.
 
-Once all users stop filtering a queue (stop their mirrord runs), the temporary SQS queues that mirrord created will be
+Once all users stop filtering a queue (i.e. end their mirrord sessions), the temporary SQS queues that mirrord created will be
 deleted.
 
