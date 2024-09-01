@@ -28,7 +28,7 @@ intention:
 So far queue splitting is available for [Amazon SQS](https://aws.amazon.com/sqs/). Pretty soon we'll support
 Kafka as well.
 
-## SQS-enabled mirrord operator installation
+## Enabling Queue Splitting in your Cluster
 
 In order to use the queue splitting feature, some extra values need be provided during the installation of the mirrord Operator.
 
