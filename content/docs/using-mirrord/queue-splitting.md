@@ -28,6 +28,32 @@ intention:
 > **_NOTE:_** So far queue splitting is available for [Amazon SQS](https://aws.amazon.com/sqs/). Pretty soon we'll
 > support Kafka as well.
 
+## How it works
+
+### SQS Splitting
+
+When a queue splitting session starts, the operator changes the target workload to consumer messages from a
+different, temporary queue created by the operator. The operator also creates a temporary queue that the local
+application reads from.
+
+So if we have a consumer app reading messages from a queue:
+
+![A K8s application that consumes messages from a queue](before-splitting.png)
+
+After a mirrord queue splitting session starts, the setup will change to this:
+
+![A queue splitting session.png](1_user_splitting.png)
+
+And as soon as a second mirrord queue splitting session starts, the operator will create another temporary queue for
+the new local app:
+
+![2 queue splitting sessions](2_users_splitting.png)
+
+A bit after a mirrord session ends, the operator will delete the temporary queue it created for it. When all
+sessions that split a certain queue end, the mirrord Operator will wait for the deployed application to consume the
+remaining messages in its temporary queue, and then delete that temporary queue as well, and change the deployed
+application to consume messages back from the original queue.
+
 ## Enabling Queue Splitting in your Cluster
 
 In order to use the queue splitting feature, some extra values need be provided during the installation of the mirrord Operator.
