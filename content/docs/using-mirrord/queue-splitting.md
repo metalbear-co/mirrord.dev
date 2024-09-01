@@ -12,16 +12,18 @@ toc: true
 tags: ["team", "enterprise"]
 ---
 
-If your application consumes messages from a queue service, you might want the local application you're running with
-mirrord to read messages from the queue. You probably don't want the local application to have to compete with the
-remote one for messages, and you might also not want your local application to read all messages from the queue, as
-that might disrupt the deployed application, or get in the way of teammates that are working on the same service.
-
-With _mirrord for Teams_, queue messages can be split between (possibly multiple) mirrord users, and the deployed
-application.
-
-Users can define a filter in their mirrord configuration, and their local app will only read queue messages that
-match that filter.
+If your application consumes messages from a queue service, you should choose a configuration that matches your
+intention:
+1. Running your application with mirrord without any special configuration will result in your local application
+   competing with the remote target (and potentially other mirrord runs by teammates) for queue messages.
+2. Running your application with
+   [`copy_target` + `scale_down`](https://mirrord.dev/docs/using-mirrord/copy-target/#replacing-a-whole-deployment-using-scale_down)
+   will result in the deployed application not consuming any messages, and your local application being the
+   exclusive consumer of queue messages.
+3. **If you want to control which messages will be consumed by the deployed application, and which ones will reach your
+   local application, set up queue splitting for the relevant target, and define a messages filter in the mirrord
+   configuration. Messages that match the filter will reach your local application, and messages that do not, will
+   reach either the deployed application, or another teammate's local application, if they match their filter.**
 
 So far queue splitting is available for [Amazon SQS](https://aws.amazon.com/sqs/) queues. Pretty soon we'll support
 kafka queues as well.
