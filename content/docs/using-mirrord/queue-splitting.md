@@ -39,9 +39,9 @@ this means setting the [`operator.sqsSplitting`](https://github.com/metalbear-co
 command, the `--sqs-splitting` flag should be set.
 
 When SQS splitting is enabled during installation, some additional resources are created, and the SQS component of
-the mirrord operator is started.
+the mirrord Operator is started.
 
-Additionally, the mirrord operator has to be able to create, read from, write to, and delete SQS queues.
+Additionally, the mirrord Operator has to be able to create, read from, write to, and delete SQS queues.
 If the queue messages are encrypted, the operator also needs the `kms:Encrypt`, `kms:Decrypt` and `kms:GenerateDataKey`
 permissions.
 
