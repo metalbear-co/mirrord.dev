@@ -38,16 +38,16 @@ application reads from.
 
 So if we have a consumer app reading messages from a queue:
 
-![A K8s application that consumes messages from a queue](before-splitting.png)
+{{<figure src="before-splitting.png" class="bg-white center" alt="A K8s application that consumes messages from a queue">}}
 
 After a mirrord queue splitting session starts, the setup will change to this:
 
-![A queue splitting session.png](1_user_splitting.png)
+{{<figure src="1_user_splitting.png" class="bg-white center" alt="A queue splitting session">}}
 
 And as soon as a second mirrord queue splitting session starts, the operator will create another temporary queue for
 the new local app:
 
-![2 queue splitting sessions](2_users_splitting.png)
+{{<figure src="2_users_splitting.png" class="bg-white center" alt="2 queue splitting sessions">}}
 
 A bit after a mirrord session ends, the operator will delete the temporary queue it created for it. When all
 sessions that split a certain queue end, the mirrord Operator will wait for the deployed application to consume the
