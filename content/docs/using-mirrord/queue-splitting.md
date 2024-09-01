@@ -20,7 +20,7 @@ that might disrupt the deployed application, or get in the way of teammates that
 With _mirrord for Teams_, queue messages can be split between (possibly multiple) mirrord users, and the deployed
 application.
 
-Users can set attribute filters in their mirrord configurations, and only get queue messages that have attributes
+Users can define a filter in their mirrord configurations, and their local app will only read queue messages that have match that filter
 that match their filter.
 
 So far queue splitting is available for [Amazon SQS](https://aws.amazon.com/sqs/) queues. Pretty soon we'll support
