@@ -25,8 +25,8 @@ intention:
    configuration. Messages that match the filter will reach your local application, and messages that do not, will
    reach either the deployed application, or another teammate's local application, if they match their filter.**
 
-So far queue splitting is available for [Amazon SQS](https://aws.amazon.com/sqs/). Pretty soon we'll support
-Kafka as well.
+> **_NOTE:_** So far queue splitting is available for [Amazon SQS](https://aws.amazon.com/sqs/). Pretty soon we'll
+> support Kafka as well.
 
 ## Enabling Queue Splitting in your Cluster
 
