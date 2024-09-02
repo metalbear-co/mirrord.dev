@@ -28,7 +28,7 @@ intention:
 > **_NOTE:_** So far queue splitting is available for [Amazon SQS](https://aws.amazon.com/sqs/). Pretty soon we'll
 > support Kafka as well.
 
-## How it works
+## How It Works
 
 ### SQS Splitting
 
@@ -61,7 +61,7 @@ sessions that split a certain queue end, the mirrord Operator will wait for the 
 remaining messages in its temporary queue, and then delete that temporary queue as well, and change the deployed
 application to consume messages back from the original queue.
 
-## Enabling Queue Splitting in your Cluster
+## Enabling Queue Splitting in Your Cluster
 
 In order to use the queue splitting feature, some extra values need be provided during the installation of the mirrord Operator.
 
@@ -90,7 +90,7 @@ via the `sa.roleArn` value
 (in `values.yaml` or via `--set`, e.g. `--set sa.roleArn=arn:aws:iam::0000000000:role/mirrord-operator-role`).
 - When installing via the `mirrord operator setup` command, use the `--aws-role-arn` flag.
 
-## Permissions for target workloads
+## Permissions for Target Workloads
 
 In order to be targeted with SQS queue splitting, a workload has to be able to read from queues that are created by
 mirrord.
@@ -104,7 +104,7 @@ However, if the workload gets its access to the queue by an IAM policy (and not 
 that grants access to that specific queue by its exact name, you would have to add a policy that would allow that
 workload to also read from new temporary queues created by mirrord on the run.
 
-## Creating a queue registry
+## Creating a Queue Registry
 
 On operator installation, a new
 [`CustomResources`](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) type was
@@ -158,7 +158,7 @@ spec:
   workload is targeted.
   * `container` is optional, when set - this queue registry only applies to runs that target that container.
 
-## Setting a filter for a mirrord run
+## Setting a Filter for a Mirrord Run
 
 Once everything else is set, you can start setting message filters in your mirrord configuration file.
 Below is an example for what such a configuration might look like:
