@@ -159,7 +159,7 @@ spec:
   workload is targeted.
   * `container` is optional, when set - this queue registry only applies to runs that target that container.
 
-## Setting a Filter for a mirrord Run
+### Setting a Filter for a mirrord Run
 
 Once everything else is set, you can start setting message filters in your mirrord configuration file.
 Below is an example for what such a configuration might look like:
