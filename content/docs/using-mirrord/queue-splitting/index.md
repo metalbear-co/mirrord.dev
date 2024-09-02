@@ -38,11 +38,12 @@ application reads from.
 
 So if we have a consumer app reading messages from a queue:
 
-{{<figure src="before-splitting.png" class="bg-white center" alt="A K8s application that consumes messages from a queue">}}
+{{<figure src="before-splitting.svg" class="bg-white center" alt="A K8s application that consumes messages from a
+queue">}}
 
 After a mirrord queue splitting session starts, the setup will change to this:
 
-{{<figure src="1-user-splitting.png" class="bg-white center" alt="A queue splitting session">}}
+{{<figure src="1-user.svg" class="bg-white center" alt="A queue splitting session">}}
 
 The operator will consume messages from the original queue, and try to match their attributes with filter defined by
 the user in the mirrord configuration file. A message that matches the filter will be sent to the queue consumed by
@@ -51,7 +52,7 @@ the local application. Other messages will be sent to the queue consumed by the 
 And as soon as a second mirrord queue splitting session starts, the operator will create another temporary queue for
 the new local app:
 
-{{<figure src="2-users-splitting.png" class="bg-white center" alt="2 queue splitting sessions">}}
+{{<figure src="2-users.svg" class="bg-white center" alt="2 queue splitting sessions">}}
 
 The users' filters will be matched in the order of the start of their sessions. If filters defined by two users both
 match a message, the message will go to whichever user started their session first.
