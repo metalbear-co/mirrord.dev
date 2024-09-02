@@ -44,10 +44,17 @@ After a mirrord queue splitting session starts, the setup will change to this:
 
 {{<figure src="1-user-splitting.png" class="bg-white center" alt="A queue splitting session">}}
 
+The operator will consume messages from the original queue, and try to match their attributes with filter defined by
+the user in the mirrord configuration file. A message that matches the filter will be sent to the queue consumed by
+the local application. Other messages will be sent to the queue consumed by the remote application.
+
 And as soon as a second mirrord queue splitting session starts, the operator will create another temporary queue for
 the new local app:
 
 {{<figure src="2-users-splitting.png" class="bg-white center" alt="2 queue splitting sessions">}}
+
+The users' filters will be matched in the order of the start of their sessions. If filters defined by two users both
+match a message, the message will go to whichever user started their session first.
 
 After a mirrord session ends, the operator will delete the temporary queue it created for it. When all
 sessions that split a certain queue end, the mirrord Operator will wait for the deployed application to consume the
