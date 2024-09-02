@@ -67,9 +67,10 @@ In order to use the queue splitting feature, some extra values need be provided 
 
 First of all, the SQS splitting feature needs to be enabled:
 - When installing with the [mirrord-operator Helm chart](https://github.com/metalbear-co/charts/tree/main/mirrord-operator)
-this means setting the [`operator.sqsSplitting`](https://github.com/metalbear-co/charts/blob/61fec57ca913068a11f3dc8579bdaa377cb028a1/mirrord-operator/values.yaml#L22)
-[value](https://helm.sh/docs/chart_template_guide/values_files/).
-- When installing via the `mirrord operator setup` command, the `--sqs-splitting` flag should be set.
+  it is enabled by setting the
+  [`operator.sqsSplitting`](https://github.com/metalbear-co/charts/blob/61fec57ca913068a11f3dc8579bdaa377cb028a1/mirrord-operator/values.yaml#L22)
+  [value](https://helm.sh/docs/chart_template_guide/values_files/) to `true`.
+- When installing via the `mirrord operator setup` command, set the `--sqs-splitting` flag.
 
 When SQS splitting is enabled during installation, some additional resources are created, and the SQS component of
 the mirrord Operator is started.
@@ -85,9 +86,7 @@ Please follow [AWS's documentation on how to do that](https://docs.aws.amazon.co
 https://docs.aws.amazon.com/eks/latest/userguide/associate-service-account-role.html
 
 The ARN of the IAM role has to be passed when installing the operator.
-- When installing with Helm, the ARN is passed
-via the `sa.roleArn` value
-(in `values.yaml` or via `--set`, e.g. `--set sa.roleArn=arn:aws:iam::0000000000:role/mirrord-operator-role`).
+- When installing with Helm, the ARN is passed via the `sa.roleArn` value
 - When installing via the `mirrord operator setup` command, use the `--aws-role-arn` flag.
 
 ## Permissions for Target Workloads
