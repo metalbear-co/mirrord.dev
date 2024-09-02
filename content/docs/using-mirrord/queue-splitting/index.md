@@ -32,7 +32,7 @@ intention:
 
 ### SQS Splitting
 
-When a queue splitting session starts, the operator changes the target workload to consumer messages from a
+When a queue splitting session starts, the operator changes the target workload to consume messages from a
 different, temporary queue created by the operator. The operator also creates a temporary queue that the local
 application reads from.
 
@@ -49,7 +49,7 @@ the new local app:
 
 {{<figure src="2-users-splitting.png" class="bg-white center" alt="2 queue splitting sessions">}}
 
-A bit after a mirrord session ends, the operator will delete the temporary queue it created for it. When all
+After a mirrord session ends, the operator will delete the temporary queue it created for it. When all
 sessions that split a certain queue end, the mirrord Operator will wait for the deployed application to consume the
 remaining messages in its temporary queue, and then delete that temporary queue as well, and change the deployed
 application to consume messages back from the original queue.
@@ -74,7 +74,7 @@ If the queue messages are encrypted, the operator also needs the following permi
 * `kms:GenerateDataKey`
 
 For that, an IAM role with an appropriate policy has to be assigned to the operator's service account.
-Please follow AWS's documentation on how to do that:
+Please follow [AWS's documentation on how to do that](https://docs.aws.amazon.com/eks/latest/userguide/associate-service-account-role.html).
 https://docs.aws.amazon.com/eks/latest/userguide/associate-service-account-role.html
 
 The ARN of the IAM role has to be passed when installing the operator.
