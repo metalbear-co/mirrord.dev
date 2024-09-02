@@ -38,8 +38,7 @@ application reads from.
 
 So if we have a consumer app reading messages from a queue:
 
-{{<figure src="before-splitting.svg" class="bg-white center" alt="A K8s application that consumes messages from a
-queue">}}
+{{<figure src="before-splitting.svg" class="bg-white center" alt="A K8s application that consumes messages from a queue">}}
 
 After a mirrord queue splitting session starts, the setup will change to this:
 
