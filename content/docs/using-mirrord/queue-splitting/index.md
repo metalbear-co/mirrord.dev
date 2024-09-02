@@ -89,7 +89,7 @@ The ARN of the IAM role has to be passed when installing the operator.
 - When installing with Helm, the ARN is passed via the `sa.roleArn` value
 - When installing via the `mirrord operator setup` command, use the `--aws-role-arn` flag.
 
-## Permissions for Target Workloads
+### Permissions for Target Workloads
 
 In order to be targeted with SQS queue splitting, a workload has to be able to read from queues that are created by
 mirrord.
@@ -103,7 +103,7 @@ However, if the workload gets its access to the queue by an IAM policy (and not 
 that grants access to that specific queue by its exact name, you would have to add a policy that would allow that
 workload to also read from new temporary queues created by mirrord on the run.
 
-## Creating a Queue Registry
+### Creating a Queue Registry
 
 On operator installation, a new
 [`CustomResources`](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) type was
