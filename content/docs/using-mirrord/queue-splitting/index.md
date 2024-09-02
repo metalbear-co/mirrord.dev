@@ -61,7 +61,9 @@ sessions that split a certain queue end, the mirrord Operator will wait for the 
 remaining messages in its temporary queue, and then delete that temporary queue as well, and change the deployed
 application to consume messages back from the original queue.
 
-## Enabling Queue Splitting in Your Cluster
+## Getting Started with Queue Splitting
+
+### Enabling Queue Splitting in Your Cluster
 
 In order to use the queue splitting feature, some extra values need be provided during the installation of the mirrord Operator.
 
