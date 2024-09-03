@@ -138,7 +138,7 @@ spec:
   consumer:
     name: meme-app
     container: main
-    workload_type: Deployment
+    workloadType: Deployment
 ```
 
 * `spec.queues` holds queues that should be split when running mirrord with this target.
