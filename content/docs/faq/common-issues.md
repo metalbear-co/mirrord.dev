@@ -51,13 +51,11 @@ When executing a task Turbo strips most of the existing process environment, inc
 
 ### Incoming traffic to the remote target doesn't reach my local process
 
-This could happen for several reasons:
-1. The local process is listening on a different port than the remote target. You can either change
+This could happen because the local process is listening on a different port than the remote target. You can either change
  the local process to listen on the same port as the remote target (don't worry about the port
  being used locally by other processes), or use the [`port_mapping`  configuration
  ](/docs/reference/configuration/#feature-network-incoming-port_mapping) to map the local port to a
  remote port.
-2. You're running with `network.incoming.mode` set to `mirror` on a cluster with a service mesh like Istio or Linkerd, which isn't currently supported. In this case, you should use the `--steal` flag instead.
 
 ### The remote target stops receiving remote traffic, but it doesn't reach my local process either
 This can happen in some clusters using a service mesh when stealing incoming traffic. You can use this configuration to fix it:

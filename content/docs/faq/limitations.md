@@ -23,7 +23,7 @@ mirrord also supports for [Go](https://metalbear.co/blog/hooking-go-from-rust-hi
 
 ### Does mirrord support clusters with a service mesh like Istio or Linkerd?
 
-Yes. (there is a [known issue](https://github.com/metalbear-co/mirrord/issues/2456) with istio proxy in "ambient" mode)
+Yes, mirrord works exactly the same way with and without a service mesh installed.
 
 ### Does mirrord support OpenShift?
 
