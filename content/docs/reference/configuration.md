@@ -2,7 +2,7 @@
 title: "Configuration"
 description: "Config"
 date: 2023-05-17T13:59:39+01:00
-lastmod: 2024-07-29T13:37:39+01:00
+lastmod: 2024-08-31T13:37:39+01:00
 draft: false
 images: []
 menu:
@@ -387,7 +387,7 @@ Can be useful for collecting logs.
 
 Defaults to `1`.
 
-## connect_tcp {#root-connect_tpc}
+## connect_tcp {#root-connect_tcp}
 
 IP:PORT to connect to instead of using k8s api, for testing purposes.
 
@@ -397,24 +397,102 @@ IP:PORT to connect to instead of using k8s api, for testing purposes.
 }
 ```
 
-# experimental {#root-experimental}
+## container {#root-container}
+
+Unstable: `mirrord container` command specific config.
+
+### container.cli_image {#container-cli_image}
+
+Tag of the `mirrord-cli` image you want to use.
+
+Defaults to `"ghcr.io/metalbear-co/mirrord-cli:<cli version>"`.
+
+### container.cli_image_lib_path {#container-cli_image}
+
+Path of the mirrord-layer lib inside the specified mirrord-cli image.
+
+Defaults to `"/opt/mirrord/lib/libmirrord_layer.so"`.
+
+## experimental {#root-experimental}
 
 mirrord Experimental features.
 This shouldn't be used unless someone from MetalBear/mirrord tells you to.
 
-## _experimental_ readlink {#experimental-readlink}
+### _experimental_ enable_exec_hooks_linux {#experimental-enable_exec_hooks_linux}
+
+Enables exec hooks on Linux. Enable Linux hooks can fix issues when the application
+shares sockets with child commands (e.g Python web servers with reload),
+but the feature is not stable and may cause other issues.
+
+### _experimental_ readlink {#experimental-readlink}
 
 Enables the `readlink` hook.
 
-## _experimental_ tcp_ping4_mock {#experimental-tcp_ping4_mock}
+### _experimental_ tcp_ping4_mock {#experimental-tcp_ping4_mock}
 
 <https://github.com/metalbear-co/mirrord/issues/2421#issuecomment-2093200904>
 
-# _experimental_ trust_any_certificate {#experimental-trust_any_certificate}
+### _experimental_ trust_any_certificate {#experimental-trust_any_certificate}
 
 Enables trusting any certificate on macOS, useful for <https://github.com/golang/go/issues/51991#issuecomment-2059588252>
 
-# feature {#root-feature}
+## external_proxy {#root-external_proxy}
+
+Configuration for the external proxy mirrord spawns when using the `mirrord container` command.
+This proxy is used to allow the internal proxy running in sidecar to connect to the mirrord
+agent.
+
+If you get `ConnectionRefused` errors, increasing the timeouts a bit might solve the issue.
+
+```json
+{
+  "external_proxy": {
+    "start_idle_timeout": 30,
+    "idle_timeout": 5
+  }
+}
+```
+
+### external_proxy.idle_timeout {#external_proxy-idle_timeout}
+
+How much time to wait while we don't have any active connections before exiting.
+
+Common cases would be running a chain of processes that skip using the layer
+and don't connect to the proxy.
+
+```json
+{
+  "external_proxy": {
+    "idle_timeout": 30
+  }
+}
+```
+
+### external_proxy.log_destination {#external_proxy-log_destination}
+Set the log file destination for the external proxy.
+
+### external_proxy.log_level {#external_proxy-log_level}
+Sets the log level for the external proxy.
+
+Follows the `RUST_LOG` convention (i.e `mirrord=trace`), and will only be used if
+`external_proxy.log_destination` is set
+
+### external_proxy.start_idle_timeout {#external_proxy-start_idle_timeout}
+
+How much time to wait for the first connection to the external proxy in seconds.
+
+Common cases would be running with dlv or any other debugger, which sets a breakpoint
+on process execution, delaying the layer startup and connection to the external proxy.
+
+```json
+{
+  "external_proxy": {
+    "start_idle_timeout": 60
+  }
+}
+```
+
+## feature {#root-feature}
 
 Controls mirrord features.
 
@@ -934,6 +1012,16 @@ Similarly, you can exclude certain paths using a negative look-ahead:
 Setting this filter will make mirrord only steal requests to URIs that do not start with
 "/health/".
 
+#### feature.network.incoming.http_filter.all_of {#feature-network-incoming-http_filter-all_of}
+
+Messages must match all of the specified filters.
+Cannot be an empty list.
+
+#### feature.network.incoming.http_filter.any_of {#feature-network-incoming-http_filter-any_of}
+
+Messages must match any of the specified filters.
+Cannot be an empty list.
+
 ##### feature.network.incoming.http_filter.header_filter {#feature-network-incoming-http-header-filter}
 
 
@@ -1133,7 +1221,37 @@ of regexes specified here. If there is a match, mirrord will connect your applic
 the target unix socket address on the target pod. Otherwise, it will leave the connection
 to happen locally on your machine.
 
-# internal_proxy {#root-internal_proxy}
+## feature.split_queues {#feature-split_queues}
+
+Define filters to split queues by, and make your local application consume only messages
+that match those filters.
+If you don't specify any filter for a queue that is however declared in the
+`MirrordWorkloadQueueRegistry` of the target you're using, a match-nothing filter
+will be used, and your local application will not receive any messages from that queue.
+
+```json
+{
+  "feature": {
+    "split_queues": {
+      "first-queue": {
+        "queue_type": "SQS",
+        "message_filter": {
+          "wows": "so wows",
+          "coolz": "^very .*"
+        }
+      },
+      "second-queue": {
+        "queue_type": "SQS",
+        "message_filter": {
+          "who": "*you$"
+        }
+      },
+    }
+  }
+}
+```
+
+## internal_proxy {#root-internal_proxy}
 
 Configuration for the internal proxy mirrord spawns for each local mirrord session
 that local layers use to connect to the remote agent
@@ -1166,12 +1284,14 @@ and don't connect to the proxy.
 ```
 
 ### internal_proxy.log_destination {#internal_proxy-log_destination}
+
 Set the log file destination for the internal proxy.
 
 ### internal_proxy.log_level {#internal_proxy-log_level}
+
 Set the log level for the internal proxy.
-RUST_LOG convention (i.e `mirrord=trace`)
-will only be used if log_destination is set
+RUST_LOG convention (i.e `mirrord=trace`) will only be used if `log_destination`
+is set.
 
 ### internal_proxy.start_idle_timeout {#internal_proxy-start_idle_timeout}
 
@@ -1195,7 +1315,7 @@ Will use current context if not specified.
 
 ```json
 {
- "kube_context": "mycluster"
+  "kube_context": "mycluster"
 }
 ```
 
@@ -1206,7 +1326,7 @@ the in-cluster config.
 
 ```json
 {
- "kubeconfig": "~/bear/kube-config"
+  "kubeconfig": "~/bear/kube-config"
 }
 ```
 
@@ -1228,7 +1348,7 @@ while `/usr/bin/bash` would apply only for that binary).
 
 ```json
 {
- "sip_binaries": "bash;python"
+  "sip_binaries": "bash;python"
 }
 ```
 
@@ -1265,7 +1385,6 @@ accepted values for the `target` option.
 The simplified configuration supports:
 
 - `pod/{sample-pod}/[container]/{sample-container}`;
-- `podname/{sample-pod}/[container]/{sample-container}`;
 - `deployment/{sample-deployment}/[container]/{sample-container}`;
 
 Shortened setup:
@@ -1304,7 +1423,6 @@ If you use it without it, it will choose a random pod replica to work with.
 
 Supports:
 - `pod/{sample-pod}`;
-- `podname/{sample-pod}`;
 - `deployment/{sample-deployment}`;
 - `container/{sample-container}`;
 - `containername/{sample-container}`.

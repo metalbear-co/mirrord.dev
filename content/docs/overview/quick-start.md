@@ -178,7 +178,7 @@ users:
 ```
 
 ### Verifying the Installation
-After installing the Operator, you can verify it works by running \`mirrord operator status\`. All mirrord clients will now use the Operator instead of doing actions on their own when running against the cluster.
+After installing the Operator, you can verify it works by running `mirrord operator status`. All mirrord clients will now use the Operator instead of doing actions on their own when running against the cluster.
 
 
 ## Test it out!

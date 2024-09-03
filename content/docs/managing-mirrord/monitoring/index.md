@@ -52,4 +52,30 @@ Fields:
 ## DataDog dashboard
 
 We offer a DataDog dashboard you can import to track statistics (working on official DD integration as well).
+
 Download it <a href="/Mirrord_Operator_Dashboard.json" download>here</a>
+
+
+## fluentd
+
+If you are using fluentd you can add a filter to unpack some values from "log" message
+
+```
+<filter kubernetes.var.log.containers.**_mirrord_mirrord-operator-**>
+  @type parser
+  key_name log
+  reserve_data true
+  remove_key_name_field true
+  <parse>
+    @type json
+  </parse>
+</filter>
+```
+
+this will expand all the extra fields stored in "log" field.
+
+### fluentd + elasticsearch
+
+Assuming you are using `logstash_format true` and the connected mapping will store the extra fields in a `keyword` type, we have a ready made dashboard you can simply import.
+
+Download it <a href="/operator-fluentd-kibana.ndjson" download>here</a> (Use Saved Objects to import)
