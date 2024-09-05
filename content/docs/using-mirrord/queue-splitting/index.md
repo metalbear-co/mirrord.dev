@@ -77,15 +77,102 @@ First of all, the SQS splitting feature needs to be enabled:
 When SQS splitting is enabled during installation, some additional resources are created, and the SQS component of
 the mirrord Operator is started.
 
-Additionally, the mirrord Operator has to be able to create, read from, write to, and delete SQS queues.
-If the queue messages are encrypted, the operator also needs the following permissions:
+Additionally, the operator needs to be able to do some operations on SQS queues in your account.
+For that, an IAM role with an appropriate policy has to be assigned to the operator's service account.
+Please follow [AWS's documentation on how to do that](https://docs.aws.amazon.com/eks/latest/userguide/associate-service-account-role.html).
+
+Some of the permissions are needed for your actual queues that you would like to split, and some permissions are
+only needed for the temporary queues the mirrord Operator creates and later deletes. Here is an overview:
+
+| SQS Permission     | needed for your queues | needed for temporary queues |
+|:-------------------|:----------------------:|:---------------------------:|
+| GetQueueUrl        |           ✓            |                             |
+| ListQueueTags      |           ✓            |                             |
+| ReceiveMessage     |           ✓            |                             |
+| DeleteMessage      |           ✓            |                             |
+| GetQueueAttributes |           ✓            |          ✓ (both!)          |
+| CreateQueue        |                        |              ✓              |
+| TagQueue           |                        |              ✓              |
+| SendMessage        |                        |              ✓              |
+| GetQueueAttributes |                        |              ✓              |
+| DeleteQueue        |                        |              ✓              |
+
+
+Here we provide a short explanation for each required permission.
+* `sqs:GetQueueUrl`: the operator finds queue names to split in the provided source, and then it fetches the URL
+  from SQS in order to make all other API calls.
+* `sqs:GetQueueAttributes`: the operator gives all temporary queues the same attributes as their corresponding
+  original queue, so it needs permission to get the original queue's attributes. It also reads the attributes of
+  temporary queues it created, in order to check how many messages they have approximately.
+* `sqs:ListQueueTags`: the operator queries your queue's tags, in order to give all temporary queues that are
+  created for that queue the same tags.
+* `sqs:ReceiveMessage`: the mirrord Operator will read messages from queues you want to split.
+* `sqs:DeleteMessage`: after reading a message and forwarding it to a temporary queue, the operator deletes it.
+* `sqs:CreateQueue`: the mirrord Operator will create temporary queues in your SQS account.
+* `sqs:TagQueue`: all the queues mirrord creates will be tagged with all the tags of their respective original
+  queues, plus any tags that are configured for them in the `MirrordWorkloadQueueRegistry` in which they are declared.
+* `sqs:SendMessage`: mirrord will send the messages it reads from an original queue to the temporary queue of the
+  client whose filter matches it, or to the temporary queue the deployed application reads from.
+* `sqs:DeleteQueue`: when a user session is done, mirrord will delete the temporary queue it created for that
+  session. After all sessions that split a certain queue end, also the temporary queue that is for the deployed
+  application is deleted.
+
+
+This is an example for a policy that gives the operator's roles the minimal permissions it needs to split a queue
+called `ClientUploads`:
+
+```json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "sqs:GetQueueUrl",
+                "sqs:GetQueueAttributes",
+                "sqs:ListQueueTags",
+                "sqs:ReceiveMessage",
+                "sqs:DeleteMessage"
+            ],
+            "Resource": [
+                "arn:aws:sqs:eu-north-1:314159265359:ClientUploads"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "sqs:CreateQueue",
+                "sqs:TagQueue",
+                "sqs:SendMessage",
+                "sqs:GetQueueAttributes",
+                "sqs:DeleteQueue"
+            ],
+            "Resource": "arn:aws:sqs:eu-north-1:314159265359:mirrord-*"
+        }
+    ]
+}
+```
+* The first statement gives the role the permissions it needs for your original queues.
+
+  Instead of specifying the queues you would like to be able to split in the first statement, you could alternatively
+  make that statement apply for all resources in the account, and limit the queues it applies to using conditions
+  instead of resource names. For example, you could add a condition that makes the statement only apply to queues with
+  the tag `splittable=true` or `env=dev` etc. and set those tags for all queues you would like to allow the operator
+  to split.
+
+* The second statement in the example gives the role the permissions it needs for the temporary queues. Since all the
+  temporary queues created by mirrord are created with the name prefix `mirrord-`, that statement in the example is
+  limited to resources with that prefix in their name.
+
+  If you would like to limit the second statement with conditions instead of (only) with the resource name, you can
+  [set a condition that requires a tag](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-abac-tagging-resource-control.html),
+  and in the `MirrordWorkloadQueueRegistry` resource you can specify for each queue tags that mirrord will set for
+  temporary queues that it creates for that original queue.
+
+If the queue messages are encrypted, the operator's IAM role should also have the following permissions:
 * `kms:Encrypt`
 * `kms:Decrypt`
 * `kms:GenerateDataKey`
-
-For that, an IAM role with an appropriate policy has to be assigned to the operator's service account.
-Please follow [AWS's documentation on how to do that](https://docs.aws.amazon.com/eks/latest/userguide/associate-service-account-role.html).
-https://docs.aws.amazon.com/eks/latest/userguide/associate-service-account-role.html
 
 The ARN of the IAM role has to be passed when installing the operator.
 - When installing with Helm, the ARN is passed via the `sa.roleArn` value
