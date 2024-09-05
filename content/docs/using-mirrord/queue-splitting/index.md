@@ -94,7 +94,6 @@ only needed for the temporary queues the mirrord Operator creates and later dele
 | CreateQueue        |                        |              ✓              |
 | TagQueue           |                        |              ✓              |
 | SendMessage        |                        |              ✓              |
-| GetQueueAttributes |                        |              ✓              |
 | DeleteQueue        |                        |              ✓              |
 
 
