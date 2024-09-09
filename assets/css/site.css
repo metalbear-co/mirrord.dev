@@ -1469,6 +1469,10 @@ table td {
   width: 100%;
 }
 
+.w-1 {
+  width: 0.25rem;
+}
+
 .max-w-4xl {
   max-width: 56rem;
 }
@@ -3692,6 +3696,7 @@ body {
 }
 
 .docs__sidebar--left {
+  display: grid;
   padding-top: 1rem;
 }
 
@@ -3801,8 +3806,6 @@ body {
   top: 11px;
   right: 0.5rem;
   border-radius: 5px;
-  --tw-bg-opacity: 1;
-  background-color: rgb(217 217 217 / var(--tw-bg-opacity));
   padding-left: 6px;
   padding-right: 6px;
   padding-top: 5px;
@@ -4800,6 +4803,10 @@ body {
     grid-column-start: 9;
   }
 
+  .lg\:col-start-3 {
+    grid-column-start: 3;
+  }
+
   .lg\:m-0 {
     margin: 0px;
   }
@@ -5785,6 +5792,10 @@ body {
 }
 
 @media (min-width: 1280px) {
+  .xl\:sticky {
+    position: sticky;
+  }
+
   .xl\:-top-\[27\%\] {
     top: -27%;
   }
@@ -5793,12 +5804,32 @@ body {
     top: -360px;
   }
 
+  .xl\:top-\[148px\] {
+    top: 148px;
+  }
+
   .xl\:col-span-2 {
     grid-column: span 2 / span 2;
   }
 
   .xl\:col-span-8 {
     grid-column: span 8 / span 8;
+  }
+
+  .xl\:col-span-3 {
+    grid-column: span 3 / span 3;
+  }
+
+  .xl\:col-span-4 {
+    grid-column: span 4 / span 4;
+  }
+
+  .xl\:col-start-9 {
+    grid-column-start: 9;
+  }
+
+  .xl\:col-start-8 {
+    grid-column-start: 8;
   }
 
   .xl\:-ml-\[15\%\] {
@@ -5815,6 +5846,10 @@ body {
 
   .xl\:block {
     display: block;
+  }
+
+  .xl\:hidden {
+    display: none;
   }
 
   .xl\:h-44 {
