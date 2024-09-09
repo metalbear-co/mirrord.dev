@@ -333,6 +333,7 @@ body {
 }
 
 .docs__sidebar--left {
+    display: grid;
     @apply pt-4 lg:pt-0;
 }
 
@@ -366,7 +367,7 @@ body {
 }
 
 .search-form__wrapper {
-    @apply relative lg:mb-10 after:absolute after:top-[11px] after:right-2 after:text-primary-text after:text-[#222222] after:bg-[#D9D9D9] after:text-[10px] after:rounded-[5px] after:leading-none after:pt-[5px] after:pb-[4px] after:px-[6px];
+    @apply relative lg:mb-10 after:absolute after:top-[11px] after:right-2 after:text-primary-text after:text-[#222222] after:text-[10px] after:rounded-[5px] after:leading-none after:pt-[5px] after:pb-[4px] after:px-[6px];
 }
 
 .search-form__input {
