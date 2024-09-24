@@ -61,7 +61,7 @@ Similarly, at the cluster level, it runs at the level of the target pod, running
 This gives mirrord some unique advantages over its alternatives:
 * You can configure *exactly* what functionality happens remotely, and what stays local. For example:
   * You can read some files or environment variables from your local machine and some from the remote pod
-  * You can make requests to certain endpoints happen locally, and others be sent out from the remote pod
+  * You can make requests to certain hosts or IPs happen locally, and others be sent out from the remote pod
 * At the local level, it doesn't require root access
 * At the local level, it takes 15 seconds at most to start up
 * At the local level, you can run multiple processes simultaneously, each in the context of a different remote pod
