@@ -63,14 +63,18 @@ If you can't give your end users permissions to create pods with the capabilitie
 If mirrord for Teams doesn't work for you either, [let us know](hello@metalbear.co) and we'll try to figure a solution that matches your security policies.
 
 ### What kinds of Kubernetes objects can I use as a remote target?
-The mirrord OSS supports the following Kubernetes objects as remote targets:
-- Container
-- Pods (the first container in the pod will be targeted; some containers, like service mesh proxies, will be automatically ignored)
-- Deployments (mirrord will target a random pod from the deployment)
+mirrord OSS supports the following Kubernetes objects as targets:
+- Pods
+- Deployments
 - Argo Rollouts
 
-mirrord for Teams adds support for the following objects:
+In mirrord OSS, mirrord will always target a random pod when a workload with multiple pods is used as the remote target.
+
+mirrord for Teams adds support for the following workloads:
 - Jobs
 - CronJobs
 - StatefulSets
-- Deployments (mirrord will target all pods from the deployment)
+
+In mirrord for Teams, mirrord will always target all pods when a workload with multiple pods is used as the remote target.
+
+Both in mirrord OSS and mirrord for Teams, if you don't name any specific container to be targeted, mirrord will pick the first container from the pod spec. Some containers, like service mesh proxies, will be automatically ignored.
