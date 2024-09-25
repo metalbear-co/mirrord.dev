@@ -26,17 +26,21 @@ environment variable.
 
 ## Possible targets
 
-The mirrord OSS supports the following Kubernetes objects as targets:
-- Container
-- Pods (the first container in the pod will be targeted; some containers, like service mesh proxies, will be automatically ignored)
-- Deployments (mirrord will target a random pod from the deployment)
+mirrord OSS supports the following Kubernetes objects as targets:
+- Pods
+- Deployments
 - Argo Rollouts
 
-mirrord for Teams adds support for the following objects:
+In mirrord OSS, mirrord will always target a random pod when a workload is used as the remote target.
+
+mirrord for Teams adds support for the following workloads:
 - Jobs
 - CronJobs
 - StatefulSets
-- Deployments (mirrord will target all pods from the deployment)
+
+In mirrord for Teams, mirrord will always target all pods when a workload is used as the remote target.
+
+Both in mirrord OSS and mirrord for Teams, if you don't name any specific container to be targeted, mirrord will pick the first container from the pod spec. Some containers, like service mesh proxies, will be automatically ignored.
 
 You can specify a target namespace if the target should be found in that namespace instead of the namespace that is
 currently used by `kubectl`. See the different interfaces below for possible ways of specifying the target and its
