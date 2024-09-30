@@ -43,6 +43,8 @@ For your convenience, mirrord for Teams includes a built-in ClusterRole called `
 
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
+metadata:
+  name: mirrord-operator-rolebinding
 subjects:
 - kind: User
   name: jim
