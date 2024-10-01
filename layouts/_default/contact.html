@@ -72,6 +72,17 @@
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       const formData = new FormData(form);
+      let firstname = null;
+      let lastname = null;
+      const names = formData.get('name').split(/\s+/);
+      if (names.length > 1) {
+        firstname = names[0];
+        lastname = names.slice(1).join(' ');
+      } else {
+        firstname = names[0]
+        lastname
+      };
+
       const object = {
         context: {
           pageUri: window.location.href,
@@ -81,17 +92,17 @@
           {
             "objectTypeId": "0-1",
             "name": "email",
-            "value": formData.get('work-email')
+            "value": formData.get('email')
           },
           {
             "objectTypeId": "0-1",
             "name": "firstname",
-            "value": formData.get('firstname')
+            "value": firstname,
           },
           {
             "objectTypeId": "0-1",
             "name": "lastname",
-            "value": formData.get('lastname')
+            "value": lastname,
           },
           {
             "objectTypeId": "0-1",
