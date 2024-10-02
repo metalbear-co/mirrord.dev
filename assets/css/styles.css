@@ -523,5 +523,5 @@ body {
 }
 
 .content-accordion a {
-    @apply underline;
+    @apply underline;  
 }
