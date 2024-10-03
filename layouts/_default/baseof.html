@@ -6,12 +6,11 @@
 {{- $currentPage := . }}
 {{- $page_url := $currentPage.RelPermalink | relLangURL }}
 
-<body class="font-body {{ if or .IsHome (eq .Section "stories") (eq $page_url "/pricing/") (eq $page_url "/contact/") }}bg-white{{ else }}bg-[#FBFBFD] dark:bg-[#202020]{{ end }}">
-
+<body class="font-body {{ if or .IsHome (eq .Section "stories") (eq $page_url "/pricing/") (eq $page_url "/contact/") }}bg-white{{ else }}bg-[#FBFBFD]{{ end }}">
 
   <div class="overflow-hidden">
 
-    {{- if eq $page_url "/compare/telepresence/" }}
+    {{- if eq .Layout "compare" }}
     {{- partial "header/header-landing.html" . }}
     {{- else }}
     {{- partial "header/header.html" . }}
