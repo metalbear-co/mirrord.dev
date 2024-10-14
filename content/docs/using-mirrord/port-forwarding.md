@@ -19,16 +19,21 @@ You can use the command like so:
 mirrord port-forward --target <target-path> -L <local port>:<remote address>:<remote port>
 ```
 
-For example, to forward traffic from localhost:8080 to py-serv on port 80 in targetless mode:
+For example, to forward traffic from localhost:8080 to py-serv on port 80 (in targetless mode):
 ```bash
 mirrord port-forward -L 8080:py-serv:80
 ```
 
+It also allows for reverse port forwarding, where traffic to a port on the target pod is forwarded to a local one, like so:
+```bash
+mirrord port-forward --target <target-path> -R <remote port>:<local port>
+```
+
+In addition, multiple ports can be forwarded in one direction or both directions simultaneously in the same command by providing each source and destination as a separate `-L` or `-R` argument.
 ### More details
 
-- The local port part of the argument is optional, with out the same port will be used locally as on the remote.
+- The local port component of the `-L` argument is optional, and without it the same port will be used locally as on the remote.
+- The same is true of the `-R` argument: if one port number is provided, it will be used for both local and remote ports.
 - Port-forwarding only supports TCP, not UDP.
 - The remote address can be an IPv4 address or a hostname - hostnames are resolved in the cluster.
 - Connections are made lazily, so a hostname may fail to resolve only after mirrord attempts to send it data.
-
-In the future, mirrord will also support reverse port-forwarding ([tracked by this issue](https://github.com/metalbear-co/mirrord/issues/2609)).
