@@ -11,6 +11,7 @@ weight: 140
 toc: true
 tags: ["open source", "team", "enterprise"]
 ---
+### Regular port-forwarding
 
 The port-forward command allows you to forward traffic from a local port to a destination in the cluster, in a similar way to `kubectl port-forward`. However, it uses the existing permissions on the target pod, allowing you to port-forward to destinations only accessible from the target. This includes locations outside the cluster like third-party APIs.
 
@@ -23,6 +24,8 @@ For example, to forward traffic from localhost:8080 to an incluster service py-s
 ```bash
 mirrord port-forward -L 8080:py-serv:80
 ```
+
+### Reverse port-forwarding
 
 It also allows for reverse port forwarding, where traffic is redirected from a port on the target pod or workload to a local port, like so:
 ```bash
@@ -37,6 +40,7 @@ mirrord port-forward --target deployment/py-serv -R 80:8080
 In addition, multiple ports can be forwarded in one direction or both directions simultaneously in the same command by providing each source and destination as a separate `-L` or `-R` argument.
 
 Regular port forwarding with an `-L` can be done in targetless mode and does not require specifying any target. Reverse port forwarding always requires a target.
+
 ### More details
 
 - The local port component of the `-L` argument is optional, and without it the same port will be used locally as on the remote.
