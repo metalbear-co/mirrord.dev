@@ -48,3 +48,4 @@ Regular port forwarding with an `-L` can be done in targetless mode and does not
 - Port-forwarding only supports TCP, not UDP.
 - The remote address can be an IPv4 address or a hostname - hostnames are resolved in the cluster.
 - In regular port forwarding (`-L`) connections are made lazily and hostname resolution is attempted only data is sent to the local port.
+- Reverse forwarding (`-R`) can read the `feature.network.incoming` section of a mirrord config file when the file is passed to the command with `-f`.
