@@ -53,16 +53,38 @@ body {
 }
 
 .menu__item {
-    @apply mb-0 pl-4 lg:pl-0 pr-4;
+    @apply mb-0 px-4 lg:px-6;
 }
 
 .menu__item-link {
-    @apply py-4 lg:py-2 px-2 hover:no-underline;
+    @apply py-4 lg:py-2 px-[2px] hover:no-underline;
 }
 
-.active-link {
-    @apply lg:before:absolute lg:before:left-0 lg:before:-bottom-[2px] lg:before:w-full lg:before:bg-tertiary lg:before:h-[4px];
+.menu__item-link.active-link {
+    @apply text-[#756DF3] font-semibold;
 }
+
+.menu__item.button a {
+    @apply lg:w-[168px] lg:h-[48px] lg:bg-[#E4E3FD] lg:border lg:border-solid lg:border-[#222222] lg:hover:shadow-[-7px_6.5px_0px_000000] rounded-[8px] hover:font-normal group-hover:font-normal transition-all duration-200 ease-[ease];
+}
+
+.menu__item.button a span {
+    @apply font-semibold lg:font-normal group-hover:font-normal hover:font-normal;
+}
+
+@media (min-width: 1024px) {
+    .menu__item.button:hover a span {
+        font-weight: 400;
+    }
+}
+
+.menu__item.menu-item-desktop {
+    @apply hidden lg:block;
+}
+
+/* .active-link {
+    @apply lg:before:absolute lg:before:left-0 lg:before:-bottom-[2px] lg:before:w-full lg:before:bg-tertiary lg:before:h-[4px];
+} */
 
 .none-line {
     @apply lg:before:bg-transparent;
@@ -235,6 +257,10 @@ body {
 }
 
 /* TOC */
+.docs__toc:not(.docs__toc:has(a)) {
+    display: none;
+}
+
 .docs__toc #TableOfContents ul,
 .docs__toc #TableOfContents ul > li > ul,
 .docs__toc .docs-nav__toc ul,
@@ -307,6 +333,7 @@ body {
 }
 
 .docs__sidebar--left {
+    display: grid;
     @apply pt-4 lg:pt-0;
 }
 
@@ -340,7 +367,7 @@ body {
 }
 
 .search-form__wrapper {
-    @apply relative lg:mb-10 after:absolute after:top-[11px] after:right-2 after:text-primary-text after:text-[#222222] after:bg-[#D9D9D9] after:text-[10px] after:rounded-[5px] after:leading-none after:pt-[5px] after:pb-[4px] after:px-[6px];
+    @apply relative lg:mb-10 after:absolute after:top-[11px] after:right-2 after:text-primary-text after:text-[#222222] after:text-[10px] after:rounded-[5px] after:leading-none after:pt-[5px] after:pb-[4px] after:px-[6px];
 }
 
 .search-form__input {
@@ -489,4 +516,12 @@ body {
 
 .medium-zoom-image--opened {
     z-index: 9999;
-  }
+}
+
+.pricing-page-title {
+    transform: rotateX(160deg);
+}
+
+.content-accordion a {
+    @apply underline;  
+}

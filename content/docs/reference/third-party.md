@@ -30,3 +30,16 @@ List of third-party guides and videos about mirrord:
 | [Local Debugging of Dotnet Web API in AKS using Mirrord](https://medium.com/@srinivasmummareddy/local-debugging-of-dotnet-web-api-in-aks-using-mirrord-84d369738b35) | Blog | Demo of mirrord |
 | [Local Development With Mirrord](https://linuxblog.xyz/posts/mirrord/) | Blog | Demo of mirrord |
 | [mirrord: Simplifying Kubernetes Development and Debugging](https://www.youtube.com/watch?v=KJpEebC1tNE) | Video | Overview and demo of mirrord |
+| [Making locally executing code think it’s running on k8s](https://gluo.be/mirrord-making-locally-executing-code-think-its-running-on-k8s/) | Blog | Overview of mirrord |
+| [Intro to “Remocal” Kubernetes Development with mirrord](https://www.youtube.com/live/nuipmDu-Rnw?si=DXiWJr29et1b-xC6) | Video | Overview and use cases for mirrord |
+| [What is Remocal? How can this approach help enhance DX (developer experience)?](https://www.mishraajay.in/blog/moreinnerdevloop) | Blog | Demo of mirrord |
+| [Why Fast Feedback Loops Matter When Working with Kubernetes](https://piotrzan.medium.com/why-fast-feedback-loops-matter-when-working-with-kubernetes-58b8d2cb8e8e) | Blog | Overview of mirrord |
+| [Fast Feedback Loops - Developing on Kubernetes with Mirrord](https://www.youtube.com/watch?v=EK_ivK8HlNo) | Video | Demo of mirrord |
+| [Perfect Development Workflow with Mirrord: Every Developer’s Hero](https://devopsmaestro.hashnode.dev/perfect-development-workflow-with-mirrord-every-developers-hero) | Blog | Overview of mirrord |
+| [Top 5 Kubernetes Development Tools for Developers](https://medium.com/@victoriaporomon/top-5-kubernetes-development-tools-for-developers-d2bf9aac1ded) | Blog | Overview of mirrord |
+| [Cloud-First application development with mirrord](https://www.mishraajay.in/blog/mirrordcmplxapp) | Blog | Demo of mirrord |
+| [Using mirrord for Local Development and Debugging](https://uthy.hashnode.dev/using-mirrord-for-local-development-and-debugging) | Blog | Overview and demo of mirrord |
+| [Remocal Development: The Future of Modern Development](https://www.youtube.com/watch?v=GjWCPLHSSI8) | Video | Dive into mirrord use cases |
+| [Kubernetes Debugging with Mirrord and VS Code](https://youtu.be/gqIlf3DdlfQ?si=yTXrnfpZzt_snDMA) | Video | Overview of mirrord |
+| [Remocal Development: The Future of Efficient Kubernetes Workflows](https://thenewstack.io/remocal-development-the-future-of-efficient-kubernetes-workflows/) | Blog | Overview of mirrord |
+| [Use this tool for easy debug right on Kubernetes](https://www.youtube.com/shorts/VGygxsQuhtY) | Video | Overview of mirrord |

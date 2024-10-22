@@ -1,9 +1,11 @@
 {{- define "main" }}
 <main id="site-main" class="site__main single-page bg-white -translate-y-[1px]">
-    {{- partial "compare/telepresence/hero.html" . }}
-    {{- partial "compare/telepresence/vs-telepresence.html" . }}
-    {{- partial "compare/desktop-slider.html" . }}
-    {{- partial "compare/mobile-slider.html" . }}
-    <!-- {{- partial "compare/mirrord-for-teams.html" . }} -->
+  {{- $page := . }}
+  {{- range $section := $.Params.sections }}
+  {{- $partialPath := $section | printf "partials/compare/%s.html" }}
+  {{- if templates.Exists ( $partialPath ) }}
+  {{- partial $partialPath $page }}
+  {{- end }}
+  {{- end }}
 </main>
 {{- end }}

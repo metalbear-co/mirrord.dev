@@ -64,7 +64,18 @@ For example:
 mirrord exec --target pod/app-pod-01 python main.py
 ```
 
-Use `mirrord exec --help` to get all possible commands + arguments.
+Or, if you'd rather run a local container than a native process, run:
+```bash
+mirrord container --target <target-path> -- <command used to run the local container>
+```
+
+For example:
+
+```bash
+mirrord container -- docker run nginx
+```
+
+Use `mirrord exec --help` or `mirrord container --help` to get all possible commands + arguments.
 
 
 ## VS Code Extension
@@ -167,7 +178,7 @@ users:
 ```
 
 ### Verifying the Installation
-After installing the Operator, you can verify it works by running \`mirrord operator status\`. All mirrord clients will now use the Operator instead of doing actions on their own when running against the cluster.
+After installing the Operator, you can verify it works by running `mirrord operator status`. All mirrord clients will now use the Operator instead of doing actions on their own when running against the cluster.
 
 
 ## Test it out!
@@ -186,6 +197,6 @@ We find that this configuration works for a lot of use cases, but if you'd like 
 ## What's next?
 Now that you've tried out mirrord, it's time to get acquainted with its different configuration options and tailor it to your needs:
 1. If you'd like to intercept traffic rather than mirror it so that your local process is the one answering the remote requests, check out [this guide](/docs/using-mirrord/steal/). Note that you can even filter which traffic you intercept!
-2. If your local process reads from a queue, you might want to test out the [pause feature](/docs/using-mirrord/pause/), which temporarily pauses the remote target so it doesn't compete with your local process for queue messages.
+2. If your local process reads from a queue, you might want to test out the [copy target feature](/docs/using-mirrord/copy-target/), which temporarily creates a copy of the mirrord session target. With its `scaledown` flag it allows you to temporarily delete all replicas in your targeted rollout or deployment, so that none competes with your local process for queue messages.
 3. If you don't want to impersonate a remote target - for example, if you want to run a tool in the context of your cluster - check out our [guide on the targetless mode](/docs/using-mirrord/targetless/).
 4. If you just want to learn more about mirrord, why not check out our [architecture]({{< ref "/docs/reference/architecture" >}} "architecture") or [configuration]({{< ref "/docs/reference/configuration" >}} "configuration") sections?

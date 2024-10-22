@@ -1,44 +1,84 @@
 main:
-- name: User Stories
-  url: /stories/
-  weight: 20
-- identifier: resources
-  name: Resources
-  url: "/resources/"
+- name: Home
+  url: "/"
+  params:
+    class: "text-upper lg:hidden"
   weight: 10
-- identifier: docs
-  name: Docs
+- name: Product
+  url: /product/
+  params:
+    class: "text-upper"
+  weight: 10
+- name: Pricing
+  url: /pricing/
+  params:
+    class: "text-upper"
+  weight: 20
+- name: Docs
   url: /docs/overview/introduction/
-  weight: 100
-  parent: resources
-- identifier: blog
-  name: Blog
-  url: "https://metalbear.co/blog"
-  weight: 200
-  parent: resources
-- identifier: FAQ
-  name: FAQ
-  url: "/docs/faq/general"
-  weight: 300
-  parent: resources
-- identifier: teams
-  name: mirrord for Teams
-  url: "https://app.metalbear.co/"
+  params:
+    class: "text-upper"
   weight: 30
-- identifier: get-started
-  name: Register/Login
+- name: Login/Sign Up
   url: "https://app.metalbear.co/"
-  weight: 100
-  parent: teams
-- identifier: pricing
-  name: Pricing
-  url: "/pricing"
-  weight: 200
-  parent: teams
-- identifier: support
-  name: Support
-  url: "/#get-support"
-  weight: 40
+  params:
+    class: "menu-item-desktop"
+  weight: 30
+- name: Schedule A Demo
+  url: "https://meetings-eu1.hubspot.com/mirrord/schedule-a-demo"
+  params:
+    class: "button menu-item-desktop"
+    target: "_blank"
+  weight: 50
+
+main_mobile:
+- name: Login/Sign Up
+  url: "https://app.metalbear.co/"
+  weight: 10
+- name: Contact us
+  url: "/contact/"
+  weight: 20
+- name: Schedule A Demo
+  url: "https://meetings-eu1.hubspot.com/mirrord/schedule-a-demo"
+  weight: 30
+
+# - identifier: resources
+#   name: Resources
+#   url: "/resources/"
+#   weight: 10
+# - identifier: docs
+#   name: Docs
+#   url: /docs/overview/introduction/
+#   weight: 100
+#   parent: resources
+# - identifier: blog
+#   name: Blog
+#   url: "https://metalbear.co/blog"
+#   weight: 200
+#   parent: resources
+# - identifier: FAQ
+#   name: FAQ
+#   url: "/docs/faq/general"
+#   weight: 300
+#   parent: resources
+# - identifier: teams
+#   name: mirrord for Teams
+#   url: "https://app.metalbear.co/"
+#   weight: 30
+# - identifier: get-started
+#   name: Register/Login
+#   url: "https://app.metalbear.co/"
+#   weight: 100
+#   parent: teams
+# - identifier: pricing
+#   name: Pricing
+#   url: "/pricing"
+#   weight: 200
+#   parent: teams
+# - identifier: support
+#   name: Support
+#   url: "/#get-support"
+#   weight: 40
 # - identifier: contact
 #   name: Contact Us
 #   url: "/contact"
@@ -54,7 +94,7 @@ docs:
     url: /docs/help/
 footer_menu:
 - name: Get Started
-  url: /docs/overview/quick-start/
+  url: https://app.metalbear.co
   weight: 10
 - name: Docs
   url: /docs/overview/introduction/
@@ -68,8 +108,8 @@ footer_menu:
 - name: vs Telepresence
   url: "/compare/telepresence/"
   weight: 50
-- name: Support
-  url: "/#get-support"
+- name: Vs Bridge to Kubernetes
+  url: "compare/bridge-to-kubernetes/"
   weight: 60
 - identifier: contact
   name: Contact Us
@@ -84,10 +124,10 @@ social:
   pre: github
   url: https://github.com/metalbear-co/mirrord
   weight: 20
-# - name: Twitter
-#   pre: twitter
-#   url: https://twitter.com/metalbearco
-#   weight: 30
+- name: Twitter
+  pre: twitter
+  url: https://twitter.com/metalbearco
+  weight: 30
 - name: Linkedin
   pre: linkedin
   url: https://www.linkedin.com/company/metalbearco/

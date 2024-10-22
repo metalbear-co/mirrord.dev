@@ -1,5 +1,5 @@
 ---
-title: Develop Locally with Your Kubernetes Environment
+title: mirrord
 baseURL: https://mirrord.dev/
 languageCode: en-US
 defaultContentLanguage: en
@@ -78,7 +78,7 @@ minify:
 module:
   hugoVersion:
     extended: true
-    min: 0.95.0
+    min: 0.120.0
     max: ''
   mounts:
     - source: assets

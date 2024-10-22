@@ -72,7 +72,48 @@ To specify a filter on a path, use the `feature.network.incoming.http_filter.pat
 
 Note that both `header_filter` and `path_filter` take regex value, so for example `"header_filter": "X-Header-.+: header-value-.+"` would work.
 
+### Filtering out healthchecks using a negative look-ahead
+
+The HTTP filters both take "fancy" regexes that support negative look-aheads.
+This can be useful for avoiding the stealing of Kubernetes liveness, readiness and startup probes.
+
+For filtering out any probes sent to the application by kubernetes, you can use this header filter,
+to require a user-agent that does not start with "kube-probe":
+
+```json
+{
+  "feature": {
+    "network": {
+      "incoming": {
+        "mode": "steal",
+        "http_filter": {
+          "header_filter": "^User-Agent: (?!kube-probe)",
+        }
+      }
+    }
+  }
+}
+```
+
+To avoid stealing requests sent to URIs starting with "/health/", you can set this filter:
+
+```json
+{
+  "feature": {
+    "network": {
+      "incoming": {
+        "mode": "steal",
+        "http_filter": {
+          "path_filter": "^(?!/health/)",
+        }
+      }
+    }
+  }
+}
+```
+
+
 ## What's next?
-1. If your local process reads from a queue, you might want to test out the [pause feature](/docs/using-mirrord/pause/), which temporarily pauses the remote target so it doesn't compete with your local process for queue messages.
+1. If your local process reads from a queue, you might want to test out the [copy target feature](/docs/using-mirrord/copy-target/), which temporarily creates a copy of the mirrord session target. With its `scaledown` flag it allows you to temporarily delete all replicas in your targeted rollout or deployment, so that none competes with your local process for queue messages.
 2. If you don't want to impersonate a remote target - for example, if you want to run a tool in the context of your cluster - check out our [guide on the targetless mode](/docs/using-mirrord/targetless/).
 3. If you just want to learn more about mirrord, why not check out our [architecture]({{< ref "/docs/reference/architecture" >}} "architecture") or [configuration]({{< ref "/docs/reference/configuration" >}} "configuration") sections?

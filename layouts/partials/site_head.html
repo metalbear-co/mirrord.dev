@@ -1,12 +1,14 @@
-<head>    
+<head>
     <meta charset="utf-8">
     {{- hugo.Generator }}
     {{ if and (.Site.Params.alert) (ne .Section "docs") }}
-        {{ partial "header/alert.html" . }}
+    {{ partial "header/alert.html" . }}
     {{ end -}}
-    <title>{{ if .Title }}{{ .Title }} | {{ end }}{{ site.Title }}</title>
+    <title>{{ if .Title }}{{ .Title }} | {{ site.Title }}{{ else }}mirrord | Faster, Simpler Kubernetes Development{{
+        end }}</title>
     <meta name="author" content="{{ site.Params.author }}">
-    <meta name="description" content="{{ with .Params.description }} {{.}} {{else}} {{ with site.Params.description }} {{.}} {{end}} {{end}}">
+    <meta name="description"
+        content="{{ with .Params.description }} {{.}} {{else}} {{ with site.Params.description }} {{.}} {{end}} {{end}}">
     {{- "<!-- mobile responsive meta -->" | safeHTML}}
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
     <!-- favicon -->
@@ -18,7 +20,8 @@
     {{- partial "site_style" . }}
     {{- partial "site_head_seo.html" . }}
 
-    <script defer data-domain="mirrord.dev" src="https://plausible.io/js/script.js"></script>
+    <script defer data-domain="mirrord.dev" src="https://plausible.io/js/script.hash.outbound-links.js"></script>
+    <script>window.plausible = window.plausible || function () { (window.plausible.q = window.plausible.q || []).push(arguments) }</script>
     <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
     <script src="/pagefind/pagefind-ui.js"></script>
 

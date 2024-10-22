@@ -22,8 +22,9 @@ There are currently two known cases where mirrord cannot load into the applicati
    linked in order to run them with mirrord.
    With Go programs, for example, it is as simple as adding `import "C"` to your program code.
    If you don't want to add an import to your Go program, you can alternatively build a dynamically linked binary using `go build -ldflags='-linkmode external'`. In VSCode, this can be done by adding `"buildFlags": "-ldflags='-linkmode external'"` to your `launch.json`.
-   On Linux, using `go run` is not possible at the moment - please follow [this issue](https://github.com/metalbear-co/mirrord/issues/1922) for updates.
-2. If you are running mirrord on MacOS and the executable you are running is protected by
+   
+   On Linux, append `-ldflags="-s=false"` to instruct `go run` not to omit the symbol table and debug information required by mirrord.
+3. If you are running mirrord on MacOS and the executable you are running is protected by
    [SIP](https://en.wikipedia.org/wiki/System_Integrity_Protection) (the application you are developing wouldn't be,
    but the binary that is used to execute it, e.g. `bash` for a bash script, might be protected), mirrord might have trouble loading into it (mirrord can generally bypass SIP, but there are still some unhandled edge cases). If that is the case, you could try copying the binary you're trying to run to an unprotected directory (e.g. anywhere in your home directory), changing the IDE run configuration or the CLI
    to use the copy instead of the original binary, and trying again. If it still doesn't work, also remove the signature
@@ -35,15 +36,32 @@ There are currently two known cases where mirrord cannot load into the applicati
 
 Another reason that mirrord might seem not to work is if your remote pod has more than one container. mirrord works at the level of the container, not the whole pod. If your pod runs multiple containers, you need to make sure mirrord targets the correct one by by specifying it explicitly in the [target configuration](/docs/reference/configuration/#root-target). Note that we filter out the proxy containers added by popular service meshes automatically.
 
+### I've run my [Turbo](https://turbo.build/) task with mirrord, but it seems to have no effect
+
+When executing a task Turbo strips most of the existing process environment, including internal mirrord variables required during libc call interception setup. There are two alternative ways to solve this problem:
+
+1. Explicitly tell Turbo to pass mirrord environment to the task. To do this, merge the snippet below into your `turbo.json`. You should be able to run the task like `mirrord exec turbo dev`.
+```json
+{
+  "globalPassThroughEnv": ["MIRRORD_*", "LD_PRELOAD", "DYLD_INSERT_LIBRARIES"]
+}
+```
+
+2. Invoke mirrord inside the Turbo task command line itself.
+
 ### Incoming traffic to the remote target doesn't reach my local process
 
-This could happen for several reasons:
-1. The local process is listening on a different port than the remote target. You can either change
+This could happen because the local process is listening on a different port than the remote target. You can either change
  the local process to listen on the same port as the remote target (don't worry about the port
  being used locally by other processes), or use the [`port_mapping`  configuration
  ](/docs/reference/configuration/#feature-network-incoming-port_mapping) to map the local port to a
  remote port.
-2. You're running with `network.incoming.mode` set to `mirror` on a cluster with a service mesh like Istio or Linkerd, which isn't currently supported. In this case, you should use the `--steal` flag instead.
+
+### The remote target stops receiving remote traffic, but it doesn't reach my local process either
+This can happen in some clusters using a service mesh when stealing incoming traffic. You can use this configuration to fix it:
+```json
+{"agent": {"flush_connections": false}}
+```
 
 ### My application is trying to read a file locally instead of from the cluster
 
@@ -92,7 +110,7 @@ As a temporary solution for cleaning up completed agent pods manually, you can r
 kubectl delete jobs --selector=app=mirrord --field-selector=status.successful=1
 ```
 
-### My local process gets permission (EACCESS) error on file access
+### My local process gets permission (EACCESS) error on file access or DNS can't resolve
 
 If your cluster is running on Bottlerocket or has SELinux enabled, please try enabling the `privileged` flag
 in the agent configuration:
@@ -106,4 +124,20 @@ in the agent configuration:
 
 ### `mirrord operator status` fails with `503 Service Unavailable` on GKE
 
-If private networking is enabled, it is likely due to firewall rules blocking the mirrord operator's API service from the API server. To fix this, add a firewall rule that allows your cluster's master nodes to access TCP port 3000 in your cluster's pods. Please refer to the [GCP docs](https://cloud.google.com/kubernetes-engine/docs/how-to/private-clusters#add_firewall_rules) for information.
+If private networking is enabled, it is likely due to firewall rules blocking the mirrord operator's API service from the API server. To fix this, add a firewall rule that allows your cluster's master nodes to access TCP port 443 in your cluster's pods. Please refer to the [GCP docs](https://cloud.google.com/kubernetes-engine/docs/how-to/private-clusters#add_firewall_rules) for information.
+
+### My local process encounters unexpected certificate validation errors
+
+When running processes locally versus in a container within Kubernetes, some languages handle certificate validation differently. For instance, a Go application on macOS will use the macOS Keychain for certificate validation, whereas the same application in a container will use different API calls. This discrepancy can lead to unexpected certificate validation errors when using tools like mirrord.
+
+A specific issue with Go can be found [here](https://github.com/golang/go/issues/51991), where Go encounters certificate validation errors due to certain AWS services serving certificates that are deemed invalid by the macOS Keychain, but not by Go’s certificate validation in other environments.
+
+To work around this issue (on macOS), you can use the following mirrord configuration:
+```json
+{
+   "experimental": {"trust_any_certificate": true}
+}
+```
+This configuration would make any certificate trusted for the process.
+
+Other alternatives are to either disable certificate validation in your application or import the problematic certificate (or its root CA) into your macOS Keychain. For guidance on how to do this, refer to this [Apple support article](https://support.apple.com/guide/keychain-access/change-the-trust-settings-of-a-certificate-kyca11871/mac).

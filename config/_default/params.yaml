@@ -3,7 +3,7 @@ repoHost: GitHub
 docsRepo: 'https://github.com/metalbear-co/mirrord.dev'
 docsRepoBranch: master
 docsRepoSubPath: ''
-title: mirrord
+title: Faster, Simpler Kubernetes Development
 titleSeparator: '-'
 titleAddition: Rethinking cloud development
 description: >-
@@ -34,6 +34,7 @@ schemaLinkedIn: 'https://www.linkedin.com/company/metalbearco/'
 schemaGitHub: 'https://github.com/metalbear-co/mirrord'
 schemaSection: blog
 
-alert: true
+
+alert: false
 alertDismissable: true
-alertText: "We're coming to KubeCon EU 🥳 <a class=\"alert-link stretched-link\" href=\"https://kccnceu2024.sched.com/event/1YeN7\" rel=\"noopener\" target=\"_blank\">Come hear our talk</a> about the low level magic behind mirrord, or just to say hi 👋"
+alertText: "mirrord for Teams is live on Product Hunt! <a class=\"alert-link stretched-link\" href=\"https://www.producthunt.com/posts/mirrord-for-teams\" rel=\"noopener\" target=\"_blank\">Check out the launch and share your feedback!</a>"

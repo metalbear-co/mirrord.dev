@@ -54,10 +54,27 @@ Our main goal in future versions of mirrord is to reduce the risk of disruption 
 
 ### Can I use mirrord to run a local container, rather than a local process, in the context of the remote Kubernetes cluster?
 
-The only way to do this at the moment is to install the mirrord CLI within the container and change its entrypoint to run the original process using mirrord. Support for running containers directly with mirrord will be added in the future - please follow [this issue](https://github.com/metalbear-co/mirrord/issues/1658) for updates.
+Yes! You can use the `mirrord container` command to run a local container in the context of the remote Kubernetes cluster. You can read more about it [here]({{< ref "/docs/using-mirrord/local-container" >}} "Local Container").
 
 ### What if I can't create containers with the capabilities mirrord requires in my cluster?
 
 mirrord works by creating an agent on a privileged pod in the remote cluster that accesses another pod's namespaces (read more about it [here](https://metalbear.co/blog/getting-started-with-ephemeral-containers/)).
 If you can't give your end users permissions to create pods with the capabilities mirrord needs, we suggest trying out [mirrord for Teams]({{< ref "/docs/overview/teams" >}} "mirrord for Teams"). It adds a Kubernetes operator that acts as a control plane for mirrord clients, and lets them work with mirrord without creating pods themselves.
 If mirrord for Teams doesn't work for you either, [let us know](hello@metalbear.co) and we'll try to figure a solution that matches your security policies.
+
+### What kinds of Kubernetes objects can I use as a remote target?
+mirrord OSS supports the following Kubernetes objects as targets:
+- Pods
+- Deployments
+- Argo Rollouts
+
+In mirrord OSS, mirrord will always target a random pod when a workload with multiple pods is used as the remote target.
+
+mirrord for Teams adds support for the following workloads:
+- Jobs
+- CronJobs
+- StatefulSets
+
+In mirrord for Teams, mirrord will always target all pods when a workload with multiple pods is used as the remote target.
+
+Both in mirrord OSS and mirrord for Teams, if you don't name any specific container to be targeted, mirrord will pick the first container from the pod spec. Some containers, like service mesh proxies, will be automatically ignored.

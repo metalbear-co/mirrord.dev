@@ -24,6 +24,7 @@ tags: ["team", "enterprise"]
     - `CAP_NET_ADMIN` - for modifying routing tables
     - `CAP_SYS_PTRACE` - for reading the target pod's environment variables
     - `CAP_SYS_ADMIN` - for joining the target pod's network namespace
+- mirrord doesn't copy remote files or secrets to the local filesystem. The local app only gets access to remote files and secrets in memory, and so they'll only be written to the local filesystem if done by the local app, or if mirrord was explicitly configured to log to files with a log level of debug/trace.
 - Missing anything? Feel free to ask us on Discord or hi@metalbear.co
 
 ## Are you SOC2/GDPR compliant?
@@ -42,6 +43,8 @@ For your convenience, mirrord for Teams includes a built-in ClusterRole called `
 
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
+metadata:
+  name: mirrord-operator-rolebinding
 subjects:
 - kind: User
   name: jim
@@ -54,92 +57,12 @@ roleRef:
 
 In addition, the Operator impersonates any user that calls its API, and thus only operates on pods or deployments for which the user has `get` permissions.
 
-Below is the ClusterRole's yaml, which you can modify to suit your needs:
-
-```yaml
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
-metadata:
-  name: mirrord-operator-user
-rules:
-- apiGroups:
-  - operator.metalbear.co
-  resources:
-  - copytargets
-  - mirrordoperators
-  - targets
-  - targets/port-locks
-  verbs:
-  - get
-  - list
-- apiGroups:
-  - operator.metalbear.co
-  resources:
-  - mirrordoperators/certificate
-  - copytargets
-  verbs:
-  - create
-- apiGroups:
-  - operator.metalbear.co
-  resources:
-  - targets
-  - copytargets
-  verbs:
-  - proxy
-  resources:
-  - sessions
-  verbs:
-  - deletecollection
-  - delete
-  ```
+To see the latest definition, we recommend checking our [Helm chart](https://github.com/metalbear-co/charts/blob/main/mirrord-operator/templates/cluster-role.yaml).
 
 ### How do I limit user access to a specific namespace?
 
-Create a ClusterRoleBinding between the user and the `mirrord-operator-user` role, but only grant the user access to `get` pods or deployments on the allowed namespace. The Operator will impersonate the user and only have access to their allowed targets.
-```yaml
+Create a ClusterRoleBinding between the user and the `mirrord-operator-user-basic` role, then create a [namespaced role](https://github.com/metalbear-co/charts/blob/main/mirrord-operator/templates/namespaced-role.yaml) (easiest via Helm chart by specifying `roleNamespaces`) and bind create RoleBinding in the namespace.
 
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
-metadata:
-  name: mirrord-operator-user-cr
-rules:
-- apiGroups:
-  - operator.metalbear.co
-  resources:
-  - mirrordoperators
-  verbs:
-  - get
-  - list
-- apiGroups:
-  - operator.metalbear.co
-  resources:
-  - mirrordoperators/certificate
-  verbs:
-  - create
-
----
-
-apiVersion: rbac.authorization.k8s.io/v1
-kind: Role
-metadata:
-  name: mirrord-operator-user
-  namespace: <namespace>
-rules:
-- apiGroups:
-  - operator.metalbear.co
-  resources:
-  - targets
-  - targets/port-locks
-  verbs:
-  - get
-  - list
-  - proxy
-
-```
-
-## I want to explicitly grant mirrord permissions for each namespace
-
-You can split the mirrord role into a cluster-wide one which is required for operator discovery and authentication, and a namespaced one for actual mirrord usage.
 
 ### How do I limit user access to a specific target?
 
@@ -162,3 +85,21 @@ If the user doesn't have `get` access to the targets, then they won't be able to
 
 You can define [policies](/docs/managing-mirrord/policies/) that prevent stealing (or only prevent stealing without setting a
 filter) for selected targets. Let us know if there are more features you would like to be able to limit using policies.
+
+## How can I prevent users from using mirrord without going through the Operator?
+
+When the mirrord CLI starts, it checks if an Operator is installed in the cluster and uses it if it's available. However, if the user lacks access to the Operator or if the Operator doesn't exist, mirrord attempts to create an agent directly.
+
+To prevent clients from attempting to create an agent without the Operator, you can add the [following key](/docs/reference/configuration/#root-operator) to the mirrord configuration file:
+
+```json
+{
+  "operator": true
+}
+```
+
+To prevent mirrord clients from directly creating agents at the cluster level, we recommend disallowing the creation of pods with extra capabilities by using [Pod Admission Policies](https://kubernetes.io/docs/tasks/configure-pod-container/enforce-standards-namespace-labels/). Apply a baseline or stricter policy to all namespaces while excluding the mirrord namespace.
+
+Note: before adding a new Pod Admission Policy, you should make sure it doesn't limit any functionality required by your existing workloads.
+
+By default the in-cluster traffic between the operator and its agents isn't encrypted nor authenticated. To ensure encryption and authentication you can enable TLS protocol for the operator–agent connections. You can do this in the operator [Helm chart](https://github.com/metalbear-co/charts/blob/main/mirrord-operator/values.yaml) by setting `agent.tls` to true or manually by setting `OPERATOR_AGENT_CONNECTION_TLS=true` in the operator container environment. TLS connections are supported from agent version 3.97.0.
