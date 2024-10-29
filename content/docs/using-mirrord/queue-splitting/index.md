@@ -63,7 +63,7 @@ application to consume messages back from the original queue.
 
 ### Kafka Splitting
 
-When an Kafka splitting session starts, the operator changes the target workload to consume messages from a
+When a Kafka splitting session starts, the operator changes the target workload to consume messages from a
 different, temporary topic created by the operator in the same Kafka cluster. The operator also creates a temporary topic that the local
 application reads from.
 
@@ -304,7 +304,7 @@ be created.
 It describes Kafka topics that this workload consumes and contains instructions for the mirrord Operator on how to execture splitting.
 Each `MirrordKafkaTopicsConsumer` is linked to a single workload that can be targeted with a Kafka splitting session.
 2. `MirrordKafkaClienConfig` is a resource that must be created in the namespace where mirrord operator is installed.
-It contains properties that the operator will use when creating a [librdkafka](https://github.com/confluentinc/librdkafka) client used for all Kafka operations during the split.
+It contains properties that the operator will use when creating a Kafka client used for all Kafka operations during the split.
 This resource is referenced by `MirrordKafkaTopicsConsumer`.
 
 #### `MirrordKafkaTopicsConsumer`
@@ -372,15 +372,15 @@ When used by the mirrord Operator for Kafka splitting, the example below will be
 bootstrap.servers=kafka.default.svc.cluster.local:9092
 ```
 
-This file will be used when creating a [librdkafka]((https://github.com/confluentinc/librdkafka)) client for managing temporary topics, consuming messages from the original topic and producing messages to the temporary topics. Full list of available properties can be found [here](https://github.com/confluentinc/librdkafka/blob/master/CONFIGURATION.md).
+This file will be used when creating a Kafka client for managing temporary topics, consuming messages from the original topic and producing messages to the temporary topics. Full list of available properties can be found [here](https://github.com/confluentinc/librdkafka/blob/master/CONFIGURATION.md).
 
 > **_NOTE:_** `group.id` property will always be overwritten by mirrord Operator when resolving the `.properties` file.
 
 `MirrordKafkaClientConfig` resource supports property inheritance via `spec.parent` field. When resolving a resource `X` that has parent `Y`:
 1. `Y` is resolved into a `.properties` file.
 2. For each property defined in `X`:
-    * If value is provided, it overrides previous value
-    * If value is not provided (`null`), property is removed
+    * If `value` is provided, it overrides any previous value of that property
+    * If `value` is not provided (`null`), that property is removed
 
 Below we have an example of two `MirrordKafkaClientConfig`s with inheritance relation:
 
@@ -396,8 +396,9 @@ spec:
     value: kafka.default.svc.cluster.local:9092
   - name: message.send.max.retries
     value: 4
+```
 
----
+```yaml
 apiVersion: queues.mirrord.metalbear.co/v1alpha
 kind: MirrordKafkaClientConfig
 metadata:
