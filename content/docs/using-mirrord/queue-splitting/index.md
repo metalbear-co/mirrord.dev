@@ -25,52 +25,81 @@ intention:
    configuration. Messages that match the filter will reach your local application, and messages that do not, will
    reach either the deployed application, or another teammate's local application, if they match their filter.**
 
-> **_NOTE:_** So far queue splitting is available for [Amazon SQS](https://aws.amazon.com/sqs/). Pretty soon we'll
-> support Kafka as well.
+> **_NOTE:_** So far queue splitting is available for [Amazon SQS](https://aws.amazon.com/sqs/) and [Kafka](https://kafka.apache.org/). Pretty soon we'll
+> support RabbitMQ as well.
 
 ## How It Works
 
 ### SQS Splitting
 
-When a queue splitting session starts, the operator changes the target workload to consume messages from a
+When an SQS splitting session starts, the operator changes the target workload to consume messages from a
 different, temporary queue created by the operator. The operator also creates a temporary queue that the local
 application reads from.
 
 So if we have a consumer app reading messages from a queue:
 
-{{<figure src="before-splitting.svg" class="bg-white center" alt="A K8s application that consumes messages from a queue">}}
+{{<figure src="before-splitting-sqs.svg" class="bg-white center" alt="A K8s application that consumes messages from an SQS queue">}}
 
-After a mirrord queue splitting session starts, the setup will change to this:
+After a mirrord SQS splitting session starts, the setup will change to this:
 
-{{<figure src="1-user.svg" class="bg-white center" alt="A queue splitting session">}}
+{{<figure src="1-user-sqs.svg" class="bg-white center" alt="One SQS splitting session">}}
 
 The operator will consume messages from the original queue, and try to match their attributes with filter defined by
-the user in the mirrord configuration file. A message that matches the filter will be sent to the queue consumed by
+the user in the mirrord configuration file (read more in the [last section](#setting-a-filter-for-a-mirrord-run)). A message that matches the filter will be sent to the queue consumed by
 the local application. Other messages will be sent to the queue consumed by the remote application.
 
-And as soon as a second mirrord queue splitting session starts, the operator will create another temporary queue for
+And as soon as a second mirrord SQS splitting session starts, the operator will create another temporary queue for
 the new local app:
 
-{{<figure src="2-users.svg" class="bg-white center" alt="2 queue splitting sessions">}}
+{{<figure src="2-users-sqs.svg" class="bg-white center" alt="Two SQS splitting sessions">}}
 
 The users' filters will be matched in the order of the start of their sessions. If filters defined by two users both
 match a message, the message will go to whichever user started their session first.
 
-After a mirrord session ends, the operator will delete the temporary queue it created for it. When all
+After a mirrord session ends, the operator will delete the temporary queue that was created for that session. When all
 sessions that split a certain queue end, the mirrord Operator will wait for the deployed application to consume the
 remaining messages in its temporary queue, and then delete that temporary queue as well, and change the deployed
 application to consume messages back from the original queue.
 
-## Getting Started with Queue Splitting
+### Kafka Splitting
 
-### Enabling Queue Splitting in Your Cluster
+When a Kafka splitting session starts, the operator changes the target workload to consume messages from a
+different, temporary topic created by the operator in the same Kafka cluster. The operator also creates a temporary topic that the local
+application reads from.
 
-In order to use the queue splitting feature, some extra values need be provided during the installation of the mirrord Operator.
+So if we have a consumer app reading messages from a topic:
+
+{{<figure src="before-splitting-kafka.svg" class="bg-white center" alt="A K8s application that consumes messages from a Kafka topic">}}
+
+After a mirrord Kafka splitting session starts, the setup will change to this:
+
+{{<figure src="1-user-kafka.svg" class="bg-white center" alt="One Kafka splitting session">}}
+
+The operator will consume messages from the original topic (using the same consumer group id as the target workload), and try to match their headers with filter defined by
+the user in the mirrord configuration file (read more in the [last section](#setting-a-filter-for-a-mirrord-run)). A message that matches the filter will be sent to the topic consumed by
+the local application. Other messages will be sent to the topic consumed by the remote application.
+
+And as soon as a second mirrord Kafka splitting session starts, the operator will create another temporary queue for
+the new local app:
+
+{{<figure src="2-users-kafka.svg" class="bg-white center" alt="Two Kafka splitting sessions">}}
+
+The users' filters will be matched in the order of the start of their sessions. If filters defined by two users both
+match a message, the message will go to whichever user started their session first.
+
+After a mirrord session ends, the operator will delete the temporary topic that was created for that session. When all
+sessions that split a certain topic end, the mirrord Operator will change the deployed application to consume messages back from the original topic and delete the temporary topic as well.
+
+## Getting Started with SQS Splitting
+
+### Enabling SQS Splitting in Your Cluster
+
+In order to use the SQS splitting feature, some extra values need be provided during the installation of the mirrord Operator.
 
 First of all, the SQS splitting feature needs to be enabled:
 - When installing with the [mirrord-operator Helm chart](https://github.com/metalbear-co/charts/tree/main/mirrord-operator)
   it is enabled by setting the
-  [`operator.sqsSplitting`](https://github.com/metalbear-co/charts/blob/61fec57ca913068a11f3dc8579bdaa377cb028a1/mirrord-operator/values.yaml#L22)
+  [`operator.sqsSplitting`](https://github.com/metalbear-co/charts/blob/06efc8666bd26ff7f3a0863333ea4a109aaa6b62/mirrord-operator/values.yaml#L22)
   [value](https://helm.sh/docs/chart_template_guide/values_files/) to `true`.
 - When installing via the `mirrord operator setup` command, set the `--sqs-splitting` flag.
 
@@ -245,9 +274,155 @@ spec:
   workload is targeted.
   * `container` is optional, when set - this queue registry only applies to runs that target that container.
 
-### Setting a Filter for a mirrord Run
+## Getting Started with Kafka Splitting
 
-Once everything else is set, you can start setting message filters in your mirrord configuration file.
+### Enabling Kafka Splitting in Your Cluster
+
+In order to use the Kafka splitting feature, some extra values need be provided during the installation of the mirrord Operator.
+
+First of all, the Kafka splitting feature needs to be enabled:
+- When installing with the [mirrord-operator Helm chart](https://github.com/metalbear-co/charts/tree/main/mirrord-operator)
+  it is enabled by setting the
+  [`operator.kafkaSplitting`](https://github.com/metalbear-co/charts/blob/06efc8666bd26ff7f3a0863333ea4a109aaa6b62/mirrord-operator/values.yaml#L24)
+  [value](https://helm.sh/docs/chart_template_guide/values_files/) to `true`.
+- When installing via the `mirrord operator setup` command, set the `--kafka-splitting` flag.
+
+When Kafka splitting is enabled during installation, some additional resources are created, and the Kafka component of
+the mirrord Operator is started.
+
+### Configuring Kafka Splitting with Custom Resources
+
+On operator installation, new
+[`CustomResources`](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) types were
+created on your cluster: `MirrordKafkaTopicsConsumer` and `MirrordKafkaClientConfig`. Users with permissions to get CRDs, can verify their
+existence with `kubectl get crd mirrordkafkatopicsconsumers.queues.mirrord.metalbear.co` and `kubectl get crd mirrordkafkaclientconfigs.queues.mirrord.metalbear.co`.
+
+After a Kafka-enabled operator is installed, and before you can start splitting queues, resources of these types must
+be created.
+
+1. `MirrordKafkaTopicsConsumer` is a resource that must be created in the same namespace as the target workload.
+It describes Kafka topics that this workload consumes and contains instructions for the mirrord Operator on how to execture splitting.
+Each `MirrordKafkaTopicsConsumer` is linked to a single workload that can be targeted with a Kafka splitting session.
+2. `MirrordKafkaClienConfig` is a resource that must be created in the namespace where mirrord operator is installed.
+It contains properties that the operator will use when creating a Kafka client used for all Kafka operations during the split.
+This resource is referenced by `MirrordKafkaTopicsConsumer`.
+
+#### `MirrordKafkaTopicsConsumer`
+
+Below we have an example for `MirrordKafkaTopicsConsumer` resource, for a meme app that consumes messages from a Kafka topic:
+
+```yaml
+apiVersion: "queues.mirrord.metalbear.co/v1alpha"
+kind: MirrordKafkaTopicsConsumer
+metadata:
+  name: meme-app-topics-consumer
+spec:
+  consumerApiVersion: "apps/v1"
+  consumerKind: "Deployment"
+  consumerName": "meme-app"
+  topics:
+  - id: views-topic
+    clientConfig: base-config
+    groupIdSources:
+    - directEnvVar:
+        container: consumer
+        variable: KAFKA_GROUP_ID
+    nameSources:
+    - directEnvVar:
+        container: consumer
+        variable: KAFKA_TOPIC_NAME
+```
+
+* `spec.topics` is a list of topics that can be split when running mirrord with this target.
+  * The topic ID is chosen by you, and will be used by every teammate who wishes to filter messages from this topic.
+    You can choose any string for that, it does not have to be the same as the name of the queue. In the example
+    above the topic has id `views-topic`.
+  * `clientConfig` is the name of the `MirrordKafkaClientConfig` resource living in the mirrord Operator's namespace
+    that will be used when interacting with the Kafka cluster.
+  * `groupIdSources` holds a list of all occurences of Kafka consumer group id in the workload's pod spec.
+    mirrord Operator will use this group id when consuming messages from the topic.
+
+    Currently the only supported source type is an environment variable with value defined directly in the pod spec.
+  * `nameSources` holds a list of all occurences of topic name in the workload's pod spec.
+    mirrord Operator will use this name when consuming messages.
+    It is crucial that both the local and deployed app take topic name from these sources,
+    as mirrord Operator will use them to inject the names of temporary topics.
+
+    Currently the only supported source type is an environment variable with value defined directly in the pod spec.
+
+#### `MirrordKafkaClientConfig`
+
+Below we have an example for `MirrordKafkaClientConfig` resource:
+
+```yaml
+apiVersion: queues.mirrord.metalbear.co/v1alpha
+kind: MirrordKafkaClientConfig
+metadata:
+  name: base-config
+  namespace: mirrord
+spec:
+  properties:
+  - name: bootstrap.servers
+    value: kafka.default.svc.cluster.local:9092
+```
+
+When used by the mirrord Operator for Kafka splitting, the example below will be resolved to following `.properties` file:
+
+```properties
+bootstrap.servers=kafka.default.svc.cluster.local:9092
+```
+
+This file will be used when creating a Kafka client for managing temporary topics, consuming messages from the original topic and producing messages to the temporary topics. Full list of available properties can be found [here](https://github.com/confluentinc/librdkafka/blob/master/CONFIGURATION.md).
+
+> **_NOTE:_** `group.id` property will always be overwritten by mirrord Operator when resolving the `.properties` file.
+
+`MirrordKafkaClientConfig` resource supports property inheritance via `spec.parent` field. When resolving a resource `X` that has parent `Y`:
+1. `Y` is resolved into a `.properties` file.
+2. For each property defined in `X`:
+    * If `value` is provided, it overrides any previous value of that property
+    * If `value` is not provided (`null`), that property is removed
+
+Below we have an example of two `MirrordKafkaClientConfig`s with inheritance relation:
+
+```yaml
+apiVersion: queues.mirrord.metalbear.co/v1alpha
+kind: MirrordKafkaClientConfig
+metadata:
+  name: base-config
+  namespace: mirrord
+spec:
+  properties:
+  - name: bootstrap.servers
+    value: kafka.default.svc.cluster.local:9092
+  - name: message.send.max.retries
+    value: 4
+```
+
+```yaml
+apiVersion: queues.mirrord.metalbear.co/v1alpha
+kind: MirrordKafkaClientConfig
+metadata:
+  name: with-client-id
+  namespace: mirrord
+spec:
+  parent: base-config
+  properties:
+  - name: client.id
+    value: mirrord-operator
+  - name: message.send.max.retries
+    value: null
+```
+
+When used by the mirrord Operator for Kafka splitting, the `with-client-id` below will be resolved to following `.properties` file:
+
+```properties
+bootstrap.servers=kafka.default.svc.cluster.local:9092
+client.id=mirrord-operator
+```
+
+## Setting a Filter for a mirrord Run
+
+Once everything else is set, you can start using message filters in your mirrord configuration file.
 Below is an example for what such a configuration might look like:
 ```json
 {
@@ -261,6 +436,17 @@ Below is an example for what such a configuration might look like:
                     "author": "^me$",
                     "level": "^(beginner|intermediate)$"
                 }
+            },
+            "ad-queue": {
+                "queue_type": "SQS",
+                "message_filter": {}
+            },
+            "views-topic": {
+                "queue_type": "Kafka",
+                "message_filter": {
+                    "author": "^me$",
+                    "source": "^my-session-"
+                }
             }
         }
     }
@@ -268,19 +454,21 @@ Below is an example for what such a configuration might look like:
 ```
 
 * [`feature.split_queues`](/docs/reference/configuration/#feature-split_queues) is the configuration field you need
-  to specify in order to filter queue messages. Directly under it, we have a mapping from a queue ID to a queue
-  filter definition. This queue ID is the queue ID that was set in the
-  [queue registry resource](#creating-a-queue-registry) of this target.
-  * `message_filter` is a mapping from message attribute names to message attribute value regexes. Your local
-    application will only see queue messages that have all the specified message attributes.
+  to specify in order to filter queue messages. Directly under it, we have a mapping from a queue or topic ID to a queue
+  filter definition.
+  * Queue or topic ID is the ID that was set in the [SQS queue registry resource](#creating-a-queue-registry) or [Kafka topics consumer resource](#creating-a-topics-registry).
+  * `message_filter` is a mapping from message attribute (SQS) or header (Kafka) names to message attribute or header value regexes. Your local
+    application will only see queue messages that have **all** of the specified message attributes or headers.
 
-    In this case, the local
-    application would only receive messages that have an attribute with the name "author" and the value "me", AND an
-    attribute with the name "level" and one of the values "beginner" and "intermediate".
+    Empty `message_filter` is treated as a match-none directive.
 
-In the example above, a filter was only defined for one of the queues this target consumes. This is equivalent to
-specifying a match-none filter for the second queue. Meaning our application will not see any messages in the
-`ad-queue`.
+In the example above, the local application:
 
-Once all users stop filtering a queue (i.e. end their mirrord sessions), the temporary SQS queues that mirrord
+* Will receive a subset of messages from SQS queue with ID `meme-queue`. All received messages will have an attribute `author` with the value `me`,
+  AND an attribute `level` with value either `beginner` or `intermediate`.
+* Will receive a subset of messages from Kafka topic with ID `views-topic`. All received messages will have an attribute `author` with the value `me`,
+  AND an attribute `source` with value starting with `my-session-` (e.g `my-session-844cb78789-2fmsw`).
+* Will receive no messages from SQS queue with id `ad-queue`.
+
+Once all users stop filtering a queue (i.e. end their mirrord sessions), the temporary queues (SQS) and topics (Kafka) that mirrord operator
 created will be deleted.
