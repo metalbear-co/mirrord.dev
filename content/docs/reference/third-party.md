@@ -43,3 +43,5 @@ List of third-party guides and videos about mirrord:
 | [Kubernetes Debugging with Mirrord and VS Code](https://youtu.be/gqIlf3DdlfQ?si=yTXrnfpZzt_snDMA) | Video | Overview of mirrord |
 | [Remocal Development: The Future of Efficient Kubernetes Workflows](https://thenewstack.io/remocal-development-the-future-of-efficient-kubernetes-workflows/) | Blog | Overview of mirrord |
 | [Use this tool for easy debug right on Kubernetes](https://www.youtube.com/shorts/VGygxsQuhtY) | Video | Overview of mirrord |
+| [Mirrord Mirrord on the wall, who's most processed of them all 🪞🔄](https://open.substack.com/pub/vibhavstechdiary/p/mirrord-mirrord-on-the-wall-whos?utm_campaign=post&utm_medium=web) | Blog | Demo of mirrord |
+| ["Let's hook up !" ~ said every LD_PRELOAD ever 🪝⚙️](https://vibhavstechdiary.substack.com/p/lets-hook-up-said-every-ld_preload) | Blog | Demo of mirrord | 
