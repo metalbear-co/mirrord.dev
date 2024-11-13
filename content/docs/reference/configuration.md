@@ -370,7 +370,7 @@ Default is
 
 ### agent.service_account {#agent-service_account}
 
-Allows setting up custom Service Account for the agent Job and Pod.\
+Allows setting up custom Service Account for the agent Job and Pod.
 
 ```json
 {
