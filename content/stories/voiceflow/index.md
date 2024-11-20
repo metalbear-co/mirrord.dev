@@ -1,5 +1,5 @@
 ---
-title: "VoiceFlow User Story | Greg O'Grady"
+title: "Voiceflow User Story | Greg O'Grady"
 card_title: "Greg O'Grady"
 description: "mirrord abstracts away the complexities for developers who may not have deep knowledge of Kubernetes or the networking stack"
 date: 2024-11-7T06:00:00+00:00
