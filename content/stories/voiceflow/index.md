@@ -4,7 +4,7 @@ card_title: "Greg O'Grady"
 description: "mirrord abstracts away the complexities for developers who may not have deep knowledge of Kubernetes or the networking stack"
 date: 2024-11-7T06:00:00+00:00
 lastmod: 2024-11-7T06:00:00+00:00
-position: "Software Engineer | VoiceFlow"
+position: "Software Engineer | Voiceflow"
 avatar: "greg-o-grady.png"
 logo: "voiceflow.png"
 featured: true
@@ -13,10 +13,10 @@ weight: 10
 ---
 
 # About yourself 
-Greg O'Grady, Software Engineer IV at VoiceFlow
+Greg O'Grady, Software Engineer IV at Voiceflow
 
 # About your company
-VoiceFlow helps product teams build, manage, and deploy AI Agents to automate customer experiences.
+Voiceflow helps product teams build, manage, and deploy AI Agents to automate customer experiences.
 
 
 # Why did you choose mirrord instead? 
