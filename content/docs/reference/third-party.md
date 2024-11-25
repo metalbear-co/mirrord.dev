@@ -45,3 +45,5 @@ List of third-party guides and videos about mirrord:
 | [Use this tool for easy debug right on Kubernetes](https://www.youtube.com/shorts/VGygxsQuhtY) | Video | Overview of mirrord |
 | [Mirrord Mirrord on the wall, who's most processed of them all 🪞🔄](https://open.substack.com/pub/vibhavstechdiary/p/mirrord-mirrord-on-the-wall-whos?utm_campaign=post&utm_medium=web) | Blog | Demo of mirrord |
 | ["Let's hook up !" ~ said every LD_PRELOAD ever 🪝⚙️](https://vibhavstechdiary.substack.com/p/lets-hook-up-said-every-ld_preload) | Blog | Demo of mirrord | 
+| [Debug Kubernetes Pods Locally with Ease: Why You Need Mirrord](https://medium.com/@hellork1982/no-more-mocking-around-mirrord-lets-you-debug-against-real-kubernetes-traffic-dcf0b8a9b867) | Blog | Overview of mirrord |
+| [Running .NET Aspire on a local Kubernetes cluster](https://youtu.be/zr2O4uZ3tK8?si=3iVuM2xO4zdNFXX6) | Video | Demo of mirrord |
