@@ -232,7 +232,7 @@ be created for the target you want to run against, in the target's namespace.
 Below we have an example for such a resource, for a meme app that consumes messages from two queues:
 
 ```yaml
-apiVersion: "queues.mirrord.metalbear.co/v1alpha"
+apiVersion: queues.mirrord.metalbear.co/v1alpha
 kind: MirrordWorkloadQueueRegistry
 metadata:
   name: meme-app-q-registry
@@ -312,14 +312,14 @@ This resource is referenced by `MirrordKafkaTopicsConsumer`.
 Below we have an example for `MirrordKafkaTopicsConsumer` resource, for a meme app that consumes messages from a Kafka topic:
 
 ```yaml
-apiVersion: "queues.mirrord.metalbear.co/v1alpha"
+apiVersion: queues.mirrord.metalbear.co/v1alpha
 kind: MirrordKafkaTopicsConsumer
 metadata:
   name: meme-app-topics-consumer
 spec:
-  consumerApiVersion: "apps/v1"
-  consumerKind: "Deployment"
-  consumerName": "meme-app"
+  consumerApiVersion: apps/v1
+  consumerKind: Deployment
+  consumerName: meme-app
   topics:
   - id: views-topic
     clientConfig: base-config
