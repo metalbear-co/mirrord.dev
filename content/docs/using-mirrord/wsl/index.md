@@ -221,18 +221,6 @@ With mirrord installed, open up your project.
 - Keep in mind that you’ll be navigating the directories with Linux style paths.
  If you have not copied your project files to WSL, you can navigate the Windows files from the `/mnt` directory.
 
-Pressing the mirrord button at the bottom to enable it will change the circle from.
-
-{{<figure src="./images/vscode-mirrord-disabled.png" alt="VS Code mirrord disabled" class="bg-white center">}}
-
-Changes to.
-
-{{<figure src="./images/vscode-mirrord-enabled.png" alt="VS Code mirrord enabled" class="bg-white center">}}
-
-Now starting your project will have mirrord hooked into it.
-
-(Include the mirrord gif we have here?)
-
 ### Using mirrord from the CLI
 
 In your WSL terminal, you can download and install mirrord by running the following command:
@@ -312,15 +300,3 @@ Instead of restarting it like that, close the WSL IDE, and in the Windows IDE se
 - If you get an error saying that mirrord does not support the Windows platform,
  this means that you’re trying to install it on the Windows IDE. Uninstall the mirrord extension,
  and follow the previous steps to start the WSL IDE.
-
-Pressing the mirrord button at the top to enable it will change the icon from.
-
-{{<figure src="./images/intellij-mirrord-disabled.png" alt="IntelliJ IDEA click to enable mirrord" class="bg-white center">}}
-
-Changes to.
-
-{{<figure src="./images/intellij-mirrord-enabled.png" alt="IntelliJ IDEA mirrord enabled" class="bg-white center">}}
-
-Now starting your project will have mirrord hooked into it.
-
-(Include the mirrord gif we have here?)
