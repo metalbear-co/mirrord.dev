@@ -12,14 +12,14 @@ toc: true
 tags: ["open source", "team", "enterprise"]
 ---
 
-# Running mirrord on Windows
+# Running mirrord on Windows {#root-windows}
 
 Using mirrord on Windows requires setting up the _Linux Subsystem for Windows_ (_WSL_).
 You’ll also need a Kubernetes cluster. If you don’t have one, you can set one up locally
 using [Docker Desktop](https://docs.docker.com/desktop/install/windows-install/).
 mirrord works with any Kubernetes cluster, be it remote or local.
 
-## Setting up WSL
+## Setting up WSL {#root-windows-wsl}
 
 You can read about the prerequisites and installation options on the official Microsoft
 documentation for
@@ -28,7 +28,7 @@ documentation for
 The mirrord guide uses the default installation options, which has Ubuntu as the Linux distro.
 mirrord itself is not limited to any particular distro.
 
-### From the Microsoft Store
+### From the Microsoft Store {#root-windows-wsl-store}
 
 To install WSL from the Microsoft Store just open the Microsoft Store app, then search for
 the name of the Linux distro you want. We recommend installing Ubuntu, but mirrord works
@@ -40,7 +40,7 @@ After installation is complete, click on the Open button and a terminal window w
 
 {{<figure src="./images/ms-store-open-ubuntu.png" alt="Open Ubuntu from the Microsoft store" class="bg-white center">}}
 
-### From the Terminal
+### From the Terminal {#root-windows-wsl-terminal}
 
 Open a terminal with **administrator privileges**.
 
@@ -79,7 +79,7 @@ To start a session in WSL, now enter the `wsl` command:
 wsl
 ```
 
-### Setting up the Linux distro
+### Setting up the Linux distro {#root-windows-wsl-distro}
 
 After starting a new WSL session (either from the command line, or from the Microsoft Store)
 you’ll be prompted to set up a Linux user.
@@ -99,7 +99,7 @@ necessary to run and debug your project.
 Some IDEs may support running in WSL from Windows directly (the IDE is installed on Windows),
 such as VS Code and the IntelliJ family of IDEs, while others may require being installed in Linux itself.
 
-## Kubernetes on WSL
+## Kubernetes on WSL {#root-kubernetes}
 
 - Setting up a Kubernetes cluster is out of scope for this guide - we’re assuming that you
  have a remote cluster to target with mirrord.
@@ -128,7 +128,7 @@ service/kubernetes   ClusterIP   10.96.0.1	     <none>    	       443/TCP    1d
  Kubernetes configuration.
  Refer to the [`kube config` manual](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_config/) manual.
 
-## Running a project on WSL
+## Running a project on WSL {#root-project}
 
 Before starting your IDE, it’s recommended that you copy your project files from the
 Windows file system to Linux, to avoid performance issues.
@@ -139,9 +139,9 @@ be something like `/mnt/{windows-drive-letter}`, so by default it’ll be `/mnt/
 
 {{<figure src="./images/linux-files-from-windows-explorer.png" alt="Linux files from Windows Explorer" class="bg-white center">}}
 
-### Creating a playground project
+### Creating a playground project {#root-project-playground}
 
-- If you already have your own project, you may skip this section.
+- If you already have your own project, you may [skip this section](#root-project-vscode).
 
 We’ll provide you with a small playground project here, if you don’t already have your own.
 Let's create a sample NodeJS project to use with mirrord, but bear in mind that mirrord is
@@ -186,7 +186,7 @@ Hello, mirrord
 
 We can finally move on to installing and using mirrord.
 
-### Using mirrord in VS Code
+### Using mirrord in VS Code {#root-project-vscode}
 
 - Microsoft provides a very good guide on
  [how to use WSL with VS Code](https://learn.microsoft.com/windows/wsl/tutorials/wsl-vscode).
@@ -221,7 +221,7 @@ With mirrord installed, open up your project.
 - Keep in mind that you’ll be navigating the directories with Linux style paths.
  If you have not copied your project files to WSL, you can navigate the Windows files from the `/mnt` directory.
 
-### Using mirrord from the CLI
+### Using mirrord from the CLI {#root-project-cli}
 
 In your WSL terminal, you can download and install mirrord by running the following command:
 
@@ -254,7 +254,7 @@ mirrord exec --target “targetless” – node app.mjs
 
 You can use `mirrord exec –help` to list other `exec` options.
 
-### Using mirrord in IntelliJ
+### Using mirrord in IntelliJ {#root-project-intellij}
 
 - Jetbrains provides a very good guide on
 [how to use WSL with IntelliJ](https://www.jetbrains.com/help/idea/how-to-use-wsl-development-environment-in-product.html).
