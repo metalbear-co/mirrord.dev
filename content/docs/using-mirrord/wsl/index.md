@@ -221,39 +221,6 @@ With mirrord installed, open up your project.
 - Keep in mind that you’ll be navigating the directories with Linux style paths.
  If you have not copied your project files to WSL, you can navigate the Windows files from the `/mnt` directory.
 
-### Using mirrord from the CLI {#root-project-cli}
-
-In your WSL terminal, you can download and install mirrord by running the following command:
-
-```sh
-curl -fsSL https://raw.githubusercontent.com/metalbear-co/mirrord/main/scripts/install.sh | bash
-```
-
-- You might get prompted to enter your `root` user password, so we can install it in `/usr/local/bin`.
-- If `curl` is not installed in the Linux distro, you can use the distro package manager
- to install it, or download and install it manually from the [curl website](https://curl.se/download.html).
-
-Now to execute your project with mirrord, just run the `mirrord exec` command:
-
-```sh
-mirrord exec --target "<pod-target>" <process command> 
-```
-
-- If you’re using this guide’s playground project your `mirrord exec` command should be:
-
-```sh
-mirrord exec --target “targetless” node app.mjs
-```
-
-- You can list the available mirrord targets with the `mirrord ls` command.
- If no targets are being shown, you might not have any Kubernetes resources that can be
- targeted by mirrord, or you might not be using the right Kubernetes context.
- You can check the later with `kubectl config view`, look at the `current-context` and see
- if it’s the intended one.
- You may change the context with the `kubectl config use-context [CONTEXT NAME]` command.
-
-You can use `mirrord exec –help` to list other `exec` options.
-
 ### Using mirrord in IntelliJ {#root-project-intellij}
 
 - Jetbrains provides a very good guide on
@@ -300,3 +267,36 @@ Instead of restarting it like that, close the WSL IDE, and in the Windows IDE se
 - If you get an error saying that mirrord does not support the Windows platform,
  this means that you’re trying to install it on the Windows IDE. Uninstall the mirrord extension,
  and follow the previous steps to start the WSL IDE.
+
+### Using mirrord from the CLI {#root-project-cli}
+
+In your WSL terminal, you can download and install mirrord by running the following command:
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/metalbear-co/mirrord/main/scripts/install.sh | bash
+```
+
+- You might get prompted to enter your `root` user password, so we can install it in `/usr/local/bin`.
+- If `curl` is not installed in the Linux distro, you can use the distro package manager
+ to install it, or download and install it manually from the [curl website](https://curl.se/download.html).
+
+Now to execute your project with mirrord, just run the `mirrord exec` command:
+
+```sh
+mirrord exec --target "<pod-target>" <process command> 
+```
+
+- If you’re using this guide’s playground project your `mirrord exec` command should be:
+
+```sh
+mirrord exec --target “targetless” node app.mjs
+```
+
+- You can list the available mirrord targets with the `mirrord ls` command.
+ If no targets are being shown, you might not have any Kubernetes resources that can be
+ targeted by mirrord, or you might not be using the right Kubernetes context.
+ You can check the later with `kubectl config view`, look at the `current-context` and see
+ if it’s the intended one.
+ You may change the context with the `kubectl config use-context [CONTEXT NAME]` command.
+
+You can use `mirrord exec –help` to list other `exec` options.
