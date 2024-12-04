@@ -164,6 +164,7 @@ First update the package manager.
 ```sh
 sudo apt update
 ```
+
 Now install the nodejs package.
 
 ```sh
