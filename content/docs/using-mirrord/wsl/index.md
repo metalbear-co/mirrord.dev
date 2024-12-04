@@ -34,17 +34,17 @@ To install WSL from the Microsoft Store just open the Microsoft Store app, then 
 the name of the Linux distro you want. We recommend installing Ubuntu, but mirrord works
 with any Linux distro.
 
-![microsoft store install Ubuntu](./images/ms-store-install-ubuntu "Install Ubuntu from the Microsoft store")
+{{<figure src="./images/ms-store-install-ubuntu.png" alt="Install Ubuntu from the Microsoft store" class="bg-white center">}}
 
 After installation is complete, click on the Open button and a terminal window will appear.
 
-![microsoft store open Ubuntu](./images/ms-store-open-ubuntu "Open Ubuntu from the Microsoft store")
+{{<figure src="./images/ms-store-open-ubuntu.png" alt="Open Ubuntu from the Microsoft store" class="bg-white center">}}
 
 ### From the Terminal
 
 Open a terminal with **administrator privileges**.
 
-![open terminal with administrator privileges](./images/open-terminal-administrator "Open terminal with administrator privileges")
+{{<figure src="./images/open-terminal-administrator.png" alt="Open terminal with administrator privileges" class="bg-white center">}}
 
 - It doesn’t have to be the Windows Terminal. PowerShell and Command Prompt will also work.
 
@@ -85,7 +85,7 @@ After starting a new WSL session (either from the command line, or from the Micr
 you’ll be prompted to set up a Linux user.
 The username and password does not need to match your Windows user.
 
-![setting up Ubuntu](./images/setting-up-ubuntu "Setting up Ubuntu")
+{{<figure src="./images/setting-up-ubuntu.png" alt="Setting up Ubuntu" class="bg-white center">}}
 
 After setting up your Linux user, it’s time to prepare the Linux environment for development.
 Install the tools needed to access your Kubernetes cluster
@@ -137,7 +137,7 @@ The best practice is to have everything inside Linux.
 You can do this from the command line (from within Linux, the Windows file system should
 be something like `/mnt/{windows-drive-letter}`, so by default it’ll be `/mnt/c`), or from File Explorer.
 
-![accessing linux files from windows explorer](./images/linux-files-from-windwos-explorer "Linux files from Windows Explorer")
+{{<figure src="./images/linux-files-from-windwos-explorer.png" alt="Linux files from Windows Explorer" class="bg-white center">}}
 
 ### Creating a playground project
 
@@ -193,19 +193,19 @@ We can finally move on to installing and using mirrord.
 
 Open VS Code from Windows, as you normally would, and click on the Remote Explorer.
 
-![vs code remote explorer wsl targets](./images/vscode-remote-explorer "VS Code remote explorer WSL Targets")
+{{<figure src="./images/vscode-remote-explorer.png" alt="VS Code remote explorer WSL Targets" class="bg-white center">}}
 
 Select the Linux distro you have set up, and click on the Connect in Current Window button that appears.
 
-![vs code remote explorer wsl targets connecting to Ubuntu](./images/vscode-remote-explorer-connect-ubuntu "VS Code remote explorer WSL Targets connecting to Ubuntu")
+{{<figure src="./images/vscode-remote-explorer-connect-ubuntu.png" alt="VS Code remote explorer WSL Targets connecting to Ubuntu" class="bg-white center">}}
 
 VS Code will notify you it’s starting WSL, and the Remote Explorer will change to indicate you’re connected.
 
-![vs code connected to wsl](./images/vscode-connected-wsl "VS Code connected to WSL")
+{{<figure src="./images/vscode-connected-wsl.png" alt="VS Code connected to WSL" class="bg-white center">}}
 
 Now go to the Extensions panel, search for mirrord and install it.
 
-![vs code extensions install mirrord](./images/vscode-install-mirrord "VS Code extensions install mirrord")
+{{<figure src="./images/vscode-install-mirrord.png" alt="VS Code extensions install mirrord" class="bg-white center">}}
 
 - Some of your extensions may appear as disabled, with a button to `Install in WSL`.
  If you want to use these extensions from the WSL VS Code, then you must click the button and install them.
@@ -216,18 +216,18 @@ Now go to the Extensions panel, search for mirrord and install it.
 
 With mirrord installed, open up your project.
 
-![vs code open project in wsl path](./images/vscode-open-project "VS Code open project")
+{{<figure src="./images/vscode-open-project.png" alt="VS Code open project" class="bg-white center">}}
 
 - Keep in mind that you’ll be navigating the directories with Linux style paths.
  If you have not copied your project files to WSL, you can navigate the Windows files from the `/mnt` directory.
 
 Pressing the mirrord button at the bottom to enable it will change the circle from.
 
-![vs code mirrord starts disabled](./images/vscode-mirrord-disabled "VS Code mirrord disabled")
+{{<figure src="./images/vscode-mirrord-disabled.png" alt="VS Code mirrord disabled" class="bg-white center">}}
 
 Changes to.
 
-![vs code mirrord clicked changes to enabled](./images/vscode-mirrord-enabled "VS Code mirrord enabled")
+{{<figure src="./images/vscode-mirrord-enabled.png" alt="VS Code mirrord enabled" class="bg-white center">}}
 
 Now starting your project will have mirrord hooked into it.
 
@@ -274,15 +274,15 @@ You can use `mirrord exec –help` to list other `exec` options.
 Open the Jetbrains IDE you have installed on Windows (the mirrord plugin is available for
 every Jetbrains IDE, in this tutorial we’ll show screen caps from Intellij Idea Ultimate, but that’s **not** a requirement).
 
-![intellij idea new window](./images/intellij-new-window "IntelliJ IDEA new window")
+{{<figure src="./images/intellij-new-window.png" alt="IntelliJ IDEA new window" class="bg-white center">}}
 
 Select the WSL option under Remote Development.
 
-![intellij idea remote development wsl](./images/intellij-select-wsl "IntelliJ IDEA select WSL")
+{{<figure src="./images/intellij-select-wsl.png" alt="IntelliJ IDEA select WSL" class="bg-white center">}}
 
 Click on the + button (if you already have a project, otherwise select New Project).
 
-![intellij idea open wsl project](./images/intellij-open-wsl-project "IntelliJ IDEA open WSL project")
+{{<figure src="./images/intellij-open-wsl-project.png" alt="IntelliJ IDEA open WSL project" class="bg-white center">}}
 
 - Pay attention to the IDE version you’re choosing.
  The recommendation here is to select the same one that you have installed on Windows,
@@ -290,24 +290,24 @@ Click on the + button (if you already have a project, otherwise select New Proje
 
 Either type the path to your project, or click on the `...` button to open the path picker.
 
-![intellij idea wsl project path](./images/intellij-wsl-project-path "IntelliJ IDEA find project in WSL path")
+{{<figure src="./images/intellij-wsl-project-path.png" alt="IntelliJ IDEA find project in WSL path" class="bg-white center">}}
 
 Now click `Download IDE and Connect` at the bottom.
 
-![intellij idea click download and connect](./images/intellij-download-and-connect "IntelliJ IDEA download and connect to WSL IDE")
+{{<figure src="./images/intellij-download-and-connect.png" alt="IntelliJ IDEA download and connect to WSL IDE" class="bg-white center">}}
 
 The IDE will be downloaded and installed on Linux. After it’s ready, it should automatically open.
 
-![intellij idea wsl project](./images/intellij-wsl-project "IntelliJ IDEA project is open on WSL")
+{{<figure src="./images/intellij-wsl-project.png" alt="IntelliJ IDEA project is open on WSL" class="bg-white center">}}
 
 Click on the gear button, select `Plugins` and search the `Marketplace` for “mirrord”.
 
-![intellij idea install mirrord](./images/intellij-install-mirrord "IntelliJ IDEA WSL install mirrord from marketplace")
+{{<figure src="./images/intellij-install-mirrord.png" alt="IntelliJ IDEA WSL install mirrord from marketplace" class="bg-white center">}}
 
 After clicking to install it, the install button will change to `Restart IDE`.
 Instead of restarting it like that, close the WSL IDE, and in the Windows IDE select to open your project again.
 
-![intellij idea restarted after plugin install](./images/intellij-restart-wsl-ide "IntelliJ IDEA restart WSL IDE after installing mirrord")
+{{<figure src="./images/intellij-restart-wsl-ide.png" alt="IntelliJ IDEA restart WSL IDE after installing mirrord" class="bg-white center">}}
 
 - If you get an error saying that mirrord does not support the Windows platform,
  this means that you’re trying to install it on the Windows IDE. Uninstall the mirrord extension,
@@ -315,11 +315,11 @@ Instead of restarting it like that, close the WSL IDE, and in the Windows IDE se
 
 Pressing the mirrord button at the top to enable it will change the icon from.
 
-![intellij idea mirrord disabled](./images/intellij-mirrord-disabled "IntelliJ IDEA click to enable mirrord")
+{{<figure src="./images/intellij-mirrord-disabled.png" alt="IntelliJ IDEA click to enable mirrord" class="bg-white center">}}
 
 Changes to.
 
-![intellij idea mirrord enabled](./images/intellij-mirrord-enabled "IntelliJ IDEA mirrord enabled")
+{{<figure src="./images/intellij-mirrord-enabled.png" alt="IntelliJ IDEA mirrord enabled" class="bg-white center">}}
 
 Now starting your project will have mirrord hooked into it.
 
