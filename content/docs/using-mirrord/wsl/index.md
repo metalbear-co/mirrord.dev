@@ -137,7 +137,7 @@ The best practice is to have everything inside Linux.
 You can do this from the command line (from within Linux, the Windows file system should
 be something like `/mnt/{windows-drive-letter}`, so by default it’ll be `/mnt/c`), or from File Explorer.
 
-{{<figure src="./images/linux-files-from-windwos-explorer.png" alt="Linux files from Windows Explorer" class="bg-white center">}}
+{{<figure src="./images/linux-files-from-windows-explorer.png" alt="Linux files from Windows Explorer" class="bg-white center">}}
 
 ### Creating a playground project
 
