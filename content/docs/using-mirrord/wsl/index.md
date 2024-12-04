@@ -236,13 +236,13 @@ curl -fsSL https://raw.githubusercontent.com/metalbear-co/mirrord/main/scripts/i
 Now to execute your project with mirrord, just run the `mirrord exec` command:
 
 ```sh
-mirrord exec --target <pod-target> – <process command> 
+mirrord exec --target "<pod-target>" <process command> 
 ```
 
 - If you’re using this guide’s playground project your `mirrord exec` command should be:
 
 ```sh
-mirrord exec --target “targetless” – node app.mjs
+mirrord exec --target “targetless” node app.mjs
 ```
 
 - You can list the available mirrord targets with the `mirrord ls` command.
