@@ -29,6 +29,7 @@ List of third-party guides and videos about mirrord:
 | [Mastering Local Microservices Debugging with Mirrord](https://medium.com/@emafuma/mastering-local-microservices-debugging-with-mirrord-0a99443c1544) | Blog | Demo of mirrord |
 | [Local Debugging of Dotnet Web API in AKS using Mirrord](https://medium.com/@srinivasmummareddy/local-debugging-of-dotnet-web-api-in-aks-using-mirrord-84d369738b35) | Blog | Demo of mirrord |
 | [Local Development With Mirrord](https://linuxblog.xyz/posts/mirrord/) | Blog | Demo of mirrord |
+| [mirrord: Simplifying Kubernetes Development and Debugging](https://www.youtube.com/watch?v=KJpEebC1tNE) | Video | Overview and demo of mirrord |
 | [Making locally executing code think it’s running on k8s](https://gluo.be/mirrord-making-locally-executing-code-think-its-running-on-k8s/) | Blog | Overview of mirrord |
 | [Intro to “Remocal” Kubernetes Development with mirrord](https://www.youtube.com/live/nuipmDu-Rnw?si=DXiWJr29et1b-xC6) | Video | Overview and use cases for mirrord |
 | [What is Remocal? How can this approach help enhance DX (developer experience)?](https://www.mishraajay.in/blog/moreinnerdevloop) | Blog | Demo of mirrord |
@@ -42,3 +43,7 @@ List of third-party guides and videos about mirrord:
 | [Kubernetes Debugging with Mirrord and VS Code](https://youtu.be/gqIlf3DdlfQ?si=yTXrnfpZzt_snDMA) | Video | Overview of mirrord |
 | [Remocal Development: The Future of Efficient Kubernetes Workflows](https://thenewstack.io/remocal-development-the-future-of-efficient-kubernetes-workflows/) | Blog | Overview of mirrord |
 | [Use this tool for easy debug right on Kubernetes](https://www.youtube.com/shorts/VGygxsQuhtY) | Video | Overview of mirrord |
+| [Mirrord Mirrord on the wall, who's most processed of them all 🪞🔄](https://open.substack.com/pub/vibhavstechdiary/p/mirrord-mirrord-on-the-wall-whos?utm_campaign=post&utm_medium=web) | Blog | Demo of mirrord |
+| ["Let's hook up !" ~ said every LD_PRELOAD ever 🪝⚙️](https://vibhavstechdiary.substack.com/p/lets-hook-up-said-every-ld_preload) | Blog | Demo of mirrord | 
+| [Debug Kubernetes Pods Locally with Ease: Why You Need Mirrord](https://medium.com/@hellork1982/no-more-mocking-around-mirrord-lets-you-debug-against-real-kubernetes-traffic-dcf0b8a9b867) | Blog | Overview of mirrord |
+| [Running .NET Aspire on a local Kubernetes cluster](https://youtu.be/zr2O4uZ3tK8?si=3iVuM2xO4zdNFXX6) | Video | Demo of mirrord |

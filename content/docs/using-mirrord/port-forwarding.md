@@ -11,6 +11,7 @@ weight: 140
 toc: true
 tags: ["open source", "team", "enterprise"]
 ---
+### Regular port-forwarding
 
 The port-forward command allows you to forward traffic from a local port to a destination in the cluster, in a similar way to `kubectl port-forward`. However, it uses the existing permissions on the target pod, allowing you to port-forward to destinations only accessible from the target. This includes locations outside the cluster like third-party APIs.
 
@@ -19,16 +20,32 @@ You can use the command like so:
 mirrord port-forward --target <target-path> -L <local port>:<remote address>:<remote port>
 ```
 
-For example, to forward traffic from localhost:8080 to py-serv on port 80 in targetless mode:
+For example, to forward traffic from localhost:8080 to an incluster service py-serv listening on port 80:
 ```bash
 mirrord port-forward -L 8080:py-serv:80
 ```
 
+### Reverse port-forwarding
+
+It also allows for reverse port forwarding, where traffic is redirected from a port on the target pod or workload to a local port, like so:
+```bash
+mirrord port-forward --target <target-path> -R <remote port>:<local port>
+```
+
+For example, to forward traffic from an incluster deployment py-serv listening on port 80 to localhost:8080:
+```bash
+mirrord port-forward --target deployment/py-serv -R 80:8080
+```
+
+In addition, multiple ports can be forwarded in one direction or both directions simultaneously in the same command by providing each source and destination as a separate `-L` or `-R` argument.
+
+Regular port forwarding with an `-L` can be done in targetless mode and does not require specifying any target. Reverse port forwarding always requires a target.
+
 ### More details
 
-- The local port part of the argument is optional, with out the same port will be used locally as on the remote.
+- The local port component of the `-L` argument is optional, and without it the same port will be used locally as on the remote.
+- The same is true of the `-R` argument: if one port number is provided, it will be used for both local and remote ports.
 - Port-forwarding only supports TCP, not UDP.
 - The remote address can be an IPv4 address or a hostname - hostnames are resolved in the cluster.
-- Connections are made lazily, so a hostname may fail to resolve only after mirrord attempts to send it data.
-
-In the future, mirrord will also support reverse port-forwarding ([tracked by this issue](https://github.com/metalbear-co/mirrord/issues/2609)).
+- In regular port forwarding (`-L`) connections are made lazily and hostname resolution is attempted only data is sent to the local port.
+- Reverse forwarding (`-R`) can read the `feature.network.incoming` section of a mirrord config file when the file is passed to the command with `-f`.

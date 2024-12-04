@@ -2,7 +2,7 @@
 title: "Configuration"
 description: "Config"
 date: 2023-05-17T13:59:39+01:00
-lastmod: 2024-08-31T13:37:39+01:00
+lastmod: 2024-11-13T13:37:39+01:00
 draft: false
 images: []
 menu:
@@ -145,7 +145,7 @@ configuration file containing all fields.
 Controls whether or not mirrord accepts invalid TLS certificates (e.g. self-signed
 certificates).
 
-Defaults to `false`.
+If not provided, mirrord will use value from the kubeconfig.
 
 ## agent {#root-agent}
 
@@ -331,6 +331,17 @@ Defaults to `false`.
 
 Needed if your mesh uses nftables instead of iptables-legacy,
 
+### agent.node_selector {#agent-node_selector}
+
+Allows setting up custom node selector for the agent Pod. Applies only to targetless runs,
+as targeted agent always runs on the same node as its target container.
+
+```json
+{
+  "node_selector": { "kubernetes.io/hostname": "node1" }
+}
+```
+
 ### agent.privileged {#agent-privileged}
 
 Run the mirror agent as privileged container.
@@ -354,6 +365,16 @@ Default is
     "cpu": "100m",
       "memory": "100Mi"
   }
+}
+```
+
+### agent.service_account {#agent-service_account}
+
+Allows setting up custom Service Account for the agent Job and Pod.
+
+```json
+{
+  "service_account": "my-service-account"
 }
 ```
 
@@ -401,6 +422,20 @@ IP:PORT to connect to instead of using k8s api, for testing purposes.
 
 Unstable: `mirrord container` command specific config.
 
+### container.cli_extra_args {#container-cli_extra_args}
+
+Any extra args to use when creating the sidecar mirrord-cli container.
+
+This is useful when you want to use portforwarding, passing `-p local:container` won't work
+for main command but adding them here will work
+```json
+{
+  "container": {
+    "cli_extra_args": ["-p", "local:container"]
+  }
+}
+```
+
 ### container.cli_image {#container-cli_image}
 
 Tag of the `mirrord-cli` image you want to use.
@@ -418,15 +453,27 @@ Defaults to `"/opt/mirrord/lib/libmirrord_layer.so"`.
 mirrord Experimental features.
 This shouldn't be used unless someone from MetalBear/mirrord tells you to.
 
+### _experimental_ disable_reuseaddr {#experimental-disable_reuseaddr}
+
+Disables the `SO_REUSEADDR` socket option on sockets that mirrord steals/mirrors.
+On macOS the application can use the same address many times but then we don't steal it
+correctly. This probably should be on by default but we want to gradually roll it out.
+<https://github.com/metalbear-co/mirrord/issues/2819>
+This option applies only on macOS.
+
 ### _experimental_ enable_exec_hooks_linux {#experimental-enable_exec_hooks_linux}
 
 Enables exec hooks on Linux. Enable Linux hooks can fix issues when the application
 shares sockets with child commands (e.g Python web servers with reload),
 but the feature is not stable and may cause other issues.
 
+### _experimental_ hide_ipv6_interfaces {#experimental-hide_ipv6_interfaces}
+
+Enables `getifaddrs` hook that removes IPv6 interfaces from the list returned by libc.
+
 ### _experimental_ readlink {#experimental-readlink}
 
-Enables the `readlink` hook.
+DEPRECATED, WILL BE REMOVED
 
 ### _experimental_ tcp_ping4_mock {#experimental-tcp_ping4_mock}
 
@@ -435,6 +482,10 @@ Enables the `readlink` hook.
 ### _experimental_ trust_any_certificate {#experimental-trust_any_certificate}
 
 Enables trusting any certificate on macOS, useful for <https://github.com/golang/go/issues/51991#issuecomment-2059588252>
+
+### _experimental_ use_dev_null {#experimental-use_dev_null}
+
+Uses /dev/null for creating local fake files (should be better than using /tmp)
 
 ## external_proxy {#root-external_proxy}
 
@@ -550,7 +601,7 @@ have support for a shortened version, that you can see [here](#root-shortened).
 ## feature.copy_target {#feature-copy_target}
 
 Creates a new copy of the target. mirrord will use this copy instead of the original target
-(e.g. intercept network traffic). This feature requires a [mirrord operator](https://mirrord.dev/docs/overview/teams/).
+(e.g. intercept network traffic). This feature requires a [mirrord operator](https://mirrord.dev/docs/overview/teams/?utm_source=copytarget).
 
 This feature is not compatible with rollout targets and running without a target
 (`targetless` mode).
@@ -682,7 +733,7 @@ Case insensitive.
 2. `"read_only"` - List of patterns that should be read only remotely.
 3. `"local"` - List of patterns that should be read locally.
 4. `"not_found"` - List of patters that should never be read nor written. These files should be
-treated as non-existent.
+   treated as non-existent.
 4. `"mapping"` - Map of patterns and their corresponding replacers. The replacement happens before any specific behavior as defined above or mode (uses [`Regex::replace`](https://docs.rs/regex/latest/regex/struct.Regex.html#method.replace))
 
 The logic for choosing the behavior is as follows:
@@ -690,9 +741,9 @@ The logic for choosing the behavior is as follows:
 
 1. Check agains "mapping" if path needs to be replaced, if matched then continue to next step
    with new path after replacements otherwise continue as usual.
-2. Check if one of the patterns match the file path, do the corresponding action. There's
-no specified order if two lists match the same path, we will use the first one (and we
-do not guarantee what is first).
+2. Check if one of the patterns match the file path, do the corresponding action. There's no
+   specified order if two lists match the same path, we will use the first one (and we do not
+   guarantee what is first).
 
     **Warning**: Specifying the same path in two lists is unsupported and can lead to undefined
     behaviour.
@@ -751,6 +802,9 @@ Will do the next replacements for any io operaton
 
 `/home/johndoe/dev/tomcat/context.xml` => `/etc/tomcat/context.xml`
 `/home/johndoe/dev/config/api/app.conf` => `/mnt/configs/johndoe-api/app.conf`
+
+- Relative paths: this feature (currently) does not apply mappings to relative
+paths, e.g. `../dev`.
 
 ### feature.fs.mode {#feature-fs-mode}
 
@@ -828,11 +882,11 @@ Resolve DNS via the remote pod.
 Defaults to `true`.
 
 Mind that:
-- DNS resolving can be done in multiple ways. Some frameworks use
-`getaddrinfo`/`gethostbyname` functions, while others communicate directly with the DNS server
-at port `53` and perform a sort of manual resolution. Just enabling the `dns` feature in mirrord
-might not be enough. If you see an address resolution error, try enabling the
-[`fs`](#feature-fs) feature, and setting `read_only: ["/etc/resolv.conf"]`.
+- DNS resolving can be done in multiple ways. Some frameworks use `getaddrinfo`/`gethostbyname`
+  functions, while others communicate directly with the DNS server at port `53` and perform a
+  sort of manual resolution. Just enabling the `dns` feature in mirrord might not be enough. If
+  you see an address resolution error, try enabling the [`fs`](#feature-fs) feature, and setting
+  `read_only: ["/etc/resolv.conf"]`.
 - DNS filter currently works only with frameworks that use `getaddrinfo`/`gethostbyname`
   functions.
 
@@ -866,8 +920,8 @@ Takes a list of values, such as:
 }
 ```
 
-- Only queries for hostname `google.com` with service port `1337` or `7331`
-will go through the remote pod.
+- Only queries for hostname `google.com` with service port `1337` or `7331` will go through the
+  remote pod.
 
 ```json
 {
@@ -903,7 +957,7 @@ details.
 Incoming traffic supports 3 [modes](#feature-network-incoming-mode) of operation:
 
 1. Mirror (**default**): Sniffs the TCP data from a port, and forwards a copy to the interested
-listeners;
+   listeners;
 
 2. Steal: Captures the TCP data from a port, and forwards it to the local process.
 
@@ -1087,14 +1141,13 @@ Can be set to either `"mirror"` (default), `"steal"` or `"off"`.
 - `"off"`: Disables the incoming network feature.
 - `"steal"`: Supports 2 modes of operation:
 
-1. Port traffic stealing: Steals all TCP data from a
-  port, which is selected whenever the
-user listens in a TCP socket (enabling the feature is enough to make this work, no
-additional configuration is needed);
+1. Port traffic stealing: Steals all TCP data from a port, which is selected whenever the user
+   listens in a TCP socket (enabling the feature is enough to make this work, no additional
+   configuration is needed);
 
-2. HTTP traffic stealing: Steals only HTTP traffic, mirrord tries to detect if the incoming
-data on a port is HTTP (in a best-effort kind of way, not guaranteed to be HTTP), and
-steals the traffic on the port if it is HTTP;
+2. HTTP traffic stealing: Steals only HTTP traffic, mirrord tries to detect if the incoming data
+   on a port is HTTP (in a best-effort kind of way, not guaranteed to be HTTP), and steals the
+   traffic on the port if it is HTTP;
 
 #### feature.network.incoming.on_concurrent_steal {#feature-network-incoming-on_concurrent_steal}
 
@@ -1150,7 +1203,7 @@ The `remote` and `local` config for this feature are **mutually** exclusive.
 
 #### feature.network.outgoing.filter {#feature.network.outgoing.filter}
 
-Unstable: the precise syntax of this config is subject to change.
+Filters that are used to send specific traffic from either the remote pod or the local app
 
 List of addresses/ports/subnets that should be sent through either the remote pod or local app,
 depending how you set this up with either `remote` or `local`.
@@ -1169,8 +1222,8 @@ Takes a list of values, such as:
 }
 ```
 
-- Only UDP and TCP traffic on resolved address of `google.com` on port `1337` and `7331`
-will go through the remote pod.
+- Only UDP and TCP traffic on resolved address of `google.com` on port `1337` and `7331` will go
+  through the remote pod.
 ```json
 {
   "remote": ["google.com:1337", "google.com:7331"]
@@ -1237,13 +1290,26 @@ will be used, and your local application will not receive any messages from that
         "queue_type": "SQS",
         "message_filter": {
           "wows": "so wows",
-          "coolz": "^very .*"
+          "coolz": "^very"
         }
       },
       "second-queue": {
         "queue_type": "SQS",
         "message_filter": {
-          "who": "*you$"
+          "who": "you$"
+        }
+      },
+      "third-queue": {
+        "queue_type": "Kafka",
+        "message_filter": {
+          "who": "you$"
+        }
+      },
+      "fourth-queue": {
+        "queue_type": "Kafka",
+        "message_filter": {
+          "wows": "so wows",
+          "coolz": "^very"
         }
       },
     }

@@ -108,9 +108,9 @@ footer_menu:
 - name: vs Telepresence
   url: "/compare/telepresence/"
   weight: 50
-# - name: Support
-#   url: "/#get-support"
-#   weight: 60
+- name: Vs Bridge to Kubernetes
+  url: "compare/bridge-to-kubernetes/"
+  weight: 60
 - identifier: contact
   name: Contact Us
   url: "/contact"
