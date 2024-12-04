@@ -97,7 +97,7 @@ necessary to run and debug your project.
  but some might require manual installation and setup.
 
 Some IDEs may support running in WSL from Windows directly (the IDE is installed on Windows),
-such as VS Code and the Intellij family of IDEs, while others may require being installed in Linux itself.
+such as VS Code and the IntelliJ family of IDEs, while others may require being installed in Linux itself.
 
 ## Kubernetes on WSL
 
@@ -266,13 +266,13 @@ mirrord exec --target “targetless” – node app.mjs
 
 You can use `mirrord exec –help` to list other `exec` options.
 
-### Using mirrord in Intellij
+### Using mirrord in IntelliJ
 
 - Jetbrains provides a very good guide on
-[how to use WSL with Intellij](https://www.jetbrains.com/help/idea/how-to-use-wsl-development-environment-in-product.html).
+[how to use WSL with IntelliJ](https://www.jetbrains.com/help/idea/how-to-use-wsl-development-environment-in-product.html).
 
 Open the Jetbrains IDE you have installed on Windows (the mirrord plugin is available for
-every Jetbrains IDE. In this tutorial we’ll show screen caps from Intellij Idea Ultimate, but that’s **not** a requirement).
+every Jetbrains IDE. In this tutorial we’ll show screen caps from IntelliJ Idea Ultimate, but that’s **not** a requirement).
 
 {{<figure src="./images/intellij-new-window.png" alt="IntelliJ IDEA new window" class="bg-white center">}}
 
