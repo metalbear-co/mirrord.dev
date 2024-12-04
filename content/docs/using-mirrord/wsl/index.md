@@ -272,7 +272,7 @@ You can use `mirrord exec –help` to list other `exec` options.
 [how to use WSL with Intellij](https://www.jetbrains.com/help/idea/how-to-use-wsl-development-environment-in-product.html).
 
 Open the Jetbrains IDE you have installed on Windows (the mirrord plugin is available for
-every Jetbrains IDE, in this tutorial we’ll show screen caps from Intellij Idea Ultimate, but that’s **not** a requirement).
+every Jetbrains IDE. In this tutorial we’ll show screen caps from Intellij Idea Ultimate, but that’s **not** a requirement).
 
 {{<figure src="./images/intellij-new-window.png" alt="IntelliJ IDEA new window" class="bg-white center">}}
 
