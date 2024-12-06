@@ -14,13 +14,13 @@ toc: true
 tags: ["open source", "team", "enterprise"]
 ---
 
-mirrord is an open-source tool that lets developers run local processes in the context of their cloud environment. It makes it incredibly easy to test your code on a cloud environment (e.g. staging) without actually going through the hassle of Dockerization, CI, or deployment, and without disrupting the environment by deploying untested code. Instead of saving it for the last step, now you can shift-left on cloud testing and test your code in the cloud from the very beginning of your development process.
+mirrord is a tool that lets developers run local processes in the context of their cloud environment. It makes it incredibly easy to test your code on a cloud environment (e.g. staging) without actually going through the hassle of Dockerization, CI, or deployment, and without disrupting the environment by deploying untested code. Instead of saving it for the last step, now you can shift-left on cloud testing and test your code in the cloud from the very beginning of your development process.
 
 Want to see mirrord in action? Check out our <a target="_blank" href="https://www.youtube.com/watch?v=ZR7A7cqQcFM)">demo</a>.
 
 
 ## Why?
-hello changes
+
 Traditionally, software development happens in loops. Developers write and test their code locally, then deploy it to a staging/pre-production environment in the cloud, where they perform additional tests. These tests often fail, because the code is meeting a production-like environment for the first time, and encounters new conditions. The code must then be fixed/rewritten, tested locally again, deployed to staging again, and so on, until the tests on staging pass.
 
 {{<figure src="loop.png" class="bg-white center" alt="The Traditional Dev Loop">}}
