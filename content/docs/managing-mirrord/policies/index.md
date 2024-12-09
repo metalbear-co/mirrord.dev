@@ -90,4 +90,8 @@ spec:
       component: webserver
   block:
     - steal-without-filter
+    - mirror
 ```
+
+This policy blocks mirroring and unfiltered stealing of traffic coming to all deployments in the namespace `books`
+which are marked with label `component: webserver`.
