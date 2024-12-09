@@ -81,10 +81,10 @@ If the user doesn't have `get` access to the targets, then they won't be able to
   - proxy
 ```
 
-## How can I prevent users in my team from stealing traffic from a target?
+## How can I prevent users in my team from stealing.mirroring traffic from a target?
 
 You can define [policies](/docs/managing-mirrord/policies/) that prevent stealing (or only prevent stealing without setting a
-filter) for selected targets. Let us know if there are more features you would like to be able to limit using policies.
+filter) and/or mirroring for selected targets. Let us know if there are more features you would like to be able to limit using policies.
 
 ## How can I prevent users from using mirrord without going through the Operator?
 
