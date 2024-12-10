@@ -2,7 +2,7 @@
 title: "WSL"
 description: "Installing and using mirrord on windows with WSL."
 date: 2024-12-03T13:37:00+00:00
-lastmod: 2024-12-04T13:37:00+00:00
+lastmod: 2024-12-09T13:37:00+00:00
 draft: false
 menu:
   docs:
@@ -300,3 +300,31 @@ mirrord exec --target “targetless” node app.mjs
  You may change the context with the `kubectl config use-context [CONTEXT NAME]` command.
 
 You can use `mirrord exec –help` to list other `exec` options.
+
+## Troubleshooting {#root-troubleshoot}
+
+### IntelliJ failed to update mirrord binary {#root-troubleshooting-intellij-binary}
+
+If you're seeing a mirrord notification pop-up that says something along the lines of:
+
+> failed to update the mirrord binary: PKIX path building failed:
+> sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification
+> path to requested target
+
+Something is wrong with the local certificate that IntelliJ is trying to use. You can read
+more about this on the
+[IntelliJ certificates manual installation](https://www.jetbrains.com/help/idea/ssl-certificates.html#manual_configuration)
+page.
+
+You can fix this issue by navigating to the IntelliJ IDE dir (change it to match where
+your IntelliJ IDE is installed) in the WSL terminal:
+
+```sh
+cd ~/.local/share/JetBrains/Toolbox/apps/{NAME-OF-IDE}/jbr/lib/security
+```
+
+And issuing the following command:
+
+```sh
+keytool -importcert -trustcacerts -alias <alias-name> -file <path/to/file.crt> -keystore cacerts
+```
