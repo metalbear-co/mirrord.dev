@@ -421,7 +421,7 @@ client.id=mirrord-operator
 ```
 
 `MirrordKafkaClientConfig` also supports setting properties from a Kubernetes [`Secret`](https://kubernetes.io/docs/concepts/configuration/secret/) with the `spec.loadFromSecret` field.
-The value for `loadFromSecret` is given in the form: "namespace/name".
+The value for `loadFromSecret` is given in the form: `<secret-namespace>/<secret-name>`.
 
 Each key-value entry defined in secret's data will be included in the resulting `.properties` file. Property inheritance from the parent still occurs, and within each `MirrordKafkaClientConfig` properties loaded from the secret are overwritten by those in `properties`.
 
