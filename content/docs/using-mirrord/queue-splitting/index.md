@@ -420,6 +420,33 @@ bootstrap.servers=kafka.default.svc.cluster.local:9092
 client.id=mirrord-operator
 ```
 
+`MirrordKafkaClientConfig` also supports setting properties from a Kubernetes [`Secret`](https://kubernetes.io/docs/concepts/configuration/secret/) with the `spec.loadFromSecret` field.
+The value for `loadFromSecret` is given in the form: `<secret-namespace>/<secret-name>`.
+
+Each key-value entry defined in secret's data will be included in the resulting `.properties` file. Property inheritance from the parent still occurs, and within each `MirrordKafkaClientConfig` properties loaded from the secret are overwritten by those in `properties`.
+
+This means the priority of setting properties (from highest to lowest) is like so:
+
+* `childProperty`
+* `childSecret` 
+* `parentProperty` 
+* `parentSecret`
+
+Below is an example for a `MirrordKafkaClientConfig` resource that references a secret:
+
+```yaml
+apiVersion: queues.mirrord.metalbear.co/v1alpha
+kind: MirrordKafkaClientConfig
+metadata:
+  name: base-config
+  namespace: mirrord
+spec:
+  loadFromSecret: mirrord/my-secret
+  properties: []
+```
+
+> **_NOTE:_** By default, the operator will only have access to secrets in its own namespace (`mirrord` by default).
+
 ## Setting a Filter for a mirrord Run
 
 Once everything else is set, you can start using message filters in your mirrord configuration file.
