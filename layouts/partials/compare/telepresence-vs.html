@@ -61,18 +61,18 @@
                 {{- $total := sub (len .Params.compares) 1 }}
                 {{- range $index, $element := .Params.compares }}
                 <div
-                    class="flex items-center h-[86px] md:h-[111px] lg:h-[80px] xl:h-[100px] 2xl:h-[111px] 3xl:h-[134px] {{ if lt $index $total }}border-b border-solid border-b-black{{ end }}">
+                    class="flex items-center h-[95px] md:h-[80px] lg:h-[56px] xl:h-[71px] 2xl:h-[80px] 3xl:h-[96px] {{ if lt $index $total }}border-b border-solid border-b-black{{ end }}">
                     <div class="flex-1">
                         {{- with .title }}
                         <p
-                            class="text-[#000000] text-sm md:text-[1.313rem] lg:text-base xl:text-[1.188rem] 2xl:text-[1.313rem] 3xl:text-[1.563rem] font-body mb-0">
+                            class="text-[#000000] text-base md:text-[1.313rem] lg:text-base xl:text-[1.188rem] 2xl:text-[1.313rem] 3xl:text-[1.563rem] font-body mb-0">
                             {{ . | safeHTML }}</p>
                         {{- end }}
                     </div>
                     <div class="w-[20%] lg:w-[18%] flex-none flex justify-end">
                         <div class="w-3/4 lg:w-3/5 flex-none flex justify-center">
                             <div
-                                class="w-[30px] md:w-[43px] lg:w-[30px] xl:w-[39px] 2xl:w-[43px] 3xl:w-[52px] flex-none">
+                                class="w-[24px] md:w-[35px] lg:w-[24px] xl:w-[31px] 2xl:w-[35px] 3xl:w-[43px] flex-none">
                                 <svg class="w-full h-auto" viewBox="0 0 43 43" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path
@@ -84,7 +84,7 @@
                     </div>
                     <div class="w-[26%] lg:w-[18%] flex-none flex justify-end">
                         <div class="w-[80%] flex-none flex justify-center">
-                            <div class="w-[30px] md:w-[43px] lg:w-[30px] xl:w-[39px] 2xl:w-[43px] 3xl:w-[52px] flex-none">
+                            <div class="w-[24px] md:w-[35px] lg:w-[24px] xl:w-[31px] 2xl:w-[35px] 3xl:w-[43px] flex-none">
                                 {{- if .is_telepresence }}
                                 <svg class="w-full h-auto" viewBox="0 0 43 43" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
