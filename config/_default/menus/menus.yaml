@@ -108,7 +108,7 @@ footer_menu:
 - name: vs Telepresence
   url: "/compare/telepresence/"
   weight: 50
-- name: Vs Bridge to Kubernetes
+- name: vs Bridge to Kubernetes
   url: "compare/bridge-to-kubernetes/"
   weight: 60
 - identifier: contact
