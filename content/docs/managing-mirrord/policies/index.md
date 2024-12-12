@@ -21,9 +21,9 @@ https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resou
 namespaced `MirrordPolicy` and clusterwide `MirrordClusterPolicy`. With these policies you can limit
 the use of some features of mirrord for selected targets.
 
-`MirrordPolicy` and `MirrordClusterPolicy` have the exact same specification.
-`MirrordPolicy` can apply only to targets living in the same namespace,
-while `MirrordClusterPolicy` can apply to all targets in the cluster.
+- `MirrordPolicy` and `MirrordClusterPolicy` have the exact same specification;
+- `MirrordPolicy` applies only to targets living in the same namespace;
+- `MirrordClusterPolicy` applies to all targets in the cluster.
 
 ### Blockable features
 
