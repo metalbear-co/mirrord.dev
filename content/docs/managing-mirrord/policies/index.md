@@ -90,7 +90,7 @@ prevents mirrord users from stealing traffic when using the whole `boats` deploy
 still use a specific pod out of that deployment as a target for mirrord and steal its traffic. In order to prevent that,
 the `targetPath` pattern or the label selector needs to be changed to match the pods of that deployment.
 
-If a deployment is used as a target, the deployment's labels will be used to match against policies' `selector`, if
+If a workload is used as a target, this workload's labels will be used to match against policies' `selector`, if
 set. If a pod is used as a target, the pod's labels will be used.
 
 Another example of a policy:
