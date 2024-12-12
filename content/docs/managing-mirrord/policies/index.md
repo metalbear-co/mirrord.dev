@@ -33,7 +33,7 @@ Currently the set of blockable features contains:
 * `mirror` - prevents mirrord sessions from mirroring traffic from the targeted pods
 
 If you are not using the latest operator version, the set of supported blocked features might be different.
-In order to see the exact set of features you can block you can use `kubectl` command like this:
+In order to see the exact set of features you can block, use the following `kubectl` command:
 ```shell
 kubectl get crd mirrordpolicies.policies.mirrord.metalbear.co -o jsonpath='{.spec.versions[-1].schema.openAPIV3Schema.properties.spec.properties.block.items.enum}'
 ```
