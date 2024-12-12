@@ -16,20 +16,37 @@ tags: ["team", "enterprise"]
 
 ## Policies
 
-The installation of the mirrord operator defines a [custom resource](
-https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/)
-named `MirrordPolicy` on your cluster.
-By creating policies you can limit the use of some features of mirrord with selected targets.
-In order to see a list of the features you can block in a policy you can run
+The installation of the mirrord operator defines two [custom resources](
+https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) on your cluster:
+namespaced `MirrordPolicy` and clusterwide `MirrordClusterPolicy`. By creating policies you can limit
+the use of some features of mirrord with selected targets.
+
+`MirrordPolicy` and `MirrordClusterPolicy` have the exact same specification.
+`MirrordPolicy` can apply only to targets living in the same namespace,
+while `MirrordClusterPolicy` can apply to all targets in the cluster.
+
+### Blockable features
+
+Currently the set of blockable features contains:
+* `steal` - prevents mirrord sessions from stealing traffic in any way from the targeted pods
+* `steal-without-filter` - prevents mirrord sessions from stealing traffic from the targeted pods, unless HTTP filter is used
+* `mirror` - prevents mirrord sessions from mirroring traffic from the targeted pods
+
+If you are not using the latest operator version, the set of supported blocked features might be different.
+In order to see the exact set of features you can block you can use `kubectl` command like this:
 ```shell
 kubectl get crd mirrordpolicies.policies.mirrord.metalbear.co -o jsonpath='{.spec.versions[-1].schema.openAPIV3Schema.properties.spec.properties.block.items.enum}'
 ```
-You can optionally set a target path pattern and/or a [label selector](
+
+### Restricting targets affected by mirrord policies
+
+By default, mirrord policies apply to all targets in the namespace or cluster.
+You can use a target path pattern (`.spec.targetPath`) and/or a [label selector](
 https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#resources-that-support-set-based-requirements)
-in order to limit the targets for which a policy applies.
+(`.spec.selector`) in order to limit the targets to which a policy applies.
 
 The target path of a mirrord run is either `targetless` or has the form `<TARGET_TYPE>/<NAME>` followed by an optional
-`/container/<CONTAINER_NAME>`, where `<TARGET_TYPE>` is one of `deploy`, `pod` and `rollout`.
+`/container/<CONTAINER_NAME>`, where `<TARGET_TYPE>` is one of `deploy`, `pod`, `rollout` and `statefulset`.
 
 Examples for possible target paths:
 - `deploy/boats`
@@ -39,13 +56,14 @@ Examples for possible target paths:
 
 By specifying a `targetPath` pattern in the policy, you limit the policy to only apply to runs that have
 a target path that matches the specified pattern.
-The target path pattern can contain `?` which will match a single character and `*` which will match arbitrarily many
+
+The target path pattern can contain `?`, which will match a single character, and `*`, which will match arbitrarily many
 characters.
 For example, `"deploy/*"` will make a policy apply for any run with a deployment target. `"*boats*"` will make a
 policy apply to any target with `boats` in its name, e.g. `pod/boats-2kljw9`,
 `pod/whatever-23oije2/container/boats-container`, etc.
 
-> __Note__: when a container is specified for the mirrord run, the target path ends with `/container/<CONTAINER_NAME>`.
+> __Note__: when mirrord user specifies a container for the mirrord run, the target path ends with `/container/<CONTAINER_NAME>`.
 >
 > This means the pattern `deploy/my-deployment` will not match when a container is specified. That pattern can be
 > changed to `deploy/my-deployment*` to also match on runs with a specified container (but will then also match
