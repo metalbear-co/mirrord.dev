@@ -28,8 +28,8 @@ the use of some features of mirrord for selected targets.
 ### Blockable features
 
 Currently the set of blockable features contains:
-* `steal` - prevents mirrord sessions from stealing traffic in any way from the targeted pods
-* `steal-without-filter` - prevents mirrord sessions from stealing traffic from the targeted pods, unless HTTP filter is used
+* `steal` - prevents stealing traffic from the targeted pods;
+* `steal-without-filter` - prevents stealing traffic from the targeted pods, unless HTTP filter is used;
 * `mirror` - prevents mirroring traffic from the targeted pods.
 
 If you are not using the latest operator version, the set of supported blockable features might be different.
