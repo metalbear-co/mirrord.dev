@@ -30,7 +30,7 @@ the use of some features of mirrord for selected targets.
 Currently the set of blockable features contains:
 * `steal` - prevents mirrord sessions from stealing traffic in any way from the targeted pods
 * `steal-without-filter` - prevents mirrord sessions from stealing traffic from the targeted pods, unless HTTP filter is used
-* `mirror` - prevents mirrord sessions from mirroring traffic from the targeted pods
+* `mirror` - prevents mirroring traffic from the targeted pods.
 
 If you are not using the latest operator version, the set of supported blockable features might be different.
 In order to see the exact set of features you can block, use the following `kubectl` command:
