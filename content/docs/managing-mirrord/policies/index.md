@@ -17,8 +17,8 @@ tags: ["team", "enterprise"]
 ## Policies
 
 The installation of the mirrord operator defines two [custom resources](
-https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) on your cluster:
-namespaced `MirrordPolicy` and clusterwide `MirrordClusterPolicy`. With these policies you can limit
+https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) in your cluster:
+the namespaced `MirrordPolicy` and the clusterwide `MirrordClusterPolicy`. With these policies you can limit
 the use of some features of mirrord for selected targets.
 
 - `MirrordPolicy` and `MirrordClusterPolicy` have the exact same specification;
