@@ -48,6 +48,16 @@ Fields:
 |scale_down|whether the session's target was scaled down|`Target Copied`|
 
 
+## Prometheus
+
+mirrord Operator can expose prometheus metrics if enabled with `OPERATOR_METRICS_ENABLED` (ternary true/false) environment variable. (default endpoint is `:9000/metrics`)
+
+Exposed metrics:
+|metric|description|labels|
+|---|---|---|
+|mirrord_license_valid_seconds|seconds left for current license validity|
+|mirrord_sessions_create_total|count of created sessions|`client_hostname` `client_name` `client_user` `user_id`|
+|mirrord_sessions_duration|histogram for session durations after they are ended|`client_hostname` `client_name` `client_user` `user_id`|
 
 ## DataDog Dashboard
 
