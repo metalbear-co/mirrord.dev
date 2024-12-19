@@ -2,7 +2,7 @@
 title: "Port Forwarding"
 description: "How to use mirrord for port forwarding"
 date: 2024-09-03T15:39:44+01:00
-lastmod: 2024-09-03T15:39:44+01:00
+lastmod: 2024-12-19T15:39:44+01:00
 draft: false
 menu:
   docs:
