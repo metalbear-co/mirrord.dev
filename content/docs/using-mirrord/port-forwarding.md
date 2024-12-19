@@ -13,7 +13,12 @@ tags: ["open source", "team", "enterprise"]
 ---
 ### Regular port-forwarding
 
-The port-forward command allows you to forward traffic from a local port to a destination in the cluster, in a similar way to `kubectl port-forward`. However, it uses the existing permissions on the target pod, allowing you to port-forward to destinations only accessible from the target. This includes locations outside the cluster like third-party APIs.
+The port-forward command allows you to forward traffic from a local port to any
+destination that the mirrord targeted pod has access to, in a similar way to
+`kubectl port-forward`.
+However, it uses the existing permissions on the target pod, allowing you to port-forward
+to destinations only accessible from the target.
+This includes locations outside the cluster like third-party APIs.
 
 You can use the command like so:
 ```bash
