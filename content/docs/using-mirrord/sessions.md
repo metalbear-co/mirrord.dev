@@ -8,7 +8,7 @@ images: []
 menu:
   docs:
     parent: "using-mirrord"
-weight: 150
+weight: 170
 toc: true
 tags: ["team", "enterprise"]
 ---
