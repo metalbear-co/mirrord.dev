@@ -23,12 +23,12 @@ This dialog will allow you to select the target in your Kubernetes cluster that 
 
 > __Note__: For some projects, the plugin might not be able to present the target selection dialog.
 >
-> When this happens, you should see a warning notification and the execution should be cancelled.
+> When this happens, you'll see a warning notification and the execution will be cancelled.
 > You can still use mirrord, but you'll have to specify the target in mirrord config.
 >
-> This is known to happen with Java projects using IntelliJ build system.
+> This is known to happen with Java projects using the IntelliJ build system.
 
-Enabling or disabling mirrord with the toolbar button affects all future run and debug sessions.
+The toolbar button enables/disables mirrord for all run and debug sessions.
 
 mirrord's initial state on startup can be configured in the plugin settings (`Settings -> Tools -> mirrord -> Enable mirrord on startup`)
 
@@ -49,7 +49,7 @@ If the mirrord config does not specify the target, you will be prompted with the
 The dialog will only show targets in the namespace specified in the mirrord config.
 If the namespace is not specified, your Kubernetes user's default namespace will be used.
 
-## Using mirrord Config
+## Using the mirrord Config
 
 The plugin allows for using the [mirrord config](/docs/reference/configuration).
 For any run/debug session, the mirrord config to be used can be specified in multiple ways:
@@ -80,7 +80,7 @@ If config file path is not specified in the run configuration environment, the p
 
 Default config is the lexicographically first file in `<PROJECT ROOT>/.mirrord` directory that ends with either `.json`, `.yaml` or `.toml`.
 
-## Managing mirrord Binary
+## Managing the mirrord Binary
 
 The plugin relies on the standard mirrord CLI binary.
 
