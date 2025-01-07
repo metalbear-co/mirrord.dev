@@ -15,6 +15,7 @@ tags: ["open source", "team", "enterprise"]
 If you work on your application in one of JetBrains IDEs (e.g PyCharm, IntelliJ or Goland), you can debug it with mirrord using our JetBrains Marketplace [plugin](https://plugins.jetbrains.com/plugin/19772-mirrord). Simply:
 1. Download the plugin,
 2. Enable mirrord using the toolbar button (next to "mirrord" popup menu),
+{{<figure src="images/enabler.png" alt="Select Active Config action">}}
 3. Run or debug your application the usual way.
 
 You should be prompted with a target selection dialog. This dialog will allow you to select the target in your cluster that you want to impersonate.
