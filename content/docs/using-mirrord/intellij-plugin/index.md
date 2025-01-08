@@ -76,7 +76,7 @@ This path should be absolute.
 
 ### Config from default path
 
-If config file path is not specified in the run configuration environment, the plugin will try to find a default config.
+If the config file path is not specified in the run configuration environment, the plugin will try to find a default config.
 
 The default config is the lexicographically first file in `<PROJECT ROOT>/.mirrord` directory that ends with either `.json`, `.yaml` or `.toml`.
 
