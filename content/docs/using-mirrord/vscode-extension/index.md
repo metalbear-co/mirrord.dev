@@ -23,7 +23,7 @@ This quick pick will allow you to select the target in your Kubernetes cluster t
 
 The toolbar button enables/disables mirrord for all run and debug sessions.
 
-mirrord's initial state on startup can be configured in the settings:
+mirrord's initial state on startup can be configured in the VSCode settings:
 ```json
 {
     "mirrord.enabledByDefault": true
@@ -97,14 +97,14 @@ Accepted config file extensions are: `json`, `toml`, `yml` and `yaml`.
 The extension relies on the standard mirrord CLI binary.
 
 By default, the extension checks the latest release version and downloads the most up-to-date binary in the background.
-You can disable this behavior in the settings:
+You can disable this behavior in the VSCode settings:
 ```json
 {
   "mirrord.autoUpdate": false
 }
 ```
 
-You can also pin the binary version in the settings:
+You can also pin the binary version with:
 ```json
 {
   "mirrord.autoUpdate": "3.128.0"
