@@ -38,7 +38,7 @@ This is controlled via the `MIRRORD_ACTIVE` environment variable in your launch 
 To have mirrord always enabled for the given launch configuration, set `MIRRORD_ACTIVE=1` in the launch configuration's environment variables.
 To have mirrord always disabled, set `MIRRORD_ACTIVE=0`.
 
-## Selecting Session Target
+## Selecting session target
 
 mirrord's target can be specified in two ways: with the target selection quick pick or with the mirrord config.
 
@@ -47,12 +47,12 @@ If the mirrord config does not specify the target, you will be prompted with the
 The quick pick will only show targets in the namespace specified in the mirrord config.
 If the namespace is not specified, your Kubernetes user's default namespace will be used.
 
-## Using the mirrord Config
+## Using the mirrord config
 
 The extension allows for using the [mirrord config](/docs/reference/configuration).
 For any run/debug session, the mirrord config to be used can be specified in multiple ways:
 
-### Active Config
+### Active config
 
 The toolbar dropdown menu allows for specifying a temporary mirrord config override.
 This config will be used for all run/debug sessions.
@@ -67,20 +67,20 @@ or have a name that ends with `mirrord`. Accepted config file extensions are: `j
 
 You can remove the override using the same action.
 
-### Config For Run Configuration
+### Config for launch configuration
 
 If no active config is specified, the extension will try to read the config file path from the `MIRRORD_CONFIG_FILE` environment variable specified in the launch configuration.
 
 This path should be absolute.
 
-### Config From Default Path
+### Config from default path
 
 If config file path is not specified in the launch configuration environment, the plugin will try to find a default config.
 
 The default config is the lexicographically first file in `<PROJECT ROOT>/.mirrord` directory that ends with `mirrord`.
 Accepted config file extensions are: `json`, `toml`, `yml` and `yaml`.
 
-## Managing the mirrord Binary
+## Managing the mirrord binary
 
 The extension relies on the standard mirrord CLI binary.
 
