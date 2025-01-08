@@ -18,8 +18,8 @@ If you develop your application in Visual Studio Code, you can debug it with mir
 {{<figure src="images/enabler.png" alt="mirrord button">}}
 3. Run or debug your application as you usually do
 
-When you start a debugging session with mirrord enabled, you'll be prompted with a target selection quickpick.
-This quickpick will allow you to select the target in your Kubernetes cluster that you want to impersonate.
+When you start a debugging session with mirrord enabled, you'll be prompted with a target selection quick pick.
+This quick pick will allow you to select the target in your Kubernetes cluster that you want to impersonate.
 
 The toolbar button enables/disables mirrord for all run and debug sessions.
 
@@ -40,11 +40,11 @@ To have mirrord always disabled, set `MIRRORD_ACTIVE=0`.
 
 ## Selecting Session Target
 
-mirrord's target can be specified in two ways: with the target selection quickpick or with the mirrord config.
+mirrord's target can be specified in two ways: with the target selection quick pick or with the mirrord config.
 
-If the mirrord config does not specify the target, you will be prompted with the quickpick each time you start a new session.
+If the mirrord config does not specify the target, you will be prompted with the quick pick each time you start a new session.
 
-The quickpick will only show targets in the namespace specified in the mirrord config.
+The quick pick will only show targets in the namespace specified in the mirrord config.
 If the namespace is not specified, your Kubernetes user's default namespace will be used.
 
 ## Using the mirrord Config
@@ -61,7 +61,7 @@ To specify the override, use `Select active config` action.
 
 {{<figure src="images/select-active-config.png" alt="select active config action">}}
 
-You will be prompted with a quickpick where you can select a mirrord config from your project files.
+You will be prompted with a quick pick where you can select a mirrord config from your project files.
 For the file to be present in the dialog, it must either be located in a directory which name ends with `.mirrord`,
 or have a name that ends with `mirrord`. Accepted config file extensions are: `json`, `toml`, `yml` and `yaml`.
 
