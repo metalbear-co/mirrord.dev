@@ -40,7 +40,7 @@ This is controlled via the `MIRRORD_ACTIVE` environment variable in your run con
 To have mirrord always enabled for the given run configuration, set `MIRRORD_ACTIVE=1` in the run configuration's environment variables.
 To have mirrord always disabled, set `MIRRORD_ACTIVE=0`.
 
-## Selecting session sarget
+## Selecting session target
 
 mirrord's target can be specified in two ways: with the target selection dialog or with the mirrord config.
 
