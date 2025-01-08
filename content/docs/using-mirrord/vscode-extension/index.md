@@ -34,9 +34,19 @@ mirrord's initial state on startup can be configured in the settings:
 
 mirrord can be persistently enabled or disabled for a specific launch configuration, regardless of the toolbar button state.
 This is controlled via the `MIRRORD_ACTIVE` environment variable in your launch configuration.
+The value `"1"` keeps mirrord always enabled, while the value `"0"` disables it.
 
-To have mirrord always enabled for the given launch configuration, set `MIRRORD_ACTIVE=1` in the launch configuration's environment variables.
-To have mirrord always disabled, set `MIRRORD_ACTIVE=0`.
+```json
+{
+  "env": {
+    // mirrord always enabled
+    "MIRRORD_ACTIVE": "1"
+
+    // mirrord always disabled
+    // "MIRRORD_ACTIVE": "0"
+  }
+}
+```
 
 ## Selecting session target
 
