@@ -40,21 +40,23 @@ This is controlled via the `MIRRORD_ACTIVE` environment variable in your run con
 To have mirrord always enabled for the given run configuration, set `MIRRORD_ACTIVE=1` in the run configuration's environment variables.
 To have mirrord always disabled, set `MIRRORD_ACTIVE=0`.
 
-## Selecting Session Target
+## Selecting session target
 
-mirrord's target can be specified in two ways: with the target selection dialog or with the mirrord config.
+mirrord's target can be specified in two ways: 
 
-If the mirrord config does not specify the target, you will be prompted with the dialog each time you start a new session.
+1. with the target selection dialog
+    - The dialog will only appear if the mirrord config does not specify the target.
+    - The dialog will only show targets in the namespace specified in the mirrord config ([`.target.namespace`](/docs/reference/configuration/#target-namespace)). 
+    If the namespace is not specified, your Kubernetes user's default namespace will be used.
 
-The dialog will only show targets in the namespace specified in the mirrord config.
-If the namespace is not specified, your Kubernetes user's default namespace will be used.
+2. in the mirrord config's [target section](/docs/reference/configuration/#root-target)
 
-## Using the mirrord Config
+## Using the mirrord config
 
 The plugin allows for using the [mirrord config](/docs/reference/configuration).
 For any run/debug session, the mirrord config to be used can be specified in multiple ways:
 
-### Active Config
+### Active config
 
 The toolbar dropdown menu allows for specifying a temporary mirrord config override.
 This config will be used for all run/debug sessions.
@@ -68,23 +70,23 @@ For the file to be present in the dialog, its path must contain `mirrord` and en
 
 You can remove the override using the same action.
 
-### Config For Run Configuration
+### Config for run configuration
 
 If no active config is specified, the plugin will try to read the config file path from the `MIRRORD_CONFIG_FILE` environment variable specified in the run configuration.
 
 This path should be absolute.
 
-### Config From Default Path
+### Config from default path
 
-If config file path is not specified in the run configuration environment, the plugin will try to find a default config.
+If the config file path is not specified in the run configuration environment, the plugin will try to find a default config.
 
-Default config is the lexicographically first file in `<PROJECT ROOT>/.mirrord` directory that ends with either `.json`, `.yaml` or `.toml`.
+The default config is the lexicographically first file in `<PROJECT ROOT>/.mirrord` directory that ends with either `.json`, `.yaml` or `.toml`.
 
-## Managing the mirrord Binary
+## Managing the mirrord binary
 
 The plugin relies on the standard mirrord CLI binary.
 
-By default, the plugin checks latest release version and downloads the most up-to-date binary in the background.
+By default, the plugin checks the latest release version and downloads the most up-to-date binary in the background.
 You can disable this behavior in the plugin settings (`Settings -> Tools -> mirrord -> Auto update mirrord binary`).
 
 You can also pin the binary version in the plugin settings (`Settings -> Tools -> mirrord -> mirrord binary version`).
