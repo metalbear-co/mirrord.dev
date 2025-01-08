@@ -78,7 +78,7 @@ This path should be absolute.
 
 If config file path is not specified in the run configuration environment, the plugin will try to find a default config.
 
-Default config is the lexicographically first file in `<PROJECT ROOT>/.mirrord` directory that ends with either `.json`, `.yaml` or `.toml`.
+The default config is the lexicographically first file in `<PROJECT ROOT>/.mirrord` directory that ends with either `.json`, `.yaml` or `.toml`.
 
 ## Managing the mirrord Binary
 
