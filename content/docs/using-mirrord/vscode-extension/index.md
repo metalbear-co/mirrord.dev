@@ -50,12 +50,14 @@ The value `"1"` keeps mirrord always enabled, while the value `"0"` disables it.
 
 ## Selecting session target
 
-mirrord's target can be specified in two ways: with the target selection quick pick or with the mirrord config.
+mirrord's target can be specified in two ways: 
 
-If the mirrord config does not specify the target, you will be prompted with the quick pick each time you start a new session.
+1. with the target selection quick pick
+    - The quick pick will only appear if the mirrord config does not specify the target.
+    - The quick pick will only show targets in the namespace specified in the mirrord config ([`.target.namespace`](/docs/reference/configuration/#target-namespace)). 
+    If the namespace is not specified, your Kubernetes user's default namespace will be used.
 
-The quick pick will only show targets in the namespace specified in the mirrord config.
-If the namespace is not specified, your Kubernetes user's default namespace will be used.
+2. in the mirrord config's [target section](/docs/reference/configuration/#root-target)
 
 ## Using the mirrord config
 
