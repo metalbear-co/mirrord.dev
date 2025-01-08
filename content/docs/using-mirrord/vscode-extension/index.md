@@ -84,7 +84,7 @@ Accepted config file extensions are: `json`, `toml`, `yml` and `yaml`.
 
 The extension relies on the standard mirrord CLI binary.
 
-By default, the extension checks latest release version and downloads the most up-to-date binary in the background.
+By default, the extension checks the latest release version and downloads the most up-to-date binary in the background.
 You can disable this behavior in the settings:
 ```json
 {

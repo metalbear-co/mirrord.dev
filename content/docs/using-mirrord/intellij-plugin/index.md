@@ -84,7 +84,7 @@ Default config is the lexicographically first file in `<PROJECT ROOT>/.mirrord` 
 
 The plugin relies on the standard mirrord CLI binary.
 
-By default, the plugin checks latest release version and downloads the most up-to-date binary in the background.
+By default, the plugin checks the latest release version and downloads the most up-to-date binary in the background.
 You can disable this behavior in the plugin settings (`Settings -> Tools -> mirrord -> Auto update mirrord binary`).
 
 You can also pin the binary version in the plugin settings (`Settings -> Tools -> mirrord -> mirrord binary version`).
