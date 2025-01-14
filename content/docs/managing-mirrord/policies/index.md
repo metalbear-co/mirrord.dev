@@ -38,6 +38,13 @@ In order to see the exact set of features you can block, use the following `kube
 kubectl get crd mirrordpolicies.policies.mirrord.metalbear.co -o jsonpath='{.spec.versions[-1].schema.openAPIV3Schema.properties.spec.properties.block.items.enum}'
 ```
 
+### Controllable features
+
+Some policies allow for changing the behaviour of features, instead of just blocking an
+action from happening, these policies modify the parameters of the action.
+
+- `env` -  
+
 ### Restricting targets affected by mirrord policies
 
 By default, mirrord policies apply to all targets in the namespace or cluster.
