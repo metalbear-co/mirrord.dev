@@ -43,21 +43,60 @@ kubectl get crd mirrordpolicies.policies.mirrord.metalbear.co -o jsonpath='{.spe
 
 Some policies are not for outright blocking features, instead they change or override behaviour.
 
-* `env` - changes how environment variables may be retrieved from the target, overriding
-  what the user has set in their `mirrord.json` config file;
-  * `exclude` - the environment variables in this list **WON'T** be retrieved from the target,
+#### env policy
+
+Changes how environment variables may be retrieved from the target, overriding what the
+user has set in their `mirrord.json` config file.
+
+* `exclude` - the environment variables in this list **WON'T** be retrieved from the target,
   instead mirrord will either use the locally available env vars (if they exist in the user's
   machine), or these env vars will be missing completely;
-* `fs` - changes file operations behaviour, giving the operator control over which files
-  may be accessed from the target, and in which modes. Overrides what the user has set in
-  their `mirrord.json` config file;
-  * `readOnly` - files that match any of the patterns specified here must be opened as
-    **read-only**, otherwise the operation will fail;
-  * `local` - matching files will be forced to be opened locally, on the user's machine,
-    instead of in the target;
-  * `notFound` - any matching files will return a _not found_ error as if the file is not
-    present in the target, even if it exists there;
- 
+
+The policy takes priority over a user's mirrord config, which means that if the user has
+a config:
+
+```json
+{ "feature": { "env": { "include": "*_URL" } } }
+```
+
+If the policy is set with `exclude: ["*_URL"]`, then mirror will **NOT** retrieve env vars
+that match `*_URL`, even though the user explicitly wanted that in their config.
+
+If you are not using the latest operator version, the env policy options might be different.
+In order to see the latest options, use the following `kubectl` command:
+
+```shell
+kubectl get crd mirrordpolicies.policies.mirrord.metalbear.co -o jsonpath='{.spec.versions[-1].schema.openAPIV3Schema.properties.spec.properties.env}'
+```
+
+#### fs policy
+
+Changes file operations behaviour, giving the operator control over which files may be
+accessed from the target, and in which modes. Overrides what the user has set in their
+`mirrord.json` config file.
+
+* `readOnly` - files that match any of the patterns specified here must be opened as
+  **read-only**, otherwise the operation will fail;
+* `local` - matching files will be forced to be opened locally, on the user's machine,
+  instead of in the target;
+* `notFound` - any matching files will return a _not found_ error as if the file is not
+  present in the target, even if it exists there;
+
+The policy takes priority over a user's mirrord config, which means that if the user has
+a config:
+
+```json
+{ "feature": { "fs": { "read_write": ".+\\.json" } } }
+```
+
+If the policy is set with `readOnly: [".+\\.json"]`, and the user tries to open a file
+that matches this regex in _write_ mode, then mirrord will return an error to the user app,
+as if the file could not be found, even though the user wanted it to be `read_write`.
+
+```shell
+kubectl get crd mirrordpolicies.policies.mirrord.metalbear.co -o jsonpath='{.spec.versions[-1].schema.openAPIV3Schema.properties.spec.properties.fs}'
+```
+
 ### Restricting targets affected by mirrord policies
 
 By default, mirrord policies apply to all targets in the namespace or cluster.
