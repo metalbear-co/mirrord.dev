@@ -48,6 +48,15 @@ Some policies are not for outright blocking features, instead they change or ove
   * `exclude` - the environment variables in this list **WON'T** be retrieved from the target,
   instead mirrord will either use the locally available env vars (if they exist in the user's
   machine), or these env vars will be missing completely;
+* `fs` - changes file operations behaviour, giving the operator control over which files
+  may be accessed from the target, and in which modes. Overrides what the user has set in
+  their `mirrord.json` config file;
+  * `readOnly` - files that match any of the patterns specified here must be opened as
+    **read-only**, otherwise the operation will fail;
+  * `local` - matching files will be forced to be opened locally, on the user's machine,
+    instead of in the target;
+  * `notFound` - any matching files will return a _not found_ error as if the file is not
+    present in the target, even if it exists there;
  
 ### Restricting targets affected by mirrord policies
 
