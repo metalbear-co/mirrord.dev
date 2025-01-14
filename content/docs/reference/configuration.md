@@ -2,7 +2,7 @@
 title: "Configuration"
 description: "Config"
 date: 2023-05-17T13:59:39+01:00
-lastmod: 2024-11-13T13:37:39+01:00
+lastmod: 2025-01-14T00:00:00+01:00
 draft: false
 images: []
 menu:
@@ -92,6 +92,9 @@ configuration file containing all fields.
       "override": {
         "DATABASE_CONNECTION": "db://localhost:7777/my-db",
         "LOCAL_BEAR": "panda"
+      },
+      "mapping": {
+        ".+_TIMEOUT": "1000"
       }
     },
     "fs": {
@@ -448,6 +451,10 @@ Path of the mirrord-layer lib inside the specified mirrord-cli image.
 
 Defaults to `"/opt/mirrord/lib/libmirrord_layer.so"`.
 
+### container.cli_prevent_cleanup {#container-cli_extra_args}
+
+Don't add `--rm` to sidecar command to prevent cleanup.
+
 ## experimental {#root-experimental}
 
 mirrord Experimental features.
@@ -474,6 +481,16 @@ Enables `getifaddrs` hook that removes IPv6 interfaces from the list returned by
 ### _experimental_ readlink {#experimental-readlink}
 
 DEPRECATED, WILL BE REMOVED
+
+### _experimental_ readonly_file_buffer {#experimental-readonly_file_buffer}
+
+Sets buffer size for readonly remote files (in bytes, for example 4096).
+If set, such files will be read in chunks and buffered locally.
+This improves performace when the user application reads data in small portions.
+
+Setting to 0 disables file buffering.
+
+<https://github.com/metalbear-co/mirrord/issues/2069>
 
 ### _experimental_ tcp_ping4_mock {#experimental-tcp_ping4_mock}
 
@@ -644,6 +661,12 @@ This option is compatible only with deployment targets.
 Allows the user to set or override the local process' environment variables with the ones
 from the remote pod.
 
+Can be set to one of the options:
+
+1. `false` - Disables the feature, won't have remote environment variables.
+2. `true` - Enables the feature, will obtain remote environment variables.
+3. object - see below (means `true` + additional configuration).
+
 Which environment variables to load from the remote pod are controlled by setting either
 [`include`](#feature-env-include) or [`exclude`](#feature-env-exclude).
 
@@ -658,11 +681,20 @@ See the environment variables [reference](https://mirrord.dev/docs/reference/env
       "override": {
         "DATABASE_CONNECTION": "db://localhost:7777/my-db",
         "LOCAL_BEAR": "panda"
+      },
+      "mapping": {
+        ".+_TIMEOUT": "1000"
       }
     }
   }
 }
 ```
+
+### feature.env_file {#feature-env-file}
+
+Allows for passing environment variables from an env file.
+
+These variables will override environment fetched from the remote target.
 
 ### feature.env.exclude {#feature-env-exclude}
 
@@ -695,12 +727,35 @@ If set, the variables are fetched after the user application is started.
 This setting is meant to resolve issues when using mirrord via the IntelliJ plugin on WSL
 and the remote environment contains a lot of variables.
 
+### feature.env.mapping {#feature-env-mapping}
+
+Specify map of patterns that if matched will replace the value according to specification.
+
+*Capture groups are allowed.*
+
+Example:
+```json
+{
+  ".+_TIMEOUT": "10000"
+  "LOG_.+_VERBOSITY": "debug"
+  "(\w+)_(\d+)": "magic-value"
+}
+```
+
+Will do the next replacements for environment variables that match:
+
+`CONNECTION_TIMEOUT: 500` => `CONNECTION_TIMEOUT: 10000`
+`LOG_FILE_VERBOSITY: info` => `LOG_FILE_VERBOSITY: debug`
+`DATA_1234: common-value` => `DATA_1234: magic-value`
+
 ### feature.env.override {#feature-env-override}
 
 Allows setting or overriding environment variables (locally) with a custom value.
 
 For example, if the remote pod has an environment variable `REGION=1`, but this is an
 undesirable value, it's possible to use `override` to set `REGION=2` (locally) instead.
+
+Environment specified here will also override variables passed via the env file.
 
 ### feature.env.unset {#feature-env-unset}
 
@@ -717,9 +772,9 @@ and `Aws_Profile` and other variations.
 
 Allows the user to specify the default behavior for file operations:
 
-1. `"read"` - Read from the remote file system (default)
+1. `"read"` or `true` - Read from the remote file system (default)
 2. `"write"` - Read/Write from the remote file system.
-3. `"local"` - Read from the local file system.
+3. `"local"` or `false` - Read from the local file system.
 4. `"localwithoverrides"` - perform fs operation locally, unless the path matches a pre-defined
    or user-specified exception.
 
@@ -803,8 +858,8 @@ Will do the next replacements for any io operaton
 `/home/johndoe/dev/tomcat/context.xml` => `/etc/tomcat/context.xml`
 `/home/johndoe/dev/config/api/app.conf` => `/mnt/configs/johndoe-api/app.conf`
 
-- Relative paths: this feature (currently) does not apply mappings to relative
-paths, e.g. `../dev`.
+- Relative paths: this feature (currently) does not apply mappings to relative paths, e.g.
+  `../dev`.
 
 ### feature.fs.mode {#feature-fs-mode}
 
@@ -1066,15 +1121,67 @@ Similarly, you can exclude certain paths using a negative look-ahead:
 Setting this filter will make mirrord only steal requests to URIs that do not start with
 "/health/".
 
-#### feature.network.incoming.http_filter.all_of {#feature-network-incoming-http_filter-all_of}
+With `all_of` and `any_of`, you can use multiple HTTP filters at the same time.
 
-Messages must match all of the specified filters.
+If you want to steal HTTP requests that match **every** pattern specified, use `all_of`.
+For example, this filter steals only HTTP requests to endpoint `/api/my-endpoint` that contain
+header `x-debug-session` with value `121212`.
+```json
+{
+  "all_of": [
+    { "header": "^x-debug-session: 121212$" },
+    { "path": "^/api/my-endpoint$" }
+  ]
+}
+
+If you want to steal HTTP requests that match **any** of the patterns specified, use `any_of`.
+For example, this filter steals HTTP requests to endpoint `/api/my-endpoint`
+**and** HTTP requests that contain header `x-debug-session` with value `121212`.
+```json
+{
+ "any_of": [
+   { "path": "^/api/my-endpoint$"},
+   { "header": "^x-debug-session: 121212$" }
+ ]
+}
+
+##### feature.network.incoming.http_filter.all_of {#feature-network-incoming-http_filter-all_of}
+
+An array of HTTP filters.
+
+Each inner filter specifies either header or path regex.
+Requests must match all of the filters to be stolen.
+
 Cannot be an empty list.
 
-#### feature.network.incoming.http_filter.any_of {#feature-network-incoming-http_filter-any_of}
+Example:
+```json
+{
+  "all_of": [
+    { "header": "x-user: my-user$" },
+    { "path": "^/api/v1/my-endpoint" }
+  ]
+}
+```
 
-Messages must match any of the specified filters.
+##### feature.network.incoming.http_filter.any_of {#feature-network-incoming-http_filter-any_of}
+
+An array of HTTP filters.
+
+Each inner filter specifies either header or path regex.
+Requests must match at least one of the filters to be stolen.
+
 Cannot be an empty list.
+
+Example:
+```json
+{
+  "any_of": [
+    { "header": "^x-user: my-user$" },
+    { "path": "^/api/v1/my-endpoint" }
+  ]
+}
+```
 
 ##### feature.network.incoming.http_filter.header_filter {#feature-network-incoming-http-header-filter}
 
@@ -1173,6 +1280,10 @@ List of ports to mirror/steal traffic from. Other ports will remain local.
 
 Mutually exclusive with
 [`feature.network.incoming.ignore_ports`](#feature-network-ignore_ports).
+
+### feature.network.ipv6 {#feature-network-dns}
+
+Enable ipv6 support. Turn on if your application listens to incoming traffic over IPv6.
 
 ### feature.network.outgoing {#feature-network-outgoing}
 
