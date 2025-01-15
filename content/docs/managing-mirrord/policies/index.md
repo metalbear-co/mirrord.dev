@@ -39,13 +39,14 @@ In order to see the exact set of features you can block, use the following `kube
 kubectl get crd mirrordpolicies.policies.mirrord.metalbear.co -o jsonpath='{.spec.versions[-1].schema.openAPIV3Schema.properties.spec.properties.block.items.enum}'
 ```
 
-### Functional features
+### Controllable features
 
 Some policies are not for outright blocking features, instead they change behaviour,
 overriding what the user has set in their mirrord config file.
 
 You may use these features to change which files may be accessed in the target, or which
-environment variables may be retrieved.
+environment variables may be retrieved. These policies should not be relied upon for security,
+and should instead be considered convenience policies.
 
 #### env policy
 
