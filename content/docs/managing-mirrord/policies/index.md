@@ -34,10 +34,21 @@ Currently the set of blockable features contains:
 
 If you are not using the latest operator version, the set of supported blockable features might be different.
 In order to see the exact set of features you can block, use the following `kubectl` command:
+
 ```shell
 kubectl get crd mirrordpolicies.policies.mirrord.metalbear.co -o jsonpath='{.spec.versions[-1].schema.openAPIV3Schema.properties.spec.properties.block.items.enum}'
 ```
 
+### Controllable features
+
+Some policies are not for outright blocking features, instead they change or override behaviour.
+
+* `env` - changes how environment variables may be retrieved from the target, overriding
+  what the user has set in their `mirrord.json` config file;
+  * `exclude` - the environment variables in this list **WON'T** be retrieved from the target,
+  instead mirrord will either use the locally available env vars (if they exist in the user's
+  machine), or these env vars will be missing completely;
+ 
 ### Restricting targets affected by mirrord policies
 
 By default, mirrord policies apply to all targets in the namespace or cluster.
