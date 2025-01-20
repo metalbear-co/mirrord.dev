@@ -14,7 +14,7 @@ weight: 10
 
 
 # About yourself 
-Praveen Lead Software Engineer at Carousell
+Praveen, Lead Software Engineer at Carousell
 
 # About your company
 Carousell is a leading multi-category classified and recommerce marketplace in SEA.
