@@ -23,7 +23,7 @@ Carousell is a leading multi-category classified and recommerce marketplace in S
 Telepresence
 
 # Why did you choose mirrord instead? 
-The major challenge we faced with previous solutions,, was its reliance on running processes inside a Docker container. Our server processes, which we were developing and debugging, needed to run locally. However, with previous solutions, these processes were executed inside a Docker container to send egress traffic to the target staging environment for testing.
+The major challenge we faced with previous solutions was its reliance on running processes inside a Docker container. Our server processes, which we were developing and debugging, needed to run locally. However, with previous solutions, these processes were executed inside a Docker container to send egress traffic to the target staging environment for testing.
 This created a significant issue because we couldn’t use our standard debugging tools like IntelliJ or Visual Studio Code effectively. Debugging inside a Docker container required specific tools, and the process was often cumbersome and unreliable, with numerous failure modes. 
 
 Another challenge arose when we transitioned to decentralized routing, where Istio handled network plane routing decisions. Previously, developers could debug processes locally while traffic was routed correctly. The local IPs were discoverable, enabling processes to run as though they were on a staging environment. However, after the introduction of decentralized routing, this functionality broke, leading to frustration among developers. Many felt their development velocity had decreased as a result.
