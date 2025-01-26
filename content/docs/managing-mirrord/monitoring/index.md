@@ -78,7 +78,13 @@ operator:
 
 We offer a DataDog dashboard you can import to track statistics.
 
-Download it <a href="/Mirrord_Operator_Dashboard.json" download>here</a>
+Download it <a href="/datadog/Mirrord_Operator_Dashboard.json" download>here</a>
+
+## Grafana Dashboard
+
+Alternatively there is a Grafana dashboard you can import to track statistics.
+
+Download it <a href="/grafana/Mirrord_Operator_Dashboard.json" download>here</a>
 
 
 ## fluentd
