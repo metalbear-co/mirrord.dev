@@ -48,6 +48,31 @@ Fields:
 |scale_down|whether the session's target was scaled down|`Target Copied`|
 
 
+## Prometheus
+
+mirrord Operator can expose prometheus metrics if enabled. (default endpoint is `:9000/metrics`)
+
+### Helm
+```yaml
+# values.yaml for mirrord-operator helm chart
+operator:
+  ...
+  metrics: true
+  ...
+```
+
+### Manual
+|env|description|type|default|
+|---|---|---|---|
+|OPERATOR_METRICS_ENABLED|enable metrics endpoint|"true" \| "false"|"false"|
+|OPERATOR_METRICS_ADDR|metrics http server addr|SocketAddr|"0.0.0.0:9000"|
+
+### Exposed metrics
+|metric|description|labels|
+|---|---|---|
+|mirrord_license_valid_seconds|Seconds left for current license validity|
+|mirrord_sessions_create_total|Count of created sessions|`client_hostname` `client_name` `client_user` `user_id`|
+|mirrord_sessions_duration|Histogram for session durations after they are ended|`client_hostname` `client_name` `client_user` `user_id`|
 
 ## DataDog Dashboard
 

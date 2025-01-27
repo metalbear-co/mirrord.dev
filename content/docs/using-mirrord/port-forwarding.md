@@ -2,7 +2,7 @@
 title: "Port Forwarding"
 description: "How to use mirrord for port forwarding"
 date: 2024-09-03T15:39:44+01:00
-lastmod: 2024-09-03T15:39:44+01:00
+lastmod: 2024-12-19T15:39:44+01:00
 draft: false
 menu:
   docs:
@@ -13,7 +13,12 @@ tags: ["open source", "team", "enterprise"]
 ---
 ### Regular port-forwarding
 
-The port-forward command allows you to forward traffic from a local port to a destination in the cluster, in a similar way to `kubectl port-forward`. However, it uses the existing permissions on the target pod, allowing you to port-forward to destinations only accessible from the target. This includes locations outside the cluster like third-party APIs.
+The port-forward command allows you to forward traffic from a local port to any
+destination that the mirrord targeted pod has access to, in a similar way to
+`kubectl port-forward`.
+The traffic is forwarded as-if it was coming from the target pod, meaning it has access
+to destinations that might be outside the cluster, like third-party APIs, depending
+on what's accessible by the target pod.
 
 You can use the command like so:
 ```bash
