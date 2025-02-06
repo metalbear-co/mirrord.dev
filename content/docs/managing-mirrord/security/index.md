@@ -103,3 +103,26 @@ To prevent mirrord clients from directly creating agents at the cluster level, w
 Note: before adding a new Pod Admission Policy, you should make sure it doesn't limit any functionality required by your existing workloads.
 
 By default the in-cluster traffic between the operator and its agents isn't encrypted nor authenticated. To ensure encryption and authentication you can enable TLS protocol for the operator–agent connections. You can do this in the operator [Helm chart](https://github.com/metalbear-co/charts/blob/main/mirrord-operator/values.yaml) by setting `agent.tls` to true or manually by setting `OPERATOR_AGENT_CONNECTION_TLS=true` in the operator container environment. TLS connections are supported from agent version 3.97.0.
+
+## Security hardening with the mirrord operator
+
+Here is a quick checklist you may wish to follow in order to improve the security posture of your cluster when using the operator:
+### Enabling TLS
+
+TLS can be enabled between the operator and mirrord agents to encrypt the traffic they send to each other. From the [section above](#how-can-i-prevent-users-from-using-mirrord-without-going-through-the-operator):
+
+> By default the in-cluster traffic between the operator and its agents isn’t encrypted nor authenticated. To ensure encryption and authentication you can enable TLS protocol for the operator–agent connections. You can do this in the operator [Helm chart](https://github.com/metalbear-co/charts/blob/main/mirrord-operator/values.yaml) by setting `agent.tls` to true or manually by setting `OPERATOR_AGENT_CONNECTION_TLS=true` in the operator container environment. TLS connections are supported from agent version 3.97.0.
+
+### Reducing access to the mirrord namespace
+
+Users have no need to access to the namespace where mirrord resources are created. By default, this is the `mirrord` namespace.
+
+### Using a certificate for mirrord APIService
+
+By using either your own certificate or one provided by a certificate manager, you can secure access to mirrord's APIService - you will need to set `insecureSkipTLSVerify` to `false` in the mirrord-operator Helm chart.
+
+*NB: If you are using a certificate manager, make sure you set up reminders for certificate renewal.*
+
+### Set up network policies for communication
+
+Access to the operator can be further restricted by setting up network policies in the cluster to limit the operator to communicate only with mirrord agents (this is not possible if running agents in [ephemeral mode](https://mirrord.dev/docs/reference/configuration/#agent-ephemeral)).
