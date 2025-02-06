@@ -83,7 +83,8 @@ configuration file containing all fields.
     "communication_timeout": 30,
     "startup_timeout": 360,
     "network_interface": "eth0",
-    "flush_connections": true
+    "flush_connections": true,
+    "metrics": "0.0.0.0:9000",
   },
   "feature": {
     "env": {
@@ -154,6 +155,9 @@ If not provided, mirrord will use value from the kubeconfig.
 
 Configuration for the mirrord-agent pod that is spawned in the Kubernetes cluster.
 
+**Note:** this configuration is ignored when using the mirrord Operator.
+Agent configuration is done by the cluster admin.
+
 We provide sane defaults for this option, so you don't have to set up anything here.
 
 ```json
@@ -181,7 +185,11 @@ Allows setting up custom annotations for the agent Job and Pod.
 
 ```json
 {
-  "annotations": { "cats.io/inject": "enabled" }
+  "annotations": {
+    "cats.io/inject": "enabled"
+    "prometheus.io/scrape": "true",
+    "prometheus.io/port": "9000"
+  }
 }
 ```
 
@@ -206,12 +214,17 @@ Disables specified Linux capabilities for the agent container.
 If nothing is disabled here, agent uses `NET_ADMIN`, `NET_RAW`, `SYS_PTRACE` and
 `SYS_ADMIN`.
 
+Has no effect when using the targetless mode,
+as targetless agent containers have no capabilities.
+
 ### agent.dns {#agent-dns}
 
 ### agent.ephemeral {#agent-ephemeral}
 
 Runs the agent as an
-[ephemeral container](https://kubernetes.io/docs/concepts/workloads/pods/ephemeral-containers/)
+[ephemeral container](https://kubernetes.io/docs/concepts/workloads/pods/ephemeral-containers/).
+
+Not compatible with targetless runs.
 
 Defaults to `false`.
 
@@ -314,10 +327,25 @@ with `RUST_LOG`.
 }
 ```
 
+### agent.metrics {#agent-metrics}
+
+Enables prometheus metrics for the agent pod.
+
+You might need to add annotations to the agent pod depending on how prometheus is
+configured to scrape for metrics.
+
+```json
+{
+  "metrics": "0.0.0.0:9000"
+}
+```
+
 ### agent.namespace {#agent-namespace}
 
 Namespace where the agent shall live.
-Note: Doesn't work with ephemeral containers.
+
+**Note:** ignored in targetless runs or when the agent is run as an ephemeral container.
+
 Defaults to the current kubernetes namespace.
 
 ### agent.network_interface {#agent-network_interface}
@@ -351,6 +379,9 @@ Run the mirror agent as privileged container.
 Defaults to `false`.
 
 Might be needed in strict environments such as Bottlerocket.
+
+Has no effect when using the targetless mode,
+as targetless agent containers are never privileged.
 
 ### agent.resources {#agent-resources}
 
@@ -391,12 +422,14 @@ Defaults to `60`.
 
 ### agent.tolerations {#agent-tolerations}
 
-Set pod tolerations. (not with ephemeral agents)
-Default is
+Set pod tolerations. (not with ephemeral agents).
+
+Defaults to `operator: Exists`.
+
 ```json
 [
   {
-    "operator": "Exists"
+    "key": "meow", "operator": "Exists", "effect": "NoSchedule"
   }
 ]
 ```
@@ -744,9 +777,11 @@ Example:
 
 Will do the next replacements for environment variables that match:
 
-- `CONNECTION_TIMEOUT: 500` => `CONNECTION_TIMEOUT: 10000`
-- `LOG_FILE_VERBOSITY: info` => `LOG_FILE_VERBOSITY: debug`
-- `DATA_1234: common-value` => `DATA_1234: magic-value`
+* `CONNECTION_TIMEOUT: 500` => `CONNECTION_TIMEOUT: 10000`
+
+* `LOG_FILE_VERBOSITY: info` => `LOG_FILE_VERBOSITY: debug`
+
+* `DATA_1234: common-value` => `DATA_1234: magic-value`
 
 ### feature.env.override {#feature-env-override}
 
@@ -1133,6 +1168,7 @@ header `x-debug-session` with value `121212`.
     { "path": "^/api/my-endpoint$" }
   ]
 }
+```
 
 If you want to steal HTTP requests that match **any** of the patterns specified, use `any_of`.
 For example, this filter steals HTTP requests to endpoint `/api/my-endpoint`
@@ -1144,6 +1180,7 @@ For example, this filter steals HTTP requests to endpoint `/api/my-endpoint`
    { "header": "^x-debug-session: 121212$" }
  ]
 }
+```
 
 ##### feature.network.incoming.http_filter.all_of {#feature-network-incoming-http_filter-all_of}
 
@@ -1556,15 +1593,25 @@ Accepts a single value, or multiple values separated by `;`.
 
 ## target {#root-target}
 
-Specifies the target and namespace to mirror, see [`path`](#target-path) for a list of
-accepted values for the `target` option.
+Specifies the target and namespace to target.
 
 The simplified configuration supports:
 
-- `pod/{sample-pod}/[container]/{sample-container}`;
-- `deployment/{sample-deployment}/[container]/{sample-container}`;
+- `targetless`
+- `pod/{pod-name}[/container/{container-name}]`;
+- `deployment/{deployment-name}[/container/{container-name}]`;
+- `rollout/{rollout-name}[/container/{container-name}]`;
+- `job/{job-name}[/container/{container-name}]`;
+- `cronjob/{cronjob-name}[/container/{container-name}]`;
+- `statefulset/{statefulset-name}[/container/{container-name}]`;
+- `service/{service-name}[/container/{container-name}]`;
 
-Shortened setup:
+Please note that:
+
+- `job`, `cronjob`, `statefulset` and `service` targets require the mirrord Operator
+- `job` and `cronjob` targets require the [`copy_target`](#feature-copy_target) feature
+
+Shortened setup with a target:
 
 ```json
 {
@@ -1572,38 +1619,82 @@ Shortened setup:
 }
 ```
 
-Complete setup:
+The setup above will result in a session targeting the `bear-pod` Kubernetes pod
+in the user's default namespace. A target container will be chosen by mirrord.
+
+Shortened setup with a target container:
+
+```json
+{
+  "target": "pod/bear-pod/container/bear-pod-container"
+}
+```
+
+The setup above will result in a session targeting the `bear-pod-container` container
+in the `bear-pod` Kubernetes pod in the user's default namespace.
+
+Complete setup with a target container:
 
 ```json
 {
  "target": {
    "path": {
-     "pod": "bear-pod"
+     "pod": "bear-pod",
+     "container": "bear-pod-container"
    },
-   "namespace": "default"
+   "namespace": "bear-pod-namespace"
  }
 }
 ```
+
+The setup above will result in a session targeting the `bear-pod-container` container
+in the `bear-pod` Kubernetes pod in the `bear-pod-namespace` namespace.
+
+Setup with a namespace for a targetless run:
+
+```json
+{
+  "target": {
+    "path": "targetless",
+    "namespace": "bear-namespace"
+  }
+}
+```
+
+The setup above will result in a session without any target.
+Remote outgoing traffic and DNS will be done from the `bear-namespace` namespace.
 
 ### target.namespace {#target-namespace}
 
 Namespace where the target lives.
 
-Defaults to `"default"`.
+For targetless runs, this the namespace in which remote networking is done.
+
+Defaults to the Kubernetes user's default namespace (defined in Kubernetes context).
 
 ### target.path {#target-path}
 
-Specifies the running pod (or deployment) to mirror.
+Specifies the Kubernetes resource to target.
 
-Note: Deployment level steal/mirroring is available only in mirrord for Teams
-If you use it without it, it will choose a random pod replica to work with.
+If not given, defaults to `targetless`.
+
+Note: targeting services and whole workloads is available only in mirrord for Teams.
+If you target a workload without the mirrord Operator, it will choose a random pod replica
+to work with.
 
 Supports:
-- `pod/{sample-pod}`;
-- `deployment/{sample-deployment}`;
-- `container/{sample-container}`;
-- `containername/{sample-container}`.
-- `job/{sample-job}` (only when [`copy_target`](#feature-copy_target) is enabled).
+- `targetless`
+- `pod/{pod-name}[/container/{container-name}]`;
+- `deployment/{deployment-name}[/container/{container-name}]`;
+- `rollout/{rollout-name}[/container/{container-name}]`;
+- `job/{job-name}[/container/{container-name}]`; (requires mirrord Operator and the
+  [`copy_target`](#feature-copy_target) feature)
+- `cronjob/{cronjob-name}[/container/{container-name}]`; (requires mirrord Operator and the
+  [`copy_target`](#feature-copy_target) feature)
+- `statefulset/{statefulset-name}[/container/{container-name}]`; (requires mirrord
+  Operator)
+- `service/{service-name}[/container/{container-name}]`; (requires mirrord Operator)
+- `replicaset/{replicaset-name}[/container/{container-name}]`; (requires mirrord Operator)
 
 ## telemetry {#root-telemetry}
 Controls whether or not mirrord sends telemetry data to MetalBear cloud.
