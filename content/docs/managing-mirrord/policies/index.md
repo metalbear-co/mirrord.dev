@@ -119,7 +119,7 @@ spec:
         headerFilter: "^username: .+"
 ```
 
-If the policy is set with `headerFilter: "^username: .+"` meaning at least one header filter must match the `^username: .+` regex when user is using the steal mode for incoming networking.
+If the policy is set with `headerFilter: "^username: .+"` at least one header filter must match the `^username: .+` regex when user is using the steal mode for incoming traffic.
 
 ```json
 { "feature": { "network": { "incoming": { "http_filter": { "header_filter": "username: foobar" } } } } }
