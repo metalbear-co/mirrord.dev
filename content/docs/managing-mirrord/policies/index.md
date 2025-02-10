@@ -105,7 +105,7 @@ kubectl get crd mirrordpolicies.policies.mirrord.metalbear.co -o jsonpath='{.spe
 
 #### network policy
 
-For a bit more fine grain control over incoming networking there is also an option to specify a pattern for header filter, meaning when stealing the user must spefiy a header filter that matches the provided regex
+Lets the operator control which patterns may be used as [HTTP header filters](/docs/using-mirrord/steal/#stealing-only-a-subset-of-the-remote-targets-traffic). Header filters specified by the user must match the regex specified in the network policy.
 
 ```yaml
 apiVersion: policies.mirrord.metalbear.co/v1alpha
