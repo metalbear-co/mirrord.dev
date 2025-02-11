@@ -56,7 +56,7 @@ mirrord's target can be specified in two ways:
     - The quick pick will only appear if the mirrord config does not specify the target.
     - The quick pick will initially show targets in the namespace specified in the mirrord config ([`.target.namespace`](/docs/reference/configuration/#target-namespace)). 
     If the namespace is not specified, your Kubernetes user's default namespace will be used.
-    - The quick pick will allow for switching the Kubernetes namespace.
+    - If you want to see targets in a different namespace, there is an option to "Select Another Namespace".
 
 2. in the mirrord config's [target section](/docs/reference/configuration/#root-target)
 
