@@ -2,7 +2,7 @@
 title: "Configuration"
 description: "Config"
 date: 2023-05-17T13:59:39+01:00
-lastmod: 2025-01-14T00:00:00+01:00
+lastmod: 2025-02-11T00:00:00+01:00
 draft: false
 images: []
 menu:
@@ -1318,9 +1318,10 @@ List of ports to mirror/steal traffic from. Other ports will remain local.
 Mutually exclusive with
 [`feature.network.incoming.ignore_ports`](#feature-network-ignore_ports).
 
-### feature.network.ipv6 {#feature-network-dns}
+### feature.network.ipv6 {#feature-network-ipv6}
 
-Enable ipv6 support. Turn on if your application listens to incoming traffic over IPv6.
+Enable ipv6 support. Turn on if your application listens to incoming traffic over IPv6,
+or connects to other services over IPv6.
 
 ### feature.network.outgoing {#feature-network-outgoing}
 
