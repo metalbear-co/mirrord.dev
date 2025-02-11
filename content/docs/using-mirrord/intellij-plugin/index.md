@@ -46,8 +46,9 @@ mirrord's target can be specified in two ways:
 
 1. with the target selection dialog
     - The dialog will only appear if the mirrord config does not specify the target.
-    - The dialog will only show targets in the namespace specified in the mirrord config ([`.target.namespace`](/docs/reference/configuration/#target-namespace)). 
+    - The dialog will initially show targets in the namespace specified in the mirrord config ([`.target.namespace`](/docs/reference/configuration/#target-namespace)). 
     If the namespace is not specified, your Kubernetes user's default namespace will be used.
+    - The dialog will allow for switching the Kubernetes namespace.
 
 2. in the mirrord config's [target section](/docs/reference/configuration/#root-target)
 
