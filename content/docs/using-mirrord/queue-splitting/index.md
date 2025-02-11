@@ -303,7 +303,7 @@ be created.
 1. `MirrordKafkaTopicsConsumer` is a resource that must be created in the same namespace as the target workload.
 It describes Kafka topics that this workload consumes and contains instructions for the mirrord Operator on how to execture splitting.
 Each `MirrordKafkaTopicsConsumer` is linked to a single workload that can be targeted with a Kafka splitting session.
-2. `MirrordKafkaClienConfig` is a resource that must be created in the namespace where mirrord operator is installed.
+2. `MirrordKafkaClientConfig` is a resource that must be created in the namespace where mirrord operator is installed.
 It contains properties that the operator will use when creating a Kafka client used for all Kafka operations during the split.
 This resource is referenced by `MirrordKafkaTopicsConsumer`.
 
