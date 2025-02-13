@@ -102,6 +102,46 @@ as if the file could not be found, even though the user wanted it to be `read_wr
 kubectl get crd mirrordpolicies.policies.mirrord.metalbear.co -o jsonpath='{.spec.versions[-1].schema.openAPIV3Schema.properties.spec.properties.fs}'
 ```
 
+
+#### network policy
+
+Lets the operator control which patterns may be used as [HTTP header filters](/docs/using-mirrord/steal/#stealing-only-a-subset-of-the-remote-targets-traffic). Header filters specified by the user must match the regex specified in the network policy.
+
+```yaml
+apiVersion: policies.mirrord.metalbear.co/v1alpha
+kind: MirrordPolicy
+metadata: { ... }
+spec:
+  ...
+  network:
+    incoming:
+      httpFilter:
+        headerFilter: "^username: .+"
+```
+
+If the policy is set with `headerFilter: "^username: .+"` at least one header filter must match the `^username: .+` regex when user is using the steal mode for incoming traffic.
+
+```json
+{ "feature": { "network": { "incoming": { "http_filter": { "header_filter": "username: foobar" } } } } }
+```
+
+this also works *any of* or *all of* patterns
+
+```json
+{ "feature": { "network": { "incoming": { "http_filter": { "all_of": [
+  { "header": "username: foobar" },
+  { "path": "/api.*" }
+] } } } } }
+```
+```json
+{ "feature": { "network": { "incoming": { "http_filter": { "any_of": [
+  { "header": "username: foobar" },
+  { "header": "username: baz2000" }
+] } } } } }
+```
+
+*\*`steal-without-filter` will be automatically enabled once any http filter is specified*
+
 ### Restricting targets affected by mirrord policies
 
 By default, mirrord policies apply to all targets in the namespace or cluster.
