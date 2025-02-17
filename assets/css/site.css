@@ -8689,3 +8689,7 @@ body {
   --tw-bg-opacity: 1;
   background-color: rgb(32 32 32 / var(--tw-bg-opacity));
 }
+
+.margin-auto {
+  margin: auto
+}

@@ -17,7 +17,7 @@ tags: ["open source", "team", "enterprise"]
 
 First and most important, mirrord *doesn't just mirror traffic*. It does that, but also a lot more.
 
-mirrord lets you connect a process on your development machine to your Kubernetes cluster. It does this by injecting itself into the local process (no code changes needed!), intercepting all of the input and output points of the process - network traffic, file access, and environment variables - and proxying them to the cluster. This mechanism is discussed in more detail [here](../architecture/#mirrord-layer).
+mirrord lets you connect a process on your development machine to your Kubernetes cluster. It does this by injecting itself into the local process (no code changes needed!), intercepting all of the input and output points of the process - network traffic, file access, and environment variables - and proxying them to the cluster. This mechanism is discussed in more detail [here](../../reference/architecture/#mirrord-layer).
 
 When you run mirrord, you select a Target - this is the Kubernetes Pod or Deployment whose context you want your local code to run in. For example, if you have a staging cluster running the latest stable version of all of your microservices, and you're now coding the next version of one of these microservices, you'd select as your Target the Pod or Deployment running the stable version of that microservice in staging. The following things will then happen:
 - The Target's environment variables will be made available to the local process.
@@ -60,7 +60,7 @@ Yes! You can use the `mirrord container` command to run a local container in the
 
 mirrord works by creating an agent on a privileged pod in the remote cluster that accesses another pod's namespaces (read more about it [here](https://metalbear.co/blog/getting-started-with-ephemeral-containers/)).
 If you can't give your end users permissions to create pods with the capabilities mirrord needs, we suggest trying out [mirrord for Teams]({{< ref "/docs/overview/teams" >}} "mirrord for Teams"). It adds a Kubernetes operator that acts as a control plane for mirrord clients, and lets them work with mirrord without creating pods themselves.
-If mirrord for Teams doesn't work for you either, [let us know](hello@metalbear.co) and we'll try to figure a solution that matches your security policies.
+If mirrord for Teams doesn't work for you either, [let us know](mailto:hello@metalbear.co) and we'll try to figure a solution that matches your security policies.
 
 ### What kinds of Kubernetes objects can I use as a remote target?
 mirrord OSS supports the following Kubernetes objects as targets:
