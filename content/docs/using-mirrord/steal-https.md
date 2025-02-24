@@ -154,6 +154,8 @@ With the use of `spec.targetPath` and `spec.selector`, you can link one configur
 When the mirrord Operator finds multiple configuration resources matching the session target path and labels, it merges their `ports` lists.
 The same port cannot be configured multiple times (extra entries are discarded).
 
+**Important:** mirrord-agent will search for all files and directories referenced by the config resources in the target container filesystem.
+
 ## Configuring delivery of stolen HTTPS to your local application 
 
 By default, when delivering stolen HTTPS requests to your local application, mirrord uses the original protocol - TLS.
