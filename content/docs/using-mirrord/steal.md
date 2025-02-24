@@ -115,7 +115,7 @@ To avoid stealing requests sent to URIs starting with "/health/", you can set th
 ### Stealing HTTPS traffic with a filter
 
 `feature.network.incoming.http_filter` allows you to steal a subset of HTTP requests. To apply the filter, the mirrord-agent needs to be able to parse the requests stolen from the target.
-Normally, the incluster traffic is encrypted with TLS, but it is decrypted by a service mesh before it gets to the target service. In this case, mirrord is able to parse the requests out of the box.
+Most commonly, the incluster traffic is encrypted with TLS, but it is decrypted by a service mesh before it gets to the target service. In this case, mirrord is able to parse the requests out of the box.
 
 However, in some cases the traffic is only decrypted by the target service itself. Using an HTTP filter in this case requires some additional setup. Check out the [HTTPS stealing guide](/docs/using-mirrord/steal-https/) for more information. Note that this HTTPS stealing requires mirrord Operator, which is part of mirrord for Teams. 
 
