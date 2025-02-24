@@ -2,7 +2,7 @@
 title: "Traffic Stealing"
 description: "How to steal traffic using mirrord"
 date: 2020-11-16T13:59:39+01:00
-lastmod: 2020-11-16T13:59:39+01:00
+lastmod: 2025-02-24T00:00:00+00:00
 draft: false
 menu:
   docs:
@@ -112,6 +112,12 @@ To avoid stealing requests sent to URIs starting with "/health/", you can set th
 }
 ```
 
+### Stealing HTTPS traffic with a filter
+
+`feature.network.incoming.http_filter` allows you to steal a subset of HTTP requests. To apply the filter, the mirrord-agent needs to be able to parse the requests stolen from the target.
+Most commonly, the incluster traffic is encrypted with TLS, but it is decrypted by a service mesh before it gets to the target service. In this case, mirrord is able to parse the requests out of the box.
+
+However, in some cases the traffic is only decrypted by the target service itself. Using an HTTP filter in this case requires some additional setup. Check out the [HTTPS stealing guide](/docs/using-mirrord/steal-https/) for more information. Note that this HTTPS stealing requires mirrord Operator, which is part of mirrord for Teams. 
 
 ## What's next?
 1. If your local process reads from a queue, you might want to test out the [copy target feature](/docs/using-mirrord/copy-target/), which temporarily creates a copy of the mirrord session target. With its `scaledown` flag it allows you to temporarily delete all replicas in your targeted rollout or deployment, so that none competes with your local process for queue messages.
