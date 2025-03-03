@@ -190,7 +190,7 @@ Note that, by default, the following features are also enabled:
 1. Environment variables from the remote target will be imported into your local process
 2. When reading files, your local process will read them from the remote target
 3. DNS resolution for your local process will happen on the remote target
-4. Outgoing traffic sent by your local process will be sent out from the remote target instead, and the response will be sent back to your locall process
+4. Outgoing traffic sent by your local process will be sent out from the remote target instead, and the response will be sent back to your local process
 
 We find that this configuration works for a lot of use cases, but if you'd like to change it, please read about available options in the [configuration](/docs/reference/configuration/).
 
