@@ -25,7 +25,7 @@ These conflicts and more are resolved by the mirrord Operator, available in the 
 
 ## What capabilities does mirrord have to allow concurrent usage of the same cluster?
 
-{{<figure src="images/shared-cluster.png" alt="Using clusters concurrently with mirrord" class="w-4/5 margin-auto">}}
+{{<figure src="images/shared-cluster.png" alt="Using clusters concurrently with mirrord" class="w-4/5 margin-auto zoomable">}}
 
 ### 1. Concurrently debug the same HTTP server with HTTP filters
 mirrord's HTTP filters let users only steal a subset of the incoming traffic to the remote service. By adding personalized headers to incoming traffic and then configuring mirrord to only steal traffic with those headers, users can debug the same service concurrently without affecting each other. [Learn more about HTTP filters](/docs/using-mirrord/http-filters/).
