@@ -20,6 +20,7 @@ The installation of the mirrord operator defines a new clusterwide [custom resou
 in your cluster, called `MirrordProfile`.
 
 This resource can be used to provide mirrord users with a unified base for their mirrord configs.
+Users can reference an available profile in their configs, and they will be modified accordingly.
 
 ```yaml
 apiVersion: profiles.mirrord.metalbear.co/v1alpha
