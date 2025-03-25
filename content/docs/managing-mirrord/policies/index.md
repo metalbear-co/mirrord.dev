@@ -147,7 +147,7 @@ this also works *any of* or *all of* patterns
 ] } } } } }
 ```
 
-**Important:** `steal-without-filter` will be automatically enabled once any http filter is specified*
+**Important:** `steal-without-filter` will be automatically enabled once any http filter is specified.
 
 #### profile policy
 
