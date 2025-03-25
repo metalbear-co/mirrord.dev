@@ -64,6 +64,4 @@ The profile is referenced by its name.
 
 Use of mirrord profiles can be enforced with [mirrord policies](/docs/managing-mirrord/policies/#profile-policy).
 
-**Important:** mirrord profiles and the related policy settings are purely functional.
-mirrord profiles are applied to the session on the user machine, and should not be used as security features.
-Since mirrord CLI is open source, it is possible for a malicious user to bypass these mechanisms.
+**Important:** mirrord profiles are applied to the session on the user machine, and should not be used as security features.

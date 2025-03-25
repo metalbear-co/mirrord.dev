@@ -181,9 +181,7 @@ spec:
 
 The example above will enforce that the user selects either `my-profile-1` or `my-profile-2` for their session.
 
-**Important:** mirrord profiles and the related policy settings are purely functional.
-mirrord profiles are applied to the session on the user machine, and should not be used as security features.
-Since mirrord CLI is open source, it is possible for a malicious user to bypass these mechanisms.
+**Important:** mirrord profiles are applied to the session on the user machine, and should not be used as security features.
 
 ### Restricting targets affected by mirrord policies
 
