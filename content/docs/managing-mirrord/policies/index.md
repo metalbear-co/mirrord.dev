@@ -9,7 +9,7 @@ linktitle: "Policies"
 menu:
 docs:
 teams:
-weight: 500
+weight: 520
 toc: true
 tags: ["team", "enterprise"]
 ---

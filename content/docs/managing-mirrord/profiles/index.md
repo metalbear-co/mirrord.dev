@@ -9,7 +9,7 @@ linktitle: "Profiles"
 menu:
 docs:
 teams:
-weight: 600
+weight: 530
 toc: true
 tags: ["team", "enterprise"]
 ---
