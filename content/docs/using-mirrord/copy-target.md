@@ -33,18 +33,18 @@ also answer those probes. This might come in handy when debugging with breakpoin
 `copy_target`, if you linger too long on a breakpoint, the application might miss some probes, which could cause a
 target pod to restart.
 
-## Replacing a Whole Deployment Using `scale_down`
+## Replacing a Whole Workload Using `scale_down`
 
-When the [`scale_down`](/docs/reference/configuration/#feature-copy_target-scale_down) option is set (only valid
-when the target is a deployment), mirrord will
+When the [`scale_down`](/docs/reference/configuration/#feature-copy_target-scale_down) option is set, mirrord will
 [scale](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#scaling-a-deployment) the target
-deployment down to zero, effectively replacing all existing pods of that deployment by the one new copied pod, that
-is then used as the target for the mirrord run.
+workload down to zero, effectively replacing all existing pods of that workload by the one new copied pod, that
+is then used as the target for the mirrord run. This feature is supported with Deployment, Argo Rollout, StatefulSet,
+and ReplicaSet (owned by either a Deployment or an Argo Rollout) targets.
 
-This can be useful e.g. when a deployment reads from a queue. By scaling it down to zero, the application you run
-with mirrord does not have to compete with the deployment for queue items.
+The scale down feature can be useful e.g. when a workload reads from a queue. By scaling it down to zero, the application you run
+with mirrord does not have to compete with the workload's pods for queue items.
 
-Only one mirrord run can scale down a deployment at each time. If you try to scale down a deployment that is already
+Only one mirrord session can scale down a workload at the same time. If you try to scale down a workload that is already
 being scaled down in another mirrord session (by you or by a teammate), mirrord will display an error and exit.
 
 You can see active copied targets by running `mirrord operator status`.
