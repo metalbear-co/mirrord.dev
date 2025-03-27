@@ -9,7 +9,7 @@ linktitle: "Policies"
 menu:
 docs:
 teams:
-weight: 500
+weight: 520
 toc: true
 tags: ["team", "enterprise"]
 ---
@@ -21,7 +21,7 @@ https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resou
 the namespaced `MirrordPolicy` and the clusterwide `MirrordClusterPolicy`. With these policies you can limit
 the use of some features of mirrord for selected targets.
 
-- `MirrordPolicy` and `MirrordClusterPolicy` have the exact same specification;
+- `MirrordPolicy` and `MirrordClusterPolicy` have the exact same specification (`spec` field);
 - `MirrordPolicy` applies only to targets living in the same namespace;
 - `MirrordClusterPolicy` applies to all targets in the cluster.
 
@@ -50,6 +50,8 @@ and should instead be considered convenience policies.
 
 #### env policy
 
+_Added in mirrord Operator version 3.103.0_
+
 Changes how environment variables may be retrieved from the target, overriding what the
 user has set in their `mirrord.json` config file.
 
@@ -75,6 +77,8 @@ kubectl get crd mirrordpolicies.policies.mirrord.metalbear.co -o jsonpath='{.spe
 ```
 
 #### fs policy
+
+_Added in mirrord Operator version 3.103.0_
 
 Changes file operations behaviour, giving the operator control over which files may be
 accessed from the target, and in which modes. Overrides what the user has set in their
@@ -105,7 +109,10 @@ kubectl get crd mirrordpolicies.policies.mirrord.metalbear.co -o jsonpath='{.spe
 
 #### network policy
 
-Lets the operator control which patterns may be used as [HTTP header filters](/docs/using-mirrord/steal/#stealing-only-a-subset-of-the-remote-targets-traffic). Header filters specified by the user must match the regex specified in the network policy.
+_Added in mirrord Operator version 3.105.0_
+
+Allows the operator to control which patterns may be used as [HTTP header filters](/docs/using-mirrord/steal/#stealing-only-a-subset-of-the-remote-targets-traffic).
+Header filters specified by the user must match the regex specified in the network policy.
 
 ```yaml
 apiVersion: policies.mirrord.metalbear.co/v1alpha
@@ -140,7 +147,41 @@ this also works *any of* or *all of* patterns
 ] } } } } }
 ```
 
-*\*`steal-without-filter` will be automatically enabled once any http filter is specified*
+**Important:** `steal-without-filter` will be automatically enabled once any http filter is specified.
+
+#### profile policy
+
+_Added in mirrord Operator version 3.108.0_
+
+Allows the operator to enforce using a [mirrord profile](/docs/managing-mirrord/profiles) and to specify a set of allowed profiles.
+
+```yaml
+apiVersion: policies.mirrord.metalbear.co/v1alpha
+kind: MirrordPolicy
+metadata: { ... }
+spec:
+  ...
+  # If this is set, the user must select a mirrord profile for their session.
+  #
+  # If multiple policies apply to the given session,
+  # a profile is required if at least one of them require it.
+  #
+  # Optional, defaults to false.
+  requireProfile: true
+  # A list of allowed mirrord profiles.
+  #
+  # If multiple policies apply to the given session,
+  # user's selected profile must be present in all allowlists.
+  #
+  # Optional. If not present, this policy will not enforce any allowlist.
+  profileAllowlist:
+  - my-profile-1
+  - my-profile-2
+```
+
+The example above will enforce that the user selects either `my-profile-1` or `my-profile-2` for their session.
+
+**Important:** mirrord profiles are applied to the session on the user machine, and should not be used as security features.
 
 ### Restricting targets affected by mirrord policies
 
