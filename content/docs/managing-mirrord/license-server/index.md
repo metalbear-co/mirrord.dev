@@ -1,5 +1,5 @@
 ---
-title: "License Server - mirrord for Teams"
+title: "License Server"
 description: "License Server"
 date: 2025-04-07T00:00:00+00:00
 lastmod: 2025-04-07T00:00:00+00:00
@@ -53,7 +53,7 @@ license:
         MIRRORD-LICENSE 
         ... -----
 ```
-*NOTE: default value for `service.type` is `ClusterIP`, this service should be accesible to the operator so you might concider using `NodePort` or `LoadBalancer` types*
+*NOTE: The default value for `service.type` is `ClusterIP`. This service needs to be accessible to any mirrord operators you want to track, so you can also use `NodePort` or `LoadBalancer`*
 
 Keep in mind that the `license.key` can be any value and should be used as `--license-key` in operator setup.
 
