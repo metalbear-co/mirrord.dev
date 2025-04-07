@@ -14,6 +14,8 @@ toc: true
 tags: ["enterprise"]
 ---
 
+License server allows you manage the license in a single place but for multiple operators installed on different or ephemeral clusters whilst keeping all commuications internal. This is usefull for Air-Gapped clusters or ones with restricted networking.
+
 ## Basic Setup
 
 License server is currently bundled with the operator image just under `license-server` command.
