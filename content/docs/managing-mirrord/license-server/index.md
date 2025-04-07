@@ -14,11 +14,11 @@ toc: true
 tags: ["enterprise"]
 ---
 
-License server allows you manage the license in a single place but for multiple operators installed on different or ephemeral clusters whilst keeping all commuications internal. This is usefull for Air-Gapped clusters or ones with restricted networking.
+The license server enables you to manage your organization’s seats without sending any data to mirrord’s servers. It can aggregate license metrics from multiple operators (useful if you’re running mirrord across multiple clusters) and provides visibility into seat usage across your organization.
 
 ## Basic Setup
 
-License server is currently bundled with the operator image just under `license-server` command.
+The license server is currently bundled with the operator image just under `license-server` command.
 
 For example:
 ```bash
@@ -59,7 +59,7 @@ Keep in mind that the `license.key` can be any value and should be used as `--li
 
 <br />
 
-With this `values.yaml` we can install the license server on a kubernetes cluster.
+With this `values.yaml` we can install the the license server on a kubernetes cluster.
 
 ```bash
 helm repo add metalbear-co https://metalbear-co.github.io/charts
@@ -88,17 +88,17 @@ helm install metalbear-co/mirrord-operator -f ./values.yaml --generate-name
 
 The `<license-server-addr>` should be an acceible endpoint of the `mirrord-operator-license-server` service meaning if you have it installed under `LoadBalancer` confuguration it will be the relevant `<external-ip>:<node-port>`
 
-If you have an ingress installed on the cluster please do expose the `mirrord-operator-license-server` service via http or https to license server http/https endpoint (depends on `tls` and `service.port` values in license-server chart)
+If you have an ingress installed on the cluster please do expose the `mirrord-operator-license-server` service via http or https to the license server http/https endpoint (depends on `tls` and `service.port` values in license-server chart)
 
 ## License
 
-License server must have both a license key and the license file (either via chart or `LICENSE_KEY` and `LICENSE_PATH` env variables).
+The license server must have both a license key and the license file (either via chart or `LICENSE_KEY` and `LICENSE_PATH` env variables).
 
-Where the license key can be any value and will later be used in connected operators and to manually fetch any statistic and license file must be a valid operator license that will be served to the connecting operators and should be mounted to the license server (when using chart can either be mounted from secret with license under `license.pem` key and possibly create said secret from `license.file.data` value).
+Where the license key can be any value and will later be used in connected operators and to manually fetch any statistic and license file must be a valid operator license that will be served to the connecting operators and should be mounted to the the license server (when using chart can either be mounted from secret with license under `license.pem` key and possibly create said secret from `license.file.data` value).
 
 ## Tls
 
-License server is able to self expose a https endpoint if needed by providing the relevant certifcate and private key or via `certManager` integration.
+The license server is able to self expose a https endpoint if needed by providing the relevant certifcate and private key or via `certManager` integration.
 
 ```yaml
 # ./values.yaml
@@ -126,7 +126,7 @@ tls:
 
 ## Ingress
 
-Operator will use `OPERATOR_LICENSE_KEY` and `OPERATOR_LICENSE_SERVER` (or `license.key` and `license.licenseServer` value in operator chart). The server value must contain the protocol and the prefix for any ingress that the license server can be behind.
+Operator will use `OPERATOR_LICENSE_KEY` and `OPERATOR_LICENSE_SERVER` (or `license.key` and `license.licenseServer` value in operator chart). The server value must contain the protocol and the prefix for any ingress that the the license server can be behind.
 
 For example value of<br/>
 `https://operator-license-server.internal-ingress.managment-cluster`<br/>
