@@ -148,7 +148,7 @@ Then download the accompanying `values.yaml`:
 curl https://raw.githubusercontent.com/metalbear-co/charts/main/mirrord-operator/values.yaml --output values.yaml
 ```
 
-Set \`license.key\` to your key.
+Set `license.key` to your key.
 
 Finally, install the chart:
 ```bash

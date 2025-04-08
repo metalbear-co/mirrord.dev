@@ -9,7 +9,7 @@ linktitle: "Security"
 menu:
   docs:
     teams:
-weight: 500
+weight: 510
 toc: true
 tags: ["team", "enterprise"]
 ---
