@@ -80,10 +80,29 @@ license:
   key: secret
   licenseServer: http://<license-server-addr>
 ```
+*NOTE: The server value must contain the protocol and the prefix for any ingress that the the license server can be behind.*
+
 and then use the install or upgrade to set these parameters
 ```bash
 helm install metalbear-co/mirrord-operator -f ./values.yaml --generate-name --wait
 ```
+
+
+## Ingress
+
+Operator will use `license.key` and `license.licenseServer` (or `OPERATOR_LICENSE_KEY` and `OPERATOR_LICENSE_SERVER` env variables).
+
+For example value of<br/>
+`https://operator-license-server.internal-ingress.managment-cluster`<br/>
+assumes that<br/>
+`https://operator-license-server.internal-ingress.managment-cluster/api/v1/license`<br/>
+will result in a request to `$ADDRESS/api/v1/license` in license-server container.
+
+If there is some path prefix it will assume it will be trimmed by ingress, meaning value of<br/>
+`https://internal-ingress.managment-cluster/operator-license-server`<br/>
+will expect<br/>
+`https://internal-ingress.managment-cluster/operator-license-server/api/v1/license`<br/>
+to also result in a request to `$ADDRESS/api/v1/license` in license-server container (the ingress will need to strip the prefix)
 
 The `<license-server-addr>` should be an acceible endpoint of the `mirrord-operator-license-server` service meaning if you have it installed under `LoadBalancer` confuguration it will be the relevant `<external-ip>:<node-port>`
 
@@ -121,19 +140,3 @@ tls:
 ```
 
 *NOTE: If enabled certManager does create only certificates for internal dns names like `mirrord-operator-license-server` or `mirrord-operator-license-server.mirrord.svc` under a newly created `cert-manager.io/v1.Issuer` and does require `cert-manager.io` to be installed on the cluster*
-
-## Ingress
-
-Operator will use `OPERATOR_LICENSE_KEY` and `OPERATOR_LICENSE_SERVER` (or `license.key` and `license.licenseServer` value in operator chart). The server value must contain the protocol and the prefix for any ingress that the the license server can be behind.
-
-For example value of<br/>
-`https://operator-license-server.internal-ingress.managment-cluster`<br/>
-assumes that<br/>
-`https://operator-license-server.internal-ingress.managment-cluster/api/v1/license`<br/>
-will result in a request to `$ADDRESS/api/v1/license` in license-server container.
-
-If there is some path prefix it will assume it will be trimmed by ingress, meaning value of<br/>
-`https://internal-ingress.managment-cluster/operator-license-server`<br/>
-will expect<br/>
-`https://internal-ingress.managment-cluster/operator-license-server/api/v1/license`<br/>
-to also result in a request to `$ADDRESS/api/v1/license` in license-server container (the ingress will need to strip the prefix)
