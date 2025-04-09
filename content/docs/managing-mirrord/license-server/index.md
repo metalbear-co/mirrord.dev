@@ -95,6 +95,5 @@ helm install metalbear-co/mirrord-operator -f ./values.yaml --generate-name --wa
 
 The license server must have both a license key and the license file (either via chart or `LICENSE_KEY` and `LICENSE_PATH` env variables).
 
-* License key - Can be any string of your choosing and will later be used in connected operators and to manually fetch any statistic. We recommend you 
+* License key - Can be any string of your choosing, we recommend you use a random characacters or a uuid for this value will later be used in connected operators and to manually fetch usage statistics.
 * License file -  Must be a valid operator license that will be served to the connecting operators and should be mounted to the the license server (when using chart can either be mounted from secret with license under `license.pem` key and possibly create said secret from `license.file.data` value).
-
