@@ -43,7 +43,12 @@ license:
         ... -----
 ```
 
-Then fill in the `license.key` and `license.file.data."license.pem"` with a license key value of your choosing and the contents of your operator license and/or customise the deployment to your choosing. (all values.yaml configuration options can found [here](https://raw.githubusercontent.com/metalbear-co/charts/main/mirrord-license-server/values.yaml))
+Fill in the license.key and license.pem fields according to the following guidelines:
+
+* License key - Can be any string of your choosing, we recommend you use a random characacters or a uuid for this value, because it will later be used in connected operators and to manually fetch usage statistics.
+* License file -  Must be a valid operator license that will be served to the connecting operators and should be mounted to the the license server (when using chart can either be mounted from secret with license under `license.pem` key and possibly create said secret from `license.file.data` value).
+
+You can customize the license server deployment further - all values.yaml configuration options can found [here](https://raw.githubusercontent.com/metalbear-co/charts/main/mirrord-license-server/values.yaml)
 
 *NOTE: The license server needs to be accessible to any mirrord operators you want to track. To that end, the default value for `service.type` is `ClusterIP`, but can be changed to `NodePort` or `LoadBalancer`, according to your requirements.*
 
@@ -72,28 +77,7 @@ license:
 ```
 *NOTE: The server value must contain the protocol and the prefix for any ingress that the the license server can be behind.*
 
-*For the `license.licenseServer` an example value of<br/>*
-*`https://operator-license-server.internal-ingress.managment-cluster`<br/>*
-*assumes that<br/>*
-*`https://operator-license-server.internal-ingress.managment-cluster/api/v1/license`<br/>*
-*will result in a request to `$ADDRESS/api/v1/license` in license-server container.*
-
-*If there is some path prefix it will assume it will be trimmed by ingress, meaning value of<br/>*
-*`https://internal-ingress.managment-cluster/operator-license-server`<br/>*
-*will expect<br/>*
-*`https://internal-ingress.managment-cluster/operator-license-server/api/v1/license`<br/>*
-*to also result in a request to `$ADDRESS/api/v1/license` in license-server container (the ingress will need to strip the prefix)*
-<br/>
-<br/>
-
 Then run:
 ```bash
 helm install metalbear-co/mirrord-operator -f ./values.yaml --generate-name --wait
 ```
-
-## License
-
-The license server must have both a license key and the license file (either via chart or `LICENSE_KEY` and `LICENSE_PATH` env variables).
-
-* License key - Can be any string of your choosing, we recommend you use a random characacters or a uuid for this value, because it will later be used in connected operators and to manually fetch usage statistics.
-* License file -  Must be a valid operator license that will be served to the connecting operators and should be mounted to the the license server (when using chart can either be mounted from secret with license under `license.pem` key and possibly create said secret from `license.file.data` value).
