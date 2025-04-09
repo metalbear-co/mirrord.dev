@@ -45,7 +45,7 @@ license:
 
 Then fill in the `license.key` and `license.file.data."license.pem"` with a license key value of your choosing and the contents of your operator license and/or customise the deployment to your choosing. (all values.yaml configuration options can found [here](https://raw.githubusercontent.com/metalbear-co/charts/main/mirrord-license-server/values.yaml))
 
-*NOTE: The default value for `service.type` is `ClusterIP`. This service needs to be accessible to any mirrord operators you want to track, so you can also use `NodePort` or `LoadBalancer`*
+*NOTE: The license server needs to be accessible to any mirrord operators you want to track. To that end, the default value for `service.type` is `ClusterIP`, but can be changed to `NodePort` or `LoadBalancer`, according to your requirements.*
 
 Next, install the license server on your cluster:
 
@@ -59,11 +59,11 @@ To make sure it's been installed successfully and is running:
 kubectl get deployment -n mirrord mirrord-license-server
 ```
 
-If you have an ingress installed on the cluster please do expose the `mirrord-operator-license-server` service via http or https to the license server http/https endpoint (depends on `tls` and `service.port` values in license-server chart)
+If your operator(s) are running at on a different cluster, make sure the `mirrord-operator-license-server` service is exposed to them via ingress.
 
 ### Connecting Operators to the License Server
 
-If you installed operator using Helm, first update your operator `values.yaml` file: *(read more [here](/docs/overview/quick-start/#helm) for quickstart helm setup for operator)*
+First update your operator [`values.yaml`](/docs/overview/quick-start/#helm) for quickstart helm setup for operator) file:
 ```yaml
 # ./values.yaml
 license:
