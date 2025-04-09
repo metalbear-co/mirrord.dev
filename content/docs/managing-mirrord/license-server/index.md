@@ -18,10 +18,6 @@ The license server enables you to manage your organization’s seats without sen
 
 ## Basic Setup
 
-The license server is currently bundled with the operator image just under `license-server` command. It's possible to deploy the license-server or any container runtime or orchistration we recommend installing via helm for simplicity.
-
-### Helm Chart
-
 The license server is installable via Helm. First, add the MetalBear Helm repository:
 
 ```bash
@@ -67,13 +63,7 @@ If you have an ingress installed on the cluster please do expose the `mirrord-op
 
 ### Connecting Operators to the License Server
 
-Add the license server address to the operator configuration. If you've installed the operator using the mirrord CLI:
-
-```bash
-mirrord operator setup --accept-tos --license-key secret --license-server http://<license-server-addr> | kubectl apply -f -
-```
-
-Or if you installed it using Helm, first update your `values.yaml` file:
+If you installed operator using Helm, first update your operator `values.yaml` file: *(read more [here](/docs/overview/quick-start/#helm) for quickstart helm setup for operator)*
 ```yaml
 # ./values.yaml
 license:
@@ -82,61 +72,29 @@ license:
 ```
 *NOTE: The server value must contain the protocol and the prefix for any ingress that the the license server can be behind.*
 
+*For the `license.licenseServer` an example value of<br/>*
+*`https://operator-license-server.internal-ingress.managment-cluster`<br/>*
+*assumes that<br/>*
+*`https://operator-license-server.internal-ingress.managment-cluster/api/v1/license`<br/>*
+*will result in a request to `$ADDRESS/api/v1/license` in license-server container.*
+
+*If there is some path prefix it will assume it will be trimmed by ingress, meaning value of<br/>*
+*`https://internal-ingress.managment-cluster/operator-license-server`<br/>*
+*will expect<br/>*
+*`https://internal-ingress.managment-cluster/operator-license-server/api/v1/license`<br/>*
+*to also result in a request to `$ADDRESS/api/v1/license` in license-server container (the ingress will need to strip the prefix)*
+<br/>
+<br/>
+
 Then run:
 ```bash
 helm install metalbear-co/mirrord-operator -f ./values.yaml --generate-name --wait
 ```
 
-
-## Ingress
-
-Operator will use `license.key` and `license.licenseServer` (or `OPERATOR_LICENSE_KEY` and `OPERATOR_LICENSE_SERVER` env variables).
-
-For example value of<br/>
-`https://operator-license-server.internal-ingress.managment-cluster`<br/>
-assumes that<br/>
-`https://operator-license-server.internal-ingress.managment-cluster/api/v1/license`<br/>
-will result in a request to `$ADDRESS/api/v1/license` in license-server container.
-
-If there is some path prefix it will assume it will be trimmed by ingress, meaning value of<br/>
-`https://internal-ingress.managment-cluster/operator-license-server`<br/>
-will expect<br/>
-`https://internal-ingress.managment-cluster/operator-license-server/api/v1/license`<br/>
-to also result in a request to `$ADDRESS/api/v1/license` in license-server container (the ingress will need to strip the prefix)
-
-The `<license-server-addr>` should be an acceible endpoint of the `mirrord-operator-license-server` service meaning if you have it installed under `LoadBalancer` confuguration it will be the relevant `<external-ip>:<node-port>`
-
 ## License
 
 The license server must have both a license key and the license file (either via chart or `LICENSE_KEY` and `LICENSE_PATH` env variables).
 
-* License key - Can be any string of your choosing and will later be used in connected operators and to manually fetch any statistic.
+* License key - Can be any string of your choosing and will later be used in connected operators and to manually fetch any statistic. We recommend you 
 * License file -  Must be a valid operator license that will be served to the connecting operators and should be mounted to the the license server (when using chart can either be mounted from secret with license under `license.pem` key and possibly create said secret from `license.file.data` value).
 
-## Tls
-
-The license server is able to self expose a https endpoint if needed by providing the relevant certifcate and private key or via `certManager` integration.
-
-```yaml
-# ./values.yaml
-...
-
-service:
-  port: 433
-
-tls:
-  data:
-    tls.key: |
-      -----BEGIN PRIVATE KEY-----
-      ...
-      -----END PRIVATE KEY-----
-    tls.crt: |
-      -----BEGIN CERTIFICATE-----
-      ...
-      -----END CERTIFICATE-----
-  # or
-  certManager:
-    enabled: true
-```
-
-*NOTE: If enabled certManager does create only certificates for internal dns names like `mirrord-operator-license-server` or `mirrord-operator-license-server.mirrord.svc` under a newly created `cert-manager.io/v1.Issuer` and does require `cert-manager.io` to be installed on the cluster*
