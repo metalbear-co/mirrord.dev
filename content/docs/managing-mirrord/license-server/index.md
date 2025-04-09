@@ -45,8 +45,8 @@ license:
 
 Fill in the license.key and license.pem fields according to the following guidelines:
 
-* License key - Can be any string of your choosing, we recommend you use a random characacters or a uuid for this value, because it will later be used in connected operators and to manually fetch usage statistics.
-* License file -  Must be a valid operator license that will be served to the connecting operators and should be mounted to the the license server (when using chart can either be mounted from secret with license under `license.pem` key and possibly create said secret from `license.file.data` value).
+* License key - Can be any string of your choosing. We recommend using a random characters or a UUID.
+* License file - Must be a valid operator license. This can also be a secret under the `license.pem` key.
 
 You can customize the license server deployment further - all values.yaml configuration options can found [here](https://raw.githubusercontent.com/metalbear-co/charts/main/mirrord-license-server/values.yaml)
 
