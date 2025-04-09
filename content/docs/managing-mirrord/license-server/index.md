@@ -22,13 +22,13 @@ The license server is currently bundled with the operator image just under `lice
 
 ### Helm Chart
 
-To install the the license server with Helm, first add the MetalBear Helm repository:
+The license server is installable via Helm. First, add the MetalBear Helm repository:
 
 ```bash
 helm repo add metalbear-co https://metalbear-co.github.io/charts
 ```
 
-Now to setup the license-server as a standalone helm deployment copy the following yaml to a `values.yaml` file your local machine. 
+Next, save the following yaml as `values.yaml` on your machine. 
 
 ```yaml
 # ./values.yaml
@@ -47,17 +47,17 @@ license:
         ... -----
 ```
 
-Then fill in the `license.key` and `license.file.data."license.pem"` with a license key value of your choosing and the contents of your operator license and/or customise the deployment to your choosing. (default `values.yaml` values can be found [here](https://raw.githubusercontent.com/metalbear-co/charts/main/mirrord-license-server/values.yaml))
+Then fill in the `license.key` and `license.file.data."license.pem"` with a license key value of your choosing and the contents of your operator license and/or customise the deployment to your choosing. (all values.yaml configuration options can found [here](https://raw.githubusercontent.com/metalbear-co/charts/main/mirrord-license-server/values.yaml))
 
 *NOTE: The default value for `service.type` is `ClusterIP`. This service needs to be accessible to any mirrord operators you want to track, so you can also use `NodePort` or `LoadBalancer`*
 
-With `values.yaml` you can install the the license server on a kubernetes cluster.
+Next, install the license server on your cluster:
 
 ```bash
 helm install metalbear-co/mirrord-operator-license-server -f ./values.yaml --generate-name --wait
 ```
 
-Once it's installed and running now you can connect the operator. The simplest way is to check that all the deployment pods are up.
+To make sure it's been installed successfully and is running:
 
 ```bash
 kubectl get deployment -n mirrord mirrord-license-server
@@ -67,13 +67,13 @@ If you have an ingress installed on the cluster please do expose the `mirrord-op
 
 ### Connecting Operators to the License Server
 
-Depending if installed the operator via helm or cli you can specify the following properties.
+Add the license server address to the operator configuration. If you've installed the operator using the mirrord CLI:
 
 ```bash
 mirrord operator setup --accept-tos --license-key secret --license-server http://<license-server-addr> | kubectl apply -f -
 ```
 
-or if using with Helm chart
+Or if you installed it using Helm, first update your `values.yaml` file:
 ```yaml
 # ./values.yaml
 license:
@@ -82,7 +82,7 @@ license:
 ```
 *NOTE: The server value must contain the protocol and the prefix for any ingress that the the license server can be behind.*
 
-and then use the install or upgrade to set these parameters
+Then run:
 ```bash
 helm install metalbear-co/mirrord-operator -f ./values.yaml --generate-name --wait
 ```
