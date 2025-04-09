@@ -45,7 +45,7 @@ license:
 
 Fill in the license.key and license.pem fields according to the following guidelines:
 
-* License key - Can be any string of your choosing. We recommend using a random characters or a UUID.
+* License key - Can be any string of your choosing. We recommend using random characters or a UUID.
 * License file - Must be a valid operator license. This can also be a secret under the `license.pem` key.
 
 You can customize the license server deployment further - all values.yaml configuration options can found [here](https://raw.githubusercontent.com/metalbear-co/charts/main/mirrord-license-server/values.yaml)
