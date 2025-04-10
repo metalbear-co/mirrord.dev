@@ -68,7 +68,7 @@ If your operator(s) are running at on a different cluster, make sure the `mirror
 
 ### Connecting Operators to the License Server
 
-First update your operator [`values.yaml`](/docs/overview/quick-start/#helm) for quickstart helm setup for operator) file:
+First update your operator [`values.yaml`](/docs/overview/quick-start/#helm) file:
 ```yaml
 # ./values.yaml
 license:
